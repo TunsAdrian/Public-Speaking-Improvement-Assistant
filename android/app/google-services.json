@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "147213096736",
+    "project_id": "public-speaking-assistant",
+    "storage_bucket": "public-speaking-assistant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:147213096736:android:df992a8b6342a4c9002945",
+        "android_client_info": {
+          "package_name": "adrian.tuns.public_speaking_assistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "147213096736-kambuhb68g2l5j52dkanlqdd131a94ns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAYmJR9sqtc_Pwe8FK8B_gkNWldpAMlgo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "147213096736-kambuhb68g2l5j52dkanlqdd131a94ns.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
