@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:provider/provider.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/init_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
+import 'package:public_speaking_assistant/src/presentation/settings/test_theme.dart';
 import 'package:redux/redux.dart';
 
 void main() {
-  runApp(const PublicSpeakingAssistant());
+  runApp(
+    ChangeNotifierProvider<ThemeModel>(
+      create: (BuildContext context) => ThemeModel(),
+      child: const PublicSpeakingAssistant(),
+    ),
+  );
 }
 
 class PublicSpeakingAssistant extends StatefulWidget {
@@ -29,7 +36,7 @@ class _PublicSpeakingAssistantState extends State<PublicSpeakingAssistant> with 
             store: store,
             child: MaterialApp(
               title: 'Public Speaking Improvement Assistant',
-              theme: ThemeData.light(),
+              theme: Provider.of<ThemeModel>(context).currentTheme,
               routes: AppRoutes.routes,
             ),
           );
@@ -40,7 +47,7 @@ class _PublicSpeakingAssistantState extends State<PublicSpeakingAssistant> with 
 
           return MaterialApp(
             title: 'Public Speaking Improvement Assistant',
-            theme: ThemeData.light(),
+            theme: Provider.of<ThemeModel>(context).currentTheme,
             home: const Scaffold(
               body: Center(
                 child: FlutterLogo(),

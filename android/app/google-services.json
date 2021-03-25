@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "147213096736-m56ktvvgtg7f9eompv3qebmshuivf9r4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "adrian.tuns.public_speaking_assistant",
+            "certificate_hash": "06b7bcd0f5162aa570f1629de159bab1856d914c"
+          }
+        },
+        {
           "client_id": "147213096736-kambuhb68g2l5j52dkanlqdd131a94ns.apps.googleusercontent.com",
           "client_type": 3
         }

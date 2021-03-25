@@ -1,11 +1,10 @@
-library models;
+library auth_models;
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:public_speaking_assistant/src/models/serializers.dart';
-import 'package:public_speaking_assistant/src/models/auth/index.dart';
 
-export 'package:public_speaking_assistant/src/models/auth/index.dart';
-
-part 'app_state.dart';
+part 'app_user.dart';
+part 'auth_state.dart';
+part 'registration_info.dart';
 part 'index.g.dart';

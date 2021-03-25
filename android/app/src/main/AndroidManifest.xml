@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="adrian.tuns.public_speaking_assistant">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
         android:label="public_speaking_assistant"
         android:icon="@mipmap/ic_launcher">

@@ -20,7 +20,7 @@ mixin InitMixin<S extends StatefulWidget> on State<S> {
     // Both streams start at same time, but it will wait at least 2 seconds (splashscreen of min 2 seconds)
     final List<dynamic> result = await ConcatStream<dynamic>(<Stream<dynamic>>[
       init().asStream(),
-      Future<void>.delayed(const Duration(seconds: 3)).asStream(),
+      Future<void>.delayed(const Duration(seconds: 2)).asStream(),
     ]).toList();
 
     _completer.complete(result[0]);
