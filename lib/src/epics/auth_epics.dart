@@ -33,10 +33,10 @@ class AuthEpics {
   Stream<AppAction> _login(Stream<Login$> actions, EpicStore<AppState> store) {
     return actions //
         .flatMap((Login$ action) => Stream<Login$>.value(action)
-        .asyncMap((Login$ action) => _api.login(email: action.email, password: action.password))
-        .map((AppUser user) => Login.successful(user))
-        .onErrorReturnWith((dynamic error) => Login.error(error))
-        .doOnData(action.response));
+            .asyncMap((Login$ action) => _api.login(email: action.email, password: action.password))
+            .map((AppUser user) => Login.successful(user))
+            .onErrorReturnWith((dynamic error) => Login.error(error))
+            .doOnData(action.response));
   }
 
   Stream<AppAction> _signup(Stream<Signup$> actions, EpicStore<AppState> store) {
@@ -45,7 +45,8 @@ class AuthEpics {
             .asyncMap((Signup$ action) => _api.signUp(
                   email: store.state.auth.info.email,
                   password: store.state.auth.info.password,
-                  username: store.state.auth.info.username ?? store.state.auth.info.email.split('@').first,
+                  firstName: store.state.auth.info.firstName,
+                  lastName: store.state.auth.info.lastName,
                 ))
             .map((AppUser user) => Signup.successful(user))
             .onErrorReturnWith((dynamic error) => Signup.error(error))

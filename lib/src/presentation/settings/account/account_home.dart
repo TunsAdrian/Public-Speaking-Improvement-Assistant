@@ -17,28 +17,64 @@ class AccountHome extends StatelessWidget {
           return const LoginPage();
         } else {
           return Scaffold(
-            body: Center(
-              child: IntrinsicWidth(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Go Back'),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Spacer(),
+                if (user.photoUrl != null)
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundImage: NetworkImage(user.photoUrl),
+                  )
+                else
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundColor: Colors.grey.shade900,
+                    child: Text(
+                      user.lastName[0].toUpperCase(),
+                      style: const TextStyle(fontSize: 36),
                     ),
-                    const SizedBox(height: 36.0),
-                    ElevatedButton(
-                      onPressed: () {
-                        StoreProvider.of<AppState>(context).dispatch(const SignOut());
-                      },
-                      child: const Text('Log out'),
-                    ),
-                  ],
+                  ),
+                const Spacer(),
+                const Divider(),
+                ListTile(
+                  leading: const Text('First Name'),
+                  trailing: const Icon(Icons.chevron_right),
+                  title: Text(
+                    user.firstName,
+                    textAlign: TextAlign.end,
+                  ),
                 ),
-              ),
+                const Divider(),
+                ListTile(
+                  leading: const Text('Last Name'),
+                  trailing: const Icon(Icons.chevron_right),
+                  title: Text(
+                    user.lastName,
+                    textAlign: TextAlign.end,
+                  ),
+                ),
+                const Divider(),
+                ListTile(
+                  leading: const Text('E-mail Address'),
+                  trailing: const Icon(null),
+                  title: Text(
+                    user.email,
+                    textAlign: TextAlign.end,
+                  ),
+                  enabled: false,
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    StoreProvider.of<AppState>(context).dispatch(const SignOut());
+                  },
+                  child: const Text(
+                    'Log out',
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                ),
+              ],
             ),
           );
         }

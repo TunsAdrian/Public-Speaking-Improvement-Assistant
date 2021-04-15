@@ -14,7 +14,10 @@ abstract class RegistrationInfo implements Built<RegistrationInfo, RegistrationI
   String get password;
 
   @nullable
-  String get username;
+  String get firstName;
+
+  @nullable
+  String get lastName;
 
   Map<String, dynamic> get json => serializers.serializeWith(serializer, this) as Map<String, dynamic>;
 

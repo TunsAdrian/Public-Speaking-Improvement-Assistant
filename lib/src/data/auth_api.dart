@@ -26,8 +26,7 @@ class AuthApi {
       return null;
     }
 
-    final DocumentSnapshot snapshot =
-        await _firestore.doc('users/${user.uid}').get();
+    final DocumentSnapshot snapshot = await _firestore.doc('users/${user.uid}').get();
     return AppUser.fromJson(snapshot.data());
   }
 
@@ -42,16 +41,17 @@ class AuthApi {
   Future<AppUser> signUp(
       {@required String email,
       @required String password,
-      @required String username}) async {
-    final UserCredential response = await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);
+      @required String firstName,
+      @required String lastName}) async {
+    final UserCredential response = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     final User user = response.user;
 
     final AppUser appUser = AppUser((AppUserBuilder b) {
       b
         ..uid = user.uid
         ..email = user.email
-        ..username = username;
+        ..firstName = firstName
+        ..lastName = lastName;
     });
 
     await _firestore.doc('users/${user.uid}').set(appUser.json);
@@ -69,20 +69,16 @@ class AuthApi {
       return null;
     }
 
-    final GoogleSignInAuthentication authentication =
-        await googleAccount.authentication;
+    final GoogleSignInAuthentication authentication = await googleAccount.authentication;
 
     // create/login with google credential
-    final OAuthCredential credential = GoogleAuthProvider.credential(
-        idToken: authentication.idToken,
-        accessToken: authentication.accessToken);
+    final OAuthCredential credential =
+        GoogleAuthProvider.credential(idToken: authentication.idToken, accessToken: authentication.accessToken);
 
-    final UserCredential response =
-        await _auth.signInWithCredential(credential);
+    final UserCredential response = await _auth.signInWithCredential(credential);
     final User user = response.user;
 
-    final DocumentSnapshot snapshot =
-        await _firestore.doc('users/${user.uid}').get();
+    final DocumentSnapshot snapshot = await _firestore.doc('users/${user.uid}').get();
     if (snapshot.exists) {
       return AppUser.fromJson(snapshot.data());
     }
@@ -91,7 +87,8 @@ class AuthApi {
       b
         ..uid = user.uid
         ..email = user.email
-        ..username = user.email.split('@').first
+        ..firstName = user.displayName.split(' ').first
+        ..lastName = user.displayName.split(' ').last
         ..photoUrl = user.photoURL;
     });
 

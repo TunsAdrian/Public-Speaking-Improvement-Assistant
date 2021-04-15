@@ -43,7 +43,7 @@ class SignupPage extends StatelessWidget {
                       child: const Text('Continue'),
                       onPressed: () {
                         if (Form.of(context).validate()) {
-                          Navigator.pushNamed(context, AppRoutes.username);
+                          Navigator.pushNamed(context, AppRoutes.user_name);
                         }
                       },
                     ),

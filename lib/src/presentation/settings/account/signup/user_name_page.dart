@@ -7,14 +7,14 @@ import 'package:public_speaking_assistant/src/containers/auth/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
 
-class UsernamePage extends StatelessWidget {
-  const UsernamePage({Key key}) : super(key: key);
+class UserNamePage extends StatelessWidget {
+  const UserNamePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Username'),
+        title: const Text('Your name'),
       ),
       body: SafeArea(
         child: Padding(
@@ -26,22 +26,43 @@ class UsernamePage extends StatelessWidget {
                   children: <Widget>[
                     RegistrationInfoContainer(
                       builder: (BuildContext context, RegistrationInfo info) {
-                        return TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'username',
-                          ),
-                          initialValue: info.email.split('@').first,
-                          keyboardType: TextInputType.name,
-                          onChanged: (String value) {
-                            StoreProvider.of<AppState>(context).dispatch(UpdateRegistrationInfo(username: value));
-                          },
-                          validator: (String value) {
-                            if (value.length < 3) {
-                              return 'Please choose a bigger username';
-                            }
+                        return Column(
+                          children: <Widget>[
+                            TextFormField(
+                              decoration: const InputDecoration(
+                                hintText: 'first name',
+                              ),
+                              keyboardType: TextInputType.name,
+                              textCapitalization: TextCapitalization.words,
+                              onChanged: (String value) {
+                                StoreProvider.of<AppState>(context).dispatch(UpdateRegistrationInfo(firstName: value));
+                              },
+                              validator: (String value) {
+                                if (value.length < 3) {
+                                  return 'Please input a larger first name';
+                                }
 
-                            return null;
-                          },
+                                return null;
+                              },
+                            ),
+                            TextFormField(
+                              decoration: const InputDecoration(
+                                hintText: 'last name',
+                              ),
+                              keyboardType: TextInputType.name,
+                              textCapitalization: TextCapitalization.words,
+                              onChanged: (String value) {
+                                StoreProvider.of<AppState>(context).dispatch(UpdateRegistrationInfo(lastName: value));
+                              },
+                              validator: (String value) {
+                                if (value.length < 3) {
+                                  return 'Please input a larger last name';
+                                }
+
+                                return null;
+                              },
+                            ),
+                          ],
                         );
                       },
                     ),
@@ -66,7 +87,7 @@ class UsernamePage extends StatelessWidget {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.popUntil(context, ModalRoute.withName(AppRoutes.home));
+                                Navigator.popUntil(context, ModalRoute.withName(AppRoutes.account_home));
                               },
                           ),
                         ],

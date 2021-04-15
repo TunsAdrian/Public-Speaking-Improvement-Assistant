@@ -26,8 +26,11 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
       'email',
       serializers.serialize(object.email,
           specifiedType: const FullType(String)),
-      'username',
-      serializers.serialize(object.username,
+      'firstName',
+      serializers.serialize(object.firstName,
+          specifiedType: const FullType(String)),
+      'lastName',
+      serializers.serialize(object.lastName,
           specifiedType: const FullType(String)),
     ];
     if (object.photoUrl != null) {
@@ -58,8 +61,12 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
           result.email = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'username':
-          result.username = serializers.deserialize(value,
+        case 'firstName':
+          result.firstName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'lastName':
+          result.lastName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
         case 'photoUrl':
@@ -146,10 +153,16 @@ class _$RegistrationInfoSerializer
         ..add(serializers.serialize(object.password,
             specifiedType: const FullType(String)));
     }
-    if (object.username != null) {
+    if (object.firstName != null) {
       result
-        ..add('username')
-        ..add(serializers.serialize(object.username,
+        ..add('firstName')
+        ..add(serializers.serialize(object.firstName,
+            specifiedType: const FullType(String)));
+    }
+    if (object.lastName != null) {
+      result
+        ..add('lastName')
+        ..add(serializers.serialize(object.lastName,
             specifiedType: const FullType(String)));
     }
     return result;
@@ -175,8 +188,12 @@ class _$RegistrationInfoSerializer
           result.password = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'username':
-          result.username = serializers.deserialize(value,
+        case 'firstName':
+          result.firstName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'lastName':
+          result.lastName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
       }
@@ -192,14 +209,17 @@ class _$AppUser extends AppUser {
   @override
   final String email;
   @override
-  final String username;
+  final String firstName;
+  @override
+  final String lastName;
   @override
   final String photoUrl;
 
   factory _$AppUser([void Function(AppUserBuilder) updates]) =>
       (new AppUserBuilder()..update(updates)).build();
 
-  _$AppUser._({this.uid, this.email, this.username, this.photoUrl})
+  _$AppUser._(
+      {this.uid, this.email, this.firstName, this.lastName, this.photoUrl})
       : super._() {
     if (uid == null) {
       throw new BuiltValueNullFieldError('AppUser', 'uid');
@@ -207,8 +227,11 @@ class _$AppUser extends AppUser {
     if (email == null) {
       throw new BuiltValueNullFieldError('AppUser', 'email');
     }
-    if (username == null) {
-      throw new BuiltValueNullFieldError('AppUser', 'username');
+    if (firstName == null) {
+      throw new BuiltValueNullFieldError('AppUser', 'firstName');
+    }
+    if (lastName == null) {
+      throw new BuiltValueNullFieldError('AppUser', 'lastName');
     }
   }
 
@@ -225,14 +248,16 @@ class _$AppUser extends AppUser {
     return other is AppUser &&
         uid == other.uid &&
         email == other.email &&
-        username == other.username &&
+        firstName == other.firstName &&
+        lastName == other.lastName &&
         photoUrl == other.photoUrl;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, uid.hashCode), email.hashCode), username.hashCode),
+        $jc($jc($jc($jc(0, uid.hashCode), email.hashCode), firstName.hashCode),
+            lastName.hashCode),
         photoUrl.hashCode));
   }
 
@@ -241,7 +266,8 @@ class _$AppUser extends AppUser {
     return (newBuiltValueToStringHelper('AppUser')
           ..add('uid', uid)
           ..add('email', email)
-          ..add('username', username)
+          ..add('firstName', firstName)
+          ..add('lastName', lastName)
           ..add('photoUrl', photoUrl))
         .toString();
   }
@@ -258,9 +284,13 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
   String get email => _$this._email;
   set email(String email) => _$this._email = email;
 
-  String _username;
-  String get username => _$this._username;
-  set username(String username) => _$this._username = username;
+  String _firstName;
+  String get firstName => _$this._firstName;
+  set firstName(String firstName) => _$this._firstName = firstName;
+
+  String _lastName;
+  String get lastName => _$this._lastName;
+  set lastName(String lastName) => _$this._lastName = lastName;
 
   String _photoUrl;
   String get photoUrl => _$this._photoUrl;
@@ -272,7 +302,8 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
     if (_$v != null) {
       _uid = _$v.uid;
       _email = _$v.email;
-      _username = _$v.username;
+      _firstName = _$v.firstName;
+      _lastName = _$v.lastName;
       _photoUrl = _$v.photoUrl;
       _$v = null;
     }
@@ -296,7 +327,11 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
   _$AppUser build() {
     final _$result = _$v ??
         new _$AppUser._(
-            uid: uid, email: email, username: username, photoUrl: photoUrl);
+            uid: uid,
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            photoUrl: photoUrl);
     replace(_$result);
     return _$result;
   }
@@ -410,13 +445,17 @@ class _$RegistrationInfo extends RegistrationInfo {
   @override
   final String password;
   @override
-  final String username;
+  final String firstName;
+  @override
+  final String lastName;
 
   factory _$RegistrationInfo(
           [void Function(RegistrationInfoBuilder) updates]) =>
       (new RegistrationInfoBuilder()..update(updates)).build();
 
-  _$RegistrationInfo._({this.email, this.password, this.username}) : super._();
+  _$RegistrationInfo._(
+      {this.email, this.password, this.firstName, this.lastName})
+      : super._();
 
   @override
   RegistrationInfo rebuild(void Function(RegistrationInfoBuilder) updates) =>
@@ -432,13 +471,15 @@ class _$RegistrationInfo extends RegistrationInfo {
     return other is RegistrationInfo &&
         email == other.email &&
         password == other.password &&
-        username == other.username;
+        firstName == other.firstName &&
+        lastName == other.lastName;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, email.hashCode), password.hashCode), username.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, email.hashCode), password.hashCode), firstName.hashCode),
+        lastName.hashCode));
   }
 
   @override
@@ -446,7 +487,8 @@ class _$RegistrationInfo extends RegistrationInfo {
     return (newBuiltValueToStringHelper('RegistrationInfo')
           ..add('email', email)
           ..add('password', password)
-          ..add('username', username))
+          ..add('firstName', firstName)
+          ..add('lastName', lastName))
         .toString();
   }
 }
@@ -463,9 +505,13 @@ class RegistrationInfoBuilder
   String get password => _$this._password;
   set password(String password) => _$this._password = password;
 
-  String _username;
-  String get username => _$this._username;
-  set username(String username) => _$this._username = username;
+  String _firstName;
+  String get firstName => _$this._firstName;
+  set firstName(String firstName) => _$this._firstName = firstName;
+
+  String _lastName;
+  String get lastName => _$this._lastName;
+  set lastName(String lastName) => _$this._lastName = lastName;
 
   RegistrationInfoBuilder();
 
@@ -473,7 +519,8 @@ class RegistrationInfoBuilder
     if (_$v != null) {
       _email = _$v.email;
       _password = _$v.password;
-      _username = _$v.username;
+      _firstName = _$v.firstName;
+      _lastName = _$v.lastName;
       _$v = null;
     }
     return this;
@@ -496,7 +543,10 @@ class RegistrationInfoBuilder
   _$RegistrationInfo build() {
     final _$result = _$v ??
         new _$RegistrationInfo._(
-            email: email, password: password, username: username);
+            email: email,
+            password: password,
+            firstName: firstName,
+            lastName: lastName);
     replace(_$result);
     return _$result;
   }

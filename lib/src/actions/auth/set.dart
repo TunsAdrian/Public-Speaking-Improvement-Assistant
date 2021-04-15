@@ -5,6 +5,7 @@ abstract class UpdateRegistrationInfo with _$UpdateRegistrationInfo implements A
   const factory UpdateRegistrationInfo({
     String email,
     String password,
-    String username,
+    String firstName,
+    String lastName,
   }) = UpdateRegistrationInfo$;
 }

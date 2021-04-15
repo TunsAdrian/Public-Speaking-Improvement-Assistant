@@ -28,8 +28,10 @@ AuthState _updateRegistrationInfo(AuthState state, UpdateRegistrationInfo action
       b.info.email = action.email;
     } else if (action.password != null) {
       b.info.password = action.password;
-    } else if (action.username != null) {
-      b.info.username = action.username;
+    } else if (action.firstName != null) {
+      b.info.firstName = action.firstName;
+    } else if (action.lastName != null) {
+      b.info.lastName = action.lastName;
     } else {
       b.info = RegistrationInfo().toBuilder();
     }

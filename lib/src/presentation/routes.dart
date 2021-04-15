@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:public_speaking_assistant/src/presentation/home.dart';
-import 'file:///D:/Documents/Flutter-Projects/public_speaking_assistant/lib/src/presentation/assistant/test/recording_page.dart';
+import 'package:public_speaking_assistant/src/presentation/assistant/test/recording_page.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/set_words_db.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/account_home.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/login/reset_password_page.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/signup/password_page.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/signup/signup_page.dart';
-import 'package:public_speaking_assistant/src/presentation/settings/account/signup/username_page.dart';
+import 'package:public_speaking_assistant/src/presentation/settings/account/signup/user_name_page.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/test_theme.dart';
 
 // ignore: avoid_classes_with_only_static_members
@@ -23,7 +23,7 @@ class AppRoutes {
 
   // user account routes
   static const String signup = '/signup';
-  static const String username = '/username';
+  static const String user_name = '/user_name';
   static const String password = '/password';
   static const String reset_password = '/reset_password';
 
@@ -52,8 +52,8 @@ class AppRoutes {
     signup: (BuildContext context) {
       return const SignupPage();
     },
-    username: (BuildContext context) {
-      return const UsernamePage();
+    user_name: (BuildContext context) {
+      return const UserNamePage();
     },
     password: (BuildContext context) {
       return const PasswordPage();

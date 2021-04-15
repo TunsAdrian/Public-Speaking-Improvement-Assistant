@@ -906,11 +906,12 @@ class _$UpdateRegistrationInfoTearOff {
 
 // ignore: unused_element
   UpdateRegistrationInfo$ call(
-      {String email, String password, String username}) {
+      {String email, String password, String firstName, String lastName}) {
     return UpdateRegistrationInfo$(
       email: email,
       password: password,
-      username: username,
+      firstName: firstName,
+      lastName: lastName,
     );
   }
 }
@@ -923,7 +924,8 @@ const $UpdateRegistrationInfo = _$UpdateRegistrationInfoTearOff();
 mixin _$UpdateRegistrationInfo {
   String get email;
   String get password;
-  String get username;
+  String get firstName;
+  String get lastName;
 
   $UpdateRegistrationInfoCopyWith<UpdateRegistrationInfo> get copyWith;
 }
@@ -933,7 +935,7 @@ abstract class $UpdateRegistrationInfoCopyWith<$Res> {
   factory $UpdateRegistrationInfoCopyWith(UpdateRegistrationInfo value,
           $Res Function(UpdateRegistrationInfo) then) =
       _$UpdateRegistrationInfoCopyWithImpl<$Res>;
-  $Res call({String email, String password, String username});
+  $Res call({String email, String password, String firstName, String lastName});
 }
 
 /// @nodoc
@@ -949,12 +951,14 @@ class _$UpdateRegistrationInfoCopyWithImpl<$Res>
   $Res call({
     Object email = freezed,
     Object password = freezed,
-    Object username = freezed,
+    Object firstName = freezed,
+    Object lastName = freezed,
   }) {
     return _then(_value.copyWith(
       email: email == freezed ? _value.email : email as String,
       password: password == freezed ? _value.password : password as String,
-      username: username == freezed ? _value.username : username as String,
+      firstName: firstName == freezed ? _value.firstName : firstName as String,
+      lastName: lastName == freezed ? _value.lastName : lastName as String,
     ));
   }
 }
@@ -966,7 +970,7 @@ abstract class $UpdateRegistrationInfo$CopyWith<$Res>
           $Res Function(UpdateRegistrationInfo$) then) =
       _$UpdateRegistrationInfo$CopyWithImpl<$Res>;
   @override
-  $Res call({String email, String password, String username});
+  $Res call({String email, String password, String firstName, String lastName});
 }
 
 /// @nodoc
@@ -984,30 +988,35 @@ class _$UpdateRegistrationInfo$CopyWithImpl<$Res>
   $Res call({
     Object email = freezed,
     Object password = freezed,
-    Object username = freezed,
+    Object firstName = freezed,
+    Object lastName = freezed,
   }) {
     return _then(UpdateRegistrationInfo$(
       email: email == freezed ? _value.email : email as String,
       password: password == freezed ? _value.password : password as String,
-      username: username == freezed ? _value.username : username as String,
+      firstName: firstName == freezed ? _value.firstName : firstName as String,
+      lastName: lastName == freezed ? _value.lastName : lastName as String,
     ));
   }
 }
 
 /// @nodoc
 class _$UpdateRegistrationInfo$ implements UpdateRegistrationInfo$ {
-  const _$UpdateRegistrationInfo$({this.email, this.password, this.username});
+  const _$UpdateRegistrationInfo$(
+      {this.email, this.password, this.firstName, this.lastName});
 
   @override
   final String email;
   @override
   final String password;
   @override
-  final String username;
+  final String firstName;
+  @override
+  final String lastName;
 
   @override
   String toString() {
-    return 'UpdateRegistrationInfo(email: $email, password: $password, username: $username)';
+    return 'UpdateRegistrationInfo(email: $email, password: $password, firstName: $firstName, lastName: $lastName)';
   }
 
   @override
@@ -1019,9 +1028,12 @@ class _$UpdateRegistrationInfo$ implements UpdateRegistrationInfo$ {
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
                     .equals(other.password, password)) &&
-            (identical(other.username, username) ||
+            (identical(other.firstName, firstName) ||
                 const DeepCollectionEquality()
-                    .equals(other.username, username)));
+                    .equals(other.firstName, firstName)) &&
+            (identical(other.lastName, lastName) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastName, lastName)));
   }
 
   @override
@@ -1029,7 +1041,8 @@ class _$UpdateRegistrationInfo$ implements UpdateRegistrationInfo$ {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(password) ^
-      const DeepCollectionEquality().hash(username);
+      const DeepCollectionEquality().hash(firstName) ^
+      const DeepCollectionEquality().hash(lastName);
 
   @override
   $UpdateRegistrationInfo$CopyWith<UpdateRegistrationInfo$> get copyWith =>
@@ -1041,14 +1054,17 @@ abstract class UpdateRegistrationInfo$ implements UpdateRegistrationInfo {
   const factory UpdateRegistrationInfo$(
       {String email,
       String password,
-      String username}) = _$UpdateRegistrationInfo$;
+      String firstName,
+      String lastName}) = _$UpdateRegistrationInfo$;
 
   @override
   String get email;
   @override
   String get password;
   @override
-  String get username;
+  String get firstName;
+  @override
+  String get lastName;
   @override
   $UpdateRegistrationInfo$CopyWith<UpdateRegistrationInfo$> get copyWith;
 }
