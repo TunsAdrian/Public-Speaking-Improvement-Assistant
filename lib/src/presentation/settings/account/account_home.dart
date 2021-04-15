@@ -17,6 +17,9 @@ class AccountHome extends StatelessWidget {
           return const LoginPage();
         } else {
           return Scaffold(
+            appBar: AppBar(
+              title: const Text('Account'),
+            ),
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[

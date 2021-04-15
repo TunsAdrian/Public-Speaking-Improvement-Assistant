@@ -4,6 +4,7 @@ import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:redux/redux.dart';
 
 Reducer<AuthState> authReducer = combineReducers(<Reducer<AuthState>>[
+  TypedReducer<AuthState, InitializeAppSuccessful>(_initializeAppSuccessful),
   TypedReducer<AuthState, LoginSuccessful>(_loginSuccessful),
   TypedReducer<AuthState, SignupSuccessful>(_signupSuccessful),
   TypedReducer<AuthState, UpdateRegistrationInfo>(_updateRegistrationInfo),

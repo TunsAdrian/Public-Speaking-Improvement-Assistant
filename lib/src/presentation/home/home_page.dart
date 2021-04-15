@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: <Widget>[
         const AssistantHome(),
-        Container(color: Colors.blueGrey),
+        Container(color: Colors.blue),
         const SettingsPage(),
       ][_page],
       bottomNavigationBar: BottomNavigationBar(
