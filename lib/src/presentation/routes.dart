@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:public_speaking_assistant/src/presentation/home.dart';
-import 'package:public_speaking_assistant/src/presentation/assistant/test/recording_page.dart';
+import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/recording_page.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/set_words_db.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/account_home.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/login/reset_password_page.dart';
@@ -34,7 +34,7 @@ class AppRoutes {
 
     // voice assistant routes
     speech_record: (BuildContext context) {
-      return const SpeechScreen();
+      return const RecordingPage();
     },
     set_words_db: (BuildContext context) {
       return const SetWordsDB();
