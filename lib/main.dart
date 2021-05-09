@@ -6,8 +6,13 @@ import 'package:public_speaking_assistant/src/presentation/mixin/init_mixin.dart
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/test_theme.dart';
 import 'package:redux/redux.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+Future<void> main() async {
+  // initialise local database
+  await Hive.initFlutter();
+
   runApp(
     ChangeNotifierProvider<ThemeModel>(
       create: (BuildContext context) => ThemeModel(),

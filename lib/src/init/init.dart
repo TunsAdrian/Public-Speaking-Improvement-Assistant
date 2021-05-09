@@ -4,9 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/data/auth_api.dart';
+import 'package:public_speaking_assistant/src/data/filler_words_api.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:public_speaking_assistant/src/epics/app_epics.dart';
 import 'package:public_speaking_assistant/src/reducer/reducer.dart';
+import 'package:hive/hive.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_epics/redux_epics.dart';
 
@@ -15,6 +17,7 @@ Future<Store<AppState>> init() async {
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final Box<dynamic> fillerWordsBox = await Hive.openBox<dynamic>('fillerWords');
 
   final AuthApi authApi = AuthApi(
     auth: auth,
@@ -22,7 +25,14 @@ Future<Store<AppState>> init() async {
     google: GoogleSignIn(),
   );
 
-  final AppEpics epic = AppEpics(authApi: authApi);
+  final FillerWordsApi fillerWordsApi = FillerWordsApi(
+    fillerWordsBox: fillerWordsBox,
+  );
+
+  final AppEpics epic = AppEpics(
+    authApi: authApi,
+    fillerWordsApi: fillerWordsApi,
+  );
 
   return Store<AppState>(
     reducer,

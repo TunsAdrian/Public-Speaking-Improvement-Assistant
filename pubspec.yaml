@@ -20,6 +20,10 @@ dependencies:
   cloud_firestore: ^0.16.0
   google_sign_in: ^4.5.9
 
+  #hive database
+  hive: ^1.5.0-pre
+  hive_flutter: ^0.3.1
+
   # flutter
   flutter_redux: ^0.7.0
 
@@ -34,6 +38,7 @@ dependencies:
   built_collection: ^4.3.2
   freezed_annotation: ^0.12.0
   http: ^0.12.2
+  path_provider: ^1.6.28
 
   # for theme dynamic change (! delete after implement with redux)
   provider: ^4.3.2+2
@@ -42,6 +47,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  hive_generator: any
   build_runner: any
   built_value_generator: any
   freezed: any

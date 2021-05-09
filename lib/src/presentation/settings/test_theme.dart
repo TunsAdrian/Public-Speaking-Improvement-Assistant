@@ -6,7 +6,7 @@ ThemeData lightTheme = ThemeData.light();
 enum ThemeType { Light, Dark }
 
 class ThemeModel extends ChangeNotifier {
-  ThemeData currentTheme = darkTheme;
+  ThemeData currentTheme = lightTheme;
   ThemeType _themeType = ThemeType.Dark;
 
   void toggleTheme() {

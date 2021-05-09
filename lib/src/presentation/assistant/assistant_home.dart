@@ -26,7 +26,7 @@ class AssistantHome extends StatelessWidget {
               const SizedBox(height: 36.0),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.set_words_db);
+                  Navigator.pushNamed(context, AppRoutes.set_filler_words);
                 },
                 child: const Text('Set Words Database'),
               ),

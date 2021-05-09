@@ -1,4 +1,4 @@
-part of auth_conatiners;
+part of auth_containers;
 
 class RegistrationInfoContainer extends StatelessWidget {
   const RegistrationInfoContainer({Key key, @required this.builder}) : super(key: key);
