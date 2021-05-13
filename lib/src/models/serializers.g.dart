@@ -12,6 +12,17 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AuthState.serializer)
       ..add(FillerWordsState.serializer)
       ..add(RegistrationInfo.serializer)
+      ..add(SpeechResult.serializer)
+      ..add(SpeechResultState.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(SpeechResult)]),
+          () => new ListBuilder<SpeechResult>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>()))

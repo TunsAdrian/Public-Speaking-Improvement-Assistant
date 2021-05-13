@@ -39,6 +39,13 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
         ..add(serializers.serialize(object.photoUrl,
             specifiedType: const FullType(String)));
     }
+    if (object.speechResult != null) {
+      result
+        ..add('speechResult')
+        ..add(serializers.serialize(object.speechResult,
+            specifiedType: const FullType(
+                BuiltList, const [const FullType(SpeechResult)])));
+    }
     return result;
   }
 
@@ -72,6 +79,12 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
         case 'photoUrl':
           result.photoUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+        case 'speechResult':
+          result.speechResult.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(SpeechResult)]))
+              as BuiltList<Object>);
           break;
       }
     }
@@ -214,12 +227,19 @@ class _$AppUser extends AppUser {
   final String lastName;
   @override
   final String photoUrl;
+  @override
+  final BuiltList<SpeechResult> speechResult;
 
   factory _$AppUser([void Function(AppUserBuilder) updates]) =>
       (new AppUserBuilder()..update(updates)).build();
 
   _$AppUser._(
-      {this.uid, this.email, this.firstName, this.lastName, this.photoUrl})
+      {this.uid,
+      this.email,
+      this.firstName,
+      this.lastName,
+      this.photoUrl,
+      this.speechResult})
       : super._() {
     if (uid == null) {
       throw new BuiltValueNullFieldError('AppUser', 'uid');
@@ -250,15 +270,20 @@ class _$AppUser extends AppUser {
         email == other.email &&
         firstName == other.firstName &&
         lastName == other.lastName &&
-        photoUrl == other.photoUrl;
+        photoUrl == other.photoUrl &&
+        speechResult == other.speechResult;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc($jc(0, uid.hashCode), email.hashCode), firstName.hashCode),
-            lastName.hashCode),
-        photoUrl.hashCode));
+        $jc(
+            $jc(
+                $jc($jc($jc(0, uid.hashCode), email.hashCode),
+                    firstName.hashCode),
+                lastName.hashCode),
+            photoUrl.hashCode),
+        speechResult.hashCode));
   }
 
   @override
@@ -268,7 +293,8 @@ class _$AppUser extends AppUser {
           ..add('email', email)
           ..add('firstName', firstName)
           ..add('lastName', lastName)
-          ..add('photoUrl', photoUrl))
+          ..add('photoUrl', photoUrl)
+          ..add('speechResult', speechResult))
         .toString();
   }
 }
@@ -296,6 +322,12 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
   String get photoUrl => _$this._photoUrl;
   set photoUrl(String photoUrl) => _$this._photoUrl = photoUrl;
 
+  ListBuilder<SpeechResult> _speechResult;
+  ListBuilder<SpeechResult> get speechResult =>
+      _$this._speechResult ??= new ListBuilder<SpeechResult>();
+  set speechResult(ListBuilder<SpeechResult> speechResult) =>
+      _$this._speechResult = speechResult;
+
   AppUserBuilder();
 
   AppUserBuilder get _$this {
@@ -305,6 +337,7 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
       _firstName = _$v.firstName;
       _lastName = _$v.lastName;
       _photoUrl = _$v.photoUrl;
+      _speechResult = _$v.speechResult?.toBuilder();
       _$v = null;
     }
     return this;
@@ -325,13 +358,27 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
 
   @override
   _$AppUser build() {
-    final _$result = _$v ??
-        new _$AppUser._(
-            uid: uid,
-            email: email,
-            firstName: firstName,
-            lastName: lastName,
-            photoUrl: photoUrl);
+    _$AppUser _$result;
+    try {
+      _$result = _$v ??
+          new _$AppUser._(
+              uid: uid,
+              email: email,
+              firstName: firstName,
+              lastName: lastName,
+              photoUrl: photoUrl,
+              speechResult: _speechResult?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'speechResult';
+        _speechResult?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'AppUser', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

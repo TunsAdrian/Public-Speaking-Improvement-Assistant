@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/data/auth_api.dart';
 import 'package:public_speaking_assistant/src/data/filler_words_api.dart';
+import 'package:public_speaking_assistant/src/data/speech_result_api.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:public_speaking_assistant/src/epics/app_epics.dart';
 import 'package:public_speaking_assistant/src/reducer/reducer.dart';
@@ -18,6 +19,7 @@ Future<Store<AppState>> init() async {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final Box<dynamic> fillerWordsBox = await Hive.openBox<dynamic>('fillerWords');
+  final Box<dynamic> speechResultsBox = await Hive.openBox<dynamic>('speechResults');
 
   final AuthApi authApi = AuthApi(
     auth: auth,
@@ -29,9 +31,14 @@ Future<Store<AppState>> init() async {
     fillerWordsBox: fillerWordsBox,
   );
 
+  final SpeechResultApi speechResultApi = SpeechResultApi(
+    speechResultsBox: speechResultsBox,
+  );
+
   final AppEpics epic = AppEpics(
     authApi: authApi,
     fillerWordsApi: fillerWordsApi,
+    speechResultApi: speechResultApi,
   );
 
   return Store<AppState>(

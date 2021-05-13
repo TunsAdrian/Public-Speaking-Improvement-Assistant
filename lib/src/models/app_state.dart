@@ -5,7 +5,8 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
     return _$AppState((AppStateBuilder b) {
       b
         ..auth = AuthState.initialState().toBuilder()
-        ..fillerWords = FillerWordsState.initialState().toBuilder();
+        ..fillerWords = FillerWordsState.initialState().toBuilder()
+        ..speechResult = SpeechResultState.initialState().toBuilder();
     });
   }
 
@@ -16,6 +17,8 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   AuthState get auth;
 
   FillerWordsState get fillerWords;
+
+  SpeechResultState get speechResult;
 
   Map<String, dynamic> get json => serializers.serializeWith(serializer, this) as Map<String, dynamic>;
 
