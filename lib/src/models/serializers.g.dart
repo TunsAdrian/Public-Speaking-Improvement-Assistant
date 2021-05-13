@@ -18,6 +18,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(SpeechResult)]),
           () => new ListBuilder<SpeechResult>())
       ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(SpeechResult)]),
+          () => new ListBuilder<SpeechResult>())
+      ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())
       ..addBuilderFactory(

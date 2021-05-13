@@ -6,4 +6,7 @@ import 'package:public_speaking_assistant/src/models/index.dart';
 
 part 'index.freezed.dart';
 part 'create_speech_result.dart';
+part 'save_speech_result.dart';
+part 'remove_speech_result.dart';
+part 'get_speech_result_list.dart';
 

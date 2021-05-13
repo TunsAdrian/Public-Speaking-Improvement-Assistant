@@ -23,6 +23,7 @@ dependencies:
   #hive database
   hive: ^1.5.0-pre
   hive_flutter: ^0.3.1
+  hive_generator: ^0.8.2
 
   # flutter
   flutter_redux: ^0.7.0
@@ -47,7 +48,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  hive_generator: any
   build_runner: any
   built_value_generator: any
   freezed: any

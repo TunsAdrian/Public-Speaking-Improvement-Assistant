@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:provider/provider.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
+import 'package:public_speaking_assistant/src/models/speech_result/hive_model/hiveSpeechResult.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/init_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/test_theme.dart';
@@ -12,6 +13,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 Future<void> main() async {
   // initialise local database
   await Hive.initFlutter();
+  Hive.registerAdapter(HiveSpeechResultAdapter());
 
   runApp(
     ChangeNotifierProvider<ThemeModel>(
