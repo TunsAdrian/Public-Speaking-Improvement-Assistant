@@ -6,6 +6,7 @@ import 'package:public_speaking_assistant/src/containers/index.dart';
 import 'package:public_speaking_assistant/src/data/speech_to_text_api.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/substring_highlight.dart';
+import 'package:public_speaking_assistant/src/presentation/routes.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
@@ -78,7 +79,13 @@ class _RecordingPageState extends State<RecordingPage> {
             glowColor: Theme.of(context).primaryColor,
             child: FloatingActionButton(
               child: Icon(isListening ? Icons.mic : Icons.mic_none, size: 36),
-              onPressed: _toggleRecording,
+              onPressed: () {
+                if (!isListening) {
+                  _toggleRecording();
+                } else {
+                  Navigator.pushNamed(context, AppRoutes.speech_result);
+                }
+              },
             ),
           ),
         );

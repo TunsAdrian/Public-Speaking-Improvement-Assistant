@@ -8,28 +8,39 @@ Reducer<SpeechResultState> speechResultReducer = combineReducers(<Reducer<Speech
   TypedReducer<SpeechResultState, GetSpeechResultListSuccessful>(_getSpeechResultListSuccessful),
   TypedReducer<SpeechResultState, SaveSpeechResultSuccessful>(_saveSpeechResultSuccessful),
   TypedReducer<SpeechResultState, RemoveSpeechResultSuccessful>(_removeSpeechResultSuccessful),
+  TypedReducer<SpeechResultState, UpdateSpeechResult>(_updateSpeechResult),
 ]);
 
 SpeechResultState _createSpeechResultSuccessful(SpeechResultState state, CreateSpeechResultSuccessful action) {
   return state.rebuild((SpeechResultStateBuilder b) {
-    b.speechResultList = ListBuilder<SpeechResult>(<SpeechResult>[action.speechResult]);
+    b.speechResult = action.speechResult?.toBuilder();
   });
 }
 
 SpeechResultState _getSpeechResultListSuccessful(SpeechResultState state, GetSpeechResultListSuccessful action) {
   return state.rebuild((SpeechResultStateBuilder b) {
-    b.speechResultList = ListBuilder<SpeechResult>(action.speechResultList);
+    b.savedSpeechResults = ListBuilder<SpeechResult>(action.speechResultList);
   });
 }
 
 SpeechResultState _saveSpeechResultSuccessful(SpeechResultState state, SaveSpeechResultSuccessful action) {
   return state.rebuild((SpeechResultStateBuilder b) {
-    b.speechResultList = ListBuilder<SpeechResult>(action.speechResultList);
+    b.savedSpeechResults = ListBuilder<SpeechResult>(action.speechResultList);
   });
 }
 
 SpeechResultState _removeSpeechResultSuccessful(SpeechResultState state, RemoveSpeechResultSuccessful action) {
   return state.rebuild((SpeechResultStateBuilder b) {
-    b.speechResultList = ListBuilder<SpeechResult>(action.speechResultList);
+    b.savedSpeechResults = ListBuilder<SpeechResult>(action.speechResultList);
+  });
+}
+
+SpeechResultState _updateSpeechResult(SpeechResultState state, UpdateSpeechResult action) {
+  return state.rebuild((SpeechResultStateBuilder b) {
+    if (action.speechName != null) {
+      b.speechResult.speechName = action.speechName;
+    } else {
+      b.speechResult = SpeechResult().toBuilder();
+    }
   });
 }

@@ -7,6 +7,9 @@ abstract class SpeechResult implements Built<SpeechResult, SpeechResultBuilder> 
 
   SpeechResult._();
 
+  @nullable
+  String get speechName;
+
   Duration get speechDuration;
 
   double get speechClarity;

@@ -1883,3 +1883,126 @@ abstract class GetSpeechResultListError
   StateError get error;
   $GetSpeechResultListErrorCopyWith<GetSpeechResultListError> get copyWith;
 }
+
+/// @nodoc
+class _$UpdateSpeechResultTearOff {
+  const _$UpdateSpeechResultTearOff();
+
+// ignore: unused_element
+  UpdateSpeechResult$ call({String speechName}) {
+    return UpdateSpeechResult$(
+      speechName: speechName,
+    );
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $UpdateSpeechResult = _$UpdateSpeechResultTearOff();
+
+/// @nodoc
+mixin _$UpdateSpeechResult {
+  String get speechName;
+
+  $UpdateSpeechResultCopyWith<UpdateSpeechResult> get copyWith;
+}
+
+/// @nodoc
+abstract class $UpdateSpeechResultCopyWith<$Res> {
+  factory $UpdateSpeechResultCopyWith(
+          UpdateSpeechResult value, $Res Function(UpdateSpeechResult) then) =
+      _$UpdateSpeechResultCopyWithImpl<$Res>;
+  $Res call({String speechName});
+}
+
+/// @nodoc
+class _$UpdateSpeechResultCopyWithImpl<$Res>
+    implements $UpdateSpeechResultCopyWith<$Res> {
+  _$UpdateSpeechResultCopyWithImpl(this._value, this._then);
+
+  final UpdateSpeechResult _value;
+  // ignore: unused_field
+  final $Res Function(UpdateSpeechResult) _then;
+
+  @override
+  $Res call({
+    Object speechName = freezed,
+  }) {
+    return _then(_value.copyWith(
+      speechName:
+          speechName == freezed ? _value.speechName : speechName as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class $UpdateSpeechResult$CopyWith<$Res>
+    implements $UpdateSpeechResultCopyWith<$Res> {
+  factory $UpdateSpeechResult$CopyWith(
+          UpdateSpeechResult$ value, $Res Function(UpdateSpeechResult$) then) =
+      _$UpdateSpeechResult$CopyWithImpl<$Res>;
+  @override
+  $Res call({String speechName});
+}
+
+/// @nodoc
+class _$UpdateSpeechResult$CopyWithImpl<$Res>
+    extends _$UpdateSpeechResultCopyWithImpl<$Res>
+    implements $UpdateSpeechResult$CopyWith<$Res> {
+  _$UpdateSpeechResult$CopyWithImpl(
+      UpdateSpeechResult$ _value, $Res Function(UpdateSpeechResult$) _then)
+      : super(_value, (v) => _then(v as UpdateSpeechResult$));
+
+  @override
+  UpdateSpeechResult$ get _value => super._value as UpdateSpeechResult$;
+
+  @override
+  $Res call({
+    Object speechName = freezed,
+  }) {
+    return _then(UpdateSpeechResult$(
+      speechName:
+          speechName == freezed ? _value.speechName : speechName as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$UpdateSpeechResult$ implements UpdateSpeechResult$ {
+  const _$UpdateSpeechResult$({this.speechName});
+
+  @override
+  final String speechName;
+
+  @override
+  String toString() {
+    return 'UpdateSpeechResult(speechName: $speechName)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is UpdateSpeechResult$ &&
+            (identical(other.speechName, speechName) ||
+                const DeepCollectionEquality()
+                    .equals(other.speechName, speechName)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(speechName);
+
+  @override
+  $UpdateSpeechResult$CopyWith<UpdateSpeechResult$> get copyWith =>
+      _$UpdateSpeechResult$CopyWithImpl<UpdateSpeechResult$>(this, _$identity);
+}
+
+abstract class UpdateSpeechResult$ implements UpdateSpeechResult {
+  const factory UpdateSpeechResult$({String speechName}) =
+      _$UpdateSpeechResult$;
+
+  @override
+  String get speechName;
+  @override
+  $UpdateSpeechResult$CopyWith<UpdateSpeechResult$> get copyWith;
+}

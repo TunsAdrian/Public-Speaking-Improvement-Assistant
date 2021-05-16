@@ -25,88 +25,90 @@ class _SetFillerWordsState extends State<SetFillerWords> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Set Filler Words'),
-      ),
-      body: Form(
-        child: FillerWordsContainer(
-          builder: (BuildContext context, List<String> fillerWords) {
-            return Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-                  child: Column(
-                    children: <Widget>[
-                      ElevatedButton(
-                        child: Text(_showTextForm ? 'Add This Word' : 'Add New Filler Word'),
-                        onPressed: () {
-                          setState(() {
-                            if (Form.of(context).validate()) {
-                              if (_showTextForm) {
-                                StoreProvider.of<AppState>(context)
-                                    .dispatch(AddFillerWord(fillerWord: _newFillerWord.text.trim()));
+    return ScaffoldMessenger(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Set Filler Words'),
+        ),
+        body: Form(
+          child: FillerWordsContainer(
+            builder: (BuildContext context, List<String> fillerWords) {
+              return Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+                    child: Column(
+                      children: <Widget>[
+                        ElevatedButton(
+                          child: Text(_showTextForm ? 'Add This Word' : 'Add New Filler Word'),
+                          onPressed: () {
+                            setState(() {
+                              if (Form.of(context).validate()) {
+                                if (_showTextForm) {
+                                  StoreProvider.of<AppState>(context)
+                                      .dispatch(AddFillerWord(fillerWord: _newFillerWord.text.trim()));
+                                }
+                                _showTextForm = !_showTextForm;
+                                _newFillerWord.clear();
                               }
-                              _showTextForm = !_showTextForm;
-                              _newFillerWord.clear();
-                            }
-                          });
-                        },
-                      ),
-                      Visibility(
-                        visible: _showTextForm,
-                        child: TextFormField(
-                          controller: _newFillerWord,
-                          keyboardType: TextInputType.name,
-                          decoration: const InputDecoration(
-                            hintText: 'Add a new filler word',
-                          ),
-                          validator: (String value) {
-                            if (value.isEmpty || value.trim().isEmpty) {
-                              return 'Please enter a valid word';
-                            }
-
-                            return null;
+                            });
                           },
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: fillerWords.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final String fillerWord = fillerWords[index];
+                        Visibility(
+                          visible: _showTextForm,
+                          child: TextFormField(
+                            controller: _newFillerWord,
+                            keyboardType: TextInputType.name,
+                            decoration: const InputDecoration(
+                              hintText: 'Add a new filler word',
+                            ),
+                            validator: (String value) {
+                              if (value.isEmpty || value.trim().isEmpty) {
+                                return 'Please enter a valid word';
+                              }
 
-                      return Card(
-                        child: ListTile(
-                          title: Text(fillerWord),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.highlight_remove_rounded),
-                            onPressed: () {
-                              final SnackBar snackBar = SnackBar(
-                                content: Text('$fillerWord removed'),
-                                action: SnackBarAction(
-                                  label: 'Undo',
-                                  onPressed: () {
-                                    // undo the change
-                                    StoreProvider.of<AppState>(context).dispatch(AddFillerWord(fillerWord: fillerWord));
-                                  },
-                                ),
-                              );
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                              StoreProvider.of<AppState>(context).dispatch(RemoveFillerWord(fillerWord: fillerWord));
+                              return null;
                             },
                           ),
                         ),
-                      );
-                    },
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            );
-          },
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: fillerWords.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final String fillerWord = fillerWords[index];
+
+                        return Card(
+                          child: ListTile(
+                            title: Text(fillerWord),
+                            trailing: IconButton(
+                              icon: const Icon(Icons.highlight_remove_rounded),
+                              onPressed: () {
+                                final SnackBar snackBar = SnackBar(
+                                  content: Text('$fillerWord removed'),
+                                  action: SnackBarAction(
+                                    label: 'Undo',
+                                    onPressed: () {
+                                      // undo the change
+                                      StoreProvider.of<AppState>(context).dispatch(AddFillerWord(fillerWord: fillerWord));
+                                    },
+                                  ),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                StoreProvider.of<AppState>(context).dispatch(RemoveFillerWord(fillerWord: fillerWord));
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

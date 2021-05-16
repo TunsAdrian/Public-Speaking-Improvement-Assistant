@@ -69,6 +69,7 @@ class SpeechResultApi {
       speechResult.speechClarity,
       speechResult.speechWords.toList(),
       speechResult.speechFillerWords.toList(),
+      speechResult.speechName,
     );
 
     return hiveSpeechResult;
@@ -80,7 +81,8 @@ class SpeechResultApi {
         ..speechDuration = Duration(seconds: hiveSpeechResult.speechDuration)
         ..speechClarity = hiveSpeechResult.speechClarity
         ..speechFillerWords = ListBuilder<String>(hiveSpeechResult.speechWords)
-        ..speechWords = ListBuilder<String>(hiveSpeechResult.speechFillerWords);
+        ..speechWords = ListBuilder<String>(hiveSpeechResult.speechFillerWords)
+        ..speechName = hiveSpeechResult.speechName;
     });
 
     return speechResult;

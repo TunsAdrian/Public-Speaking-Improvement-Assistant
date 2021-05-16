@@ -9,7 +9,10 @@ abstract class SpeechResultState implements Built<SpeechResultState, SpeechResul
 
   SpeechResultState._();
 
-  BuiltList<SpeechResult> get speechResultList;
+  @nullable
+  SpeechResult get speechResult;
+
+  BuiltList<SpeechResult> get savedSpeechResults;
 
   Map<String, dynamic> get json => serializers.serializeWith(serializer, this) as Map<String, dynamic>;
 

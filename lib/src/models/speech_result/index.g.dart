@@ -36,7 +36,12 @@ class _$SpeechResultSerializer implements StructuredSerializer<SpeechResult> {
           specifiedType:
               const FullType(BuiltList, const [const FullType(String)])),
     ];
-
+    if (object.speechName != null) {
+      result
+        ..add('speechName')
+        ..add(serializers.serialize(object.speechName,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -51,6 +56,10 @@ class _$SpeechResultSerializer implements StructuredSerializer<SpeechResult> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
+        case 'speechName':
+          result.speechName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'speechDuration':
           result.speechDuration = serializers.deserialize(value,
               specifiedType: const FullType(Duration)) as Duration;
@@ -89,12 +98,17 @@ class _$SpeechResultStateSerializer
   Iterable<Object> serialize(Serializers serializers, SpeechResultState object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'speechResultList',
-      serializers.serialize(object.speechResultList,
+      'savedSpeechResults',
+      serializers.serialize(object.savedSpeechResults,
           specifiedType:
               const FullType(BuiltList, const [const FullType(SpeechResult)])),
     ];
-
+    if (object.speechResult != null) {
+      result
+        ..add('speechResult')
+        ..add(serializers.serialize(object.speechResult,
+            specifiedType: const FullType(SpeechResult)));
+    }
     return result;
   }
 
@@ -110,8 +124,12 @@ class _$SpeechResultStateSerializer
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'speechResultList':
-          result.speechResultList.replace(serializers.deserialize(value,
+        case 'speechResult':
+          result.speechResult.replace(serializers.deserialize(value,
+              specifiedType: const FullType(SpeechResult)) as SpeechResult);
+          break;
+        case 'savedSpeechResults':
+          result.savedSpeechResults.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(SpeechResult)]))
               as BuiltList<Object>);
@@ -125,6 +143,8 @@ class _$SpeechResultStateSerializer
 
 class _$SpeechResult extends SpeechResult {
   @override
+  final String speechName;
+  @override
   final Duration speechDuration;
   @override
   final double speechClarity;
@@ -137,7 +157,8 @@ class _$SpeechResult extends SpeechResult {
       (new SpeechResultBuilder()..update(updates)).build();
 
   _$SpeechResult._(
-      {this.speechDuration,
+      {this.speechName,
+      this.speechDuration,
       this.speechClarity,
       this.speechWords,
       this.speechFillerWords})
@@ -167,6 +188,7 @@ class _$SpeechResult extends SpeechResult {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is SpeechResult &&
+        speechName == other.speechName &&
         speechDuration == other.speechDuration &&
         speechClarity == other.speechClarity &&
         speechWords == other.speechWords &&
@@ -176,7 +198,9 @@ class _$SpeechResult extends SpeechResult {
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, speechDuration.hashCode), speechClarity.hashCode),
+        $jc(
+            $jc($jc($jc(0, speechName.hashCode), speechDuration.hashCode),
+                speechClarity.hashCode),
             speechWords.hashCode),
         speechFillerWords.hashCode));
   }
@@ -184,6 +208,7 @@ class _$SpeechResult extends SpeechResult {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SpeechResult')
+          ..add('speechName', speechName)
           ..add('speechDuration', speechDuration)
           ..add('speechClarity', speechClarity)
           ..add('speechWords', speechWords)
@@ -195,6 +220,10 @@ class _$SpeechResult extends SpeechResult {
 class SpeechResultBuilder
     implements Builder<SpeechResult, SpeechResultBuilder> {
   _$SpeechResult _$v;
+
+  String _speechName;
+  String get speechName => _$this._speechName;
+  set speechName(String speechName) => _$this._speechName = speechName;
 
   Duration _speechDuration;
   Duration get speechDuration => _$this._speechDuration;
@@ -222,6 +251,7 @@ class SpeechResultBuilder
 
   SpeechResultBuilder get _$this {
     if (_$v != null) {
+      _speechName = _$v.speechName;
       _speechDuration = _$v.speechDuration;
       _speechClarity = _$v.speechClarity;
       _speechWords = _$v.speechWords?.toBuilder();
@@ -250,6 +280,7 @@ class SpeechResultBuilder
     try {
       _$result = _$v ??
           new _$SpeechResult._(
+              speechName: speechName,
               speechDuration: speechDuration,
               speechClarity: speechClarity,
               speechWords: speechWords.build(),
@@ -274,16 +305,19 @@ class SpeechResultBuilder
 
 class _$SpeechResultState extends SpeechResultState {
   @override
-  final BuiltList<SpeechResult> speechResultList;
+  final SpeechResult speechResult;
+  @override
+  final BuiltList<SpeechResult> savedSpeechResults;
 
   factory _$SpeechResultState(
           [void Function(SpeechResultStateBuilder) updates]) =>
       (new SpeechResultStateBuilder()..update(updates)).build();
 
-  _$SpeechResultState._({this.speechResultList}) : super._() {
-    if (speechResultList == null) {
+  _$SpeechResultState._({this.speechResult, this.savedSpeechResults})
+      : super._() {
+    if (savedSpeechResults == null) {
       throw new BuiltValueNullFieldError(
-          'SpeechResultState', 'speechResultList');
+          'SpeechResultState', 'savedSpeechResults');
     }
   }
 
@@ -299,18 +333,20 @@ class _$SpeechResultState extends SpeechResultState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is SpeechResultState &&
-        speechResultList == other.speechResultList;
+        speechResult == other.speechResult &&
+        savedSpeechResults == other.savedSpeechResults;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, speechResultList.hashCode));
+    return $jf($jc($jc(0, speechResult.hashCode), savedSpeechResults.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SpeechResultState')
-          ..add('speechResultList', speechResultList))
+          ..add('speechResult', speechResult)
+          ..add('savedSpeechResults', savedSpeechResults))
         .toString();
   }
 }
@@ -319,17 +355,24 @@ class SpeechResultStateBuilder
     implements Builder<SpeechResultState, SpeechResultStateBuilder> {
   _$SpeechResultState _$v;
 
-  ListBuilder<SpeechResult> _speechResultList;
-  ListBuilder<SpeechResult> get speechResultList =>
-      _$this._speechResultList ??= new ListBuilder<SpeechResult>();
-  set speechResultList(ListBuilder<SpeechResult> speechResultList) =>
-      _$this._speechResultList = speechResultList;
+  SpeechResultBuilder _speechResult;
+  SpeechResultBuilder get speechResult =>
+      _$this._speechResult ??= new SpeechResultBuilder();
+  set speechResult(SpeechResultBuilder speechResult) =>
+      _$this._speechResult = speechResult;
+
+  ListBuilder<SpeechResult> _savedSpeechResults;
+  ListBuilder<SpeechResult> get savedSpeechResults =>
+      _$this._savedSpeechResults ??= new ListBuilder<SpeechResult>();
+  set savedSpeechResults(ListBuilder<SpeechResult> savedSpeechResults) =>
+      _$this._savedSpeechResults = savedSpeechResults;
 
   SpeechResultStateBuilder();
 
   SpeechResultStateBuilder get _$this {
     if (_$v != null) {
-      _speechResultList = _$v.speechResultList?.toBuilder();
+      _speechResult = _$v.speechResult?.toBuilder();
+      _savedSpeechResults = _$v.savedSpeechResults?.toBuilder();
       _$v = null;
     }
     return this;
@@ -353,12 +396,16 @@ class SpeechResultStateBuilder
     _$SpeechResultState _$result;
     try {
       _$result = _$v ??
-          new _$SpeechResultState._(speechResultList: speechResultList.build());
+          new _$SpeechResultState._(
+              speechResult: _speechResult?.build(),
+              savedSpeechResults: savedSpeechResults.build());
     } catch (_) {
       String _$failedField;
       try {
-        _$failedField = 'speechResultList';
-        speechResultList.build();
+        _$failedField = 'speechResult';
+        _speechResult?.build();
+        _$failedField = 'savedSpeechResults';
+        savedSpeechResults.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'SpeechResultState', _$failedField, e.toString());

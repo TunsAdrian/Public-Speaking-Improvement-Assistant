@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/detailed_speech_result_page.dart';
+import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/speech_result_page.dart';
 import 'package:public_speaking_assistant/src/presentation/home.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/recording_page.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/set_filler_words_page.dart';
@@ -15,6 +17,8 @@ class AppRoutes {
 
   // voice assistant routes
   static const String speech_record = '/speech_record';
+  static const String speech_result = '/speech_result';
+  static const String detailed_speech_result = '/detailed_speech_result';
   static const String set_filler_words = '/set_filler_words';
 
   // settings routes
@@ -38,6 +42,12 @@ class AppRoutes {
     },
     set_filler_words: (BuildContext context) {
       return const SetFillerWords();
+    },
+    speech_result: (BuildContext context) {
+      return const SpeechResultPage();
+    },
+    detailed_speech_result: (BuildContext context) {
+      return const DetailedSpeechResultPage();
     },
 
     // settings routes

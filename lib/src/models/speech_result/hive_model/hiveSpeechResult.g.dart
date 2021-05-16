@@ -21,13 +21,14 @@ class HiveSpeechResultAdapter extends TypeAdapter<HiveSpeechResult> {
       fields[1] as double,
       (fields[2] as List)?.cast<String>(),
       (fields[3] as List)?.cast<String>(),
+      fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveSpeechResult obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.speechDuration)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class HiveSpeechResultAdapter extends TypeAdapter<HiveSpeechResult> {
       ..writeByte(2)
       ..write(obj.speechWords)
       ..writeByte(3)
-      ..write(obj.speechFillerWords);
+      ..write(obj.speechFillerWords)
+      ..writeByte(4)
+      ..write(obj.speechName);
   }
 
   @override

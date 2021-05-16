@@ -12,45 +12,53 @@ class SettingsPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          ListTile(
-            leading: const Icon(Icons.person_outline_rounded),
-            trailing: const Icon(Icons.chevron_right),
-            title: const Text('Account'),
-            onTap: () {
-              Navigator.pushNamed(context, AppRoutes.account_home);
-            },
-          ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.remove_red_eye_outlined),
-            trailing: const Icon(Icons.chevron_right),
-            title: const Text('Appearance'),
-            onTap: () {
-              Navigator.pushNamed(context, AppRoutes.appearance_change);
-            },
-          ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.lock_outline_rounded),
-            trailing: const Icon(Icons.chevron_right),
-            title: const Text('Privacy & Security'),
-            onTap: () {},
-          ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.headset_outlined),
-            trailing: const Icon(Icons.chevron_right),
-            title: const Text('Help'),
-            onTap: () {},
-          ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.help_outline_outlined),
-            trailing: const Icon(Icons.chevron_right),
-            title: const Text('About'),
-            onTap: () {},
+          Expanded(
+            child: Center(
+              child: ListView(
+                shrinkWrap: true,
+                children: <Widget>[
+                  ListTile(
+                    leading: const Icon(Icons.person_outline_rounded),
+                    trailing: const Icon(Icons.chevron_right),
+                    title: const Text('Account'),
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.account_home);
+                    },
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.remove_red_eye_outlined),
+                    trailing: const Icon(Icons.chevron_right),
+                    title: const Text('Appearance'),
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.appearance_change);
+                    },
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.lock_outline_rounded),
+                    trailing: const Icon(Icons.chevron_right),
+                    title: const Text('Privacy & Security'),
+                    onTap: () {},
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.headset_outlined),
+                    trailing: const Icon(Icons.chevron_right),
+                    title: const Text('Help'),
+                    onTap: () {},
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.help_outline_outlined),
+                    trailing: const Icon(Icons.chevron_right),
+                    title: const Text('About'),
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
