@@ -7,5 +7,5 @@ abstract class SaveSpeechResult with _$SaveSpeechResult implements AppAction {
   const factory SaveSpeechResult.successful(List<SpeechResult> speechResultList) = SaveSpeechResultSuccessful;
 
   @Implements(ErrorAction)
-  const factory SaveSpeechResult.error(StateError error) = SaveSpeechResultError;
+  const factory SaveSpeechResult.error(Object error) = SaveSpeechResultError;
 }

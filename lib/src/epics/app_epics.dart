@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'package:public_speaking_assistant/src/data/auth_api.dart';
 import 'package:public_speaking_assistant/src/data/filler_words_api.dart';
 import 'package:public_speaking_assistant/src/data/speech_result_api.dart';
@@ -6,7 +7,6 @@ import 'package:public_speaking_assistant/src/epics/filler_words_epics.dart';
 import 'package:public_speaking_assistant/src/epics/speech_result_epics.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:redux_epics/redux_epics.dart';
-import 'package:meta/meta.dart';
 
 class AppEpics {
   const AppEpics({

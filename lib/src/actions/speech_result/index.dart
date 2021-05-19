@@ -9,5 +9,6 @@ part 'create_speech_result.dart';
 part 'save_speech_result.dart';
 part 'remove_speech_result.dart';
 part 'get_speech_result_list.dart';
+part 'get_speech_result.dart';
 part 'set.dart';
 

@@ -58,7 +58,7 @@ class _SetFillerWordsState extends State<SetFillerWords> {
                           visible: _showTextForm,
                           child: TextFormField(
                             controller: _newFillerWord,
-                            keyboardType: TextInputType.name,
+                            autofocus: true,
                             decoration: const InputDecoration(
                               hintText: 'Add a new filler word',
                             ),

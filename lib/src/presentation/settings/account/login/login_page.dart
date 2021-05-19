@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> with DialogMixin {
                           },
                         ),
                         TextButton(
-                          child: const Text('Reset passowrd'),
+                          child: const Text('Reset password'),
                           onPressed: () {
                             Navigator.pushNamed(context, AppRoutes.reset_password);
                           },

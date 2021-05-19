@@ -7,5 +7,5 @@ abstract class AddFillerWord with _$AddFillerWord implements AppAction {
   const factory AddFillerWord.successful(List<String> fillerWords) = AddFillerWordSuccessful;
 
   @Implements(ErrorAction)
-  const factory AddFillerWord.error(StateError error) = AddFillerWordError;
+  const factory AddFillerWord.error(Object error) = AddFillerWordError;
 }

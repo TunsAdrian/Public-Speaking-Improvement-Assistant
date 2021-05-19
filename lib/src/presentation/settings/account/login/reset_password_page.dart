@@ -16,6 +16,7 @@ class ResetPasswordPage extends StatefulWidget {
 class _ResetPasswordPageState extends State<ResetPasswordPage> with DialogMixin {
   final TextEditingController _email = TextEditingController();
 
+  // todo: implement reset password
   void _response(AppAction action) {
     if (action is LoginError) {
       showErrorDialog(context, 'Login error', action.error);

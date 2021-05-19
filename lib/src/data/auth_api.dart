@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:meta/meta.dart';
+import 'package:public_speaking_assistant/src/models/index.dart';
 
 class AuthApi {
   const AuthApi({

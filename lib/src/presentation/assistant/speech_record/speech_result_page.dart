@@ -36,7 +36,6 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Speech Summary'),
-          centerTitle: true,
         ),
         body: SpeechResultContainer(
           builder: (BuildContext context, SpeechResult speechResult) {
@@ -51,7 +50,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                         minLeadingWidth: 75.0,
                         leading: const Text('Title'),
                         title: Text(speechResult.speechName ?? '-'),
-                        trailing: const Icon(Icons.input_outlined),
+                        trailing: const Icon(Icons.text_fields_outlined),
                         onTap: () {
                           _showSpeechSaveDialog(context, speechResult);
                         },
@@ -111,7 +110,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                             final SnackBar snackBarNameSpeech = SnackBar(
                               content: const Text('Please name your speech first'),
                               action: SnackBarAction(
-                                label: 'NAME',
+                                label: 'Name',
                                 onPressed: () {
                                   _showSpeechSaveDialog(context, speechResult);
                                 },
@@ -124,6 +123,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                             const SnackBar snackBarSaveSuccess = SnackBar(
                               content: Text('Speech result was successfully saved'),
                             );
+                            // todo: send snackbar message to home
                             ScaffoldMessenger.of(context).showSnackBar(snackBarSaveSuccess);
                             Navigator.popUntil(context, ModalRoute.withName(AppRoutes.home));
                           }
@@ -145,40 +145,45 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return Form(
-          key: _speechNameFormKey,
-          child: AlertDialog(
-            contentPadding: const EdgeInsets.all(16.0),
-            content: TextFormField(
-              controller: _speechNameTextController,
-              decoration: const InputDecoration(labelText: 'Speech Name', hintText: 'e.g. School speech'),
-              autofocus: true,
-              validator: (String value) {
-                if (value.isEmpty || value.trim().isEmpty || value.trim().length < 4) {
-                  return 'Please enter a valid name';
-                }
-
-                return null;
-              },
-            ),
-            actions: <Widget>[
-              FlatButton(
-                  child: const Text('CANCEL'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }),
-              FlatButton(
-                child: const Text('SAVE'),
-                onPressed: () {
-                  if (_speechNameFormKey.currentState.validate()) {
-                    StoreProvider.of<AppState>(context)
-                        .dispatch(UpdateSpeechResult(speechName: _speechNameTextController.text.trim()));
-                    Navigator.pop(context);
-                  }
-                },
-              )
-            ],
-          ),
+        return SavedSpeechResultsNamesContainer(
+          builder: (BuildContext context, List<String> speechResultNames) {
+            return Form(
+              key: _speechNameFormKey,
+              child: AlertDialog(
+                contentPadding: const EdgeInsets.all(16.0),
+                content: TextFormField(
+                  controller: _speechNameTextController,
+                  decoration: const InputDecoration(labelText: 'Speech Name', hintText: 'e.g. School speech'),
+                  autofocus: true,
+                  validator: (String value) {
+                    if (value.isEmpty || value.trim().isEmpty || value.trim().length < 4) {
+                      return 'Please enter a valid name';
+                    } else if (speechResultNames.contains(value)) {
+                      return 'This name was already used';
+                    }
+                    return null;
+                  },
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                      child: const Text('CANCEL'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }),
+                  FlatButton(
+                    child: const Text('SAVE'),
+                    onPressed: () {
+                      if (_speechNameFormKey.currentState.validate()) {
+                        StoreProvider.of<AppState>(context)
+                            .dispatch(UpdateSpeechResult(speechName: _speechNameTextController.text.trim()));
+                        Navigator.pop(context);
+                      }
+                    },
+                  )
+                ],
+              ),
+            );
+          },
         );
       },
     );

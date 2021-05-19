@@ -10,17 +10,25 @@ class DetailedSpeechResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Full Speech Content'),
-        centerTitle: true,
+        title: const Text('Detailed Speech'),
       ),
       body: SpeechResultContainer(
         builder: (BuildContext context, SpeechResult speechResult) {
-          return DefaultTextStyle(
-            style: Theme.of(context).textTheme.bodyText2,
-            child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints viewportConstraints) {
-                return SingleChildScrollView(
-                  reverse: true,
+          return Column(
+            children: <Widget>[
+              Visibility(
+                visible: speechResult.speechName != null,
+                child: Container(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: Text(
+                    speechResult.speechName ?? '',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
                   padding: const EdgeInsets.all(30),
                   child: SubstringHighlight(
                     text: speechResult.speechWords.toList().join(' '),
@@ -36,9 +44,9 @@ class DetailedSpeechResultPage extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              ),
+            ],
           );
         },
       ),

@@ -35,7 +35,7 @@ class _$CreateSpeechResultTearOff {
   }
 
 // ignore: unused_element
-  CreateSpeechResultError error(StateError error) {
+  CreateSpeechResultError error(Object error) {
     return CreateSpeechResultError(
       error,
     );
@@ -53,14 +53,14 @@ mixin _$CreateSpeechResult {
     Result $default(Duration speechDuration, double speechClarity,
         List<String> speechWords, List<String> speechFillerWords), {
     @required Result successful(SpeechResult speechResult),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(Duration speechDuration, double speechClarity,
         List<String> speechWords, List<String> speechFillerWords), {
     Result successful(SpeechResult speechResult),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -204,7 +204,7 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
     Result $default(Duration speechDuration, double speechClarity,
         List<String> speechWords, List<String> speechFillerWords), {
     @required Result successful(SpeechResult speechResult),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -219,7 +219,7 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
     Result $default(Duration speechDuration, double speechClarity,
         List<String> speechWords, List<String> speechFillerWords), {
     Result successful(SpeechResult speechResult),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -344,7 +344,7 @@ class _$CreateSpeechResultSuccessful implements CreateSpeechResultSuccessful {
     Result $default(Duration speechDuration, double speechClarity,
         List<String> speechWords, List<String> speechFillerWords), {
     @required Result successful(SpeechResult speechResult),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -358,7 +358,7 @@ class _$CreateSpeechResultSuccessful implements CreateSpeechResultSuccessful {
     Result $default(Duration speechDuration, double speechClarity,
         List<String> speechWords, List<String> speechFillerWords), {
     Result successful(SpeechResult speechResult),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -411,7 +411,7 @@ abstract class $CreateSpeechResultErrorCopyWith<$Res> {
   factory $CreateSpeechResultErrorCopyWith(CreateSpeechResultError value,
           $Res Function(CreateSpeechResultError) then) =
       _$CreateSpeechResultErrorCopyWithImpl<$Res>;
-  $Res call({StateError error});
+  $Res call({Object error});
 }
 
 /// @nodoc
@@ -430,7 +430,7 @@ class _$CreateSpeechResultErrorCopyWithImpl<$Res>
     Object error = freezed,
   }) {
     return _then(CreateSpeechResultError(
-      error == freezed ? _value.error : error as StateError,
+      error == freezed ? _value.error : error,
     ));
   }
 }
@@ -442,7 +442,7 @@ class _$CreateSpeechResultError implements CreateSpeechResultError {
   const _$CreateSpeechResultError(this.error) : assert(error != null);
 
   @override
-  final StateError error;
+  final Object error;
 
   @override
   String toString() {
@@ -472,7 +472,7 @@ class _$CreateSpeechResultError implements CreateSpeechResultError {
     Result $default(Duration speechDuration, double speechClarity,
         List<String> speechWords, List<String> speechFillerWords), {
     @required Result successful(SpeechResult speechResult),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -486,7 +486,7 @@ class _$CreateSpeechResultError implements CreateSpeechResultError {
     Result $default(Duration speechDuration, double speechClarity,
         List<String> speechWords, List<String> speechFillerWords), {
     Result successful(SpeechResult speechResult),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -527,10 +527,10 @@ class _$CreateSpeechResultError implements CreateSpeechResultError {
 
 abstract class CreateSpeechResultError
     implements CreateSpeechResult, ErrorAction {
-  const factory CreateSpeechResultError(StateError error) =
+  const factory CreateSpeechResultError(Object error) =
       _$CreateSpeechResultError;
 
-  StateError get error;
+  Object get error;
   $CreateSpeechResultErrorCopyWith<CreateSpeechResultError> get copyWith;
 }
 
@@ -553,7 +553,7 @@ class _$SaveSpeechResultTearOff {
   }
 
 // ignore: unused_element
-  SaveSpeechResultError error(StateError error) {
+  SaveSpeechResultError error(Object error) {
     return SaveSpeechResultError(
       error,
     );
@@ -570,13 +570,13 @@ mixin _$SaveSpeechResult {
   Result when<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -677,7 +677,7 @@ class _$SaveSpeechResult$ implements SaveSpeechResult$ {
   Result when<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -690,7 +690,7 @@ class _$SaveSpeechResult$ implements SaveSpeechResult$ {
   Result maybeWhen<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -807,7 +807,7 @@ class _$SaveSpeechResultSuccessful implements SaveSpeechResultSuccessful {
   Result when<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -820,7 +820,7 @@ class _$SaveSpeechResultSuccessful implements SaveSpeechResultSuccessful {
   Result maybeWhen<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -872,7 +872,7 @@ abstract class $SaveSpeechResultErrorCopyWith<$Res> {
   factory $SaveSpeechResultErrorCopyWith(SaveSpeechResultError value,
           $Res Function(SaveSpeechResultError) then) =
       _$SaveSpeechResultErrorCopyWithImpl<$Res>;
-  $Res call({StateError error});
+  $Res call({Object error});
 }
 
 /// @nodoc
@@ -891,7 +891,7 @@ class _$SaveSpeechResultErrorCopyWithImpl<$Res>
     Object error = freezed,
   }) {
     return _then(SaveSpeechResultError(
-      error == freezed ? _value.error : error as StateError,
+      error == freezed ? _value.error : error,
     ));
   }
 }
@@ -903,7 +903,7 @@ class _$SaveSpeechResultError implements SaveSpeechResultError {
   const _$SaveSpeechResultError(this.error) : assert(error != null);
 
   @override
-  final StateError error;
+  final Object error;
 
   @override
   String toString() {
@@ -932,7 +932,7 @@ class _$SaveSpeechResultError implements SaveSpeechResultError {
   Result when<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -945,7 +945,7 @@ class _$SaveSpeechResultError implements SaveSpeechResultError {
   Result maybeWhen<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -985,10 +985,9 @@ class _$SaveSpeechResultError implements SaveSpeechResultError {
 }
 
 abstract class SaveSpeechResultError implements SaveSpeechResult, ErrorAction {
-  const factory SaveSpeechResultError(StateError error) =
-      _$SaveSpeechResultError;
+  const factory SaveSpeechResultError(Object error) = _$SaveSpeechResultError;
 
-  StateError get error;
+  Object get error;
   $SaveSpeechResultErrorCopyWith<SaveSpeechResultError> get copyWith;
 }
 
@@ -1011,7 +1010,7 @@ class _$RemoveSpeechResultTearOff {
   }
 
 // ignore: unused_element
-  RemoveSpeechResultError error(StateError error) {
+  RemoveSpeechResultError error(Object error) {
     return RemoveSpeechResultError(
       error,
     );
@@ -1028,13 +1027,13 @@ mixin _$RemoveSpeechResult {
   Result when<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -1134,7 +1133,7 @@ class _$RemoveSpeechResult$ implements RemoveSpeechResult$ {
   Result when<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -1147,7 +1146,7 @@ class _$RemoveSpeechResult$ implements RemoveSpeechResult$ {
   Result maybeWhen<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1265,7 +1264,7 @@ class _$RemoveSpeechResultSuccessful implements RemoveSpeechResultSuccessful {
   Result when<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -1278,7 +1277,7 @@ class _$RemoveSpeechResultSuccessful implements RemoveSpeechResultSuccessful {
   Result maybeWhen<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1331,7 +1330,7 @@ abstract class $RemoveSpeechResultErrorCopyWith<$Res> {
   factory $RemoveSpeechResultErrorCopyWith(RemoveSpeechResultError value,
           $Res Function(RemoveSpeechResultError) then) =
       _$RemoveSpeechResultErrorCopyWithImpl<$Res>;
-  $Res call({StateError error});
+  $Res call({Object error});
 }
 
 /// @nodoc
@@ -1350,7 +1349,7 @@ class _$RemoveSpeechResultErrorCopyWithImpl<$Res>
     Object error = freezed,
   }) {
     return _then(RemoveSpeechResultError(
-      error == freezed ? _value.error : error as StateError,
+      error == freezed ? _value.error : error,
     ));
   }
 }
@@ -1362,7 +1361,7 @@ class _$RemoveSpeechResultError implements RemoveSpeechResultError {
   const _$RemoveSpeechResultError(this.error) : assert(error != null);
 
   @override
-  final StateError error;
+  final Object error;
 
   @override
   String toString() {
@@ -1391,7 +1390,7 @@ class _$RemoveSpeechResultError implements RemoveSpeechResultError {
   Result when<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -1404,7 +1403,7 @@ class _$RemoveSpeechResultError implements RemoveSpeechResultError {
   Result maybeWhen<Result extends Object>(
     Result $default(SpeechResult speechResult), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1445,10 +1444,10 @@ class _$RemoveSpeechResultError implements RemoveSpeechResultError {
 
 abstract class RemoveSpeechResultError
     implements RemoveSpeechResult, ErrorAction {
-  const factory RemoveSpeechResultError(StateError error) =
+  const factory RemoveSpeechResultError(Object error) =
       _$RemoveSpeechResultError;
 
-  StateError get error;
+  Object get error;
   $RemoveSpeechResultErrorCopyWith<RemoveSpeechResultError> get copyWith;
 }
 
@@ -1470,7 +1469,7 @@ class _$GetSpeechResultListTearOff {
   }
 
 // ignore: unused_element
-  GetSpeechResultListError error(StateError error) {
+  GetSpeechResultListError error(Object error) {
     return GetSpeechResultListError(
       error,
     );
@@ -1487,13 +1486,13 @@ mixin _$GetSpeechResultList {
   Result when<Result extends Object>(
     Result $default(), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -1569,7 +1568,7 @@ class _$GetSpeechResultList$ implements GetSpeechResultList$ {
   Result when<Result extends Object>(
     Result $default(), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -1582,7 +1581,7 @@ class _$GetSpeechResultList$ implements GetSpeechResultList$ {
   Result maybeWhen<Result extends Object>(
     Result $default(), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1696,7 +1695,7 @@ class _$GetSpeechResultListSuccessful implements GetSpeechResultListSuccessful {
   Result when<Result extends Object>(
     Result $default(), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -1709,7 +1708,7 @@ class _$GetSpeechResultListSuccessful implements GetSpeechResultListSuccessful {
   Result maybeWhen<Result extends Object>(
     Result $default(), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1762,7 +1761,7 @@ abstract class $GetSpeechResultListErrorCopyWith<$Res> {
   factory $GetSpeechResultListErrorCopyWith(GetSpeechResultListError value,
           $Res Function(GetSpeechResultListError) then) =
       _$GetSpeechResultListErrorCopyWithImpl<$Res>;
-  $Res call({StateError error});
+  $Res call({Object error});
 }
 
 /// @nodoc
@@ -1782,7 +1781,7 @@ class _$GetSpeechResultListErrorCopyWithImpl<$Res>
     Object error = freezed,
   }) {
     return _then(GetSpeechResultListError(
-      error == freezed ? _value.error : error as StateError,
+      error == freezed ? _value.error : error,
     ));
   }
 }
@@ -1794,7 +1793,7 @@ class _$GetSpeechResultListError implements GetSpeechResultListError {
   const _$GetSpeechResultListError(this.error) : assert(error != null);
 
   @override
-  final StateError error;
+  final Object error;
 
   @override
   String toString() {
@@ -1823,7 +1822,7 @@ class _$GetSpeechResultListError implements GetSpeechResultListError {
   Result when<Result extends Object>(
     Result $default(), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -1836,7 +1835,7 @@ class _$GetSpeechResultListError implements GetSpeechResultListError {
   Result maybeWhen<Result extends Object>(
     Result $default(), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1877,11 +1876,467 @@ class _$GetSpeechResultListError implements GetSpeechResultListError {
 
 abstract class GetSpeechResultListError
     implements GetSpeechResultList, ErrorAction {
-  const factory GetSpeechResultListError(StateError error) =
+  const factory GetSpeechResultListError(Object error) =
       _$GetSpeechResultListError;
 
-  StateError get error;
+  Object get error;
   $GetSpeechResultListErrorCopyWith<GetSpeechResultListError> get copyWith;
+}
+
+/// @nodoc
+class _$GetSpeechResultTearOff {
+  const _$GetSpeechResultTearOff();
+
+// ignore: unused_element
+  GetSpeechResult$ call({@required String speechResultName}) {
+    return GetSpeechResult$(
+      speechResultName: speechResultName,
+    );
+  }
+
+// ignore: unused_element
+  GetSpeechResultSuccessful successful(SpeechResult speechResult) {
+    return GetSpeechResultSuccessful(
+      speechResult,
+    );
+  }
+
+// ignore: unused_element
+  GetSpeechResultError error(StateError error) {
+    return GetSpeechResultError(
+      error,
+    );
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $GetSpeechResult = _$GetSpeechResultTearOff();
+
+/// @nodoc
+mixin _$GetSpeechResult {
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(String speechResultName), {
+    @required Result successful(SpeechResult speechResult),
+    @required Result error(StateError error),
+  });
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(String speechResultName), {
+    Result successful(SpeechResult speechResult),
+    Result error(StateError error),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(GetSpeechResult$ value), {
+    @required Result successful(GetSpeechResultSuccessful value),
+    @required Result error(GetSpeechResultError value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(GetSpeechResult$ value), {
+    Result successful(GetSpeechResultSuccessful value),
+    Result error(GetSpeechResultError value),
+    @required Result orElse(),
+  });
+}
+
+/// @nodoc
+abstract class $GetSpeechResultCopyWith<$Res> {
+  factory $GetSpeechResultCopyWith(
+          GetSpeechResult value, $Res Function(GetSpeechResult) then) =
+      _$GetSpeechResultCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$GetSpeechResultCopyWithImpl<$Res>
+    implements $GetSpeechResultCopyWith<$Res> {
+  _$GetSpeechResultCopyWithImpl(this._value, this._then);
+
+  final GetSpeechResult _value;
+  // ignore: unused_field
+  final $Res Function(GetSpeechResult) _then;
+}
+
+/// @nodoc
+abstract class $GetSpeechResult$CopyWith<$Res> {
+  factory $GetSpeechResult$CopyWith(
+          GetSpeechResult$ value, $Res Function(GetSpeechResult$) then) =
+      _$GetSpeechResult$CopyWithImpl<$Res>;
+  $Res call({String speechResultName});
+}
+
+/// @nodoc
+class _$GetSpeechResult$CopyWithImpl<$Res>
+    extends _$GetSpeechResultCopyWithImpl<$Res>
+    implements $GetSpeechResult$CopyWith<$Res> {
+  _$GetSpeechResult$CopyWithImpl(
+      GetSpeechResult$ _value, $Res Function(GetSpeechResult$) _then)
+      : super(_value, (v) => _then(v as GetSpeechResult$));
+
+  @override
+  GetSpeechResult$ get _value => super._value as GetSpeechResult$;
+
+  @override
+  $Res call({
+    Object speechResultName = freezed,
+  }) {
+    return _then(GetSpeechResult$(
+      speechResultName: speechResultName == freezed
+          ? _value.speechResultName
+          : speechResultName as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$GetSpeechResult$ implements GetSpeechResult$ {
+  const _$GetSpeechResult$({@required this.speechResultName})
+      : assert(speechResultName != null);
+
+  @override
+  final String speechResultName;
+
+  @override
+  String toString() {
+    return 'GetSpeechResult(speechResultName: $speechResultName)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is GetSpeechResult$ &&
+            (identical(other.speechResultName, speechResultName) ||
+                const DeepCollectionEquality()
+                    .equals(other.speechResultName, speechResultName)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(speechResultName);
+
+  @override
+  $GetSpeechResult$CopyWith<GetSpeechResult$> get copyWith =>
+      _$GetSpeechResult$CopyWithImpl<GetSpeechResult$>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(String speechResultName), {
+    @required Result successful(SpeechResult speechResult),
+    @required Result error(StateError error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return $default(speechResultName);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(String speechResultName), {
+    Result successful(SpeechResult speechResult),
+    Result error(StateError error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if ($default != null) {
+      return $default(speechResultName);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(GetSpeechResult$ value), {
+    @required Result successful(GetSpeechResultSuccessful value),
+    @required Result error(GetSpeechResultError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(GetSpeechResult$ value), {
+    Result successful(GetSpeechResultSuccessful value),
+    Result error(GetSpeechResultError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetSpeechResult$ implements GetSpeechResult {
+  const factory GetSpeechResult$({@required String speechResultName}) =
+      _$GetSpeechResult$;
+
+  String get speechResultName;
+  $GetSpeechResult$CopyWith<GetSpeechResult$> get copyWith;
+}
+
+/// @nodoc
+abstract class $GetSpeechResultSuccessfulCopyWith<$Res> {
+  factory $GetSpeechResultSuccessfulCopyWith(GetSpeechResultSuccessful value,
+          $Res Function(GetSpeechResultSuccessful) then) =
+      _$GetSpeechResultSuccessfulCopyWithImpl<$Res>;
+  $Res call({SpeechResult speechResult});
+}
+
+/// @nodoc
+class _$GetSpeechResultSuccessfulCopyWithImpl<$Res>
+    extends _$GetSpeechResultCopyWithImpl<$Res>
+    implements $GetSpeechResultSuccessfulCopyWith<$Res> {
+  _$GetSpeechResultSuccessfulCopyWithImpl(GetSpeechResultSuccessful _value,
+      $Res Function(GetSpeechResultSuccessful) _then)
+      : super(_value, (v) => _then(v as GetSpeechResultSuccessful));
+
+  @override
+  GetSpeechResultSuccessful get _value =>
+      super._value as GetSpeechResultSuccessful;
+
+  @override
+  $Res call({
+    Object speechResult = freezed,
+  }) {
+    return _then(GetSpeechResultSuccessful(
+      speechResult == freezed
+          ? _value.speechResult
+          : speechResult as SpeechResult,
+    ));
+  }
+}
+
+/// @nodoc
+class _$GetSpeechResultSuccessful implements GetSpeechResultSuccessful {
+  const _$GetSpeechResultSuccessful(this.speechResult)
+      : assert(speechResult != null);
+
+  @override
+  final SpeechResult speechResult;
+
+  @override
+  String toString() {
+    return 'GetSpeechResult.successful(speechResult: $speechResult)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is GetSpeechResultSuccessful &&
+            (identical(other.speechResult, speechResult) ||
+                const DeepCollectionEquality()
+                    .equals(other.speechResult, speechResult)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(speechResult);
+
+  @override
+  $GetSpeechResultSuccessfulCopyWith<GetSpeechResultSuccessful> get copyWith =>
+      _$GetSpeechResultSuccessfulCopyWithImpl<GetSpeechResultSuccessful>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(String speechResultName), {
+    @required Result successful(SpeechResult speechResult),
+    @required Result error(StateError error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return successful(speechResult);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(String speechResultName), {
+    Result successful(SpeechResult speechResult),
+    Result error(StateError error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (successful != null) {
+      return successful(speechResult);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(GetSpeechResult$ value), {
+    @required Result successful(GetSpeechResultSuccessful value),
+    @required Result error(GetSpeechResultError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return successful(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(GetSpeechResult$ value), {
+    Result successful(GetSpeechResultSuccessful value),
+    Result error(GetSpeechResultError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (successful != null) {
+      return successful(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetSpeechResultSuccessful implements GetSpeechResult {
+  const factory GetSpeechResultSuccessful(SpeechResult speechResult) =
+      _$GetSpeechResultSuccessful;
+
+  SpeechResult get speechResult;
+  $GetSpeechResultSuccessfulCopyWith<GetSpeechResultSuccessful> get copyWith;
+}
+
+/// @nodoc
+abstract class $GetSpeechResultErrorCopyWith<$Res> {
+  factory $GetSpeechResultErrorCopyWith(GetSpeechResultError value,
+          $Res Function(GetSpeechResultError) then) =
+      _$GetSpeechResultErrorCopyWithImpl<$Res>;
+  $Res call({StateError error});
+}
+
+/// @nodoc
+class _$GetSpeechResultErrorCopyWithImpl<$Res>
+    extends _$GetSpeechResultCopyWithImpl<$Res>
+    implements $GetSpeechResultErrorCopyWith<$Res> {
+  _$GetSpeechResultErrorCopyWithImpl(
+      GetSpeechResultError _value, $Res Function(GetSpeechResultError) _then)
+      : super(_value, (v) => _then(v as GetSpeechResultError));
+
+  @override
+  GetSpeechResultError get _value => super._value as GetSpeechResultError;
+
+  @override
+  $Res call({
+    Object error = freezed,
+  }) {
+    return _then(GetSpeechResultError(
+      error == freezed ? _value.error : error as StateError,
+    ));
+  }
+}
+
+@Implements(ErrorAction)
+
+/// @nodoc
+class _$GetSpeechResultError implements GetSpeechResultError {
+  const _$GetSpeechResultError(this.error) : assert(error != null);
+
+  @override
+  final StateError error;
+
+  @override
+  String toString() {
+    return 'GetSpeechResult.error(error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is GetSpeechResultError &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+
+  @override
+  $GetSpeechResultErrorCopyWith<GetSpeechResultError> get copyWith =>
+      _$GetSpeechResultErrorCopyWithImpl<GetSpeechResultError>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(String speechResultName), {
+    @required Result successful(SpeechResult speechResult),
+    @required Result error(StateError error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return error(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(String speechResultName), {
+    Result successful(SpeechResult speechResult),
+    Result error(StateError error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (error != null) {
+      return error(this.error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(GetSpeechResult$ value), {
+    @required Result successful(GetSpeechResultSuccessful value),
+    @required Result error(GetSpeechResultError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(GetSpeechResult$ value), {
+    Result successful(GetSpeechResultSuccessful value),
+    Result error(GetSpeechResultError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetSpeechResultError implements GetSpeechResult, ErrorAction {
+  const factory GetSpeechResultError(StateError error) = _$GetSpeechResultError;
+
+  StateError get error;
+  $GetSpeechResultErrorCopyWith<GetSpeechResultError> get copyWith;
 }
 
 /// @nodoc

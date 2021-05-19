@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/detailed_speech_result_page.dart';
+import 'package:public_speaking_assistant/src/presentation/assistant/detailed_speech_result_page.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/speech_result_page.dart';
 import 'package:public_speaking_assistant/src/presentation/home.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/recording_page.dart';
-import 'package:public_speaking_assistant/src/presentation/assistant/set_filler_words_page.dart';
+import 'package:public_speaking_assistant/src/presentation/assistant/filler_words/set_filler_words_page.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/account_home.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/login/reset_password_page.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/signup/password_page.dart';

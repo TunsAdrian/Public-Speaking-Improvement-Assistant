@@ -26,4 +26,3 @@ FillerWordsState _removeFillerWordSuccessful(FillerWordsState state, RemoveFille
     b.fillerWords = ListBuilder<String>(action.fillerWords);
   });
 }
-

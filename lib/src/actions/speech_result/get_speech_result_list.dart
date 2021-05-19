@@ -7,5 +7,5 @@ abstract class GetSpeechResultList with _$GetSpeechResultList implements AppActi
   const factory GetSpeechResultList.successful(List<SpeechResult> speechResultList) = GetSpeechResultListSuccessful;
 
   @Implements(ErrorAction)
-  const factory GetSpeechResultList.error(StateError error) = GetSpeechResultListError;
+  const factory GetSpeechResultList.error(Object error) = GetSpeechResultListError;
 }

@@ -7,5 +7,5 @@ abstract class RemoveSpeechResult with _$RemoveSpeechResult implements AppAction
   const factory RemoveSpeechResult.successful(List<SpeechResult> speechResultList) = RemoveSpeechResultSuccessful;
 
   @Implements(ErrorAction)
-  const factory RemoveSpeechResult.error(StateError error) = RemoveSpeechResultError;
+  const factory RemoveSpeechResult.error(Object error) = RemoveSpeechResultError;
 }

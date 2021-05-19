@@ -1,7 +1,7 @@
+import 'package:meta/meta.dart';
 import 'package:public_speaking_assistant/src/actions/filler_words/index.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/data/filler_words_api.dart';
-import 'package:meta/meta.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:redux_epics/redux_epics.dart';
 import 'package:rxdart/rxdart.dart';

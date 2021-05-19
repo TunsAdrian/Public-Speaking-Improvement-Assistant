@@ -1,5 +1,5 @@
-import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:meta/meta.dart';
+import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/data/speech_result_api.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:redux_epics/redux_epics.dart';
@@ -15,6 +15,7 @@ class SpeechResultEpics {
   Epic<AppState> get epics {
     return combineEpics<AppState>(<Epic<AppState>>[
       TypedEpic<AppState, CreateSpeechResult$>(_createSpeechResult),
+      TypedEpic<AppState, GetSpeechResult$>(_getSpeechResult),
       TypedEpic<AppState, GetSpeechResultList$>(_getSpeechResultList),
       TypedEpic<AppState, RemoveSpeechResult$>(_removeSpeechResult),
       TypedEpic<AppState, SaveSpeechResult$>(_saveSpeechResult),
@@ -32,6 +33,14 @@ class SpeechResultEpics {
                 ))
             .map((SpeechResult speechResult) => CreateSpeechResult.successful(speechResult))
             .onErrorReturnWith((dynamic error) => CreateSpeechResult.error(error)));
+  }
+
+  Stream<AppAction> _getSpeechResult(Stream<GetSpeechResult$> actions, EpicStore<AppState> store) {
+    return actions //
+        .flatMap((GetSpeechResult$ action) => Stream<GetSpeechResult$>.value(action)
+            .asyncMap((GetSpeechResult$ action) => _api.getSpeechResult(speechResultName: action.speechResultName))
+            .map((SpeechResult speechResult) => GetSpeechResult.successful(speechResult))
+            .onErrorReturnWith((dynamic error) => GetSpeechResult.error(error)));
   }
 
   Stream<AppAction> _getSpeechResultList(Stream<GetSpeechResultList$> actions, EpicStore<AppState> store) {

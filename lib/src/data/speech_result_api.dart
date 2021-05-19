@@ -5,11 +5,11 @@ import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:public_speaking_assistant/src/models/speech_result/hive_model/hiveSpeechResult.dart';
 
 class SpeechResultApi {
-  const SpeechResultApi({@required Box<dynamic> speechResultsBox})
+  const SpeechResultApi({@required Box<HiveSpeechResult> speechResultsBox})
       : assert(speechResultsBox != null),
         _speechResultsBox = speechResultsBox;
 
-  final Box<dynamic> _speechResultsBox;
+  final Box<HiveSpeechResult> _speechResultsBox;
 
   Future<SpeechResult> createSpeechResult({
     @required Duration speechDuration,
@@ -28,37 +28,30 @@ class SpeechResultApi {
     return speechResult;
   }
 
+  SpeechResult getSpeechResult({@required String speechResultName}) {
+    final HiveSpeechResult hiveSpeechResult = _speechResultsBox.get(speechResultName);
+    return _convertHiveToSpeechResult(hiveSpeechResult: hiveSpeechResult);
+  }
+
   List<SpeechResult> getSpeechResultList() {
-    final List<HiveSpeechResult> hiveSpeechResultList = _speechResultsBox.get('speechResultsKey');
+    final List<HiveSpeechResult> hiveSpeechResultList = _speechResultsBox.values.toList();
     return _convertHiveListToSpeechResult(hiveSpeechResultList: hiveSpeechResultList);
   }
 
   Future<List<SpeechResult>> saveSpeechResult({@required SpeechResult speechResult}) async {
     final HiveSpeechResult convertedSpeechResult = _convertSpeechResultToHive(speechResult: speechResult);
-    List<HiveSpeechResult> hiveSpeechResultList = await _speechResultsBox.get('speechResultsKey');
 
-    if (hiveSpeechResultList != null) {
-      hiveSpeechResultList.add(convertedSpeechResult);
-    } else {
-      hiveSpeechResultList = <HiveSpeechResult>[convertedSpeechResult];
-    }
-
-    await _speechResultsBox.put('speechResultsKey', hiveSpeechResultList);
+    // key used is the speech name
+    await _speechResultsBox.put(speechResult.speechName, convertedSpeechResult);
+    final List<HiveSpeechResult> hiveSpeechResultList = _speechResultsBox.values.toList();
 
     return _convertHiveListToSpeechResult(hiveSpeechResultList: hiveSpeechResultList);
   }
 
   Future<List<SpeechResult>> removeSpeechResult({@required SpeechResult speechResult}) async {
-    final HiveSpeechResult convertedSpeechResult = _convertSpeechResultToHive(speechResult: speechResult);
-    List<HiveSpeechResult> hiveSpeechResultList = await _speechResultsBox.get('speechResultsKey');
-
-    if (hiveSpeechResultList != null) {
-      hiveSpeechResultList.remove(convertedSpeechResult);
-    } else {
-      hiveSpeechResultList = <HiveSpeechResult>[convertedSpeechResult];
-    }
-
-    await _speechResultsBox.put('speechResultsKey', hiveSpeechResultList);
+    // key used is the speech name
+    await _speechResultsBox.delete(speechResult.speechName);
+    final List<HiveSpeechResult> hiveSpeechResultList = _speechResultsBox.values.toList();
 
     return _convertHiveListToSpeechResult(hiveSpeechResultList: hiveSpeechResultList);
   }
@@ -80,8 +73,8 @@ class SpeechResultApi {
       b
         ..speechDuration = Duration(seconds: hiveSpeechResult.speechDuration)
         ..speechClarity = hiveSpeechResult.speechClarity
-        ..speechFillerWords = ListBuilder<String>(hiveSpeechResult.speechWords)
-        ..speechWords = ListBuilder<String>(hiveSpeechResult.speechFillerWords)
+        ..speechWords = ListBuilder<String>(hiveSpeechResult.speechWords)
+        ..speechFillerWords = ListBuilder<String>(hiveSpeechResult.speechFillerWords)
         ..speechName = hiveSpeechResult.speechName;
     });
 

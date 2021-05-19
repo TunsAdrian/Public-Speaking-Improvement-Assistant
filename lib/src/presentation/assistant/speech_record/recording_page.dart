@@ -51,9 +51,7 @@ class _RecordingPageState extends State<RecordingPage> {
       builder: (BuildContext context, List<String> fillerWords) {
         return Scaffold(
           appBar: AppBar(
-            // title: const Text('Public Speaking Assistant'),
-            title: Text('Confidence: ${(confidence * 100.0).toStringAsFixed(1)}%'),
-            centerTitle: true,
+            title: const Text('Public Speaking Assistant'),
           ),
           body: SingleChildScrollView(
             reverse: true,

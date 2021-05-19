@@ -26,7 +26,7 @@ class _$GetFillerWordsTearOff {
   }
 
 // ignore: unused_element
-  GetFillerWordsError error(StateError error) {
+  GetFillerWordsError error(Object error) {
     return GetFillerWordsError(
       error,
     );
@@ -43,13 +43,13 @@ mixin _$GetFillerWords {
   Result when<Result extends Object>(
     Result $default(), {
     @required Result successful(List<String> fillerWords),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(), {
     Result successful(List<String> fillerWords),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -125,7 +125,7 @@ class _$GetFillerWords$ implements GetFillerWords$ {
   Result when<Result extends Object>(
     Result $default(), {
     @required Result successful(List<String> fillerWords),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -138,7 +138,7 @@ class _$GetFillerWords$ implements GetFillerWords$ {
   Result maybeWhen<Result extends Object>(
     Result $default(), {
     Result successful(List<String> fillerWords),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -247,7 +247,7 @@ class _$GetFillerWordsSuccessful implements GetFillerWordsSuccessful {
   Result when<Result extends Object>(
     Result $default(), {
     @required Result successful(List<String> fillerWords),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -260,7 +260,7 @@ class _$GetFillerWordsSuccessful implements GetFillerWordsSuccessful {
   Result maybeWhen<Result extends Object>(
     Result $default(), {
     Result successful(List<String> fillerWords),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -312,7 +312,7 @@ abstract class $GetFillerWordsErrorCopyWith<$Res> {
   factory $GetFillerWordsErrorCopyWith(
           GetFillerWordsError value, $Res Function(GetFillerWordsError) then) =
       _$GetFillerWordsErrorCopyWithImpl<$Res>;
-  $Res call({StateError error});
+  $Res call({Object error});
 }
 
 /// @nodoc
@@ -331,7 +331,7 @@ class _$GetFillerWordsErrorCopyWithImpl<$Res>
     Object error = freezed,
   }) {
     return _then(GetFillerWordsError(
-      error == freezed ? _value.error : error as StateError,
+      error == freezed ? _value.error : error,
     ));
   }
 }
@@ -343,7 +343,7 @@ class _$GetFillerWordsError implements GetFillerWordsError {
   const _$GetFillerWordsError(this.error) : assert(error != null);
 
   @override
-  final StateError error;
+  final Object error;
 
   @override
   String toString() {
@@ -371,7 +371,7 @@ class _$GetFillerWordsError implements GetFillerWordsError {
   Result when<Result extends Object>(
     Result $default(), {
     @required Result successful(List<String> fillerWords),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -384,7 +384,7 @@ class _$GetFillerWordsError implements GetFillerWordsError {
   Result maybeWhen<Result extends Object>(
     Result $default(), {
     Result successful(List<String> fillerWords),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -424,9 +424,9 @@ class _$GetFillerWordsError implements GetFillerWordsError {
 }
 
 abstract class GetFillerWordsError implements GetFillerWords, ErrorAction {
-  const factory GetFillerWordsError(StateError error) = _$GetFillerWordsError;
+  const factory GetFillerWordsError(Object error) = _$GetFillerWordsError;
 
-  StateError get error;
+  Object get error;
   $GetFillerWordsErrorCopyWith<GetFillerWordsError> get copyWith;
 }
 
@@ -449,7 +449,7 @@ class _$AddFillerWordTearOff {
   }
 
 // ignore: unused_element
-  AddFillerWordError error(StateError error) {
+  AddFillerWordError error(Object error) {
     return AddFillerWordError(
       error,
     );
@@ -466,13 +466,13 @@ mixin _$AddFillerWord {
   Result when<Result extends Object>(
     Result $default(String fillerWord), {
     @required Result successful(List<String> fillerWords),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(String fillerWord), {
     Result successful(List<String> fillerWords),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -572,7 +572,7 @@ class _$AddFillerWord$ implements AddFillerWord$ {
   Result when<Result extends Object>(
     Result $default(String fillerWord), {
     @required Result successful(List<String> fillerWords),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -585,7 +585,7 @@ class _$AddFillerWord$ implements AddFillerWord$ {
   Result maybeWhen<Result extends Object>(
     Result $default(String fillerWord), {
     Result successful(List<String> fillerWords),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -697,7 +697,7 @@ class _$AddFillerWordSuccessful implements AddFillerWordSuccessful {
   Result when<Result extends Object>(
     Result $default(String fillerWord), {
     @required Result successful(List<String> fillerWords),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -710,7 +710,7 @@ class _$AddFillerWordSuccessful implements AddFillerWordSuccessful {
   Result maybeWhen<Result extends Object>(
     Result $default(String fillerWord), {
     Result successful(List<String> fillerWords),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -762,7 +762,7 @@ abstract class $AddFillerWordErrorCopyWith<$Res> {
   factory $AddFillerWordErrorCopyWith(
           AddFillerWordError value, $Res Function(AddFillerWordError) then) =
       _$AddFillerWordErrorCopyWithImpl<$Res>;
-  $Res call({StateError error});
+  $Res call({Object error});
 }
 
 /// @nodoc
@@ -781,7 +781,7 @@ class _$AddFillerWordErrorCopyWithImpl<$Res>
     Object error = freezed,
   }) {
     return _then(AddFillerWordError(
-      error == freezed ? _value.error : error as StateError,
+      error == freezed ? _value.error : error,
     ));
   }
 }
@@ -793,7 +793,7 @@ class _$AddFillerWordError implements AddFillerWordError {
   const _$AddFillerWordError(this.error) : assert(error != null);
 
   @override
-  final StateError error;
+  final Object error;
 
   @override
   String toString() {
@@ -821,7 +821,7 @@ class _$AddFillerWordError implements AddFillerWordError {
   Result when<Result extends Object>(
     Result $default(String fillerWord), {
     @required Result successful(List<String> fillerWords),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -834,7 +834,7 @@ class _$AddFillerWordError implements AddFillerWordError {
   Result maybeWhen<Result extends Object>(
     Result $default(String fillerWord), {
     Result successful(List<String> fillerWords),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -874,9 +874,9 @@ class _$AddFillerWordError implements AddFillerWordError {
 }
 
 abstract class AddFillerWordError implements AddFillerWord, ErrorAction {
-  const factory AddFillerWordError(StateError error) = _$AddFillerWordError;
+  const factory AddFillerWordError(Object error) = _$AddFillerWordError;
 
-  StateError get error;
+  Object get error;
   $AddFillerWordErrorCopyWith<AddFillerWordError> get copyWith;
 }
 
@@ -899,7 +899,7 @@ class _$RemoveFillerWordTearOff {
   }
 
 // ignore: unused_element
-  RemoveFillerWordError error(StateError error) {
+  RemoveFillerWordError error(Object error) {
     return RemoveFillerWordError(
       error,
     );
@@ -916,13 +916,13 @@ mixin _$RemoveFillerWord {
   Result when<Result extends Object>(
     Result $default(String fillerWord), {
     @required Result successful(List<String> fillerWords),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(String fillerWord), {
     Result successful(List<String> fillerWords),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -1022,7 +1022,7 @@ class _$RemoveFillerWord$ implements RemoveFillerWord$ {
   Result when<Result extends Object>(
     Result $default(String fillerWord), {
     @required Result successful(List<String> fillerWords),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -1035,7 +1035,7 @@ class _$RemoveFillerWord$ implements RemoveFillerWord$ {
   Result maybeWhen<Result extends Object>(
     Result $default(String fillerWord), {
     Result successful(List<String> fillerWords),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1149,7 +1149,7 @@ class _$RemoveFillerWordSuccessful implements RemoveFillerWordSuccessful {
   Result when<Result extends Object>(
     Result $default(String fillerWord), {
     @required Result successful(List<String> fillerWords),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -1162,7 +1162,7 @@ class _$RemoveFillerWordSuccessful implements RemoveFillerWordSuccessful {
   Result maybeWhen<Result extends Object>(
     Result $default(String fillerWord), {
     Result successful(List<String> fillerWords),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1214,7 +1214,7 @@ abstract class $RemoveFillerWordErrorCopyWith<$Res> {
   factory $RemoveFillerWordErrorCopyWith(RemoveFillerWordError value,
           $Res Function(RemoveFillerWordError) then) =
       _$RemoveFillerWordErrorCopyWithImpl<$Res>;
-  $Res call({StateError error});
+  $Res call({Object error});
 }
 
 /// @nodoc
@@ -1233,7 +1233,7 @@ class _$RemoveFillerWordErrorCopyWithImpl<$Res>
     Object error = freezed,
   }) {
     return _then(RemoveFillerWordError(
-      error == freezed ? _value.error : error as StateError,
+      error == freezed ? _value.error : error,
     ));
   }
 }
@@ -1245,7 +1245,7 @@ class _$RemoveFillerWordError implements RemoveFillerWordError {
   const _$RemoveFillerWordError(this.error) : assert(error != null);
 
   @override
-  final StateError error;
+  final Object error;
 
   @override
   String toString() {
@@ -1274,7 +1274,7 @@ class _$RemoveFillerWordError implements RemoveFillerWordError {
   Result when<Result extends Object>(
     Result $default(String fillerWord), {
     @required Result successful(List<String> fillerWords),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -1287,7 +1287,7 @@ class _$RemoveFillerWordError implements RemoveFillerWordError {
   Result maybeWhen<Result extends Object>(
     Result $default(String fillerWord), {
     Result successful(List<String> fillerWords),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1327,9 +1327,8 @@ class _$RemoveFillerWordError implements RemoveFillerWordError {
 }
 
 abstract class RemoveFillerWordError implements RemoveFillerWord, ErrorAction {
-  const factory RemoveFillerWordError(StateError error) =
-      _$RemoveFillerWordError;
+  const factory RemoveFillerWordError(Object error) = _$RemoveFillerWordError;
 
-  StateError get error;
+  Object get error;
   $RemoveFillerWordErrorCopyWith<RemoveFillerWordError> get copyWith;
 }

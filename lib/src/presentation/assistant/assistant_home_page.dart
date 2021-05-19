@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
 
-class AssistantHome extends StatelessWidget {
-  const AssistantHome({Key key}) : super(key: key);
+class AssistantHomePage extends StatelessWidget {
+  const AssistantHomePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

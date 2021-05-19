@@ -5,6 +5,7 @@ import 'package:public_speaking_assistant/src/models/index.dart';
 
 Reducer<SpeechResultState> speechResultReducer = combineReducers(<Reducer<SpeechResultState>>[
   TypedReducer<SpeechResultState, CreateSpeechResultSuccessful>(_createSpeechResultSuccessful),
+  TypedReducer<SpeechResultState, GetSpeechResultSuccessful>(_getSpeechResultSuccessful),
   TypedReducer<SpeechResultState, GetSpeechResultListSuccessful>(_getSpeechResultListSuccessful),
   TypedReducer<SpeechResultState, SaveSpeechResultSuccessful>(_saveSpeechResultSuccessful),
   TypedReducer<SpeechResultState, RemoveSpeechResultSuccessful>(_removeSpeechResultSuccessful),
@@ -14,6 +15,12 @@ Reducer<SpeechResultState> speechResultReducer = combineReducers(<Reducer<Speech
 SpeechResultState _createSpeechResultSuccessful(SpeechResultState state, CreateSpeechResultSuccessful action) {
   return state.rebuild((SpeechResultStateBuilder b) {
     b.speechResult = action.speechResult?.toBuilder();
+  });
+}
+
+SpeechResultState _getSpeechResultSuccessful(SpeechResultState state, GetSpeechResultSuccessful action) {
+  return state.rebuild((SpeechResultStateBuilder b) {
+    b.speechResult = action.speechResult.toBuilder();
   });
 }
 
