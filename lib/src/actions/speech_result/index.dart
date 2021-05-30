@@ -10,5 +10,6 @@ part 'save_speech_result.dart';
 part 'remove_speech_result.dart';
 part 'get_speech_result_list.dart';
 part 'get_speech_result.dart';
+part 'save_synced_speech_results_locally.dart';
 part 'set.dart';
 

@@ -21,6 +21,8 @@ class _$SpeechResultSerializer implements StructuredSerializer<SpeechResult> {
   Iterable<Object> serialize(Serializers serializers, SpeechResult object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
+      'uuid',
+      serializers.serialize(object.uuid, specifiedType: const FullType(String)),
       'speechDuration',
       serializers.serialize(object.speechDuration,
           specifiedType: const FullType(Duration)),
@@ -56,6 +58,10 @@ class _$SpeechResultSerializer implements StructuredSerializer<SpeechResult> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
+        case 'uuid':
+          result.uuid = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'speechName':
           result.speechName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -143,6 +149,8 @@ class _$SpeechResultStateSerializer
 
 class _$SpeechResult extends SpeechResult {
   @override
+  final String uuid;
+  @override
   final String speechName;
   @override
   final Duration speechDuration;
@@ -157,12 +165,16 @@ class _$SpeechResult extends SpeechResult {
       (new SpeechResultBuilder()..update(updates)).build();
 
   _$SpeechResult._(
-      {this.speechName,
+      {this.uuid,
+      this.speechName,
       this.speechDuration,
       this.speechClarity,
       this.speechWords,
       this.speechFillerWords})
       : super._() {
+    if (uuid == null) {
+      throw new BuiltValueNullFieldError('SpeechResult', 'uuid');
+    }
     if (speechDuration == null) {
       throw new BuiltValueNullFieldError('SpeechResult', 'speechDuration');
     }
@@ -188,6 +200,7 @@ class _$SpeechResult extends SpeechResult {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is SpeechResult &&
+        uuid == other.uuid &&
         speechName == other.speechName &&
         speechDuration == other.speechDuration &&
         speechClarity == other.speechClarity &&
@@ -199,7 +212,9 @@ class _$SpeechResult extends SpeechResult {
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, speechName.hashCode), speechDuration.hashCode),
+            $jc(
+                $jc($jc($jc(0, uuid.hashCode), speechName.hashCode),
+                    speechDuration.hashCode),
                 speechClarity.hashCode),
             speechWords.hashCode),
         speechFillerWords.hashCode));
@@ -208,6 +223,7 @@ class _$SpeechResult extends SpeechResult {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SpeechResult')
+          ..add('uuid', uuid)
           ..add('speechName', speechName)
           ..add('speechDuration', speechDuration)
           ..add('speechClarity', speechClarity)
@@ -220,6 +236,10 @@ class _$SpeechResult extends SpeechResult {
 class SpeechResultBuilder
     implements Builder<SpeechResult, SpeechResultBuilder> {
   _$SpeechResult _$v;
+
+  String _uuid;
+  String get uuid => _$this._uuid;
+  set uuid(String uuid) => _$this._uuid = uuid;
 
   String _speechName;
   String get speechName => _$this._speechName;
@@ -251,6 +271,7 @@ class SpeechResultBuilder
 
   SpeechResultBuilder get _$this {
     if (_$v != null) {
+      _uuid = _$v.uuid;
       _speechName = _$v.speechName;
       _speechDuration = _$v.speechDuration;
       _speechClarity = _$v.speechClarity;
@@ -280,6 +301,7 @@ class SpeechResultBuilder
     try {
       _$result = _$v ??
           new _$SpeechResult._(
+              uuid: uuid,
               speechName: speechName,
               speechDuration: speechDuration,
               speechClarity: speechClarity,

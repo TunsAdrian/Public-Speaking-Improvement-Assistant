@@ -110,7 +110,8 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
                                                   .dispatch(const GetSyncedSpeechResults());
                                             } else {
                                               const SnackBar snackBarNoUserConnected = SnackBar(
-                                                content: Text('You need to confirm your email in order to sync your speeches'),
+                                                content: Text(
+                                                    'You need to confirm your email in order to sync your speeches'),
                                               );
 
                                               ScaffoldMessenger.of(context).showSnackBar(snackBarNoUserConnected);
@@ -126,7 +127,7 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
                                       ),
                                       onTap: () {
                                         StoreProvider.of<AppState>(context)
-                                            .dispatch(GetSpeechResult(speechResultName: speechResult.speechName));
+                                            .dispatch(GetSpeechResult(speechResultUuid: speechResult.uuid));
                                         Navigator.pushNamed(context, AppRoutes.detailed_speech_result,
                                             arguments: <SpeechResult>{speechResult});
                                       },

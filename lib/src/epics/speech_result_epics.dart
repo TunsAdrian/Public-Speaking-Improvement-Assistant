@@ -17,8 +17,9 @@ class SpeechResultEpics {
       TypedEpic<AppState, CreateSpeechResult$>(_createSpeechResult),
       TypedEpic<AppState, GetSpeechResult$>(_getSpeechResult),
       TypedEpic<AppState, GetSpeechResultList$>(_getSpeechResultList),
-      TypedEpic<AppState, RemoveSpeechResult$>(_removeSpeechResult),
       TypedEpic<AppState, SaveSpeechResult$>(_saveSpeechResult),
+      TypedEpic<AppState, RemoveSpeechResult$>(_removeSpeechResult),
+      TypedEpic<AppState, SaveSyncedResultsLocally$>(_saveSyncedResultsLocally),
     ]);
   }
 
@@ -38,7 +39,7 @@ class SpeechResultEpics {
   Stream<AppAction> _getSpeechResult(Stream<GetSpeechResult$> actions, EpicStore<AppState> store) {
     return actions //
         .flatMap((GetSpeechResult$ action) => Stream<GetSpeechResult$>.value(action)
-            .asyncMap((GetSpeechResult$ action) => _api.getSpeechResult(speechResultName: action.speechResultName))
+            .asyncMap((GetSpeechResult$ action) => _api.getSpeechResult(speechResultUuid: action.speechResultUuid))
             .map((SpeechResult speechResult) => GetSpeechResult.successful(speechResult))
             .onErrorReturnWith((dynamic error) => GetSpeechResult.error(error)));
   }
@@ -65,5 +66,14 @@ class SpeechResultEpics {
             .asyncMap((RemoveSpeechResult$ action) => _api.removeSpeechResult(speechResult: action.speechResult))
             .map((List<SpeechResult> speechResultList) => RemoveSpeechResult.successful(speechResultList))
             .onErrorReturnWith((dynamic error) => RemoveSpeechResult.error(error)));
+  }
+
+  Stream<AppAction> _saveSyncedResultsLocally(Stream<SaveSyncedResultsLocally$> actions, EpicStore<AppState> store) {
+    return actions //
+        .flatMap((SaveSyncedResultsLocally$ action) => Stream<SaveSyncedResultsLocally$>.value(action)
+            .asyncMap((SaveSyncedResultsLocally$ action) =>
+                _api.saveSyncedSpeechResultsLocally(userSpeechResults: action.userSpeechResults))
+            .map((List<SpeechResult> speechResultList) => SaveSyncedResultsLocally.successful(speechResultList))
+            .onErrorReturnWith((dynamic error) => SaveSyncedResultsLocally.error(error)));
   }
 }

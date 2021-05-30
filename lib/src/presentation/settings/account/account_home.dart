@@ -46,72 +46,83 @@ class AccountHome extends StatelessWidget {
             ),
           );
         } else {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('Account'),
-            ),
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Spacer(),
-                if (user.photoUrl != null)
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundImage: NetworkImage(user.photoUrl),
-                  )
-                else
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundColor: Colors.grey.shade900,
-                    child: Text(
-                      user.lastName[0].toUpperCase(),
-                      style: const TextStyle(fontSize: 36),
+          return SyncedSpeechResultsContainer(
+            builder: (BuildContext context, List<SpeechResult> syncedSpeechResultsList) {
+              return Scaffold(
+                appBar: AppBar(
+                  title: const Text('Account'),
+                ),
+                body: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Spacer(),
+                    if (user.photoUrl != null)
+                      CircleAvatar(
+                        radius: 60,
+                        backgroundImage: NetworkImage(user.photoUrl),
+                      )
+                    else
+                      CircleAvatar(
+                        radius: 60,
+                        backgroundColor: Colors.grey.shade900,
+                        child: Text(
+                          user.lastName[0].toUpperCase(),
+                          style: const TextStyle(fontSize: 36),
+                        ),
+                      ),
+                    const Spacer(),
+                    ElevatedButton.icon(
+                      label: const Text('Download your synced speeches'),
+                      icon: const Icon(Icons.cloud_download_outlined),
+                      onPressed: () {
+                        StoreProvider.of<AppState>(context).dispatch(SaveSyncedResultsLocally(
+                          userSpeechResults: syncedSpeechResultsList,
+                        ));
+                        const SnackBar snackBarAccountCreationSuccess = SnackBar(
+                          content: Text('Your speeches were successfully downloaded and synced'),
+                          duration: Duration(seconds: 2),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBarAccountCreationSuccess);
+                      },
                     ),
-                  ),
-                const Spacer(),
-                ElevatedButton.icon(
-                  label: const Text('Download your synced speeches'),
-                  icon: const Icon(Icons.cloud_download_outlined),
-                  onPressed: () {
-                    // todo: save the speech results from cloud to the local database
-                  },
+                    const Divider(),
+                    ListTile(
+                      minLeadingWidth: 110.0,
+                      leading: const Text('First Name'),
+                      title: Text(
+                        user.firstName,
+                      ),
+                    ),
+                    const Divider(),
+                    ListTile(
+                      minLeadingWidth: 110.0,
+                      leading: const Text('Last Name'),
+                      title: Text(
+                        user.lastName,
+                      ),
+                    ),
+                    const Divider(),
+                    ListTile(
+                      minLeadingWidth: 110.0,
+                      leading: const Text('E-mail Address'),
+                      title: Text(
+                        user.email,
+                      ),
+                    ),
+                    const Spacer(),
+                    TextButton(
+                      onPressed: () {
+                        StoreProvider.of<AppState>(context).dispatch(const SignOut());
+                      },
+                      child: const Text(
+                        'Log out',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                    ),
+                  ],
                 ),
-                const Divider(),
-                ListTile(
-                  minLeadingWidth: 110.0,
-                  leading: const Text('First Name'),
-                  title: Text(
-                    user.firstName,
-                  ),
-                ),
-                const Divider(),
-                ListTile(
-                  minLeadingWidth: 110.0,
-                  leading: const Text('Last Name'),
-                  title: Text(
-                    user.lastName,
-                  ),
-                ),
-                const Divider(),
-                ListTile(
-                  minLeadingWidth: 110.0,
-                  leading: const Text('E-mail Address'),
-                  title: Text(
-                    user.email,
-                  ),
-                ),
-                const Spacer(),
-                TextButton(
-                  onPressed: () {
-                    StoreProvider.of<AppState>(context).dispatch(const SignOut());
-                  },
-                  child: const Text(
-                    'Log out',
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                ),
-              ],
-            ),
+              );
+            },
           );
         }
       },

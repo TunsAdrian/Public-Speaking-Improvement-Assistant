@@ -179,12 +179,12 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                   },
                 ),
                 actions: <Widget>[
-                  FlatButton(
+                  TextButton(
                       child: const Text('CANCEL'),
                       onPressed: () {
                         Navigator.pop(context);
                       }),
-                  FlatButton(
+                  TextButton(
                     child: const Text('SAVE'),
                     onPressed: () {
                       if (_speechNameFormKey.currentState.validate()) {

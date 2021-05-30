@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:public_speaking_assistant/src/actions/filler_words/index.dart';
 import 'package:public_speaking_assistant/src/containers/filler_words/index.dart';
@@ -13,6 +14,7 @@ class SetFillerWords extends StatefulWidget {
 
 class _SetFillerWordsState extends State<SetFillerWords> {
   final TextEditingController _newFillerWord = TextEditingController();
+  final EmojiParser _emojiParser = EmojiParser();
   bool _showTextForm = false;
 
   @override
@@ -65,6 +67,13 @@ class _SetFillerWordsState extends State<SetFillerWords> {
                             validator: (String value) {
                               if (value.isEmpty || value.trim().isEmpty) {
                                 return 'Please enter a valid word';
+                              } else {
+                                for (final int rune in value.runes) {
+                                  final String character = String.fromCharCode(rune);
+                                  if (_emojiParser.hasEmoji(character)) {
+                                    return 'No emoji allowed';
+                                  }
+                                }
                               }
 
                               return null;
@@ -92,7 +101,8 @@ class _SetFillerWordsState extends State<SetFillerWords> {
                                     label: 'Undo',
                                     onPressed: () {
                                       // undo the change
-                                      StoreProvider.of<AppState>(context).dispatch(AddFillerWord(fillerWord: fillerWord));
+                                      StoreProvider.of<AppState>(context)
+                                          .dispatch(AddFillerWord(fillerWord: fillerWord));
                                     },
                                   ),
                                 );

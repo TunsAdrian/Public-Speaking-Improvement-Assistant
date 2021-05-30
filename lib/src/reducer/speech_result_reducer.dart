@@ -9,6 +9,7 @@ Reducer<SpeechResultState> speechResultReducer = combineReducers(<Reducer<Speech
   TypedReducer<SpeechResultState, GetSpeechResultListSuccessful>(_getSpeechResultListSuccessful),
   TypedReducer<SpeechResultState, SaveSpeechResultSuccessful>(_saveSpeechResultSuccessful),
   TypedReducer<SpeechResultState, RemoveSpeechResultSuccessful>(_removeSpeechResultSuccessful),
+  TypedReducer<SpeechResultState, SaveSyncedResultsLocallySuccessful>(_saveSyncedResultsLocallySuccessful),
   TypedReducer<SpeechResultState, UpdateSpeechResult>(_updateSpeechResult),
 ]);
 
@@ -39,6 +40,13 @@ SpeechResultState _saveSpeechResultSuccessful(SpeechResultState state, SaveSpeec
 SpeechResultState _removeSpeechResultSuccessful(SpeechResultState state, RemoveSpeechResultSuccessful action) {
   return state.rebuild((SpeechResultStateBuilder b) {
     b.savedSpeechResults = ListBuilder<SpeechResult>(action.speechResultList);
+  });
+}
+
+SpeechResultState _saveSyncedResultsLocallySuccessful(
+    SpeechResultState state, SaveSyncedResultsLocallySuccessful action) {
+  return state.rebuild((SpeechResultStateBuilder b) {
+    b.savedSpeechResults = ListBuilder<SpeechResult>(action.speechResultsUpdated);
   });
 }
 

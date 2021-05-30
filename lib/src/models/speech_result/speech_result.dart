@@ -7,6 +7,8 @@ abstract class SpeechResult implements Built<SpeechResult, SpeechResultBuilder> 
 
   SpeechResult._();
 
+  String get uuid;
+
   @nullable
   String get speechName;
 

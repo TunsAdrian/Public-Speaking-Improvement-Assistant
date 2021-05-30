@@ -13,6 +13,7 @@ import 'package:public_speaking_assistant/src/models/speech_result/hive_model/hi
 import 'package:public_speaking_assistant/src/reducer/reducer.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_epics/redux_epics.dart';
+import 'package:uuid/uuid.dart';
 
 Future<Store<AppState>> init() async {
   await Firebase.initializeApp();
@@ -21,6 +22,7 @@ Future<Store<AppState>> init() async {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final Box<String> fillerWordsBox = await Hive.openBox<String>('fillerWords');
   final Box<HiveSpeechResult> speechResultsBox = await Hive.openBox<HiveSpeechResult>('speechResults');
+  final Uuid uuidInstance = Uuid();
 
   final AuthApi authApi = AuthApi(
     auth: auth,
@@ -34,6 +36,7 @@ Future<Store<AppState>> init() async {
 
   final SpeechResultApi speechResultApi = SpeechResultApi(
     speechResultsBox: speechResultsBox,
+    uuidInstance: uuidInstance,
   );
 
   final AppEpics epic = AppEpics(

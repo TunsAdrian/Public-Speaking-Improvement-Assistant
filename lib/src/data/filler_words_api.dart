@@ -16,7 +16,7 @@ class FillerWordsApi {
   Future<List<String>> addFillerWord({@required String fillerWord}) async {
     // key and value with same name
     // key need to be converted to a valid ascii key
-    final String validKey = fillerWord.codeUnitAt(0).toString();
+    final String validKey = fillerWord.hashCode.toString();
 
     await _fillerWordsBox.put(validKey, fillerWord);
     final List<String> fillerWords = _fillerWordsBox.values.toList();
@@ -27,7 +27,7 @@ class FillerWordsApi {
   Future<List<String>> removeFillerWord({@required String fillerWord}) async {
     // key and value with same name
     // key need to be converted to a valid ascii key
-    final String validKey = fillerWord.codeUnitAt(0).toString();
+    final String validKey = fillerWord.hashCode.toString();
 
     await _fillerWordsBox.delete(validKey);
     final List<String> fillerWords = _fillerWordsBox.values.toList();

@@ -4,7 +4,8 @@ part of auth_actions;
 abstract class GetSyncedSpeechResults with _$GetSyncedSpeechResults implements AppAction {
   const factory GetSyncedSpeechResults() = GetSyncedSpeechResults$;
 
-  const factory GetSyncedSpeechResults.successful(List<SpeechResult> speechResultList) = GetSyncedSpeechResultsSuccessful;
+  const factory GetSyncedSpeechResults.successful(List<SpeechResult> speechResultList) =
+      GetSyncedSpeechResultsSuccessful;
 
   @Implements(ErrorAction)
   const factory GetSyncedSpeechResults.error(StateError error) = GetSyncedSpeechResultsError;
