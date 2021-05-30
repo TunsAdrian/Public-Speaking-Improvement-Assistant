@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:provider/provider.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:public_speaking_assistant/src/models/speech_result/hive_model/hiveSpeechResult.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/init_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
-import 'package:public_speaking_assistant/src/presentation/settings/test_theme.dart';
 import 'package:redux/redux.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -13,14 +11,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 Future<void> main() async {
   // initialise local database
   await Hive.initFlutter();
+  await Hive.openBox<dynamic>('settings'); // open the settings box when starting the application
   Hive.registerAdapter(HiveSpeechResultAdapter());
 
-  runApp(
-    ChangeNotifierProvider<ThemeModel>(
-      create: (BuildContext context) => ThemeModel(),
-      child: const PublicSpeakingAssistant(),
-    ),
-  );
+  runApp(const PublicSpeakingAssistant());
 }
 
 class PublicSpeakingAssistant extends StatefulWidget {
@@ -41,10 +35,18 @@ class _PublicSpeakingAssistantState extends State<PublicSpeakingAssistant> with 
 
           return StoreProvider<AppState>(
             store: store,
-            child: MaterialApp(
-              title: 'Public Speaking Improvement Assistant',
-              theme: Provider.of<ThemeModel>(context).currentTheme,
-              routes: AppRoutes.routes,
+            // ignore: always_specify_types
+            child: ValueListenableBuilder(
+              valueListenable: Hive.box<dynamic>('settings').listenable(),
+              builder: (BuildContext context, Box<dynamic> settingsBox, Widget widget) {
+                final bool darkMode = settingsBox.get('darkMode', defaultValue: false);
+                return MaterialApp(
+                  themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
+                  darkTheme: ThemeData.dark(),
+                  title: 'Public Speaking Improvement Assistant',
+                  routes: AppRoutes.routes,
+                );
+              },
             ),
           );
         } else {
@@ -52,14 +54,22 @@ class _PublicSpeakingAssistantState extends State<PublicSpeakingAssistant> with 
             throw snapshot.error;
           }
 
-          return MaterialApp(
-            title: 'Public Speaking Improvement Assistant',
-            theme: Provider.of<ThemeModel>(context).currentTheme,
-            home: const Scaffold(
-              body: Center(
-                child: FlutterLogo(),
-              ),
-            ),
+          // ignore: always_specify_types
+          return ValueListenableBuilder(
+            valueListenable: Hive.box<dynamic>('settings').listenable(),
+            builder: (BuildContext context, Box<dynamic> settingsBox, Widget widget) {
+              final bool darkMode = settingsBox.get('darkMode', defaultValue: false);
+              return MaterialApp(
+                themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
+                darkTheme: ThemeData.dark(),
+                title: 'Public Speaking Improvement Assistant',
+                home: const Scaffold(
+                  body: Center(
+                    child: FlutterLogo(),
+                  ),
+                ),
+              );
+            },
           );
         }
       },

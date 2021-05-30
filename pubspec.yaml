@@ -44,9 +44,6 @@ dependencies:
   uuid: ^2.2.2
   flutter_emoji: ^2.2.1+1
 
-  # for theme dynamic change (! delete after implement with redux)
-  provider: ^4.3.2+2
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

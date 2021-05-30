@@ -9,7 +9,6 @@ import 'package:public_speaking_assistant/src/presentation/settings/account/logi
 import 'package:public_speaking_assistant/src/presentation/settings/account/signup/password_page.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/signup/signup_page.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/signup/user_name_page.dart';
-import 'package:public_speaking_assistant/src/presentation/settings/test_theme.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class AppRoutes {
@@ -23,7 +22,6 @@ class AppRoutes {
 
   // settings routes
   static const String account_home = '/account_home';
-  static const String appearance_change = '/appearance_change';
 
   // user account routes
   static const String signup = '/signup';
@@ -53,9 +51,6 @@ class AppRoutes {
     // settings routes
     account_home: (BuildContext context) {
       return const AccountHome();
-    },
-    appearance_change: (BuildContext context) {
-      return const AppearancePage();
     },
 
     // user account routes
