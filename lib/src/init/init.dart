@@ -48,5 +48,8 @@ Future<Store<AppState>> init() async {
     middleware: <Middleware<AppState>>[
       EpicMiddleware<AppState>(epic.epics),
     ],
-  )..dispatch(const InitializeApp());
+  )
+    ..dispatch(const GetCurrentUser())
+    ..dispatch(const GetSpeechResultList())
+    ..dispatch(const GetSyncedSpeechResults());
 }

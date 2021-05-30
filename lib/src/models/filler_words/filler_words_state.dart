@@ -2,7 +2,7 @@ part of filler_words_models;
 
 abstract class FillerWordsState implements Built<FillerWordsState, FillerWordsStateBuilder> {
   factory FillerWordsState.initialState() {
-     return _$FillerWordsState();
+    return _$FillerWordsState();
   }
 
   factory FillerWordsState.fromJson(dynamic json) => serializers.deserializeWith(serializer, json);

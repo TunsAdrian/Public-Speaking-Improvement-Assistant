@@ -14,14 +14,9 @@ class _$GetUserTearOff {
   const _$GetUserTearOff();
 
 // ignore: unused_element
-  Login$ call(
-      {@required String email,
-      @required String password,
-      @required void Function(AppAction) response}) {
-    return Login$(
-      email: email,
-      password: password,
-      response: response,
+  GetUser$ call(String uid) {
+    return GetUser$(
+      uid,
     );
   }
 
@@ -450,24 +445,24 @@ abstract class GetUserError implements GetUser, ErrorAction {
 }
 
 /// @nodoc
-class _$InitializeAppTearOff {
-  const _$InitializeAppTearOff();
+class _$GetCurrentUserTearOff {
+  const _$GetCurrentUserTearOff();
 
 // ignore: unused_element
-  InitializeApp$ call() {
-    return const InitializeApp$();
+  GetCurrentUser$ call() {
+    return const GetCurrentUser$();
   }
 
 // ignore: unused_element
-  InitializeAppSuccessful successful(@nullable AppUser user) {
-    return InitializeAppSuccessful(
+  GetCurrentUserSuccessful successful(@nullable AppUser user) {
+    return GetCurrentUserSuccessful(
       user,
     );
   }
 
 // ignore: unused_element
-  InitializeAppError error(Object error) {
-    return InitializeAppError(
+  GetCurrentUserError error(Object error) {
+    return GetCurrentUserError(
       error,
     );
   }
@@ -475,10 +470,10 @@ class _$InitializeAppTearOff {
 
 /// @nodoc
 // ignore: unused_element
-const $InitializeApp = _$InitializeAppTearOff();
+const $GetCurrentUser = _$GetCurrentUserTearOff();
 
 /// @nodoc
-mixin _$InitializeApp {
+mixin _$GetCurrentUser {
   @optionalTypeArgs
   Result when<Result extends Object>(
     Result $default(), {
@@ -494,67 +489,67 @@ mixin _$InitializeApp {
   });
   @optionalTypeArgs
   Result map<Result extends Object>(
-    Result $default(InitializeApp$ value), {
-    @required Result successful(InitializeAppSuccessful value),
-    @required Result error(InitializeAppError value),
+    Result $default(GetCurrentUser$ value), {
+    @required Result successful(GetCurrentUserSuccessful value),
+    @required Result error(GetCurrentUserError value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>(
-    Result $default(InitializeApp$ value), {
-    Result successful(InitializeAppSuccessful value),
-    Result error(InitializeAppError value),
+    Result $default(GetCurrentUser$ value), {
+    Result successful(GetCurrentUserSuccessful value),
+    Result error(GetCurrentUserError value),
     @required Result orElse(),
   });
 }
 
 /// @nodoc
-abstract class $InitializeAppCopyWith<$Res> {
-  factory $InitializeAppCopyWith(
-          InitializeApp value, $Res Function(InitializeApp) then) =
-      _$InitializeAppCopyWithImpl<$Res>;
+abstract class $GetCurrentUserCopyWith<$Res> {
+  factory $GetCurrentUserCopyWith(
+          GetCurrentUser value, $Res Function(GetCurrentUser) then) =
+      _$GetCurrentUserCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$InitializeAppCopyWithImpl<$Res>
-    implements $InitializeAppCopyWith<$Res> {
-  _$InitializeAppCopyWithImpl(this._value, this._then);
+class _$GetCurrentUserCopyWithImpl<$Res>
+    implements $GetCurrentUserCopyWith<$Res> {
+  _$GetCurrentUserCopyWithImpl(this._value, this._then);
 
-  final InitializeApp _value;
+  final GetCurrentUser _value;
   // ignore: unused_field
-  final $Res Function(InitializeApp) _then;
+  final $Res Function(GetCurrentUser) _then;
 }
 
 /// @nodoc
-abstract class $InitializeApp$CopyWith<$Res> {
-  factory $InitializeApp$CopyWith(
-          InitializeApp$ value, $Res Function(InitializeApp$) then) =
-      _$InitializeApp$CopyWithImpl<$Res>;
+abstract class $GetCurrentUser$CopyWith<$Res> {
+  factory $GetCurrentUser$CopyWith(
+          GetCurrentUser$ value, $Res Function(GetCurrentUser$) then) =
+      _$GetCurrentUser$CopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$InitializeApp$CopyWithImpl<$Res>
-    extends _$InitializeAppCopyWithImpl<$Res>
-    implements $InitializeApp$CopyWith<$Res> {
-  _$InitializeApp$CopyWithImpl(
-      InitializeApp$ _value, $Res Function(InitializeApp$) _then)
-      : super(_value, (v) => _then(v as InitializeApp$));
+class _$GetCurrentUser$CopyWithImpl<$Res>
+    extends _$GetCurrentUserCopyWithImpl<$Res>
+    implements $GetCurrentUser$CopyWith<$Res> {
+  _$GetCurrentUser$CopyWithImpl(
+      GetCurrentUser$ _value, $Res Function(GetCurrentUser$) _then)
+      : super(_value, (v) => _then(v as GetCurrentUser$));
 
   @override
-  InitializeApp$ get _value => super._value as InitializeApp$;
+  GetCurrentUser$ get _value => super._value as GetCurrentUser$;
 }
 
 /// @nodoc
-class _$InitializeApp$ implements InitializeApp$ {
-  const _$InitializeApp$();
+class _$GetCurrentUser$ implements GetCurrentUser$ {
+  const _$GetCurrentUser$();
 
   @override
   String toString() {
-    return 'InitializeApp()';
+    return 'GetCurrentUser()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is InitializeApp$);
+    return identical(this, other) || (other is GetCurrentUser$);
   }
 
   @override
@@ -591,9 +586,9 @@ class _$InitializeApp$ implements InitializeApp$ {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>(
-    Result $default(InitializeApp$ value), {
-    @required Result successful(InitializeAppSuccessful value),
-    @required Result error(InitializeAppError value),
+    Result $default(GetCurrentUser$ value), {
+    @required Result successful(GetCurrentUserSuccessful value),
+    @required Result error(GetCurrentUserError value),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -604,9 +599,9 @@ class _$InitializeApp$ implements InitializeApp$ {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>(
-    Result $default(InitializeApp$ value), {
-    Result successful(InitializeAppSuccessful value),
-    Result error(InitializeAppError value),
+    Result $default(GetCurrentUser$ value), {
+    Result successful(GetCurrentUserSuccessful value),
+    Result error(GetCurrentUserError value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -617,42 +612,43 @@ class _$InitializeApp$ implements InitializeApp$ {
   }
 }
 
-abstract class InitializeApp$ implements InitializeApp {
-  const factory InitializeApp$() = _$InitializeApp$;
+abstract class GetCurrentUser$ implements GetCurrentUser {
+  const factory GetCurrentUser$() = _$GetCurrentUser$;
 }
 
 /// @nodoc
-abstract class $InitializeAppSuccessfulCopyWith<$Res> {
-  factory $InitializeAppSuccessfulCopyWith(InitializeAppSuccessful value,
-          $Res Function(InitializeAppSuccessful) then) =
-      _$InitializeAppSuccessfulCopyWithImpl<$Res>;
+abstract class $GetCurrentUserSuccessfulCopyWith<$Res> {
+  factory $GetCurrentUserSuccessfulCopyWith(GetCurrentUserSuccessful value,
+          $Res Function(GetCurrentUserSuccessful) then) =
+      _$GetCurrentUserSuccessfulCopyWithImpl<$Res>;
   $Res call({@nullable AppUser user});
 }
 
 /// @nodoc
-class _$InitializeAppSuccessfulCopyWithImpl<$Res>
-    extends _$InitializeAppCopyWithImpl<$Res>
-    implements $InitializeAppSuccessfulCopyWith<$Res> {
-  _$InitializeAppSuccessfulCopyWithImpl(InitializeAppSuccessful _value,
-      $Res Function(InitializeAppSuccessful) _then)
-      : super(_value, (v) => _then(v as InitializeAppSuccessful));
+class _$GetCurrentUserSuccessfulCopyWithImpl<$Res>
+    extends _$GetCurrentUserCopyWithImpl<$Res>
+    implements $GetCurrentUserSuccessfulCopyWith<$Res> {
+  _$GetCurrentUserSuccessfulCopyWithImpl(GetCurrentUserSuccessful _value,
+      $Res Function(GetCurrentUserSuccessful) _then)
+      : super(_value, (v) => _then(v as GetCurrentUserSuccessful));
 
   @override
-  InitializeAppSuccessful get _value => super._value as InitializeAppSuccessful;
+  GetCurrentUserSuccessful get _value =>
+      super._value as GetCurrentUserSuccessful;
 
   @override
   $Res call({
     Object user = freezed,
   }) {
-    return _then(InitializeAppSuccessful(
+    return _then(GetCurrentUserSuccessful(
       user == freezed ? _value.user : user as AppUser,
     ));
   }
 }
 
 /// @nodoc
-class _$InitializeAppSuccessful implements InitializeAppSuccessful {
-  const _$InitializeAppSuccessful(@nullable this.user);
+class _$GetCurrentUserSuccessful implements GetCurrentUserSuccessful {
+  const _$GetCurrentUserSuccessful(@nullable this.user);
 
   @override
   @nullable
@@ -660,13 +656,13 @@ class _$InitializeAppSuccessful implements InitializeAppSuccessful {
 
   @override
   String toString() {
-    return 'InitializeApp.successful(user: $user)';
+    return 'GetCurrentUser.successful(user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is InitializeAppSuccessful &&
+        (other is GetCurrentUserSuccessful &&
             (identical(other.user, user) ||
                 const DeepCollectionEquality().equals(other.user, user)));
   }
@@ -676,8 +672,8 @@ class _$InitializeAppSuccessful implements InitializeAppSuccessful {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(user);
 
   @override
-  $InitializeAppSuccessfulCopyWith<InitializeAppSuccessful> get copyWith =>
-      _$InitializeAppSuccessfulCopyWithImpl<InitializeAppSuccessful>(
+  $GetCurrentUserSuccessfulCopyWith<GetCurrentUserSuccessful> get copyWith =>
+      _$GetCurrentUserSuccessfulCopyWithImpl<GetCurrentUserSuccessful>(
           this, _$identity);
 
   @override
@@ -711,9 +707,9 @@ class _$InitializeAppSuccessful implements InitializeAppSuccessful {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>(
-    Result $default(InitializeApp$ value), {
-    @required Result successful(InitializeAppSuccessful value),
-    @required Result error(InitializeAppError value),
+    Result $default(GetCurrentUser$ value), {
+    @required Result successful(GetCurrentUserSuccessful value),
+    @required Result error(GetCurrentUserError value),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -724,9 +720,9 @@ class _$InitializeAppSuccessful implements InitializeAppSuccessful {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>(
-    Result $default(InitializeApp$ value), {
-    Result successful(InitializeAppSuccessful value),
-    Result error(InitializeAppError value),
+    Result $default(GetCurrentUser$ value), {
+    Result successful(GetCurrentUserSuccessful value),
+    Result error(GetCurrentUserError value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -737,39 +733,39 @@ class _$InitializeAppSuccessful implements InitializeAppSuccessful {
   }
 }
 
-abstract class InitializeAppSuccessful implements InitializeApp {
-  const factory InitializeAppSuccessful(@nullable AppUser user) =
-      _$InitializeAppSuccessful;
+abstract class GetCurrentUserSuccessful implements GetCurrentUser {
+  const factory GetCurrentUserSuccessful(@nullable AppUser user) =
+      _$GetCurrentUserSuccessful;
 
   @nullable
   AppUser get user;
-  $InitializeAppSuccessfulCopyWith<InitializeAppSuccessful> get copyWith;
+  $GetCurrentUserSuccessfulCopyWith<GetCurrentUserSuccessful> get copyWith;
 }
 
 /// @nodoc
-abstract class $InitializeAppErrorCopyWith<$Res> {
-  factory $InitializeAppErrorCopyWith(
-          InitializeAppError value, $Res Function(InitializeAppError) then) =
-      _$InitializeAppErrorCopyWithImpl<$Res>;
+abstract class $GetCurrentUserErrorCopyWith<$Res> {
+  factory $GetCurrentUserErrorCopyWith(
+          GetCurrentUserError value, $Res Function(GetCurrentUserError) then) =
+      _$GetCurrentUserErrorCopyWithImpl<$Res>;
   $Res call({Object error});
 }
 
 /// @nodoc
-class _$InitializeAppErrorCopyWithImpl<$Res>
-    extends _$InitializeAppCopyWithImpl<$Res>
-    implements $InitializeAppErrorCopyWith<$Res> {
-  _$InitializeAppErrorCopyWithImpl(
-      InitializeAppError _value, $Res Function(InitializeAppError) _then)
-      : super(_value, (v) => _then(v as InitializeAppError));
+class _$GetCurrentUserErrorCopyWithImpl<$Res>
+    extends _$GetCurrentUserCopyWithImpl<$Res>
+    implements $GetCurrentUserErrorCopyWith<$Res> {
+  _$GetCurrentUserErrorCopyWithImpl(
+      GetCurrentUserError _value, $Res Function(GetCurrentUserError) _then)
+      : super(_value, (v) => _then(v as GetCurrentUserError));
 
   @override
-  InitializeAppError get _value => super._value as InitializeAppError;
+  GetCurrentUserError get _value => super._value as GetCurrentUserError;
 
   @override
   $Res call({
     Object error = freezed,
   }) {
-    return _then(InitializeAppError(
+    return _then(GetCurrentUserError(
       error == freezed ? _value.error : error,
     ));
   }
@@ -778,21 +774,21 @@ class _$InitializeAppErrorCopyWithImpl<$Res>
 @Implements(ErrorAction)
 
 /// @nodoc
-class _$InitializeAppError implements InitializeAppError {
-  const _$InitializeAppError(this.error) : assert(error != null);
+class _$GetCurrentUserError implements GetCurrentUserError {
+  const _$GetCurrentUserError(this.error) : assert(error != null);
 
   @override
   final Object error;
 
   @override
   String toString() {
-    return 'InitializeApp.error(error: $error)';
+    return 'GetCurrentUser.error(error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is InitializeAppError &&
+        (other is GetCurrentUserError &&
             (identical(other.error, error) ||
                 const DeepCollectionEquality().equals(other.error, error)));
   }
@@ -802,8 +798,8 @@ class _$InitializeAppError implements InitializeAppError {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
 
   @override
-  $InitializeAppErrorCopyWith<InitializeAppError> get copyWith =>
-      _$InitializeAppErrorCopyWithImpl<InitializeAppError>(this, _$identity);
+  $GetCurrentUserErrorCopyWith<GetCurrentUserError> get copyWith =>
+      _$GetCurrentUserErrorCopyWithImpl<GetCurrentUserError>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -836,9 +832,9 @@ class _$InitializeAppError implements InitializeAppError {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>(
-    Result $default(InitializeApp$ value), {
-    @required Result successful(InitializeAppSuccessful value),
-    @required Result error(InitializeAppError value),
+    Result $default(GetCurrentUser$ value), {
+    @required Result successful(GetCurrentUserSuccessful value),
+    @required Result error(GetCurrentUserError value),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -849,9 +845,9 @@ class _$InitializeAppError implements InitializeAppError {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>(
-    Result $default(InitializeApp$ value), {
-    Result successful(InitializeAppSuccessful value),
-    Result error(InitializeAppError value),
+    Result $default(GetCurrentUser$ value), {
+    Result successful(GetCurrentUserSuccessful value),
+    Result error(GetCurrentUserError value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -862,11 +858,11 @@ class _$InitializeAppError implements InitializeAppError {
   }
 }
 
-abstract class InitializeAppError implements InitializeApp, ErrorAction {
-  const factory InitializeAppError(Object error) = _$InitializeAppError;
+abstract class GetCurrentUserError implements GetCurrentUser, ErrorAction {
+  const factory GetCurrentUserError(Object error) = _$GetCurrentUserError;
 
   Object get error;
-  $InitializeAppErrorCopyWith<InitializeAppError> get copyWith;
+  $GetCurrentUserErrorCopyWith<GetCurrentUserError> get copyWith;
 }
 
 /// @nodoc
@@ -3199,4 +3195,913 @@ abstract class SignUpWithGoogleError implements SignUpWithGoogle, ErrorAction {
 
   Object get error;
   $SignUpWithGoogleErrorCopyWith<SignUpWithGoogleError> get copyWith;
+}
+
+/// @nodoc
+class _$SyncSpeechResultTearOff {
+  const _$SyncSpeechResultTearOff();
+
+// ignore: unused_element
+  SyncSpeechResult$ call(
+      {@required SpeechResult speechResult, @required bool isSynced}) {
+    return SyncSpeechResult$(
+      speechResult: speechResult,
+      isSynced: isSynced,
+    );
+  }
+
+// ignore: unused_element
+  SyncSpeechResultSuccessful successful(List<SpeechResult> speechResultList) {
+    return SyncSpeechResultSuccessful(
+      speechResultList,
+    );
+  }
+
+// ignore: unused_element
+  SyncSpeechResultError error(StateError error) {
+    return SyncSpeechResultError(
+      error,
+    );
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $SyncSpeechResult = _$SyncSpeechResultTearOff();
+
+/// @nodoc
+mixin _$SyncSpeechResult {
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(SpeechResult speechResult, bool isSynced), {
+    @required Result successful(List<SpeechResult> speechResultList),
+    @required Result error(StateError error),
+  });
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(SpeechResult speechResult, bool isSynced), {
+    Result successful(List<SpeechResult> speechResultList),
+    Result error(StateError error),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(SyncSpeechResult$ value), {
+    @required Result successful(SyncSpeechResultSuccessful value),
+    @required Result error(SyncSpeechResultError value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(SyncSpeechResult$ value), {
+    Result successful(SyncSpeechResultSuccessful value),
+    Result error(SyncSpeechResultError value),
+    @required Result orElse(),
+  });
+}
+
+/// @nodoc
+abstract class $SyncSpeechResultCopyWith<$Res> {
+  factory $SyncSpeechResultCopyWith(
+          SyncSpeechResult value, $Res Function(SyncSpeechResult) then) =
+      _$SyncSpeechResultCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$SyncSpeechResultCopyWithImpl<$Res>
+    implements $SyncSpeechResultCopyWith<$Res> {
+  _$SyncSpeechResultCopyWithImpl(this._value, this._then);
+
+  final SyncSpeechResult _value;
+  // ignore: unused_field
+  final $Res Function(SyncSpeechResult) _then;
+}
+
+/// @nodoc
+abstract class $SyncSpeechResult$CopyWith<$Res> {
+  factory $SyncSpeechResult$CopyWith(
+          SyncSpeechResult$ value, $Res Function(SyncSpeechResult$) then) =
+      _$SyncSpeechResult$CopyWithImpl<$Res>;
+  $Res call({SpeechResult speechResult, bool isSynced});
+}
+
+/// @nodoc
+class _$SyncSpeechResult$CopyWithImpl<$Res>
+    extends _$SyncSpeechResultCopyWithImpl<$Res>
+    implements $SyncSpeechResult$CopyWith<$Res> {
+  _$SyncSpeechResult$CopyWithImpl(
+      SyncSpeechResult$ _value, $Res Function(SyncSpeechResult$) _then)
+      : super(_value, (v) => _then(v as SyncSpeechResult$));
+
+  @override
+  SyncSpeechResult$ get _value => super._value as SyncSpeechResult$;
+
+  @override
+  $Res call({
+    Object speechResult = freezed,
+    Object isSynced = freezed,
+  }) {
+    return _then(SyncSpeechResult$(
+      speechResult: speechResult == freezed
+          ? _value.speechResult
+          : speechResult as SpeechResult,
+      isSynced: isSynced == freezed ? _value.isSynced : isSynced as bool,
+    ));
+  }
+}
+
+/// @nodoc
+class _$SyncSpeechResult$ implements SyncSpeechResult$ {
+  const _$SyncSpeechResult$(
+      {@required this.speechResult, @required this.isSynced})
+      : assert(speechResult != null),
+        assert(isSynced != null);
+
+  @override
+  final SpeechResult speechResult;
+  @override
+  final bool isSynced;
+
+  @override
+  String toString() {
+    return 'SyncSpeechResult(speechResult: $speechResult, isSynced: $isSynced)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is SyncSpeechResult$ &&
+            (identical(other.speechResult, speechResult) ||
+                const DeepCollectionEquality()
+                    .equals(other.speechResult, speechResult)) &&
+            (identical(other.isSynced, isSynced) ||
+                const DeepCollectionEquality()
+                    .equals(other.isSynced, isSynced)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(speechResult) ^
+      const DeepCollectionEquality().hash(isSynced);
+
+  @override
+  $SyncSpeechResult$CopyWith<SyncSpeechResult$> get copyWith =>
+      _$SyncSpeechResult$CopyWithImpl<SyncSpeechResult$>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(SpeechResult speechResult, bool isSynced), {
+    @required Result successful(List<SpeechResult> speechResultList),
+    @required Result error(StateError error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return $default(speechResult, isSynced);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(SpeechResult speechResult, bool isSynced), {
+    Result successful(List<SpeechResult> speechResultList),
+    Result error(StateError error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if ($default != null) {
+      return $default(speechResult, isSynced);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(SyncSpeechResult$ value), {
+    @required Result successful(SyncSpeechResultSuccessful value),
+    @required Result error(SyncSpeechResultError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(SyncSpeechResult$ value), {
+    Result successful(SyncSpeechResultSuccessful value),
+    Result error(SyncSpeechResultError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SyncSpeechResult$ implements SyncSpeechResult {
+  const factory SyncSpeechResult$(
+      {@required SpeechResult speechResult,
+      @required bool isSynced}) = _$SyncSpeechResult$;
+
+  SpeechResult get speechResult;
+  bool get isSynced;
+  $SyncSpeechResult$CopyWith<SyncSpeechResult$> get copyWith;
+}
+
+/// @nodoc
+abstract class $SyncSpeechResultSuccessfulCopyWith<$Res> {
+  factory $SyncSpeechResultSuccessfulCopyWith(SyncSpeechResultSuccessful value,
+          $Res Function(SyncSpeechResultSuccessful) then) =
+      _$SyncSpeechResultSuccessfulCopyWithImpl<$Res>;
+  $Res call({List<SpeechResult> speechResultList});
+}
+
+/// @nodoc
+class _$SyncSpeechResultSuccessfulCopyWithImpl<$Res>
+    extends _$SyncSpeechResultCopyWithImpl<$Res>
+    implements $SyncSpeechResultSuccessfulCopyWith<$Res> {
+  _$SyncSpeechResultSuccessfulCopyWithImpl(SyncSpeechResultSuccessful _value,
+      $Res Function(SyncSpeechResultSuccessful) _then)
+      : super(_value, (v) => _then(v as SyncSpeechResultSuccessful));
+
+  @override
+  SyncSpeechResultSuccessful get _value =>
+      super._value as SyncSpeechResultSuccessful;
+
+  @override
+  $Res call({
+    Object speechResultList = freezed,
+  }) {
+    return _then(SyncSpeechResultSuccessful(
+      speechResultList == freezed
+          ? _value.speechResultList
+          : speechResultList as List<SpeechResult>,
+    ));
+  }
+}
+
+/// @nodoc
+class _$SyncSpeechResultSuccessful implements SyncSpeechResultSuccessful {
+  const _$SyncSpeechResultSuccessful(this.speechResultList)
+      : assert(speechResultList != null);
+
+  @override
+  final List<SpeechResult> speechResultList;
+
+  @override
+  String toString() {
+    return 'SyncSpeechResult.successful(speechResultList: $speechResultList)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is SyncSpeechResultSuccessful &&
+            (identical(other.speechResultList, speechResultList) ||
+                const DeepCollectionEquality()
+                    .equals(other.speechResultList, speechResultList)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(speechResultList);
+
+  @override
+  $SyncSpeechResultSuccessfulCopyWith<SyncSpeechResultSuccessful>
+      get copyWith =>
+          _$SyncSpeechResultSuccessfulCopyWithImpl<SyncSpeechResultSuccessful>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(SpeechResult speechResult, bool isSynced), {
+    @required Result successful(List<SpeechResult> speechResultList),
+    @required Result error(StateError error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return successful(speechResultList);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(SpeechResult speechResult, bool isSynced), {
+    Result successful(List<SpeechResult> speechResultList),
+    Result error(StateError error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (successful != null) {
+      return successful(speechResultList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(SyncSpeechResult$ value), {
+    @required Result successful(SyncSpeechResultSuccessful value),
+    @required Result error(SyncSpeechResultError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return successful(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(SyncSpeechResult$ value), {
+    Result successful(SyncSpeechResultSuccessful value),
+    Result error(SyncSpeechResultError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (successful != null) {
+      return successful(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SyncSpeechResultSuccessful implements SyncSpeechResult {
+  const factory SyncSpeechResultSuccessful(
+      List<SpeechResult> speechResultList) = _$SyncSpeechResultSuccessful;
+
+  List<SpeechResult> get speechResultList;
+  $SyncSpeechResultSuccessfulCopyWith<SyncSpeechResultSuccessful> get copyWith;
+}
+
+/// @nodoc
+abstract class $SyncSpeechResultErrorCopyWith<$Res> {
+  factory $SyncSpeechResultErrorCopyWith(SyncSpeechResultError value,
+          $Res Function(SyncSpeechResultError) then) =
+      _$SyncSpeechResultErrorCopyWithImpl<$Res>;
+  $Res call({StateError error});
+}
+
+/// @nodoc
+class _$SyncSpeechResultErrorCopyWithImpl<$Res>
+    extends _$SyncSpeechResultCopyWithImpl<$Res>
+    implements $SyncSpeechResultErrorCopyWith<$Res> {
+  _$SyncSpeechResultErrorCopyWithImpl(
+      SyncSpeechResultError _value, $Res Function(SyncSpeechResultError) _then)
+      : super(_value, (v) => _then(v as SyncSpeechResultError));
+
+  @override
+  SyncSpeechResultError get _value => super._value as SyncSpeechResultError;
+
+  @override
+  $Res call({
+    Object error = freezed,
+  }) {
+    return _then(SyncSpeechResultError(
+      error == freezed ? _value.error : error as StateError,
+    ));
+  }
+}
+
+@Implements(ErrorAction)
+
+/// @nodoc
+class _$SyncSpeechResultError implements SyncSpeechResultError {
+  const _$SyncSpeechResultError(this.error) : assert(error != null);
+
+  @override
+  final StateError error;
+
+  @override
+  String toString() {
+    return 'SyncSpeechResult.error(error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is SyncSpeechResultError &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+
+  @override
+  $SyncSpeechResultErrorCopyWith<SyncSpeechResultError> get copyWith =>
+      _$SyncSpeechResultErrorCopyWithImpl<SyncSpeechResultError>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(SpeechResult speechResult, bool isSynced), {
+    @required Result successful(List<SpeechResult> speechResultList),
+    @required Result error(StateError error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return error(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(SpeechResult speechResult, bool isSynced), {
+    Result successful(List<SpeechResult> speechResultList),
+    Result error(StateError error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (error != null) {
+      return error(this.error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(SyncSpeechResult$ value), {
+    @required Result successful(SyncSpeechResultSuccessful value),
+    @required Result error(SyncSpeechResultError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(SyncSpeechResult$ value), {
+    Result successful(SyncSpeechResultSuccessful value),
+    Result error(SyncSpeechResultError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SyncSpeechResultError implements SyncSpeechResult, ErrorAction {
+  const factory SyncSpeechResultError(StateError error) =
+      _$SyncSpeechResultError;
+
+  StateError get error;
+  $SyncSpeechResultErrorCopyWith<SyncSpeechResultError> get copyWith;
+}
+
+/// @nodoc
+class _$GetSyncedSpeechResultsTearOff {
+  const _$GetSyncedSpeechResultsTearOff();
+
+// ignore: unused_element
+  GetSyncedSpeechResults$ call() {
+    return const GetSyncedSpeechResults$();
+  }
+
+// ignore: unused_element
+  GetSyncedSpeechResultsSuccessful successful(
+      List<SpeechResult> speechResultList) {
+    return GetSyncedSpeechResultsSuccessful(
+      speechResultList,
+    );
+  }
+
+// ignore: unused_element
+  GetSyncedSpeechResultsError error(StateError error) {
+    return GetSyncedSpeechResultsError(
+      error,
+    );
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $GetSyncedSpeechResults = _$GetSyncedSpeechResultsTearOff();
+
+/// @nodoc
+mixin _$GetSyncedSpeechResults {
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(), {
+    @required Result successful(List<SpeechResult> speechResultList),
+    @required Result error(StateError error),
+  });
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(), {
+    Result successful(List<SpeechResult> speechResultList),
+    Result error(StateError error),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(GetSyncedSpeechResults$ value), {
+    @required Result successful(GetSyncedSpeechResultsSuccessful value),
+    @required Result error(GetSyncedSpeechResultsError value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(GetSyncedSpeechResults$ value), {
+    Result successful(GetSyncedSpeechResultsSuccessful value),
+    Result error(GetSyncedSpeechResultsError value),
+    @required Result orElse(),
+  });
+}
+
+/// @nodoc
+abstract class $GetSyncedSpeechResultsCopyWith<$Res> {
+  factory $GetSyncedSpeechResultsCopyWith(GetSyncedSpeechResults value,
+          $Res Function(GetSyncedSpeechResults) then) =
+      _$GetSyncedSpeechResultsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$GetSyncedSpeechResultsCopyWithImpl<$Res>
+    implements $GetSyncedSpeechResultsCopyWith<$Res> {
+  _$GetSyncedSpeechResultsCopyWithImpl(this._value, this._then);
+
+  final GetSyncedSpeechResults _value;
+  // ignore: unused_field
+  final $Res Function(GetSyncedSpeechResults) _then;
+}
+
+/// @nodoc
+abstract class $GetSyncedSpeechResults$CopyWith<$Res> {
+  factory $GetSyncedSpeechResults$CopyWith(GetSyncedSpeechResults$ value,
+          $Res Function(GetSyncedSpeechResults$) then) =
+      _$GetSyncedSpeechResults$CopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$GetSyncedSpeechResults$CopyWithImpl<$Res>
+    extends _$GetSyncedSpeechResultsCopyWithImpl<$Res>
+    implements $GetSyncedSpeechResults$CopyWith<$Res> {
+  _$GetSyncedSpeechResults$CopyWithImpl(GetSyncedSpeechResults$ _value,
+      $Res Function(GetSyncedSpeechResults$) _then)
+      : super(_value, (v) => _then(v as GetSyncedSpeechResults$));
+
+  @override
+  GetSyncedSpeechResults$ get _value => super._value as GetSyncedSpeechResults$;
+}
+
+/// @nodoc
+class _$GetSyncedSpeechResults$ implements GetSyncedSpeechResults$ {
+  const _$GetSyncedSpeechResults$();
+
+  @override
+  String toString() {
+    return 'GetSyncedSpeechResults()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is GetSyncedSpeechResults$);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(), {
+    @required Result successful(List<SpeechResult> speechResultList),
+    @required Result error(StateError error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return $default();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(), {
+    Result successful(List<SpeechResult> speechResultList),
+    Result error(StateError error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if ($default != null) {
+      return $default();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(GetSyncedSpeechResults$ value), {
+    @required Result successful(GetSyncedSpeechResultsSuccessful value),
+    @required Result error(GetSyncedSpeechResultsError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(GetSyncedSpeechResults$ value), {
+    Result successful(GetSyncedSpeechResultsSuccessful value),
+    Result error(GetSyncedSpeechResultsError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetSyncedSpeechResults$ implements GetSyncedSpeechResults {
+  const factory GetSyncedSpeechResults$() = _$GetSyncedSpeechResults$;
+}
+
+/// @nodoc
+abstract class $GetSyncedSpeechResultsSuccessfulCopyWith<$Res> {
+  factory $GetSyncedSpeechResultsSuccessfulCopyWith(
+          GetSyncedSpeechResultsSuccessful value,
+          $Res Function(GetSyncedSpeechResultsSuccessful) then) =
+      _$GetSyncedSpeechResultsSuccessfulCopyWithImpl<$Res>;
+  $Res call({List<SpeechResult> speechResultList});
+}
+
+/// @nodoc
+class _$GetSyncedSpeechResultsSuccessfulCopyWithImpl<$Res>
+    extends _$GetSyncedSpeechResultsCopyWithImpl<$Res>
+    implements $GetSyncedSpeechResultsSuccessfulCopyWith<$Res> {
+  _$GetSyncedSpeechResultsSuccessfulCopyWithImpl(
+      GetSyncedSpeechResultsSuccessful _value,
+      $Res Function(GetSyncedSpeechResultsSuccessful) _then)
+      : super(_value, (v) => _then(v as GetSyncedSpeechResultsSuccessful));
+
+  @override
+  GetSyncedSpeechResultsSuccessful get _value =>
+      super._value as GetSyncedSpeechResultsSuccessful;
+
+  @override
+  $Res call({
+    Object speechResultList = freezed,
+  }) {
+    return _then(GetSyncedSpeechResultsSuccessful(
+      speechResultList == freezed
+          ? _value.speechResultList
+          : speechResultList as List<SpeechResult>,
+    ));
+  }
+}
+
+/// @nodoc
+class _$GetSyncedSpeechResultsSuccessful
+    implements GetSyncedSpeechResultsSuccessful {
+  const _$GetSyncedSpeechResultsSuccessful(this.speechResultList)
+      : assert(speechResultList != null);
+
+  @override
+  final List<SpeechResult> speechResultList;
+
+  @override
+  String toString() {
+    return 'GetSyncedSpeechResults.successful(speechResultList: $speechResultList)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is GetSyncedSpeechResultsSuccessful &&
+            (identical(other.speechResultList, speechResultList) ||
+                const DeepCollectionEquality()
+                    .equals(other.speechResultList, speechResultList)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(speechResultList);
+
+  @override
+  $GetSyncedSpeechResultsSuccessfulCopyWith<GetSyncedSpeechResultsSuccessful>
+      get copyWith => _$GetSyncedSpeechResultsSuccessfulCopyWithImpl<
+          GetSyncedSpeechResultsSuccessful>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(), {
+    @required Result successful(List<SpeechResult> speechResultList),
+    @required Result error(StateError error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return successful(speechResultList);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(), {
+    Result successful(List<SpeechResult> speechResultList),
+    Result error(StateError error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (successful != null) {
+      return successful(speechResultList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(GetSyncedSpeechResults$ value), {
+    @required Result successful(GetSyncedSpeechResultsSuccessful value),
+    @required Result error(GetSyncedSpeechResultsError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return successful(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(GetSyncedSpeechResults$ value), {
+    Result successful(GetSyncedSpeechResultsSuccessful value),
+    Result error(GetSyncedSpeechResultsError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (successful != null) {
+      return successful(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetSyncedSpeechResultsSuccessful
+    implements GetSyncedSpeechResults {
+  const factory GetSyncedSpeechResultsSuccessful(
+      List<SpeechResult> speechResultList) = _$GetSyncedSpeechResultsSuccessful;
+
+  List<SpeechResult> get speechResultList;
+  $GetSyncedSpeechResultsSuccessfulCopyWith<GetSyncedSpeechResultsSuccessful>
+      get copyWith;
+}
+
+/// @nodoc
+abstract class $GetSyncedSpeechResultsErrorCopyWith<$Res> {
+  factory $GetSyncedSpeechResultsErrorCopyWith(
+          GetSyncedSpeechResultsError value,
+          $Res Function(GetSyncedSpeechResultsError) then) =
+      _$GetSyncedSpeechResultsErrorCopyWithImpl<$Res>;
+  $Res call({StateError error});
+}
+
+/// @nodoc
+class _$GetSyncedSpeechResultsErrorCopyWithImpl<$Res>
+    extends _$GetSyncedSpeechResultsCopyWithImpl<$Res>
+    implements $GetSyncedSpeechResultsErrorCopyWith<$Res> {
+  _$GetSyncedSpeechResultsErrorCopyWithImpl(GetSyncedSpeechResultsError _value,
+      $Res Function(GetSyncedSpeechResultsError) _then)
+      : super(_value, (v) => _then(v as GetSyncedSpeechResultsError));
+
+  @override
+  GetSyncedSpeechResultsError get _value =>
+      super._value as GetSyncedSpeechResultsError;
+
+  @override
+  $Res call({
+    Object error = freezed,
+  }) {
+    return _then(GetSyncedSpeechResultsError(
+      error == freezed ? _value.error : error as StateError,
+    ));
+  }
+}
+
+@Implements(ErrorAction)
+
+/// @nodoc
+class _$GetSyncedSpeechResultsError implements GetSyncedSpeechResultsError {
+  const _$GetSyncedSpeechResultsError(this.error) : assert(error != null);
+
+  @override
+  final StateError error;
+
+  @override
+  String toString() {
+    return 'GetSyncedSpeechResults.error(error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is GetSyncedSpeechResultsError &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+
+  @override
+  $GetSyncedSpeechResultsErrorCopyWith<GetSyncedSpeechResultsError>
+      get copyWith => _$GetSyncedSpeechResultsErrorCopyWithImpl<
+          GetSyncedSpeechResultsError>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(), {
+    @required Result successful(List<SpeechResult> speechResultList),
+    @required Result error(StateError error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return error(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(), {
+    Result successful(List<SpeechResult> speechResultList),
+    Result error(StateError error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (error != null) {
+      return error(this.error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(GetSyncedSpeechResults$ value), {
+    @required Result successful(GetSyncedSpeechResultsSuccessful value),
+    @required Result error(GetSyncedSpeechResultsError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(GetSyncedSpeechResults$ value), {
+    Result successful(GetSyncedSpeechResultsSuccessful value),
+    Result error(GetSyncedSpeechResultsError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetSyncedSpeechResultsError
+    implements GetSyncedSpeechResults, ErrorAction {
+  const factory GetSyncedSpeechResultsError(StateError error) =
+      _$GetSyncedSpeechResultsError;
+
+  StateError get error;
+  $GetSyncedSpeechResultsErrorCopyWith<GetSyncedSpeechResultsError>
+      get copyWith;
 }

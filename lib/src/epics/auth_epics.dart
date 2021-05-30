@@ -14,20 +14,22 @@ class AuthEpics {
 
   Epic<AppState> get epics {
     return combineEpics<AppState>(<Epic<AppState>>[
-      TypedEpic<AppState, InitializeApp$>(_initializeApp),
+      TypedEpic<AppState, GetCurrentUser$>(_getCurrentUser),
       TypedEpic<AppState, Login$>(_login),
       TypedEpic<AppState, Signup$>(_signup),
       TypedEpic<AppState, SignOut$>(_signOut),
       TypedEpic<AppState, SignUpWithGoogle$>(_signUpWithGoogle),
+      TypedEpic<AppState, SyncSpeechResult$>(_syncSpeechResult),
+      TypedEpic<AppState, GetSyncedSpeechResults$>(_getSyncedSpeechResults),
     ]);
   }
 
-  Stream<AppAction> _initializeApp(Stream<InitializeApp$> actions, EpicStore<AppState> store) {
+  Stream<AppAction> _getCurrentUser(Stream<GetCurrentUser$> actions, EpicStore<AppState> store) {
     return actions //
-        .flatMap((InitializeApp$ action) => Stream<InitializeApp$>.value(action)
-            .asyncMap((InitializeApp$ action) => _api.getCurrentUser())
-            .map((AppUser user) => InitializeApp.successful(user))
-            .onErrorReturnWith((dynamic error) => InitializeApp.error(error)));
+        .flatMap((GetCurrentUser$ action) => Stream<GetCurrentUser$>.value(action)
+            .asyncMap((GetCurrentUser$ action) => _api.getCurrentUser())
+            .map((AppUser user) => GetCurrentUser.successful(user))
+            .onErrorReturnWith((dynamic error) => GetCurrentUser.error(error)));
   }
 
   Stream<AppAction> _login(Stream<Login$> actions, EpicStore<AppState> store) {
@@ -68,5 +70,24 @@ class AuthEpics {
             .map((AppUser user) => SignUpWithGoogle.successful(user))
             .onErrorReturnWith((dynamic error) => SignUpWithGoogle.error(error))
             .doOnData(action.response));
+  }
+
+  Stream<AppAction> _syncSpeechResult(Stream<SyncSpeechResult$> actions, EpicStore<AppState> store) {
+    return actions //
+        .flatMap((SyncSpeechResult$ action) => Stream<SyncSpeechResult$>.value(action)
+            .asyncMap((SyncSpeechResult$ action) => _api.syncSpeechResultToCloud(
+                  speechResult: action.speechResult,
+                  isSynced: action.isSynced,
+                ))
+            .map((List<SpeechResult> speechResultList) => SyncSpeechResult.successful(speechResultList))
+            .onErrorReturnWith((dynamic error) => SyncSpeechResult.error(error)));
+  }
+
+  Stream<AppAction> _getSyncedSpeechResults(Stream<GetSyncedSpeechResults$> actions, EpicStore<AppState> store) {
+    return actions //
+        .flatMap((GetSyncedSpeechResults$ action) => Stream<GetSyncedSpeechResults$>.value(action)
+            .asyncMap((GetSyncedSpeechResults$ action) => _api.getSyncedSpeechResults())
+            .map((List<SpeechResult> speechResultList) => GetSyncedSpeechResults.successful(speechResultList))
+            .onErrorReturnWith((dynamic error) => GetSyncedSpeechResults.error(error)));
   }
 }

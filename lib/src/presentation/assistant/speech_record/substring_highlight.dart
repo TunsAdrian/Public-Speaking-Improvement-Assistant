@@ -35,6 +35,7 @@ class SubstringHighlight extends StatelessWidget {
 
       final List<String> spanList = _text.toLowerCase().split(termLC);
       int i = 0;
+      // ignore: avoid_function_literals_in_foreach_calls
       spanList.forEach((String v) {
         if (v.isNotEmpty) {
           children.add(TextSpan(text: _text.substring(i, i + v.length), style: textStyle));

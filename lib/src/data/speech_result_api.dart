@@ -29,7 +29,10 @@ class SpeechResultApi {
   }
 
   SpeechResult getSpeechResult({@required String speechResultName}) {
-    final HiveSpeechResult hiveSpeechResult = _speechResultsBox.get(speechResultName);
+    // key need to be converted to a valid ascii key
+    final String validKey = speechResultName.codeUnitAt(0).toString();
+
+    final HiveSpeechResult hiveSpeechResult = _speechResultsBox.get(validKey);
     return _convertHiveToSpeechResult(hiveSpeechResult: hiveSpeechResult);
   }
 
@@ -42,7 +45,10 @@ class SpeechResultApi {
     final HiveSpeechResult convertedSpeechResult = _convertSpeechResultToHive(speechResult: speechResult);
 
     // key used is the speech name
-    await _speechResultsBox.put(speechResult.speechName, convertedSpeechResult);
+    // key need to be converted to a valid ascii key
+    final String validKey = speechResult.speechName.codeUnitAt(0).toString();
+
+    await _speechResultsBox.put(validKey, convertedSpeechResult);
     final List<HiveSpeechResult> hiveSpeechResultList = _speechResultsBox.values.toList();
 
     return _convertHiveListToSpeechResult(hiveSpeechResultList: hiveSpeechResultList);
@@ -50,7 +56,10 @@ class SpeechResultApi {
 
   Future<List<SpeechResult>> removeSpeechResult({@required SpeechResult speechResult}) async {
     // key used is the speech name
-    await _speechResultsBox.delete(speechResult.speechName);
+    // key need to be converted to a valid ascii key
+    final String validKey = speechResult.speechName.codeUnitAt(0).toString();
+    await _speechResultsBox.delete(validKey);
+
     final List<HiveSpeechResult> hiveSpeechResultList = _speechResultsBox.values.toList();
 
     return _convertHiveListToSpeechResult(hiveSpeechResultList: hiveSpeechResultList);

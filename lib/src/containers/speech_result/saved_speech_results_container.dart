@@ -8,7 +8,7 @@ class SavedSpeechResultsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, List<SpeechResult>>(
-      converter: (Store<AppState> store) => store.state.speechResult.savedSpeechResults.toList(),
+      converter: (Store<AppState> store) => store.state.speechResult.savedSpeechResults?.toList(),
       builder: builder,
     );
   }

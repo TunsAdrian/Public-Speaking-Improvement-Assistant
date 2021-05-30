@@ -8,4 +8,3 @@ import 'package:redux/redux.dart';
 part 'saved_speech_results_names_container.dart';
 part 'saved_speech_results_container.dart';
 part 'speech_result_container.dart';
-

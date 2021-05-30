@@ -20,6 +20,7 @@ class AssistantHomePage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, AppRoutes.speech_record);
+                  // Navigator.pushNamed(context, AppRoutes.speech_result);
                 },
                 child: const Text('Start Recording'),
               ),

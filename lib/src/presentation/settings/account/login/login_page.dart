@@ -22,6 +22,8 @@ class _LoginPageState extends State<LoginPage> with DialogMixin {
       showErrorDialog(context, 'Login error', action.error);
     } else if (action is SignUpWithGoogleError) {
       showErrorDialog(context, 'Google error', action.error);
+    } else if (action is LoginSuccessful || action is SignUpWithGoogleSuccessful) {
+      StoreProvider.of<AppState>(context).dispatch(const GetSyncedSpeechResults());
     }
   }
 
@@ -64,7 +66,7 @@ class _LoginPageState extends State<LoginPage> with DialogMixin {
                       onChanged: (String value) {},
                       validator: (String value) {
                         if (value.length < 6) {
-                          return 'Please try a better password';
+                          return 'Please enter a valid password';
                         }
 
                         return null;
@@ -88,7 +90,7 @@ class _LoginPageState extends State<LoginPage> with DialogMixin {
                     ),
                     const Spacer(),
                     TextButton(
-                      child: const Text('Login'),
+                      child: const Text('Log In'),
                       onPressed: () {
                         if (Form.of(context).validate()) {
                           StoreProvider.of<AppState>(context).dispatch(Login(

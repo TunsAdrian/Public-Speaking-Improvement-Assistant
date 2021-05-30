@@ -53,13 +53,13 @@ class SignupPage extends StatelessWidget {
                         text: 'Already have an account? ',
                         children: <TextSpan>[
                           TextSpan(
-                            text: 'Login!',
+                            text: 'Log In!',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.popUntil(context, ModalRoute.withName(AppRoutes.home));
+                                Navigator.popUntil(context, ModalRoute.withName(AppRoutes.account_home));
                               },
                           ),
                         ],

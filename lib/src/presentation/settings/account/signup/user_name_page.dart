@@ -39,7 +39,7 @@ class UserNamePage extends StatelessWidget {
                               },
                               validator: (String value) {
                                 if (value.length < 3) {
-                                  return 'Please input a larger first name';
+                                  return 'Please input a longer first name';
                                 }
 
                                 return null;
@@ -56,7 +56,7 @@ class UserNamePage extends StatelessWidget {
                               },
                               validator: (String value) {
                                 if (value.length < 3) {
-                                  return 'Please input a larger last name';
+                                  return 'Please input a longer last name';
                                 }
 
                                 return null;
@@ -81,7 +81,7 @@ class UserNamePage extends StatelessWidget {
                         text: 'Already have an account? ',
                         children: <TextSpan>[
                           TextSpan(
-                            text: 'Login!',
+                            text: 'Log In!',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),

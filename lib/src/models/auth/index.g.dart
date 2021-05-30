@@ -32,6 +32,9 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
       'lastName',
       serializers.serialize(object.lastName,
           specifiedType: const FullType(String)),
+      'isEmailVerified',
+      serializers.serialize(object.isEmailVerified,
+          specifiedType: const FullType(bool)),
     ];
     if (object.photoUrl != null) {
       result
@@ -39,10 +42,10 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
         ..add(serializers.serialize(object.photoUrl,
             specifiedType: const FullType(String)));
     }
-    if (object.speechResult != null) {
+    if (object.userSpeechResults != null) {
       result
-        ..add('speechResult')
-        ..add(serializers.serialize(object.speechResult,
+        ..add('userSpeechResults')
+        ..add(serializers.serialize(object.userSpeechResults,
             specifiedType: const FullType(
                 BuiltList, const [const FullType(SpeechResult)])));
     }
@@ -76,12 +79,16 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
           result.lastName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'isEmailVerified':
+          result.isEmailVerified = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'photoUrl':
           result.photoUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'speechResult':
-          result.speechResult.replace(serializers.deserialize(value,
+        case 'userSpeechResults':
+          result.userSpeechResults.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(SpeechResult)]))
               as BuiltList<Object>);
@@ -226,9 +233,11 @@ class _$AppUser extends AppUser {
   @override
   final String lastName;
   @override
+  final bool isEmailVerified;
+  @override
   final String photoUrl;
   @override
-  final BuiltList<SpeechResult> speechResult;
+  final BuiltList<SpeechResult> userSpeechResults;
 
   factory _$AppUser([void Function(AppUserBuilder) updates]) =>
       (new AppUserBuilder()..update(updates)).build();
@@ -238,8 +247,9 @@ class _$AppUser extends AppUser {
       this.email,
       this.firstName,
       this.lastName,
+      this.isEmailVerified,
       this.photoUrl,
-      this.speechResult})
+      this.userSpeechResults})
       : super._() {
     if (uid == null) {
       throw new BuiltValueNullFieldError('AppUser', 'uid');
@@ -252,6 +262,9 @@ class _$AppUser extends AppUser {
     }
     if (lastName == null) {
       throw new BuiltValueNullFieldError('AppUser', 'lastName');
+    }
+    if (isEmailVerified == null) {
+      throw new BuiltValueNullFieldError('AppUser', 'isEmailVerified');
     }
   }
 
@@ -270,8 +283,9 @@ class _$AppUser extends AppUser {
         email == other.email &&
         firstName == other.firstName &&
         lastName == other.lastName &&
+        isEmailVerified == other.isEmailVerified &&
         photoUrl == other.photoUrl &&
-        speechResult == other.speechResult;
+        userSpeechResults == other.userSpeechResults;
   }
 
   @override
@@ -279,11 +293,13 @@ class _$AppUser extends AppUser {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, uid.hashCode), email.hashCode),
-                    firstName.hashCode),
-                lastName.hashCode),
+                $jc(
+                    $jc($jc($jc(0, uid.hashCode), email.hashCode),
+                        firstName.hashCode),
+                    lastName.hashCode),
+                isEmailVerified.hashCode),
             photoUrl.hashCode),
-        speechResult.hashCode));
+        userSpeechResults.hashCode));
   }
 
   @override
@@ -293,8 +309,9 @@ class _$AppUser extends AppUser {
           ..add('email', email)
           ..add('firstName', firstName)
           ..add('lastName', lastName)
+          ..add('isEmailVerified', isEmailVerified)
           ..add('photoUrl', photoUrl)
-          ..add('speechResult', speechResult))
+          ..add('userSpeechResults', userSpeechResults))
         .toString();
   }
 }
@@ -318,15 +335,20 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
   String get lastName => _$this._lastName;
   set lastName(String lastName) => _$this._lastName = lastName;
 
+  bool _isEmailVerified;
+  bool get isEmailVerified => _$this._isEmailVerified;
+  set isEmailVerified(bool isEmailVerified) =>
+      _$this._isEmailVerified = isEmailVerified;
+
   String _photoUrl;
   String get photoUrl => _$this._photoUrl;
   set photoUrl(String photoUrl) => _$this._photoUrl = photoUrl;
 
-  ListBuilder<SpeechResult> _speechResult;
-  ListBuilder<SpeechResult> get speechResult =>
-      _$this._speechResult ??= new ListBuilder<SpeechResult>();
-  set speechResult(ListBuilder<SpeechResult> speechResult) =>
-      _$this._speechResult = speechResult;
+  ListBuilder<SpeechResult> _userSpeechResults;
+  ListBuilder<SpeechResult> get userSpeechResults =>
+      _$this._userSpeechResults ??= new ListBuilder<SpeechResult>();
+  set userSpeechResults(ListBuilder<SpeechResult> userSpeechResults) =>
+      _$this._userSpeechResults = userSpeechResults;
 
   AppUserBuilder();
 
@@ -336,8 +358,9 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
       _email = _$v.email;
       _firstName = _$v.firstName;
       _lastName = _$v.lastName;
+      _isEmailVerified = _$v.isEmailVerified;
       _photoUrl = _$v.photoUrl;
-      _speechResult = _$v.speechResult?.toBuilder();
+      _userSpeechResults = _$v.userSpeechResults?.toBuilder();
       _$v = null;
     }
     return this;
@@ -366,13 +389,14 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
               email: email,
               firstName: firstName,
               lastName: lastName,
+              isEmailVerified: isEmailVerified,
               photoUrl: photoUrl,
-              speechResult: _speechResult?.build());
+              userSpeechResults: _userSpeechResults?.build());
     } catch (_) {
       String _$failedField;
       try {
-        _$failedField = 'speechResult';
-        _speechResult?.build();
+        _$failedField = 'userSpeechResults';
+        _userSpeechResults?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'AppUser', _$failedField, e.toString());

@@ -15,6 +15,36 @@ class AccountHome extends StatelessWidget {
       builder: (BuildContext context, AppUser user) {
         if (user == null) {
           return const LoginPage();
+        } else if (!user.isEmailVerified) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Account Confirmation'),
+            ),
+            body: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'An confirmation email has been sent to you. After confirming your email, please come back and login again.',
+                      style: Theme.of(context).textTheme.headline6,
+                      textAlign: TextAlign.center,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: ElevatedButton(
+                        child: const Text('Log In'),
+                        onPressed: () {
+                          StoreProvider.of<AppState>(context).dispatch(const SignOut());
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
         } else {
           return Scaffold(
             appBar: AppBar(
@@ -39,33 +69,36 @@ class AccountHome extends StatelessWidget {
                     ),
                   ),
                 const Spacer(),
+                ElevatedButton.icon(
+                  label: const Text('Download your synced speeches'),
+                  icon: const Icon(Icons.cloud_download_outlined),
+                  onPressed: () {
+                    // todo: save the speech results from cloud to the local database
+                  },
+                ),
                 const Divider(),
                 ListTile(
+                  minLeadingWidth: 110.0,
                   leading: const Text('First Name'),
-                  trailing: const Icon(Icons.chevron_right),
                   title: Text(
                     user.firstName,
-                    textAlign: TextAlign.end,
                   ),
                 ),
                 const Divider(),
                 ListTile(
+                  minLeadingWidth: 110.0,
                   leading: const Text('Last Name'),
-                  trailing: const Icon(Icons.chevron_right),
                   title: Text(
                     user.lastName,
-                    textAlign: TextAlign.end,
                   ),
                 ),
                 const Divider(),
                 ListTile(
+                  minLeadingWidth: 110.0,
                   leading: const Text('E-mail Address'),
-                  trailing: const Icon(null),
                   title: Text(
                     user.email,
-                    textAlign: TextAlign.end,
                   ),
-                  enabled: false,
                 ),
                 const Spacer(),
                 TextButton(

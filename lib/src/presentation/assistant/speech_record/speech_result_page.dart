@@ -15,6 +15,7 @@ class SpeechResultPage extends StatefulWidget {
 class _SpeechResultPageState extends State<SpeechResultPage> {
   final TextEditingController _speechNameTextController = TextEditingController();
   final GlobalKey<FormState> _speechNameFormKey = GlobalKey<FormState>();
+  bool tileEnabled = true;
 
   @override
   void initState() {
@@ -51,6 +52,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                         leading: const Text('Title'),
                         title: Text(speechResult.speechName ?? '-'),
                         trailing: const Icon(Icons.text_fields_outlined),
+                        enabled: tileEnabled,
                         onTap: () {
                           _showSpeechSaveDialog(context, speechResult);
                         },
@@ -60,24 +62,28 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                         minLeadingWidth: 75.0,
                         leading: const Text('Time'),
                         title: Text(speechResult.speechDuration.toString().substring(2, 7)),
+                        enabled: tileEnabled,
                       ),
                       const Divider(),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('Clarity'),
                         title: Text('${(speechResult.speechClarity * 100.0).toStringAsFixed(1)}%'),
+                        enabled: tileEnabled,
                       ),
                       const Divider(),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('All Words'),
                         title: Text('${speechResult.speechWords.length} words'),
+                        enabled: tileEnabled,
                       ),
                       const Divider(),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('Filler Words'),
                         title: Text('${speechResult.speechFillerWords.length}'),
+                        enabled: tileEnabled,
                       ),
                       const Divider(),
                       ListTile(
@@ -85,6 +91,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                         leading: const Icon(Icons.info_outline_rounded),
                         title: const Text('See The Full Speech'),
                         trailing: const Icon(Icons.chevron_right),
+                        enabled: tileEnabled,
                         onTap: () {
                           Navigator.pushNamed(context, AppRoutes.detailed_speech_result);
                         },
@@ -105,7 +112,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                       ),
                       ElevatedButton(
                         child: const Text('Save This Speech'),
-                        onPressed: () {
+                        onPressed: () async {
                           if (speechResult.speechName == null) {
                             final SnackBar snackBarNameSpeech = SnackBar(
                               content: const Text('Please name your speech first'),
@@ -119,12 +126,19 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                             ScaffoldMessenger.of(context).showSnackBar(snackBarNameSpeech);
                           } else {
                             StoreProvider.of<AppState>(context).dispatch(SaveSpeechResult(speechResult: speechResult));
-
                             const SnackBar snackBarSaveSuccess = SnackBar(
                               content: Text('Speech result was successfully saved'),
                             );
-                            // todo: send snackbar message to home
+
+                            // disable the field after the save operation was done and wait for the navigator
+                            setState(() {
+                              tileEnabled = false;
+                            });
                             ScaffoldMessenger.of(context).showSnackBar(snackBarSaveSuccess);
+
+                            // wait for 1 second, so the snackbar message can be read
+                            await Future<void>.delayed(const Duration(milliseconds: 1000), () {});
+
                             Navigator.popUntil(context, ModalRoute.withName(AppRoutes.home));
                           }
                         },

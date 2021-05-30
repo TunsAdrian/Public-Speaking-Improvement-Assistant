@@ -9,9 +9,15 @@ import 'package:public_speaking_assistant/src/presentation/routes.dart';
 class PasswordPage extends StatelessWidget with DialogMixin {
   const PasswordPage({Key key}) : super(key: key);
 
-  void _response(BuildContext context, AppAction action) {
+  Future<void> _response(BuildContext context, AppAction action) async {
     if (action is SignupSuccessful) {
-      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.home, (_) => false);
+      const SnackBar snackBarAccountCreationSuccess = SnackBar(
+        content: Text('Your account was successfully created'),
+        duration: Duration(seconds: 2),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBarAccountCreationSuccess);
+      Navigator.popUntil(context, ModalRoute.withName(AppRoutes.account_home));
     } else if (action is SignupError) {
       showErrorDialog(context, 'Signup error', action.error);
     }
@@ -50,7 +56,7 @@ class PasswordPage extends StatelessWidget with DialogMixin {
                     ),
                     const Spacer(),
                     TextButton(
-                      child: const Text('SignUp!'),
+                      child: const Text('Sign Up'),
                       onPressed: () {
                         if (Form.of(context).validate()) {
                           StoreProvider.of<AppState>(context).dispatch(Signup((AppAction action) {
@@ -65,13 +71,13 @@ class PasswordPage extends StatelessWidget with DialogMixin {
                         text: 'Already have an account? ',
                         children: <TextSpan>[
                           TextSpan(
-                            text: 'Login!',
+                            text: 'Log In!',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.popUntil(context, ModalRoute.withName(AppRoutes.home));
+                                Navigator.popUntil(context, ModalRoute.withName(AppRoutes.account_home));
                               },
                           ),
                         ],
