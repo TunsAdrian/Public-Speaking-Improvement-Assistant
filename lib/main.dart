@@ -42,7 +42,34 @@ class _PublicSpeakingAssistantState extends State<PublicSpeakingAssistant> with 
                 final bool darkMode = settingsBox.get('darkMode', defaultValue: false);
                 return MaterialApp(
                   themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
-                  darkTheme: ThemeData.dark(),
+                  theme: ThemeData.light().copyWith(
+                    primaryColor: Colors.deepPurple,
+                    accentColor: Colors.deepPurpleAccent,
+                    elevatedButtonTheme: ElevatedButtonThemeData(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.deepPurple,
+                      ),
+                    ),
+                    textButtonTheme: TextButtonThemeData(
+                      style: TextButton.styleFrom(
+                        primary: Colors.deepPurpleAccent,
+                      ),
+                    ),
+                  ),
+                  darkTheme: ThemeData.dark().copyWith(
+                    primaryColor: Colors.deepPurple,
+                    accentColor: Colors.deepPurpleAccent,
+                    elevatedButtonTheme: ElevatedButtonThemeData(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.deepPurple,
+                      ),
+                    ),
+                    textButtonTheme: TextButtonThemeData(
+                      style: TextButton.styleFrom(
+                        primary: Colors.deepPurpleAccent,
+                      ),
+                    ),
+                  ),
                   title: 'Public Speaking Improvement Assistant',
                   routes: AppRoutes.routes,
                 );
