@@ -8,5 +8,5 @@ abstract class SaveSyncedResultsLocally with _$SaveSyncedResultsLocally implemen
       SaveSyncedResultsLocallySuccessful;
 
   @Implements(ErrorAction)
-  const factory SaveSyncedResultsLocally.error(StateError error) = SaveSyncedResultsLocallyError;
+  const factory SaveSyncedResultsLocally.error(Object error) = SaveSyncedResultsLocallyError;
 }

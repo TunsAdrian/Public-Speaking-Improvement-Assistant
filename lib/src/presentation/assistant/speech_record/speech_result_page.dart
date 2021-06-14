@@ -21,11 +21,12 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
   void initState() {
     super.initState();
 
-    // todo: replace this
+    // todo: remove this
     // created manual speech result object for testing purposes
     StoreProvider.of<AppState>(context, listen: false).dispatch(const CreateSpeechResult(
       speechDuration: Duration(seconds: 61),
       speechClarity: 0.94,
+      wordsPerMinute: 24.54,
       speechWords: <String>['This', 'is', 'just', 'a', 'sample', 'text'],
       speechFillerWords: <String>['just', 'text'],
     ));
@@ -50,7 +51,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('Title'),
-                        title: Text(speechResult.speechName ?? '-'),
+                        title: Text(speechResult?.speechName ?? '-'),
                         trailing: const Icon(Icons.text_fields_outlined),
                         enabled: tileEnabled,
                         onTap: () {
@@ -62,6 +63,13 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                         minLeadingWidth: 75.0,
                         leading: const Text('Time'),
                         title: Text(speechResult.speechDuration.toString().substring(2, 7)),
+                        enabled: tileEnabled,
+                      ),
+                      const Divider(),
+                      ListTile(
+                        minLeadingWidth: 75.0,
+                        leading: const Text('Pace'),
+                        title: Text('${speechResult.wordsPerMinute.round()} words/min'),
                         enabled: tileEnabled,
                       ),
                       const Divider(),
@@ -184,7 +192,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                       onPressed: () {
                         Navigator.pop(context);
                       }),
-                  TextButton(
+                  OutlinedButton(
                     child: const Text('SAVE'),
                     onPressed: () {
                       if (_speechNameFormKey.currentState.validate()) {

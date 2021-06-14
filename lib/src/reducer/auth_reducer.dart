@@ -9,6 +9,7 @@ Reducer<AuthState> authReducer = combineReducers(<Reducer<AuthState>>[
   TypedReducer<AuthState, SignupSuccessful>(_signupSuccessful),
   TypedReducer<AuthState, UpdateRegistrationInfo>(_updateRegistrationInfo),
   TypedReducer<AuthState, SignUpWithGoogleSuccessful>(_signUpWithGoogleSuccessful),
+  TypedReducer<AuthState, DeleteUserAccountSuccessful>(_deleteUserAccountSuccessful),
   TypedReducer<AuthState, SyncSpeechResultSuccessful>(_syncSpeechResultSuccessful),
   TypedReducer<AuthState, GetSyncedSpeechResultsSuccessful>(_getSyncedSpeechResultsSuccessful),
   TypedReducer<AuthState, SignOutSuccessful>(_signOutSuccessful),
@@ -44,6 +45,10 @@ AuthState _updateRegistrationInfo(AuthState state, UpdateRegistrationInfo action
 
 AuthState _signUpWithGoogleSuccessful(AuthState state, SignUpWithGoogleSuccessful action) {
   return state.rebuild((AuthStateBuilder b) => b.user = action.user?.toBuilder());
+}
+
+AuthState _deleteUserAccountSuccessful(AuthState state, DeleteUserAccountSuccessful action) {
+  return AuthState.initialState();
 }
 
 AuthState _signOutSuccessful(AuthState state, SignOutSuccessful action) {

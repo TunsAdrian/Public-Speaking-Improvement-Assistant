@@ -19,6 +19,7 @@ class AuthEpics {
       TypedEpic<AppState, Signup$>(_signup),
       TypedEpic<AppState, SignOut$>(_signOut),
       TypedEpic<AppState, SignUpWithGoogle$>(_signUpWithGoogle),
+      TypedEpic<AppState, DeleteUserAccount$>(_deleteUserAccount),
       TypedEpic<AppState, SyncSpeechResult$>(_syncSpeechResult),
       TypedEpic<AppState, GetSyncedSpeechResults$>(_getSyncedSpeechResults),
     ]);
@@ -69,6 +70,15 @@ class AuthEpics {
             .asyncMap((SignUpWithGoogle$ action) => _api.signUpWithGoogle())
             .map((AppUser user) => SignUpWithGoogle.successful(user))
             .onErrorReturnWith((dynamic error) => SignUpWithGoogle.error(error))
+            .doOnData(action.response));
+  }
+
+  Stream<AppAction> _deleteUserAccount(Stream<DeleteUserAccount$> actions, EpicStore<AppState> store) {
+    return actions //
+        .flatMap((DeleteUserAccount$ action) => Stream<DeleteUserAccount$>.value(action)
+            .asyncMap((DeleteUserAccount$ action) => _api.deleteUserAccount())
+            .mapTo(const DeleteUserAccount.successful())
+            .onErrorReturnWith((dynamic error) => DeleteUserAccount.error(error))
             .doOnData(action.response));
   }
 

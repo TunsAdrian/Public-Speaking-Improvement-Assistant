@@ -15,6 +15,7 @@ class DetailedSpeechResultPage extends StatelessWidget {
       body: SpeechResultContainer(
         builder: (BuildContext context, SpeechResult speechResult) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Visibility(
                 visible: speechResult.speechName != null,
@@ -33,9 +34,9 @@ class DetailedSpeechResultPage extends StatelessWidget {
                   child: SubstringHighlight(
                     text: speechResult.speechWords.toList().join(' '),
                     terms: speechResult.speechFillerWords.toList(),
-                    textStyle: const TextStyle(
+                    textStyle: TextStyle(
                       fontSize: 32.0,
-                      color: Colors.black,
+                      color: Theme.of(context).textTheme.bodyText1.color,
                       fontWeight: FontWeight.w400,
                     ),
                     textStyleHighlight: const TextStyle(

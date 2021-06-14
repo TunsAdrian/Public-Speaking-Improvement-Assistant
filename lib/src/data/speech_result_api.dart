@@ -2,7 +2,8 @@ import 'package:built_collection/built_collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
-import 'package:public_speaking_assistant/src/models/speech_result/hive_model/hiveSpeechResult.dart';
+import 'package:public_speaking_assistant/src/models/hive_models/hiveSpeechResult.dart';
+
 import 'package:uuid/uuid.dart';
 
 class SpeechResultApi {
@@ -18,6 +19,7 @@ class SpeechResultApi {
   Future<SpeechResult> createSpeechResult({
     @required Duration speechDuration,
     @required double speechClarity,
+    @required double speechWordsPerMinute,
     @required List<String> speechWords,
     @required List<String> speechFillerWords,
   }) async {
@@ -26,6 +28,7 @@ class SpeechResultApi {
         ..uuid = _uuidInstance.v1()
         ..speechDuration = speechDuration
         ..speechClarity = speechClarity
+        ..wordsPerMinute = speechWordsPerMinute
         ..speechFillerWords = ListBuilder<String>(speechFillerWords)
         ..speechWords = ListBuilder<String>(speechWords);
     });
@@ -85,6 +88,7 @@ class SpeechResultApi {
       speechResult.speechFillerWords.toList(),
       speechResult.speechName,
       speechResult.uuid,
+      speechResult.wordsPerMinute,
     );
 
     return hiveSpeechResult;
@@ -96,6 +100,7 @@ class SpeechResultApi {
         ..uuid = hiveSpeechResult.uuid
         ..speechDuration = Duration(seconds: hiveSpeechResult.speechDuration)
         ..speechClarity = hiveSpeechResult.speechClarity
+        ..wordsPerMinute = hiveSpeechResult.wordsPerMinute
         ..speechWords = ListBuilder<String>(hiveSpeechResult.speechWords)
         ..speechFillerWords = ListBuilder<String>(hiveSpeechResult.speechFillerWords)
         ..speechName = hiveSpeechResult.speechName;

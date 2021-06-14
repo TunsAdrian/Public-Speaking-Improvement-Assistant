@@ -7,5 +7,5 @@ abstract class SyncSpeechResult with _$SyncSpeechResult implements AppAction {
   const factory SyncSpeechResult.successful(List<SpeechResult> speechResultList) = SyncSpeechResultSuccessful;
 
   @Implements(ErrorAction)
-  const factory SyncSpeechResult.error(StateError error) = SyncSpeechResultError;
+  const factory SyncSpeechResult.error(Object error) = SyncSpeechResultError;
 }

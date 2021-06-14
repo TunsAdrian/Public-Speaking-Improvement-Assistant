@@ -17,11 +17,13 @@ class _$CreateSpeechResultTearOff {
   CreateSpeechResult$ call(
       {@required Duration speechDuration,
       @required double speechClarity,
+      @required double wordsPerMinute,
       @required List<String> speechWords,
       @required List<String> speechFillerWords}) {
     return CreateSpeechResult$(
       speechDuration: speechDuration,
       speechClarity: speechClarity,
+      wordsPerMinute: wordsPerMinute,
       speechWords: speechWords,
       speechFillerWords: speechFillerWords,
     );
@@ -50,15 +52,23 @@ const $CreateSpeechResult = _$CreateSpeechResultTearOff();
 mixin _$CreateSpeechResult {
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
-        List<String> speechWords, List<String> speechFillerWords), {
+    Result $default(
+        Duration speechDuration,
+        double speechClarity,
+        double wordsPerMinute,
+        List<String> speechWords,
+        List<String> speechFillerWords), {
     @required Result successful(SpeechResult speechResult),
     @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
-        List<String> speechWords, List<String> speechFillerWords), {
+    Result $default(
+        Duration speechDuration,
+        double speechClarity,
+        double wordsPerMinute,
+        List<String> speechWords,
+        List<String> speechFillerWords), {
     Result successful(SpeechResult speechResult),
     Result error(Object error),
     @required Result orElse(),
@@ -103,6 +113,7 @@ abstract class $CreateSpeechResult$CopyWith<$Res> {
   $Res call(
       {Duration speechDuration,
       double speechClarity,
+      double wordsPerMinute,
       List<String> speechWords,
       List<String> speechFillerWords});
 }
@@ -122,6 +133,7 @@ class _$CreateSpeechResult$CopyWithImpl<$Res>
   $Res call({
     Object speechDuration = freezed,
     Object speechClarity = freezed,
+    Object wordsPerMinute = freezed,
     Object speechWords = freezed,
     Object speechFillerWords = freezed,
   }) {
@@ -132,6 +144,9 @@ class _$CreateSpeechResult$CopyWithImpl<$Res>
       speechClarity: speechClarity == freezed
           ? _value.speechClarity
           : speechClarity as double,
+      wordsPerMinute: wordsPerMinute == freezed
+          ? _value.wordsPerMinute
+          : wordsPerMinute as double,
       speechWords: speechWords == freezed
           ? _value.speechWords
           : speechWords as List<String>,
@@ -147,10 +162,12 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
   const _$CreateSpeechResult$(
       {@required this.speechDuration,
       @required this.speechClarity,
+      @required this.wordsPerMinute,
       @required this.speechWords,
       @required this.speechFillerWords})
       : assert(speechDuration != null),
         assert(speechClarity != null),
+        assert(wordsPerMinute != null),
         assert(speechWords != null),
         assert(speechFillerWords != null);
 
@@ -159,13 +176,15 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
   @override
   final double speechClarity;
   @override
+  final double wordsPerMinute;
+  @override
   final List<String> speechWords;
   @override
   final List<String> speechFillerWords;
 
   @override
   String toString() {
-    return 'CreateSpeechResult(speechDuration: $speechDuration, speechClarity: $speechClarity, speechWords: $speechWords, speechFillerWords: $speechFillerWords)';
+    return 'CreateSpeechResult(speechDuration: $speechDuration, speechClarity: $speechClarity, wordsPerMinute: $wordsPerMinute, speechWords: $speechWords, speechFillerWords: $speechFillerWords)';
   }
 
   @override
@@ -178,6 +197,9 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
             (identical(other.speechClarity, speechClarity) ||
                 const DeepCollectionEquality()
                     .equals(other.speechClarity, speechClarity)) &&
+            (identical(other.wordsPerMinute, wordsPerMinute) ||
+                const DeepCollectionEquality()
+                    .equals(other.wordsPerMinute, wordsPerMinute)) &&
             (identical(other.speechWords, speechWords) ||
                 const DeepCollectionEquality()
                     .equals(other.speechWords, speechWords)) &&
@@ -191,6 +213,7 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(speechDuration) ^
       const DeepCollectionEquality().hash(speechClarity) ^
+      const DeepCollectionEquality().hash(wordsPerMinute) ^
       const DeepCollectionEquality().hash(speechWords) ^
       const DeepCollectionEquality().hash(speechFillerWords);
 
@@ -201,31 +224,39 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
-        List<String> speechWords, List<String> speechFillerWords), {
+    Result $default(
+        Duration speechDuration,
+        double speechClarity,
+        double wordsPerMinute,
+        List<String> speechWords,
+        List<String> speechFillerWords), {
     @required Result successful(SpeechResult speechResult),
     @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
     assert(error != null);
-    return $default(
-        speechDuration, speechClarity, speechWords, speechFillerWords);
+    return $default(speechDuration, speechClarity, wordsPerMinute, speechWords,
+        speechFillerWords);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
-        List<String> speechWords, List<String> speechFillerWords), {
+    Result $default(
+        Duration speechDuration,
+        double speechClarity,
+        double wordsPerMinute,
+        List<String> speechWords,
+        List<String> speechFillerWords), {
     Result successful(SpeechResult speechResult),
     Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if ($default != null) {
-      return $default(
-          speechDuration, speechClarity, speechWords, speechFillerWords);
+      return $default(speechDuration, speechClarity, wordsPerMinute,
+          speechWords, speechFillerWords);
     }
     return orElse();
   }
@@ -263,11 +294,13 @@ abstract class CreateSpeechResult$ implements CreateSpeechResult {
   const factory CreateSpeechResult$(
       {@required Duration speechDuration,
       @required double speechClarity,
+      @required double wordsPerMinute,
       @required List<String> speechWords,
       @required List<String> speechFillerWords}) = _$CreateSpeechResult$;
 
   Duration get speechDuration;
   double get speechClarity;
+  double get wordsPerMinute;
   List<String> get speechWords;
   List<String> get speechFillerWords;
   $CreateSpeechResult$CopyWith<CreateSpeechResult$> get copyWith;
@@ -341,8 +374,12 @@ class _$CreateSpeechResultSuccessful implements CreateSpeechResultSuccessful {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
-        List<String> speechWords, List<String> speechFillerWords), {
+    Result $default(
+        Duration speechDuration,
+        double speechClarity,
+        double wordsPerMinute,
+        List<String> speechWords,
+        List<String> speechFillerWords), {
     @required Result successful(SpeechResult speechResult),
     @required Result error(Object error),
   }) {
@@ -355,8 +392,12 @@ class _$CreateSpeechResultSuccessful implements CreateSpeechResultSuccessful {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
-        List<String> speechWords, List<String> speechFillerWords), {
+    Result $default(
+        Duration speechDuration,
+        double speechClarity,
+        double wordsPerMinute,
+        List<String> speechWords,
+        List<String> speechFillerWords), {
     Result successful(SpeechResult speechResult),
     Result error(Object error),
     @required Result orElse(),
@@ -469,8 +510,12 @@ class _$CreateSpeechResultError implements CreateSpeechResultError {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
-        List<String> speechWords, List<String> speechFillerWords), {
+    Result $default(
+        Duration speechDuration,
+        double speechClarity,
+        double wordsPerMinute,
+        List<String> speechWords,
+        List<String> speechFillerWords), {
     @required Result successful(SpeechResult speechResult),
     @required Result error(Object error),
   }) {
@@ -483,8 +528,12 @@ class _$CreateSpeechResultError implements CreateSpeechResultError {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
-        List<String> speechWords, List<String> speechFillerWords), {
+    Result $default(
+        Duration speechDuration,
+        double speechClarity,
+        double wordsPerMinute,
+        List<String> speechWords,
+        List<String> speechFillerWords), {
     Result successful(SpeechResult speechResult),
     Result error(Object error),
     @required Result orElse(),
@@ -1902,7 +1951,7 @@ class _$GetSpeechResultTearOff {
   }
 
 // ignore: unused_element
-  GetSpeechResultError error(StateError error) {
+  GetSpeechResultError error(Object error) {
     return GetSpeechResultError(
       error,
     );
@@ -1919,13 +1968,13 @@ mixin _$GetSpeechResult {
   Result when<Result extends Object>(
     Result $default(String speechResultUuid), {
     @required Result successful(SpeechResult speechResult),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(String speechResultUuid), {
     Result successful(SpeechResult speechResult),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -2027,7 +2076,7 @@ class _$GetSpeechResult$ implements GetSpeechResult$ {
   Result when<Result extends Object>(
     Result $default(String speechResultUuid), {
     @required Result successful(SpeechResult speechResult),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -2040,7 +2089,7 @@ class _$GetSpeechResult$ implements GetSpeechResult$ {
   Result maybeWhen<Result extends Object>(
     Result $default(String speechResultUuid), {
     Result successful(SpeechResult speechResult),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -2155,7 +2204,7 @@ class _$GetSpeechResultSuccessful implements GetSpeechResultSuccessful {
   Result when<Result extends Object>(
     Result $default(String speechResultUuid), {
     @required Result successful(SpeechResult speechResult),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -2168,7 +2217,7 @@ class _$GetSpeechResultSuccessful implements GetSpeechResultSuccessful {
   Result maybeWhen<Result extends Object>(
     Result $default(String speechResultUuid), {
     Result successful(SpeechResult speechResult),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -2220,7 +2269,7 @@ abstract class $GetSpeechResultErrorCopyWith<$Res> {
   factory $GetSpeechResultErrorCopyWith(GetSpeechResultError value,
           $Res Function(GetSpeechResultError) then) =
       _$GetSpeechResultErrorCopyWithImpl<$Res>;
-  $Res call({StateError error});
+  $Res call({Object error});
 }
 
 /// @nodoc
@@ -2239,7 +2288,7 @@ class _$GetSpeechResultErrorCopyWithImpl<$Res>
     Object error = freezed,
   }) {
     return _then(GetSpeechResultError(
-      error == freezed ? _value.error : error as StateError,
+      error == freezed ? _value.error : error,
     ));
   }
 }
@@ -2251,7 +2300,7 @@ class _$GetSpeechResultError implements GetSpeechResultError {
   const _$GetSpeechResultError(this.error) : assert(error != null);
 
   @override
-  final StateError error;
+  final Object error;
 
   @override
   String toString() {
@@ -2280,7 +2329,7 @@ class _$GetSpeechResultError implements GetSpeechResultError {
   Result when<Result extends Object>(
     Result $default(String speechResultUuid), {
     @required Result successful(SpeechResult speechResult),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -2293,7 +2342,7 @@ class _$GetSpeechResultError implements GetSpeechResultError {
   Result maybeWhen<Result extends Object>(
     Result $default(String speechResultUuid), {
     Result successful(SpeechResult speechResult),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -2333,9 +2382,9 @@ class _$GetSpeechResultError implements GetSpeechResultError {
 }
 
 abstract class GetSpeechResultError implements GetSpeechResult, ErrorAction {
-  const factory GetSpeechResultError(StateError error) = _$GetSpeechResultError;
+  const factory GetSpeechResultError(Object error) = _$GetSpeechResultError;
 
-  StateError get error;
+  Object get error;
   $GetSpeechResultErrorCopyWith<GetSpeechResultError> get copyWith;
 }
 
@@ -2360,7 +2409,7 @@ class _$SaveSyncedResultsLocallyTearOff {
   }
 
 // ignore: unused_element
-  SaveSyncedResultsLocallyError error(StateError error) {
+  SaveSyncedResultsLocallyError error(Object error) {
     return SaveSyncedResultsLocallyError(
       error,
     );
@@ -2377,13 +2426,13 @@ mixin _$SaveSyncedResultsLocally {
   Result when<Result extends Object>(
     Result $default(List<SpeechResult> userSpeechResults), {
     @required Result successful(List<SpeechResult> speechResultsUpdated),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(List<SpeechResult> userSpeechResults), {
     Result successful(List<SpeechResult> speechResultsUpdated),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -2487,7 +2536,7 @@ class _$SaveSyncedResultsLocally$ implements SaveSyncedResultsLocally$ {
   Result when<Result extends Object>(
     Result $default(List<SpeechResult> userSpeechResults), {
     @required Result successful(List<SpeechResult> speechResultsUpdated),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -2500,7 +2549,7 @@ class _$SaveSyncedResultsLocally$ implements SaveSyncedResultsLocally$ {
   Result maybeWhen<Result extends Object>(
     Result $default(List<SpeechResult> userSpeechResults), {
     Result successful(List<SpeechResult> speechResultsUpdated),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -2621,7 +2670,7 @@ class _$SaveSyncedResultsLocallySuccessful
   Result when<Result extends Object>(
     Result $default(List<SpeechResult> userSpeechResults), {
     @required Result successful(List<SpeechResult> speechResultsUpdated),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -2634,7 +2683,7 @@ class _$SaveSyncedResultsLocallySuccessful
   Result maybeWhen<Result extends Object>(
     Result $default(List<SpeechResult> userSpeechResults), {
     Result successful(List<SpeechResult> speechResultsUpdated),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -2690,7 +2739,7 @@ abstract class $SaveSyncedResultsLocallyErrorCopyWith<$Res> {
           SaveSyncedResultsLocallyError value,
           $Res Function(SaveSyncedResultsLocallyError) then) =
       _$SaveSyncedResultsLocallyErrorCopyWithImpl<$Res>;
-  $Res call({StateError error});
+  $Res call({Object error});
 }
 
 /// @nodoc
@@ -2711,7 +2760,7 @@ class _$SaveSyncedResultsLocallyErrorCopyWithImpl<$Res>
     Object error = freezed,
   }) {
     return _then(SaveSyncedResultsLocallyError(
-      error == freezed ? _value.error : error as StateError,
+      error == freezed ? _value.error : error,
     ));
   }
 }
@@ -2723,7 +2772,7 @@ class _$SaveSyncedResultsLocallyError implements SaveSyncedResultsLocallyError {
   const _$SaveSyncedResultsLocallyError(this.error) : assert(error != null);
 
   @override
-  final StateError error;
+  final Object error;
 
   @override
   String toString() {
@@ -2752,7 +2801,7 @@ class _$SaveSyncedResultsLocallyError implements SaveSyncedResultsLocallyError {
   Result when<Result extends Object>(
     Result $default(List<SpeechResult> userSpeechResults), {
     @required Result successful(List<SpeechResult> speechResultsUpdated),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -2765,7 +2814,7 @@ class _$SaveSyncedResultsLocallyError implements SaveSyncedResultsLocallyError {
   Result maybeWhen<Result extends Object>(
     Result $default(List<SpeechResult> userSpeechResults), {
     Result successful(List<SpeechResult> speechResultsUpdated),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -2806,10 +2855,10 @@ class _$SaveSyncedResultsLocallyError implements SaveSyncedResultsLocallyError {
 
 abstract class SaveSyncedResultsLocallyError
     implements SaveSyncedResultsLocally, ErrorAction {
-  const factory SaveSyncedResultsLocallyError(StateError error) =
+  const factory SaveSyncedResultsLocallyError(Object error) =
       _$SaveSyncedResultsLocallyError;
 
-  StateError get error;
+  Object get error;
   $SaveSyncedResultsLocallyErrorCopyWith<SaveSyncedResultsLocallyError>
       get copyWith;
 }

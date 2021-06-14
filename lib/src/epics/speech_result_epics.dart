@@ -29,6 +29,7 @@ class SpeechResultEpics {
             .asyncMap((CreateSpeechResult$ action) => _api.createSpeechResult(
                   speechDuration: action.speechDuration,
                   speechClarity: action.speechClarity,
+                  speechWordsPerMinute: action.wordsPerMinute,
                   speechFillerWords: action.speechFillerWords,
                   speechWords: action.speechWords,
                 ))

@@ -29,6 +29,9 @@ class _$SpeechResultSerializer implements StructuredSerializer<SpeechResult> {
       'speechClarity',
       serializers.serialize(object.speechClarity,
           specifiedType: const FullType(double)),
+      'wordsPerMinute',
+      serializers.serialize(object.wordsPerMinute,
+          specifiedType: const FullType(double)),
       'speechWords',
       serializers.serialize(object.speechWords,
           specifiedType:
@@ -72,6 +75,10 @@ class _$SpeechResultSerializer implements StructuredSerializer<SpeechResult> {
           break;
         case 'speechClarity':
           result.speechClarity = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'wordsPerMinute':
+          result.wordsPerMinute = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double;
           break;
         case 'speechWords':
@@ -157,6 +164,8 @@ class _$SpeechResult extends SpeechResult {
   @override
   final double speechClarity;
   @override
+  final double wordsPerMinute;
+  @override
   final BuiltList<String> speechWords;
   @override
   final BuiltList<String> speechFillerWords;
@@ -169,6 +178,7 @@ class _$SpeechResult extends SpeechResult {
       this.speechName,
       this.speechDuration,
       this.speechClarity,
+      this.wordsPerMinute,
       this.speechWords,
       this.speechFillerWords})
       : super._() {
@@ -180,6 +190,9 @@ class _$SpeechResult extends SpeechResult {
     }
     if (speechClarity == null) {
       throw new BuiltValueNullFieldError('SpeechResult', 'speechClarity');
+    }
+    if (wordsPerMinute == null) {
+      throw new BuiltValueNullFieldError('SpeechResult', 'wordsPerMinute');
     }
     if (speechWords == null) {
       throw new BuiltValueNullFieldError('SpeechResult', 'speechWords');
@@ -204,6 +217,7 @@ class _$SpeechResult extends SpeechResult {
         speechName == other.speechName &&
         speechDuration == other.speechDuration &&
         speechClarity == other.speechClarity &&
+        wordsPerMinute == other.wordsPerMinute &&
         speechWords == other.speechWords &&
         speechFillerWords == other.speechFillerWords;
   }
@@ -213,9 +227,11 @@ class _$SpeechResult extends SpeechResult {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, uuid.hashCode), speechName.hashCode),
-                    speechDuration.hashCode),
-                speechClarity.hashCode),
+                $jc(
+                    $jc($jc($jc(0, uuid.hashCode), speechName.hashCode),
+                        speechDuration.hashCode),
+                    speechClarity.hashCode),
+                wordsPerMinute.hashCode),
             speechWords.hashCode),
         speechFillerWords.hashCode));
   }
@@ -227,6 +243,7 @@ class _$SpeechResult extends SpeechResult {
           ..add('speechName', speechName)
           ..add('speechDuration', speechDuration)
           ..add('speechClarity', speechClarity)
+          ..add('wordsPerMinute', wordsPerMinute)
           ..add('speechWords', speechWords)
           ..add('speechFillerWords', speechFillerWords))
         .toString();
@@ -255,6 +272,11 @@ class SpeechResultBuilder
   set speechClarity(double speechClarity) =>
       _$this._speechClarity = speechClarity;
 
+  double _wordsPerMinute;
+  double get wordsPerMinute => _$this._wordsPerMinute;
+  set wordsPerMinute(double wordsPerMinute) =>
+      _$this._wordsPerMinute = wordsPerMinute;
+
   ListBuilder<String> _speechWords;
   ListBuilder<String> get speechWords =>
       _$this._speechWords ??= new ListBuilder<String>();
@@ -275,6 +297,7 @@ class SpeechResultBuilder
       _speechName = _$v.speechName;
       _speechDuration = _$v.speechDuration;
       _speechClarity = _$v.speechClarity;
+      _wordsPerMinute = _$v.wordsPerMinute;
       _speechWords = _$v.speechWords?.toBuilder();
       _speechFillerWords = _$v.speechFillerWords?.toBuilder();
       _$v = null;
@@ -305,6 +328,7 @@ class SpeechResultBuilder
               speechName: speechName,
               speechDuration: speechDuration,
               speechClarity: speechClarity,
+              wordsPerMinute: wordsPerMinute,
               speechWords: speechWords.build(),
               speechFillerWords: speechFillerWords.build());
     } catch (_) {

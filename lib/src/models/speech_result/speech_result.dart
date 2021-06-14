@@ -16,6 +16,8 @@ abstract class SpeechResult implements Built<SpeechResult, SpeechResultBuilder> 
 
   double get speechClarity;
 
+  double get wordsPerMinute;
+
   BuiltList<String> get speechWords;
 
   BuiltList<String> get speechFillerWords;

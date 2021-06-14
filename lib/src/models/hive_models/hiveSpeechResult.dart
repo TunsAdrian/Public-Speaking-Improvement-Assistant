@@ -4,8 +4,8 @@ part 'hiveSpeechResult.g.dart';
 
 @HiveType(typeId: 1)
 class HiveSpeechResult extends HiveObject {
-  HiveSpeechResult(
-      this.speechDuration, this.speechClarity, this.speechWords, this.speechFillerWords, this.speechName, this.uuid);
+  HiveSpeechResult(this.speechDuration, this.speechClarity, this.speechWords, this.speechFillerWords, this.speechName,
+      this.uuid, this.wordsPerMinute);
 
   @HiveField(0)
   int speechDuration;
@@ -24,4 +24,7 @@ class HiveSpeechResult extends HiveObject {
 
   @HiveField(5)
   String uuid;
+
+  @HiveField(6)
+  double wordsPerMinute;
 }

@@ -143,6 +143,17 @@ class AuthApi {
     return appUser;
   }
 
+  Future<void> deleteUserAccount() async {
+    final User currentUser = _auth.currentUser;
+    if (currentUser == null) {
+      return;
+    }
+
+    // remove both the user data and the user authentication entry
+    await _firestore.collection('users').doc('${currentUser.uid}').delete();
+    await currentUser.delete();
+  }
+
   Future<List<SpeechResult>> syncSpeechResultToCloud(
       {@required SpeechResult speechResult, @required bool isSynced}) async {
     final User currentUser = _auth.currentUser;
@@ -156,7 +167,7 @@ class AuthApi {
       final AppUser user = AppUser.fromJson(snapshot.data());
       final List<SpeechResult> syncedSpeechResults = user.userSpeechResults.toList();
 
-      // if the result is already on cloud, it mean it must be removed
+      // if the result is already on cloud, it means it must be removed
       if (isSynced) {
         syncedSpeechResults.remove(speechResult);
       } else {

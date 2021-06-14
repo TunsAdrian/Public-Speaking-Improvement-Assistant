@@ -3218,7 +3218,7 @@ class _$SyncSpeechResultTearOff {
   }
 
 // ignore: unused_element
-  SyncSpeechResultError error(StateError error) {
+  SyncSpeechResultError error(Object error) {
     return SyncSpeechResultError(
       error,
     );
@@ -3235,13 +3235,13 @@ mixin _$SyncSpeechResult {
   Result when<Result extends Object>(
     Result $default(SpeechResult speechResult, bool isSynced), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(SpeechResult speechResult, bool isSynced), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -3353,7 +3353,7 @@ class _$SyncSpeechResult$ implements SyncSpeechResult$ {
   Result when<Result extends Object>(
     Result $default(SpeechResult speechResult, bool isSynced), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -3366,7 +3366,7 @@ class _$SyncSpeechResult$ implements SyncSpeechResult$ {
   Result maybeWhen<Result extends Object>(
     Result $default(SpeechResult speechResult, bool isSynced), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -3485,7 +3485,7 @@ class _$SyncSpeechResultSuccessful implements SyncSpeechResultSuccessful {
   Result when<Result extends Object>(
     Result $default(SpeechResult speechResult, bool isSynced), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -3498,7 +3498,7 @@ class _$SyncSpeechResultSuccessful implements SyncSpeechResultSuccessful {
   Result maybeWhen<Result extends Object>(
     Result $default(SpeechResult speechResult, bool isSynced), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -3550,7 +3550,7 @@ abstract class $SyncSpeechResultErrorCopyWith<$Res> {
   factory $SyncSpeechResultErrorCopyWith(SyncSpeechResultError value,
           $Res Function(SyncSpeechResultError) then) =
       _$SyncSpeechResultErrorCopyWithImpl<$Res>;
-  $Res call({StateError error});
+  $Res call({Object error});
 }
 
 /// @nodoc
@@ -3569,7 +3569,7 @@ class _$SyncSpeechResultErrorCopyWithImpl<$Res>
     Object error = freezed,
   }) {
     return _then(SyncSpeechResultError(
-      error == freezed ? _value.error : error as StateError,
+      error == freezed ? _value.error : error,
     ));
   }
 }
@@ -3581,7 +3581,7 @@ class _$SyncSpeechResultError implements SyncSpeechResultError {
   const _$SyncSpeechResultError(this.error) : assert(error != null);
 
   @override
-  final StateError error;
+  final Object error;
 
   @override
   String toString() {
@@ -3610,7 +3610,7 @@ class _$SyncSpeechResultError implements SyncSpeechResultError {
   Result when<Result extends Object>(
     Result $default(SpeechResult speechResult, bool isSynced), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -3623,7 +3623,7 @@ class _$SyncSpeechResultError implements SyncSpeechResultError {
   Result maybeWhen<Result extends Object>(
     Result $default(SpeechResult speechResult, bool isSynced), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -3663,10 +3663,9 @@ class _$SyncSpeechResultError implements SyncSpeechResultError {
 }
 
 abstract class SyncSpeechResultError implements SyncSpeechResult, ErrorAction {
-  const factory SyncSpeechResultError(StateError error) =
-      _$SyncSpeechResultError;
+  const factory SyncSpeechResultError(Object error) = _$SyncSpeechResultError;
 
-  StateError get error;
+  Object get error;
   $SyncSpeechResultErrorCopyWith<SyncSpeechResultError> get copyWith;
 }
 
@@ -3688,7 +3687,7 @@ class _$GetSyncedSpeechResultsTearOff {
   }
 
 // ignore: unused_element
-  GetSyncedSpeechResultsError error(StateError error) {
+  GetSyncedSpeechResultsError error(Object error) {
     return GetSyncedSpeechResultsError(
       error,
     );
@@ -3705,13 +3704,13 @@ mixin _$GetSyncedSpeechResults {
   Result when<Result extends Object>(
     Result $default(), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -3787,7 +3786,7 @@ class _$GetSyncedSpeechResults$ implements GetSyncedSpeechResults$ {
   Result when<Result extends Object>(
     Result $default(), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -3800,7 +3799,7 @@ class _$GetSyncedSpeechResults$ implements GetSyncedSpeechResults$ {
   Result maybeWhen<Result extends Object>(
     Result $default(), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -3915,7 +3914,7 @@ class _$GetSyncedSpeechResultsSuccessful
   Result when<Result extends Object>(
     Result $default(), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -3928,7 +3927,7 @@ class _$GetSyncedSpeechResultsSuccessful
   Result maybeWhen<Result extends Object>(
     Result $default(), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -3983,7 +3982,7 @@ abstract class $GetSyncedSpeechResultsErrorCopyWith<$Res> {
           GetSyncedSpeechResultsError value,
           $Res Function(GetSyncedSpeechResultsError) then) =
       _$GetSyncedSpeechResultsErrorCopyWithImpl<$Res>;
-  $Res call({StateError error});
+  $Res call({Object error});
 }
 
 /// @nodoc
@@ -4003,7 +4002,7 @@ class _$GetSyncedSpeechResultsErrorCopyWithImpl<$Res>
     Object error = freezed,
   }) {
     return _then(GetSyncedSpeechResultsError(
-      error == freezed ? _value.error : error as StateError,
+      error == freezed ? _value.error : error,
     ));
   }
 }
@@ -4015,7 +4014,7 @@ class _$GetSyncedSpeechResultsError implements GetSyncedSpeechResultsError {
   const _$GetSyncedSpeechResultsError(this.error) : assert(error != null);
 
   @override
-  final StateError error;
+  final Object error;
 
   @override
   String toString() {
@@ -4044,7 +4043,7 @@ class _$GetSyncedSpeechResultsError implements GetSyncedSpeechResultsError {
   Result when<Result extends Object>(
     Result $default(), {
     @required Result successful(List<SpeechResult> speechResultList),
-    @required Result error(StateError error),
+    @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
@@ -4057,7 +4056,7 @@ class _$GetSyncedSpeechResultsError implements GetSyncedSpeechResultsError {
   Result maybeWhen<Result extends Object>(
     Result $default(), {
     Result successful(List<SpeechResult> speechResultList),
-    Result error(StateError error),
+    Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -4098,10 +4097,434 @@ class _$GetSyncedSpeechResultsError implements GetSyncedSpeechResultsError {
 
 abstract class GetSyncedSpeechResultsError
     implements GetSyncedSpeechResults, ErrorAction {
-  const factory GetSyncedSpeechResultsError(StateError error) =
+  const factory GetSyncedSpeechResultsError(Object error) =
       _$GetSyncedSpeechResultsError;
 
-  StateError get error;
+  Object get error;
   $GetSyncedSpeechResultsErrorCopyWith<GetSyncedSpeechResultsError>
       get copyWith;
+}
+
+/// @nodoc
+class _$DeleteUserAccountTearOff {
+  const _$DeleteUserAccountTearOff();
+
+// ignore: unused_element
+  DeleteUserAccount$ call(void Function(AppAction) response) {
+    return DeleteUserAccount$(
+      response,
+    );
+  }
+
+// ignore: unused_element
+  DeleteUserAccountSuccessful successful() {
+    return const DeleteUserAccountSuccessful();
+  }
+
+// ignore: unused_element
+  DeleteUserAccountError error(Object error) {
+    return DeleteUserAccountError(
+      error,
+    );
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $DeleteUserAccount = _$DeleteUserAccountTearOff();
+
+/// @nodoc
+mixin _$DeleteUserAccount {
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(void Function(AppAction) response), {
+    @required Result successful(),
+    @required Result error(Object error),
+  });
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(void Function(AppAction) response), {
+    Result successful(),
+    Result error(Object error),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(DeleteUserAccount$ value), {
+    @required Result successful(DeleteUserAccountSuccessful value),
+    @required Result error(DeleteUserAccountError value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(DeleteUserAccount$ value), {
+    Result successful(DeleteUserAccountSuccessful value),
+    Result error(DeleteUserAccountError value),
+    @required Result orElse(),
+  });
+}
+
+/// @nodoc
+abstract class $DeleteUserAccountCopyWith<$Res> {
+  factory $DeleteUserAccountCopyWith(
+          DeleteUserAccount value, $Res Function(DeleteUserAccount) then) =
+      _$DeleteUserAccountCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$DeleteUserAccountCopyWithImpl<$Res>
+    implements $DeleteUserAccountCopyWith<$Res> {
+  _$DeleteUserAccountCopyWithImpl(this._value, this._then);
+
+  final DeleteUserAccount _value;
+  // ignore: unused_field
+  final $Res Function(DeleteUserAccount) _then;
+}
+
+/// @nodoc
+abstract class $DeleteUserAccount$CopyWith<$Res> {
+  factory $DeleteUserAccount$CopyWith(
+          DeleteUserAccount$ value, $Res Function(DeleteUserAccount$) then) =
+      _$DeleteUserAccount$CopyWithImpl<$Res>;
+  $Res call({void Function(AppAction) response});
+}
+
+/// @nodoc
+class _$DeleteUserAccount$CopyWithImpl<$Res>
+    extends _$DeleteUserAccountCopyWithImpl<$Res>
+    implements $DeleteUserAccount$CopyWith<$Res> {
+  _$DeleteUserAccount$CopyWithImpl(
+      DeleteUserAccount$ _value, $Res Function(DeleteUserAccount$) _then)
+      : super(_value, (v) => _then(v as DeleteUserAccount$));
+
+  @override
+  DeleteUserAccount$ get _value => super._value as DeleteUserAccount$;
+
+  @override
+  $Res call({
+    Object response = freezed,
+  }) {
+    return _then(DeleteUserAccount$(
+      response == freezed
+          ? _value.response
+          : response as void Function(AppAction),
+    ));
+  }
+}
+
+/// @nodoc
+class _$DeleteUserAccount$ implements DeleteUserAccount$ {
+  const _$DeleteUserAccount$(this.response) : assert(response != null);
+
+  @override
+  final void Function(AppAction) response;
+
+  @override
+  String toString() {
+    return 'DeleteUserAccount(response: $response)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is DeleteUserAccount$ &&
+            (identical(other.response, response) ||
+                const DeepCollectionEquality()
+                    .equals(other.response, response)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(response);
+
+  @override
+  $DeleteUserAccount$CopyWith<DeleteUserAccount$> get copyWith =>
+      _$DeleteUserAccount$CopyWithImpl<DeleteUserAccount$>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(void Function(AppAction) response), {
+    @required Result successful(),
+    @required Result error(Object error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return $default(response);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(void Function(AppAction) response), {
+    Result successful(),
+    Result error(Object error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if ($default != null) {
+      return $default(response);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(DeleteUserAccount$ value), {
+    @required Result successful(DeleteUserAccountSuccessful value),
+    @required Result error(DeleteUserAccountError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(DeleteUserAccount$ value), {
+    Result successful(DeleteUserAccountSuccessful value),
+    Result error(DeleteUserAccountError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteUserAccount$ implements DeleteUserAccount {
+  const factory DeleteUserAccount$(void Function(AppAction) response) =
+      _$DeleteUserAccount$;
+
+  void Function(AppAction) get response;
+  $DeleteUserAccount$CopyWith<DeleteUserAccount$> get copyWith;
+}
+
+/// @nodoc
+abstract class $DeleteUserAccountSuccessfulCopyWith<$Res> {
+  factory $DeleteUserAccountSuccessfulCopyWith(
+          DeleteUserAccountSuccessful value,
+          $Res Function(DeleteUserAccountSuccessful) then) =
+      _$DeleteUserAccountSuccessfulCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$DeleteUserAccountSuccessfulCopyWithImpl<$Res>
+    extends _$DeleteUserAccountCopyWithImpl<$Res>
+    implements $DeleteUserAccountSuccessfulCopyWith<$Res> {
+  _$DeleteUserAccountSuccessfulCopyWithImpl(DeleteUserAccountSuccessful _value,
+      $Res Function(DeleteUserAccountSuccessful) _then)
+      : super(_value, (v) => _then(v as DeleteUserAccountSuccessful));
+
+  @override
+  DeleteUserAccountSuccessful get _value =>
+      super._value as DeleteUserAccountSuccessful;
+}
+
+/// @nodoc
+class _$DeleteUserAccountSuccessful implements DeleteUserAccountSuccessful {
+  const _$DeleteUserAccountSuccessful();
+
+  @override
+  String toString() {
+    return 'DeleteUserAccount.successful()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is DeleteUserAccountSuccessful);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(void Function(AppAction) response), {
+    @required Result successful(),
+    @required Result error(Object error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return successful();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(void Function(AppAction) response), {
+    Result successful(),
+    Result error(Object error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (successful != null) {
+      return successful();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(DeleteUserAccount$ value), {
+    @required Result successful(DeleteUserAccountSuccessful value),
+    @required Result error(DeleteUserAccountError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return successful(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(DeleteUserAccount$ value), {
+    Result successful(DeleteUserAccountSuccessful value),
+    Result error(DeleteUserAccountError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (successful != null) {
+      return successful(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteUserAccountSuccessful implements DeleteUserAccount {
+  const factory DeleteUserAccountSuccessful() = _$DeleteUserAccountSuccessful;
+}
+
+/// @nodoc
+abstract class $DeleteUserAccountErrorCopyWith<$Res> {
+  factory $DeleteUserAccountErrorCopyWith(DeleteUserAccountError value,
+          $Res Function(DeleteUserAccountError) then) =
+      _$DeleteUserAccountErrorCopyWithImpl<$Res>;
+  $Res call({Object error});
+}
+
+/// @nodoc
+class _$DeleteUserAccountErrorCopyWithImpl<$Res>
+    extends _$DeleteUserAccountCopyWithImpl<$Res>
+    implements $DeleteUserAccountErrorCopyWith<$Res> {
+  _$DeleteUserAccountErrorCopyWithImpl(DeleteUserAccountError _value,
+      $Res Function(DeleteUserAccountError) _then)
+      : super(_value, (v) => _then(v as DeleteUserAccountError));
+
+  @override
+  DeleteUserAccountError get _value => super._value as DeleteUserAccountError;
+
+  @override
+  $Res call({
+    Object error = freezed,
+  }) {
+    return _then(DeleteUserAccountError(
+      error == freezed ? _value.error : error,
+    ));
+  }
+}
+
+@Implements(ErrorAction)
+
+/// @nodoc
+class _$DeleteUserAccountError implements DeleteUserAccountError {
+  const _$DeleteUserAccountError(this.error) : assert(error != null);
+
+  @override
+  final Object error;
+
+  @override
+  String toString() {
+    return 'DeleteUserAccount.error(error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is DeleteUserAccountError &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+
+  @override
+  $DeleteUserAccountErrorCopyWith<DeleteUserAccountError> get copyWith =>
+      _$DeleteUserAccountErrorCopyWithImpl<DeleteUserAccountError>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(void Function(AppAction) response), {
+    @required Result successful(),
+    @required Result error(Object error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return error(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(void Function(AppAction) response), {
+    Result successful(),
+    Result error(Object error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (error != null) {
+      return error(this.error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(DeleteUserAccount$ value), {
+    @required Result successful(DeleteUserAccountSuccessful value),
+    @required Result error(DeleteUserAccountError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(error != null);
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(DeleteUserAccount$ value), {
+    Result successful(DeleteUserAccountSuccessful value),
+    Result error(DeleteUserAccountError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteUserAccountError
+    implements DeleteUserAccount, ErrorAction {
+  const factory DeleteUserAccountError(Object error) = _$DeleteUserAccountError;
+
+  Object get error;
+  $DeleteUserAccountErrorCopyWith<DeleteUserAccountError> get copyWith;
 }

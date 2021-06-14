@@ -9,7 +9,7 @@ import 'package:public_speaking_assistant/src/data/filler_words_api.dart';
 import 'package:public_speaking_assistant/src/data/speech_result_api.dart';
 import 'package:public_speaking_assistant/src/epics/app_epics.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
-import 'package:public_speaking_assistant/src/models/speech_result/hive_model/hiveSpeechResult.dart';
+import 'package:public_speaking_assistant/src/models/hive_models/hiveSpeechResult.dart';
 import 'package:public_speaking_assistant/src/reducer/reducer.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_epics/redux_epics.dart';

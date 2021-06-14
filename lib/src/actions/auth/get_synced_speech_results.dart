@@ -8,5 +8,5 @@ abstract class GetSyncedSpeechResults with _$GetSyncedSpeechResults implements A
       GetSyncedSpeechResultsSuccessful;
 
   @Implements(ErrorAction)
-  const factory GetSyncedSpeechResults.error(StateError error) = GetSyncedSpeechResultsError;
+  const factory GetSyncedSpeechResults.error(Object error) = GetSyncedSpeechResultsError;
 }

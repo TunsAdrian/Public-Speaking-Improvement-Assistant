@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:public_speaking_assistant/src/models/hive_models/hiveColorAdapter.dart';
+import 'package:public_speaking_assistant/src/models/hive_models/hiveLanguagePair.dart';
+import 'package:public_speaking_assistant/src/models/hive_models/hiveSpeechResult.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
-import 'package:public_speaking_assistant/src/models/speech_result/hive_model/hiveSpeechResult.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/init_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
 import 'package:redux/redux.dart';
@@ -11,8 +13,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 Future<void> main() async {
   // initialise local database
   await Hive.initFlutter();
+  Hive.registerAdapter<HiveSpeechResult>(HiveSpeechResultAdapter());
+  Hive.registerAdapter<HiveLanguagePair>(HiveLanguagePairAdapter());
+  Hive.registerAdapter<Color>(HiveColorAdapter());
   await Hive.openBox<dynamic>('settings'); // open the settings box when starting the application
-  Hive.registerAdapter(HiveSpeechResultAdapter());
 
   runApp(const PublicSpeakingAssistant());
 }
@@ -35,39 +39,63 @@ class _PublicSpeakingAssistantState extends State<PublicSpeakingAssistant> with 
 
           return StoreProvider<AppState>(
             store: store,
-            // ignore: always_specify_types
-            child: ValueListenableBuilder(
+            child: ValueListenableBuilder<Box<dynamic>>(
               valueListenable: Hive.box<dynamic>('settings').listenable(),
               builder: (BuildContext context, Box<dynamic> settingsBox, Widget widget) {
                 final bool darkMode = settingsBox.get('darkMode', defaultValue: false);
+                final Color primaryColor = settingsBox.get('primaryColor', defaultValue: Colors.deepPurple);
+                final Color accentColor = settingsBox.get('accentColor', defaultValue: Colors.deepPurpleAccent);
+                final Color textButtonColor = settingsBox.get('textButtonColor', defaultValue: Colors.deepPurpleAccent);
+                final Color elevatedButtonColor =
+                    settingsBox.get('elevatedButtonColor', defaultValue: Colors.deepPurple);
+                final Color floatingButtonColor =
+                    settingsBox.get('floatingButtonColor', defaultValue: Colors.deepPurple);
+                final Color toggleableActiveColor = settingsBox.get('toggleableActiveColor', defaultValue: Colors.teal);
+
                 return MaterialApp(
                   themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
                   theme: ThemeData.light().copyWith(
-                    primaryColor: Colors.deepPurple,
-                    accentColor: Colors.deepPurpleAccent,
+                    primaryColor: primaryColor,
+                    accentColor: accentColor,
+                    toggleableActiveColor: toggleableActiveColor,
                     elevatedButtonTheme: ElevatedButtonThemeData(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurple,
+                        primary: elevatedButtonColor,
                       ),
                     ),
                     textButtonTheme: TextButtonThemeData(
                       style: TextButton.styleFrom(
-                        primary: Colors.deepPurpleAccent,
+                        primary: textButtonColor,
                       ),
+                    ),
+                    outlinedButtonTheme: OutlinedButtonThemeData(
+                        style: OutlinedButton.styleFrom(
+                      primary: textButtonColor,
+                    )),
+                    floatingActionButtonTheme: FloatingActionButtonThemeData(
+                      backgroundColor: floatingButtonColor,
                     ),
                   ),
                   darkTheme: ThemeData.dark().copyWith(
-                    primaryColor: Colors.deepPurple,
-                    accentColor: Colors.deepPurpleAccent,
+                    primaryColor: primaryColor,
+                    accentColor: accentColor,
+                    toggleableActiveColor: toggleableActiveColor,
                     elevatedButtonTheme: ElevatedButtonThemeData(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.deepPurple,
+                        primary: elevatedButtonColor,
                       ),
                     ),
                     textButtonTheme: TextButtonThemeData(
                       style: TextButton.styleFrom(
-                        primary: Colors.deepPurpleAccent,
+                        primary: textButtonColor,
                       ),
+                    ),
+                    outlinedButtonTheme: OutlinedButtonThemeData(
+                        style: OutlinedButton.styleFrom(
+                      primary: textButtonColor,
+                    )),
+                    floatingActionButtonTheme: FloatingActionButtonThemeData(
+                      backgroundColor: floatingButtonColor,
                     ),
                   ),
                   title: 'Public Speaking Improvement Assistant',
@@ -81,8 +109,7 @@ class _PublicSpeakingAssistantState extends State<PublicSpeakingAssistant> with 
             throw snapshot.error;
           }
 
-          // ignore: always_specify_types
-          return ValueListenableBuilder(
+          return ValueListenableBuilder<Box<dynamic>>(
             valueListenable: Hive.box<dynamic>('settings').listenable(),
             builder: (BuildContext context, Box<dynamic> settingsBox, Widget widget) {
               final bool darkMode = settingsBox.get('darkMode', defaultValue: false);
