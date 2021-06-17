@@ -18,9 +18,6 @@ abstract class AppUser implements Built<AppUser, AppUserBuilder> {
   bool get isEmailVerified;
 
   @nullable
-  String get photoUrl;
-
-  @nullable
   BuiltList<SpeechResult> get userSpeechResults;
 
   Map<String, dynamic> get json => serializers.serializeWith(serializer, this) as Map<String, dynamic>;

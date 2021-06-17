@@ -46,7 +46,7 @@ class _AppearancePageState extends State<AppearancePage> {
                           },
                         ),
                       ),
-                      const Divider(),
+                      const Divider(thickness: 1),
                       ListTile(
                         title: const Text('Primary Color'),
                         trailing: ColorIndicator(
@@ -63,7 +63,7 @@ class _AppearancePageState extends State<AppearancePage> {
                           },
                         ),
                       ),
-                      const Divider(),
+                      const Divider(thickness: 1),
                       ListTile(
                         title: const Text('Accent Color'),
                         trailing: ColorIndicator(
@@ -80,7 +80,7 @@ class _AppearancePageState extends State<AppearancePage> {
                           },
                         ),
                       ),
-                      const Divider(),
+                      const Divider(thickness: 1),
                       ListTile(
                         title: const Text('Toggle Color'),
                         trailing: ColorIndicator(
@@ -98,7 +98,7 @@ class _AppearancePageState extends State<AppearancePage> {
                           },
                         ),
                       ),
-                      const Divider(),
+                      const Divider(thickness: 1),
                       ListTile(
                         title: const Text('Text Button Color'),
                         trailing: ColorIndicator(
@@ -115,7 +115,7 @@ class _AppearancePageState extends State<AppearancePage> {
                           },
                         ),
                       ),
-                      const Divider(),
+                      const Divider(thickness: 1),
                       ListTile(
                         title: const Text('Elevated Button Color'),
                         trailing: ColorIndicator(
@@ -133,7 +133,7 @@ class _AppearancePageState extends State<AppearancePage> {
                           },
                         ),
                       ),
-                      const Divider(),
+                      const Divider(thickness: 1),
                       ListTile(
                         title: const Text('Floating Button Color'),
                         trailing: ColorIndicator(

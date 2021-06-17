@@ -36,12 +36,6 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
       serializers.serialize(object.isEmailVerified,
           specifiedType: const FullType(bool)),
     ];
-    if (object.photoUrl != null) {
-      result
-        ..add('photoUrl')
-        ..add(serializers.serialize(object.photoUrl,
-            specifiedType: const FullType(String)));
-    }
     if (object.userSpeechResults != null) {
       result
         ..add('userSpeechResults')
@@ -82,10 +76,6 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
         case 'isEmailVerified':
           result.isEmailVerified = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
-          break;
-        case 'photoUrl':
-          result.photoUrl = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
           break;
         case 'userSpeechResults':
           result.userSpeechResults.replace(serializers.deserialize(value,
@@ -235,8 +225,6 @@ class _$AppUser extends AppUser {
   @override
   final bool isEmailVerified;
   @override
-  final String photoUrl;
-  @override
   final BuiltList<SpeechResult> userSpeechResults;
 
   factory _$AppUser([void Function(AppUserBuilder) updates]) =>
@@ -248,7 +236,6 @@ class _$AppUser extends AppUser {
       this.firstName,
       this.lastName,
       this.isEmailVerified,
-      this.photoUrl,
       this.userSpeechResults})
       : super._() {
     if (uid == null) {
@@ -284,7 +271,6 @@ class _$AppUser extends AppUser {
         firstName == other.firstName &&
         lastName == other.lastName &&
         isEmailVerified == other.isEmailVerified &&
-        photoUrl == other.photoUrl &&
         userSpeechResults == other.userSpeechResults;
   }
 
@@ -293,12 +279,10 @@ class _$AppUser extends AppUser {
     return $jf($jc(
         $jc(
             $jc(
-                $jc(
-                    $jc($jc($jc(0, uid.hashCode), email.hashCode),
-                        firstName.hashCode),
-                    lastName.hashCode),
-                isEmailVerified.hashCode),
-            photoUrl.hashCode),
+                $jc($jc($jc(0, uid.hashCode), email.hashCode),
+                    firstName.hashCode),
+                lastName.hashCode),
+            isEmailVerified.hashCode),
         userSpeechResults.hashCode));
   }
 
@@ -310,7 +294,6 @@ class _$AppUser extends AppUser {
           ..add('firstName', firstName)
           ..add('lastName', lastName)
           ..add('isEmailVerified', isEmailVerified)
-          ..add('photoUrl', photoUrl)
           ..add('userSpeechResults', userSpeechResults))
         .toString();
   }
@@ -340,10 +323,6 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
   set isEmailVerified(bool isEmailVerified) =>
       _$this._isEmailVerified = isEmailVerified;
 
-  String _photoUrl;
-  String get photoUrl => _$this._photoUrl;
-  set photoUrl(String photoUrl) => _$this._photoUrl = photoUrl;
-
   ListBuilder<SpeechResult> _userSpeechResults;
   ListBuilder<SpeechResult> get userSpeechResults =>
       _$this._userSpeechResults ??= new ListBuilder<SpeechResult>();
@@ -359,7 +338,6 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
       _firstName = _$v.firstName;
       _lastName = _$v.lastName;
       _isEmailVerified = _$v.isEmailVerified;
-      _photoUrl = _$v.photoUrl;
       _userSpeechResults = _$v.userSpeechResults?.toBuilder();
       _$v = null;
     }
@@ -390,7 +368,6 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
               firstName: firstName,
               lastName: lastName,
               isEmailVerified: isEmailVerified,
-              photoUrl: photoUrl,
               userSpeechResults: _userSpeechResults?.build());
     } catch (_) {
       String _$failedField;

@@ -2393,9 +2393,10 @@ class _$SaveSyncedResultsLocallyTearOff {
   const _$SaveSyncedResultsLocallyTearOff();
 
 // ignore: unused_element
-  SaveSyncedResultsLocally$ call(
+  SaveSyncedResultsLocally$ call(void Function(AppAction) response,
       {@required List<SpeechResult> userSpeechResults}) {
     return SaveSyncedResultsLocally$(
+      response,
       userSpeechResults: userSpeechResults,
     );
   }
@@ -2424,13 +2425,15 @@ const $SaveSyncedResultsLocally = _$SaveSyncedResultsLocallyTearOff();
 mixin _$SaveSyncedResultsLocally {
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(List<SpeechResult> userSpeechResults), {
+    Result $default(void Function(AppAction) response,
+        List<SpeechResult> userSpeechResults), {
     @required Result successful(List<SpeechResult> speechResultsUpdated),
     @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(List<SpeechResult> userSpeechResults), {
+    Result $default(void Function(AppAction) response,
+        List<SpeechResult> userSpeechResults), {
     Result successful(List<SpeechResult> speechResultsUpdated),
     Result error(Object error),
     @required Result orElse(),
@@ -2472,7 +2475,9 @@ abstract class $SaveSyncedResultsLocally$CopyWith<$Res> {
   factory $SaveSyncedResultsLocally$CopyWith(SaveSyncedResultsLocally$ value,
           $Res Function(SaveSyncedResultsLocally$) then) =
       _$SaveSyncedResultsLocally$CopyWithImpl<$Res>;
-  $Res call({List<SpeechResult> userSpeechResults});
+  $Res call(
+      {void Function(AppAction) response,
+      List<SpeechResult> userSpeechResults});
 }
 
 /// @nodoc
@@ -2489,9 +2494,13 @@ class _$SaveSyncedResultsLocally$CopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object response = freezed,
     Object userSpeechResults = freezed,
   }) {
     return _then(SaveSyncedResultsLocally$(
+      response == freezed
+          ? _value.response
+          : response as void Function(AppAction),
       userSpeechResults: userSpeechResults == freezed
           ? _value.userSpeechResults
           : userSpeechResults as List<SpeechResult>,
@@ -2501,21 +2510,28 @@ class _$SaveSyncedResultsLocally$CopyWithImpl<$Res>
 
 /// @nodoc
 class _$SaveSyncedResultsLocally$ implements SaveSyncedResultsLocally$ {
-  const _$SaveSyncedResultsLocally$({@required this.userSpeechResults})
-      : assert(userSpeechResults != null);
+  const _$SaveSyncedResultsLocally$(this.response,
+      {@required this.userSpeechResults})
+      : assert(response != null),
+        assert(userSpeechResults != null);
 
+  @override
+  final void Function(AppAction) response;
   @override
   final List<SpeechResult> userSpeechResults;
 
   @override
   String toString() {
-    return 'SaveSyncedResultsLocally(userSpeechResults: $userSpeechResults)';
+    return 'SaveSyncedResultsLocally(response: $response, userSpeechResults: $userSpeechResults)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is SaveSyncedResultsLocally$ &&
+            (identical(other.response, response) ||
+                const DeepCollectionEquality()
+                    .equals(other.response, response)) &&
             (identical(other.userSpeechResults, userSpeechResults) ||
                 const DeepCollectionEquality()
                     .equals(other.userSpeechResults, userSpeechResults)));
@@ -2524,6 +2540,7 @@ class _$SaveSyncedResultsLocally$ implements SaveSyncedResultsLocally$ {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(response) ^
       const DeepCollectionEquality().hash(userSpeechResults);
 
   @override
@@ -2534,27 +2551,29 @@ class _$SaveSyncedResultsLocally$ implements SaveSyncedResultsLocally$ {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(List<SpeechResult> userSpeechResults), {
+    Result $default(void Function(AppAction) response,
+        List<SpeechResult> userSpeechResults), {
     @required Result successful(List<SpeechResult> speechResultsUpdated),
     @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
     assert(error != null);
-    return $default(userSpeechResults);
+    return $default(response, userSpeechResults);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(List<SpeechResult> userSpeechResults), {
+    Result $default(void Function(AppAction) response,
+        List<SpeechResult> userSpeechResults), {
     Result successful(List<SpeechResult> speechResultsUpdated),
     Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if ($default != null) {
-      return $default(userSpeechResults);
+      return $default(response, userSpeechResults);
     }
     return orElse();
   }
@@ -2589,10 +2608,11 @@ class _$SaveSyncedResultsLocally$ implements SaveSyncedResultsLocally$ {
 }
 
 abstract class SaveSyncedResultsLocally$ implements SaveSyncedResultsLocally {
-  const factory SaveSyncedResultsLocally$(
+  const factory SaveSyncedResultsLocally$(void Function(AppAction) response,
           {@required List<SpeechResult> userSpeechResults}) =
       _$SaveSyncedResultsLocally$;
 
+  void Function(AppAction) get response;
   List<SpeechResult> get userSpeechResults;
   $SaveSyncedResultsLocally$CopyWith<SaveSyncedResultsLocally$> get copyWith;
 }
@@ -2668,7 +2688,8 @@ class _$SaveSyncedResultsLocallySuccessful
   @override
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(List<SpeechResult> userSpeechResults), {
+    Result $default(void Function(AppAction) response,
+        List<SpeechResult> userSpeechResults), {
     @required Result successful(List<SpeechResult> speechResultsUpdated),
     @required Result error(Object error),
   }) {
@@ -2681,7 +2702,8 @@ class _$SaveSyncedResultsLocallySuccessful
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(List<SpeechResult> userSpeechResults), {
+    Result $default(void Function(AppAction) response,
+        List<SpeechResult> userSpeechResults), {
     Result successful(List<SpeechResult> speechResultsUpdated),
     Result error(Object error),
     @required Result orElse(),
@@ -2799,7 +2821,8 @@ class _$SaveSyncedResultsLocallyError implements SaveSyncedResultsLocallyError {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(List<SpeechResult> userSpeechResults), {
+    Result $default(void Function(AppAction) response,
+        List<SpeechResult> userSpeechResults), {
     @required Result successful(List<SpeechResult> speechResultsUpdated),
     @required Result error(Object error),
   }) {
@@ -2812,7 +2835,8 @@ class _$SaveSyncedResultsLocallyError implements SaveSyncedResultsLocallyError {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(List<SpeechResult> userSpeechResults), {
+    Result $default(void Function(AppAction) response,
+        List<SpeechResult> userSpeechResults), {
     Result successful(List<SpeechResult> speechResultsUpdated),
     Result error(Object error),
     @required Result orElse(),

@@ -34,10 +34,12 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> arguments = ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
+
     return ScaffoldMessenger(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Speech Summary'),
+          title: const Text('Speech Statistics'),
         ),
         body: SpeechResultContainer(
           builder: (BuildContext context, SpeechResult speechResult) {
@@ -58,51 +60,54 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                           _showSpeechSaveDialog(context, speechResult);
                         },
                       ),
-                      const Divider(),
+                      const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('Time'),
                         title: Text(speechResult.speechDuration.toString().substring(2, 7)),
                         enabled: tileEnabled,
                       ),
-                      const Divider(),
+                      const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('Pace'),
                         title: Text('${speechResult.wordsPerMinute.round()} words/min'),
                         enabled: tileEnabled,
                       ),
-                      const Divider(),
+                      const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('Clarity'),
                         title: Text('${(speechResult.speechClarity * 100.0).toStringAsFixed(1)}%'),
                         enabled: tileEnabled,
                       ),
-                      const Divider(),
+                      const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('All Words'),
                         title: Text('${speechResult.speechWords.length} words'),
                         enabled: tileEnabled,
                       ),
-                      const Divider(),
+                      const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('Filler Words'),
                         title: Text('${speechResult.speechFillerWords.length}'),
                         enabled: tileEnabled,
                       ),
-                      const Divider(),
-                      ListTile(
-                        minLeadingWidth: 75.0,
-                        leading: const Icon(Icons.info_outline_rounded),
-                        title: const Text('See The Full Speech'),
-                        trailing: const Icon(Icons.chevron_right),
-                        enabled: tileEnabled,
-                        onTap: () {
-                          Navigator.pushNamed(context, AppRoutes.detailed_speech_result);
-                        },
+                      const Divider(thickness: 1),
+                      Visibility(
+                        visible: arguments != null ? arguments['showDetailedSpeechTile'] : true,
+                        child: ListTile(
+                          minLeadingWidth: 75.0,
+                          leading: const Icon(Icons.info_outline_rounded),
+                          title: const Text('See the Speech Transcript'),
+                          trailing: const Icon(Icons.chevron_right),
+                          enabled: tileEnabled,
+                          onTap: () {
+                            Navigator.pushNamed(context, AppRoutes.full_speech_transcript);
+                          },
+                        ),
                       ),
                     ],
                   ),

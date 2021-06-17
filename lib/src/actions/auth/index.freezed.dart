@@ -1345,9 +1345,11 @@ class _$ResetPasswordTearOff {
   const _$ResetPasswordTearOff();
 
 // ignore: unused_element
-  ResetPassword$ call(String email) {
+  ResetPassword$ call(void Function(AppAction) response,
+      {@required String email}) {
     return ResetPassword$(
-      email,
+      response,
+      email: email,
     );
   }
 
@@ -1372,13 +1374,13 @@ const $ResetPassword = _$ResetPasswordTearOff();
 mixin _$ResetPassword {
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(String email), {
+    Result $default(void Function(AppAction) response, String email), {
     @required Result successful(),
     @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(String email), {
+    Result $default(void Function(AppAction) response, String email), {
     Result successful(),
     Result error(Object error),
     @required Result orElse(),
@@ -1420,7 +1422,7 @@ abstract class $ResetPassword$CopyWith<$Res> {
   factory $ResetPassword$CopyWith(
           ResetPassword$ value, $Res Function(ResetPassword$) then) =
       _$ResetPassword$CopyWithImpl<$Res>;
-  $Res call({String email});
+  $Res call({void Function(AppAction) response, String email});
 }
 
 /// @nodoc
@@ -1436,37 +1438,50 @@ class _$ResetPassword$CopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object response = freezed,
     Object email = freezed,
   }) {
     return _then(ResetPassword$(
-      email == freezed ? _value.email : email as String,
+      response == freezed
+          ? _value.response
+          : response as void Function(AppAction),
+      email: email == freezed ? _value.email : email as String,
     ));
   }
 }
 
 /// @nodoc
 class _$ResetPassword$ implements ResetPassword$ {
-  const _$ResetPassword$(this.email) : assert(email != null);
+  const _$ResetPassword$(this.response, {@required this.email})
+      : assert(response != null),
+        assert(email != null);
 
+  @override
+  final void Function(AppAction) response;
   @override
   final String email;
 
   @override
   String toString() {
-    return 'ResetPassword(email: $email)';
+    return 'ResetPassword(response: $response, email: $email)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is ResetPassword$ &&
+            (identical(other.response, response) ||
+                const DeepCollectionEquality()
+                    .equals(other.response, response)) &&
             (identical(other.email, email) ||
                 const DeepCollectionEquality().equals(other.email, email)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(email);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(response) ^
+      const DeepCollectionEquality().hash(email);
 
   @override
   $ResetPassword$CopyWith<ResetPassword$> get copyWith =>
@@ -1475,27 +1490,27 @@ class _$ResetPassword$ implements ResetPassword$ {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(String email), {
+    Result $default(void Function(AppAction) response, String email), {
     @required Result successful(),
     @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
     assert(error != null);
-    return $default(email);
+    return $default(response, email);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(String email), {
+    Result $default(void Function(AppAction) response, String email), {
     Result successful(),
     Result error(Object error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if ($default != null) {
-      return $default(email);
+      return $default(response, email);
     }
     return orElse();
   }
@@ -1530,8 +1545,10 @@ class _$ResetPassword$ implements ResetPassword$ {
 }
 
 abstract class ResetPassword$ implements ResetPassword {
-  const factory ResetPassword$(String email) = _$ResetPassword$;
+  const factory ResetPassword$(void Function(AppAction) response,
+      {@required String email}) = _$ResetPassword$;
 
+  void Function(AppAction) get response;
   String get email;
   $ResetPassword$CopyWith<ResetPassword$> get copyWith;
 }
@@ -1575,7 +1592,7 @@ class _$ResetPasswordSuccessful implements ResetPasswordSuccessful {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(String email), {
+    Result $default(void Function(AppAction) response, String email), {
     @required Result successful(),
     @required Result error(Object error),
   }) {
@@ -1588,7 +1605,7 @@ class _$ResetPasswordSuccessful implements ResetPasswordSuccessful {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(String email), {
+    Result $default(void Function(AppAction) response, String email), {
     Result successful(),
     Result error(Object error),
     @required Result orElse(),
@@ -1695,7 +1712,7 @@ class _$ResetPasswordError implements ResetPasswordError {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(String email), {
+    Result $default(void Function(AppAction) response, String email), {
     @required Result successful(),
     @required Result error(Object error),
   }) {
@@ -1708,7 +1725,7 @@ class _$ResetPasswordError implements ResetPasswordError {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(String email), {
+    Result $default(void Function(AppAction) response, String email), {
     Result successful(),
     Result error(Object error),
     @required Result orElse(),

@@ -128,8 +128,11 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
                                       onTap: () {
                                         StoreProvider.of<AppState>(context)
                                             .dispatch(GetSpeechResult(speechResultUuid: speechResult.uuid));
-                                        Navigator.pushNamed(context, AppRoutes.detailed_speech_result,
-                                            arguments: <SpeechResult>{speechResult});
+                                        Navigator.pushNamed(
+                                          context,
+                                          AppRoutes.full_speech_transcript,
+                                          arguments: <String, dynamic>{'fromLibrary': true},
+                                        );
                                       },
                                     ),
                                   ),

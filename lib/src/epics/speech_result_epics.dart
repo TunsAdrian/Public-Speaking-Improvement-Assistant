@@ -75,6 +75,7 @@ class SpeechResultEpics {
             .asyncMap((SaveSyncedResultsLocally$ action) =>
                 _api.saveSyncedSpeechResultsLocally(userSpeechResults: action.userSpeechResults))
             .map((List<SpeechResult> speechResultList) => SaveSyncedResultsLocally.successful(speechResultList))
-            .onErrorReturnWith((dynamic error) => SaveSyncedResultsLocally.error(error)));
+            .onErrorReturnWith((dynamic error) => SaveSyncedResultsLocally.error(error))
+            .doOnData(action.response));
   }
 }

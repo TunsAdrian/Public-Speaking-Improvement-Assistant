@@ -26,7 +26,7 @@ class SettingsHomePage extends StatelessWidget {
                       Navigator.pushNamed(context, AppRoutes.account_home);
                     },
                   ),
-                  const Divider(),
+                  const Divider(thickness: 1),
                   ListTile(
                     leading: const Icon(Icons.remove_red_eye_outlined),
                     trailing: const Icon(Icons.chevron_right),
@@ -35,26 +35,41 @@ class SettingsHomePage extends StatelessWidget {
                       Navigator.pushNamed(context, AppRoutes.appearance);
                     },
                   ),
-                  const Divider(),
+                  const Divider(thickness: 1),
                   ListTile(
                     leading: const Icon(Icons.lock_outline_rounded),
                     trailing: const Icon(Icons.chevron_right),
-                    title: const Text('Privacy & Security'),
-                    onTap: () {},
+                    title: const Text('Terms & Conditions'),
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.terms_and_conditions);
+                    },
                   ),
-                  const Divider(),
+                  const Divider(thickness: 1),
+                  ListTile(
+                    leading: const Icon(Icons.privacy_tip_outlined),
+                    trailing: const Icon(Icons.chevron_right),
+                    title: const Text('Privacy Policy'),
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.privacy_policy);
+                    },
+                  ),
+                  const Divider(thickness: 1),
                   ListTile(
                     leading: const Icon(Icons.headset_outlined),
                     trailing: const Icon(Icons.chevron_right),
                     title: const Text('Help'),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.help);
+                    },
                   ),
-                  const Divider(),
+                  const Divider(thickness: 1),
                   ListTile(
                     leading: const Icon(Icons.help_outline_outlined),
                     trailing: const Icon(Icons.chevron_right),
                     title: const Text('About'),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.about);
+                    },
                   ),
                 ],
               ),

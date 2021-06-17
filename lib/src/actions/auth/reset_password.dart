@@ -2,7 +2,7 @@ part of auth_actions;
 
 @freezed
 abstract class ResetPassword with _$ResetPassword implements AppAction {
-  const factory ResetPassword(String email) = ResetPassword$;
+  const factory ResetPassword(ActionResponse response, {@required String email}) = ResetPassword$;
 
   const factory ResetPassword.successful() = ResetPasswordSuccessful;
 

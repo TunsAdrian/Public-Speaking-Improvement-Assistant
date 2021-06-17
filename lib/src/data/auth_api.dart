@@ -46,7 +46,6 @@ class AuthApi {
           ..firstName = appUser.firstName
           ..lastName = appUser.lastName
           ..userSpeechResults = ListBuilder<SpeechResult>(appUser.userSpeechResults)
-          ..photoUrl = appUser.photoUrl
           ..isEmailVerified = user.emailVerified;
       });
 
@@ -116,7 +115,6 @@ class AuthApi {
             ..firstName = appUser.firstName
             ..lastName = appUser.lastName
             ..userSpeechResults = ListBuilder<SpeechResult>(appUser.userSpeechResults)
-            ..photoUrl = appUser.photoUrl
             ..isEmailVerified = user.emailVerified;
         });
 
@@ -132,7 +130,6 @@ class AuthApi {
         ..email = user.email
         ..firstName = user.displayName.split(' ').first
         ..lastName = user.displayName.split(' ').last
-        ..photoUrl = user.photoURL
         ..userSpeechResults = ListBuilder<SpeechResult>(<SpeechResult>[])
         ..isEmailVerified = false;
     });
@@ -141,6 +138,10 @@ class AuthApi {
     await user.sendEmailVerification();
 
     return appUser;
+  }
+
+  Future<void> resetPassword({@required String email}) async {
+    await _auth.sendPasswordResetEmail(email: email);
   }
 
   Future<void> deleteUserAccount() async {
@@ -180,7 +181,6 @@ class AuthApi {
           ..email = user.email
           ..firstName = user.firstName
           ..lastName = user.lastName
-          ..photoUrl = user.photoUrl
           ..userSpeechResults = ListBuilder<SpeechResult>(syncedSpeechResults)
           ..isEmailVerified = user.isEmailVerified;
       });

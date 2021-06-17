@@ -60,11 +60,11 @@ class _RecordingPageState extends State<RecordingPage> {
               text: text,
               terms: fillerWords,
               textStyle: const TextStyle(
-                fontSize: 32.0,
+                fontSize: 24.0,
                 fontWeight: FontWeight.w400,
               ),
               textStyleHighlight: const TextStyle(
-                fontSize: 32.0,
+                fontSize: 24.0,
                 color: Colors.red,
                 fontWeight: FontWeight.w400,
               ),

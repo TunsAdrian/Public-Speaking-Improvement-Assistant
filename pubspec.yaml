@@ -27,6 +27,7 @@ dependencies:
 
   # flutter
   flutter_redux: ^0.7.0
+  flutter_markdown: ^0.5.2
 
   # speech to text
   speech_to_text: ^3.2.0 # remove this
@@ -65,4 +66,4 @@ flutter:
 
   assets:
     - private/public-speaking-assistant-901b39fe03fb.json
-    - assets/language_codes.json
+    - assets/

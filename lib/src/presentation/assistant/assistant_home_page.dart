@@ -22,14 +22,14 @@ class AssistantHomePage extends StatelessWidget {
                   Navigator.pushNamed(context, AppRoutes.speech_record);
                   // Navigator.pushNamed(context, AppRoutes.speech_result);
                 },
-                child: const Text('Start Recording'),
+                child: const Text('Speech Rehearsal'),
               ),
               const SizedBox(height: 36.0),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, AppRoutes.set_filler_words);
                 },
-                child: const Text('Set Words Database'),
+                child: const Text('Set Filler Words'),
               ),
             ],
           ),
