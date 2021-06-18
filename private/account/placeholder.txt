@@ -1,0 +1,1 @@
+- in order to use the Google Speech API, a service account must be created and added to the project
