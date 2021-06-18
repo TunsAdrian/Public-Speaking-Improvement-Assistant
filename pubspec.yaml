@@ -28,13 +28,12 @@ dependencies:
   # flutter
   flutter_redux: ^0.7.0
   flutter_markdown: ^0.5.2
+  connectivity_plus: ^0.8.1 # needed to disable assistant if there is no internet connection
 
   # speech to text
-  speech_to_text: ^3.2.0 # remove this
   google_speech: ^1.2.1
   sound_stream: ^0.2.0
   avatar_glow: ^1.2.0
-  connectivity_plus: ^0.8.1 # needed to disable assistant if there is no internet connection
 
   # dart
   redux: ^4.0.0+3
@@ -65,5 +64,5 @@ flutter:
   uses-material-design: true
 
   assets:
-    - private/public-speaking-assistant-901b39fe03fb.json
+    - private/account/
     - assets/

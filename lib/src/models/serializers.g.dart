@@ -12,6 +12,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AuthState.serializer)
       ..add(FillerWordsState.serializer)
       ..add(RegistrationInfo.serializer)
+      ..add(SpeechAssistant.serializer)
+      ..add(SpeechAssistantState.serializer)
       ..add(SpeechResult.serializer)
       ..add(SpeechResultState.serializer)
       ..addBuilderFactory(

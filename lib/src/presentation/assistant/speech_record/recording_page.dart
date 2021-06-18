@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:public_speaking_assistant/src/actions/filler_words/index.dart';
 import 'package:public_speaking_assistant/src/containers/index.dart';
-import 'package:public_speaking_assistant/src/data/speech_to_text_api.dart';
+// import 'package:public_speaking_assistant/src/data/speech_to_text_api.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/substring_highlight.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
-import 'package:speech_to_text/speech_to_text.dart';
+// import 'package:speech_to_text/speech_recognition_result.dart';
+// import 'package:speech_to_text/speech_to_text.dart';
 
 // todo: properly implement this mechanism with redux
 class RecordingPage extends StatefulWidget {
@@ -19,7 +19,7 @@ class RecordingPage extends StatefulWidget {
 }
 
 class _RecordingPageState extends State<RecordingPage> {
-  SpeechToTextApi speechToTextApi = SpeechToTextApi(speech: SpeechToText());
+  // SpeechToTextApi speechToTextApi = SpeechToTextApi(speech: SpeechToText());
   String text = 'Press the button and start speaking';
   bool isListening = false;
   double confidence = 1.0;
@@ -33,17 +33,17 @@ class _RecordingPageState extends State<RecordingPage> {
   }
 
   // todo: move this functionality away from the presentation layer
-  Future<bool> _toggleRecording() => speechToTextApi.toggleRecording(
-        onResult: (SpeechRecognitionResult speechResult) => setState(() {
-          text = speechResult.recognizedWords;
-          if (speechResult.hasConfidenceRating && speechResult.confidence > 0) {
-            confidence = speechResult.confidence;
-          }
-        }),
-        onListening: (bool isListening) {
-          setState(() => this.isListening = isListening);
-        },
-      );
+  // Future<bool> _toggleRecording() => speechToTextApi.toggleRecording(
+  //       onResult: (SpeechRecognitionResult speechResult) => setState(() {
+  //         text = speechResult.recognizedWords;
+  //         if (speechResult.hasConfidenceRating && speechResult.confidence > 0) {
+  //           confidence = speechResult.confidence;
+  //         }
+  //       }),
+  //       onListening: (bool isListening) {
+  //         setState(() => this.isListening = isListening);
+  //       },
+  //     );
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class _RecordingPageState extends State<RecordingPage> {
               child: Icon(isListening ? Icons.mic : Icons.mic_none, size: 36),
               onPressed: () {
                 if (!isListening) {
-                  _toggleRecording();
+                  // _toggleRecording();
                 } else {
                   Navigator.pushNamed(context, AppRoutes.speech_result);
                 }

@@ -13,6 +13,7 @@ class FillerWordsApi {
     return fillerWords;
   }
 
+  // todo: replace keys with UUID (first change model to have filler word object with uuid and string)
   Future<List<String>> addFillerWord({@required String fillerWord}) async {
     // key and value with same name
     // key need to be converted to a valid ascii key

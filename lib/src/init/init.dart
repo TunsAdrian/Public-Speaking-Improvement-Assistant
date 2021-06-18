@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -6,6 +7,7 @@ import 'package:hive/hive.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/data/auth_api.dart';
 import 'package:public_speaking_assistant/src/data/filler_words_api.dart';
+import 'package:public_speaking_assistant/src/data/speech_assistant_api.dart';
 import 'package:public_speaking_assistant/src/data/speech_result_api.dart';
 import 'package:public_speaking_assistant/src/epics/app_epics.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
@@ -23,6 +25,7 @@ Future<Store<AppState>> init() async {
   final Box<String> fillerWordsBox = await Hive.openBox<String>('fillerWords');
   final Box<HiveSpeechResult> speechResultsBox = await Hive.openBox<HiveSpeechResult>('speechResults');
   final Uuid uuidInstance = Uuid();
+  final Connectivity connectivity = Connectivity();
 
   final AuthApi authApi = AuthApi(
     auth: auth,
@@ -39,10 +42,15 @@ Future<Store<AppState>> init() async {
     uuidInstance: uuidInstance,
   );
 
+  final SpeechAssistantApi speechAssistantApi = SpeechAssistantApi(
+    connectivity: connectivity,
+  );
+
   final AppEpics epic = AppEpics(
     authApi: authApi,
     fillerWordsApi: fillerWordsApi,
     speechResultApi: speechResultApi,
+    speechAssistantApi: speechAssistantApi,
   );
 
   return Store<AppState>(

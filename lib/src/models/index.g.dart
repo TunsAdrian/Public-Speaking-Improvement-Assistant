@@ -27,6 +27,9 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       'speechResult',
       serializers.serialize(object.speechResult,
           specifiedType: const FullType(SpeechResultState)),
+      'speechAssistant',
+      serializers.serialize(object.speechAssistant,
+          specifiedType: const FullType(SpeechAssistantState)),
     ];
 
     return result;
@@ -57,6 +60,11 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
                   specifiedType: const FullType(SpeechResultState))
               as SpeechResultState);
           break;
+        case 'speechAssistant':
+          result.speechAssistant.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(SpeechAssistantState))
+              as SpeechAssistantState);
+          break;
       }
     }
 
@@ -71,11 +79,15 @@ class _$AppState extends AppState {
   final FillerWordsState fillerWords;
   @override
   final SpeechResultState speechResult;
+  @override
+  final SpeechAssistantState speechAssistant;
 
   factory _$AppState([void Function(AppStateBuilder) updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({this.auth, this.fillerWords, this.speechResult}) : super._() {
+  _$AppState._(
+      {this.auth, this.fillerWords, this.speechResult, this.speechAssistant})
+      : super._() {
     if (auth == null) {
       throw new BuiltValueNullFieldError('AppState', 'auth');
     }
@@ -84,6 +96,9 @@ class _$AppState extends AppState {
     }
     if (speechResult == null) {
       throw new BuiltValueNullFieldError('AppState', 'speechResult');
+    }
+    if (speechAssistant == null) {
+      throw new BuiltValueNullFieldError('AppState', 'speechAssistant');
     }
   }
 
@@ -100,13 +115,16 @@ class _$AppState extends AppState {
     return other is AppState &&
         auth == other.auth &&
         fillerWords == other.fillerWords &&
-        speechResult == other.speechResult;
+        speechResult == other.speechResult &&
+        speechAssistant == other.speechAssistant;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, auth.hashCode), fillerWords.hashCode),
-        speechResult.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, auth.hashCode), fillerWords.hashCode),
+            speechResult.hashCode),
+        speechAssistant.hashCode));
   }
 
   @override
@@ -114,7 +132,8 @@ class _$AppState extends AppState {
     return (newBuiltValueToStringHelper('AppState')
           ..add('auth', auth)
           ..add('fillerWords', fillerWords)
-          ..add('speechResult', speechResult))
+          ..add('speechResult', speechResult)
+          ..add('speechAssistant', speechAssistant))
         .toString();
   }
 }
@@ -138,6 +157,12 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   set speechResult(SpeechResultStateBuilder speechResult) =>
       _$this._speechResult = speechResult;
 
+  SpeechAssistantStateBuilder _speechAssistant;
+  SpeechAssistantStateBuilder get speechAssistant =>
+      _$this._speechAssistant ??= new SpeechAssistantStateBuilder();
+  set speechAssistant(SpeechAssistantStateBuilder speechAssistant) =>
+      _$this._speechAssistant = speechAssistant;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
@@ -145,6 +170,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _auth = _$v.auth?.toBuilder();
       _fillerWords = _$v.fillerWords?.toBuilder();
       _speechResult = _$v.speechResult?.toBuilder();
+      _speechAssistant = _$v.speechAssistant?.toBuilder();
       _$v = null;
     }
     return this;
@@ -171,7 +197,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
           new _$AppState._(
               auth: auth.build(),
               fillerWords: fillerWords.build(),
-              speechResult: speechResult.build());
+              speechResult: speechResult.build(),
+              speechAssistant: speechAssistant.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -181,6 +208,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
         fillerWords.build();
         _$failedField = 'speechResult';
         speechResult.build();
+        _$failedField = 'speechAssistant';
+        speechAssistant.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'AppState', _$failedField, e.toString());

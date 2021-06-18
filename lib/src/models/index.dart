@@ -5,11 +5,13 @@ import 'package:built_value/serializer.dart';
 import 'package:public_speaking_assistant/src/models/auth/index.dart';
 import 'package:public_speaking_assistant/src/models/filler_words/index.dart';
 import 'package:public_speaking_assistant/src/models/serializers.dart';
+import 'package:public_speaking_assistant/src/models/speech_assistant/index.dart';
 import 'package:public_speaking_assistant/src/models/speech_result/index.dart';
 
 export 'package:public_speaking_assistant/src/models/auth/index.dart';
 export 'package:public_speaking_assistant/src/models/filler_words/index.dart';
 export 'package:public_speaking_assistant/src/models/speech_result/index.dart';
+export 'package:public_speaking_assistant/src/models/speech_assistant/index.dart';
 
 part 'app_state.dart';
 part 'index.g.dart';
