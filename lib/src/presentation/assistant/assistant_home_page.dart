@@ -42,40 +42,40 @@ class _AssistantHomePageState extends State<AssistantHomePage> {
         body: InternetConnectionContainer(
           builder: (BuildContext context, bool hasInternetConnection) {
             return Center(
-              child: Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: !hasInternetConnection
-                          ? () {
-                              const SnackBar snackBarAccountCreationSuccess = SnackBar(
-                                content: Text(
-                                    'You need a stable internet connection in order to use the public speaking assistant'),
-                              );
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: !hasInternetConnection
+                        ? () {
+                            final SnackBar snackBarAccountCreationSuccess = SnackBar(
+                              margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 44.0),
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text(
+                                  'You need a stable internet connection in order to use the public speaking assistant'),
+                            );
 
-                              ScaffoldMessenger.of(context).showSnackBar(snackBarAccountCreationSuccess);
+                            ScaffoldMessenger.of(context).showSnackBar(snackBarAccountCreationSuccess);
+                          }
+                        : null,
+                    child: ElevatedButton(
+                      child: const Text('Speech Rehearsal'),
+                      onPressed: hasInternetConnection
+                          ? () {
+                              Navigator.pushNamed(context, AppRoutes.speech_record);
+                              // Navigator.pushNamed(context, AppRoutes.speech_result);
                             }
                           : null,
-                      child: ElevatedButton(
-                        child: const Text('Speech Rehearsal'),
-                        onPressed: hasInternetConnection
-                            ? () {
-                                Navigator.pushNamed(context, AppRoutes.speech_record);
-                                // Navigator.pushNamed(context, AppRoutes.speech_result);
-                              }
-                            : null,
-                      ),
                     ),
-                    const SizedBox(height: 36.0),
-                    ElevatedButton(
-                      child: const Text('Set Filler Words'),
-                      onPressed: () {
-                        Navigator.pushNamed(context, AppRoutes.set_filler_words);
-                      },
-                    ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 36.0),
+                  ElevatedButton(
+                    child: const Text('Set Filler Words'),
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.set_filler_words);
+                    },
+                  ),
+                ],
               ),
             );
           },
