@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
+import 'package:public_speaking_assistant/src/presentation/mixin/current_theme_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/separator_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
 
-class SignupPage extends StatelessWidget with SeparatorMixin {
+class SignupPage extends StatelessWidget with SeparatorMixin, CurrentThemeMixin {
   const SignupPage({Key key}) : super(key: key);
 
   @override
@@ -29,9 +30,7 @@ class SignupPage extends StatelessWidget with SeparatorMixin {
                         child: Icon(
                           Icons.account_circle_outlined,
                           size: 120,
-                          color: Theme.of(context).brightness == Brightness.light
-                              ? ThemeData.dark().scaffoldBackgroundColor
-                              : ThemeData.light().scaffoldBackgroundColor,
+                          color: getCurrentTheme(context).scaffoldBackgroundColor,
                         ),
                       ),
                       const SizedBox(height: 30),

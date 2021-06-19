@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
+import 'package:public_speaking_assistant/src/presentation/mixin/current_theme_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/dialog_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/separator_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
@@ -13,7 +14,7 @@ class PasswordPage extends StatefulWidget {
   _PasswordPageState createState() => _PasswordPageState();
 }
 
-class _PasswordPageState extends State<PasswordPage> with DialogMixin, SeparatorMixin {
+class _PasswordPageState extends State<PasswordPage> with DialogMixin, SeparatorMixin, CurrentThemeMixin {
   bool _hidePassword = true;
 
   Future<void> _response(BuildContext context, AppAction action) async {
@@ -51,9 +52,7 @@ class _PasswordPageState extends State<PasswordPage> with DialogMixin, Separator
                         child: Icon(
                           Icons.account_circle_outlined,
                           size: 120,
-                          color: Theme.of(context).brightness == Brightness.light
-                              ? ThemeData.dark().scaffoldBackgroundColor
-                              : ThemeData.light().scaffoldBackgroundColor,
+                          color: getCurrentTheme(context).scaffoldBackgroundColor,
                         ),
                       ),
                       const SizedBox(height: 30),

@@ -6,3 +6,8 @@ import 'package:public_speaking_assistant/src/actions/index.dart';
 part 'index.freezed.dart';
 part 'listen_for_internet_status.dart';
 part 'stop_listening_for_internet_status.dart';
+part 'listen_for_speech.dart';
+part 'stop_listening_for_speech.dart';
+part 'initalize_recorder.dart';
+part 'start_recorder.dart';
+part 'stop_recorder.dart';

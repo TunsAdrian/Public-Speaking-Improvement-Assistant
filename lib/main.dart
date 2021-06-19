@@ -61,6 +61,10 @@ class _PublicSpeakingAssistantState extends State<PublicSpeakingAssistant> with 
                     elevatedButtonTheme: ElevatedButtonThemeData(
                       style: ElevatedButton.styleFrom(
                         primary: elevatedButtonColor,
+                        minimumSize: const Size(150, 36),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
                       ),
                     ),
                     textButtonTheme: TextButtonThemeData(
@@ -69,9 +73,13 @@ class _PublicSpeakingAssistantState extends State<PublicSpeakingAssistant> with 
                       ),
                     ),
                     outlinedButtonTheme: OutlinedButtonThemeData(
-                        style: OutlinedButton.styleFrom(
-                      primary: textButtonColor,
-                    )),
+                      style: OutlinedButton.styleFrom(
+                        primary: textButtonColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                    ),
                     floatingActionButtonTheme: FloatingActionButtonThemeData(
                       backgroundColor: floatingButtonColor,
                     ),
@@ -83,6 +91,10 @@ class _PublicSpeakingAssistantState extends State<PublicSpeakingAssistant> with 
                     elevatedButtonTheme: ElevatedButtonThemeData(
                       style: ElevatedButton.styleFrom(
                         primary: elevatedButtonColor,
+                        minimumSize: const Size(150, 36),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
                       ),
                     ),
                     textButtonTheme: TextButtonThemeData(
@@ -91,9 +103,13 @@ class _PublicSpeakingAssistantState extends State<PublicSpeakingAssistant> with 
                       ),
                     ),
                     outlinedButtonTheme: OutlinedButtonThemeData(
-                        style: OutlinedButton.styleFrom(
-                      primary: textButtonColor,
-                    )),
+                      style: OutlinedButton.styleFrom(
+                        primary: textButtonColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                    ),
                     floatingActionButtonTheme: FloatingActionButtonThemeData(
                       backgroundColor: floatingButtonColor,
                     ),

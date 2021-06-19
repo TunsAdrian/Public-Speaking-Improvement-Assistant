@@ -15,6 +15,7 @@ import 'package:public_speaking_assistant/src/models/hive_models/hiveSpeechResul
 import 'package:public_speaking_assistant/src/reducer/reducer.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_epics/redux_epics.dart';
+import 'package:sound_stream/sound_stream.dart';
 import 'package:uuid/uuid.dart';
 
 Future<Store<AppState>> init() async {
@@ -26,6 +27,7 @@ Future<Store<AppState>> init() async {
   final Box<HiveSpeechResult> speechResultsBox = await Hive.openBox<HiveSpeechResult>('speechResults');
   final Uuid uuidInstance = Uuid();
   final Connectivity connectivity = Connectivity();
+  final RecorderStream recorderStream = RecorderStream();
 
   final AuthApi authApi = AuthApi(
     auth: auth,
@@ -44,6 +46,7 @@ Future<Store<AppState>> init() async {
 
   final SpeechAssistantApi speechAssistantApi = SpeechAssistantApi(
     connectivity: connectivity,
+    recorderStream: recorderStream,
   );
 
   final AppEpics epic = AppEpics(

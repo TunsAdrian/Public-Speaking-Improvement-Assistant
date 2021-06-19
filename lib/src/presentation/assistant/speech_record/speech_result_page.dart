@@ -15,7 +15,7 @@ class SpeechResultPage extends StatefulWidget {
 class _SpeechResultPageState extends State<SpeechResultPage> {
   final TextEditingController _speechNameTextController = TextEditingController();
   final GlobalKey<FormState> _speechNameFormKey = GlobalKey<FormState>();
-  bool tileEnabled = true;
+  bool _tileEnabled = true;
 
   @override
   void initState() {
@@ -23,13 +23,13 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
 
     // todo: remove this
     // created manual speech result object for testing purposes
-    StoreProvider.of<AppState>(context, listen: false).dispatch(const CreateSpeechResult(
-      speechDuration: Duration(seconds: 61),
-      speechClarity: 0.94,
-      wordsPerMinute: 24.54,
-      speechWords: <String>['This', 'is', 'just', 'a', 'sample', 'text'],
-      speechFillerWords: <String>['just', 'text'],
-    ));
+    // StoreProvider.of<AppState>(context, listen: false).dispatch(const CreateSpeechResult(
+    //   speechDuration: Duration(seconds: 61),
+    //   speechClarity: 0.94,
+    //   wordsPerMinute: 24.54,
+    //   speechWords: <String>['This', 'is', 'just', 'a', 'sample', 'text'],
+    //   speechFillerWords: <String>['just', 'text'],
+    // ));
   }
 
   @override
@@ -55,7 +55,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                         leading: const Text('Title'),
                         title: Text(speechResult?.speechName ?? '-'),
                         trailing: const Icon(Icons.text_fields_outlined),
-                        enabled: tileEnabled,
+                        enabled: _tileEnabled,
                         onTap: () {
                           _showSpeechSaveDialog(context, speechResult);
                         },
@@ -65,35 +65,35 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                         minLeadingWidth: 75.0,
                         leading: const Text('Time'),
                         title: Text(speechResult.speechDuration.toString().substring(2, 7)),
-                        enabled: tileEnabled,
+                        enabled: _tileEnabled,
                       ),
                       const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('Pace'),
                         title: Text('${speechResult.wordsPerMinute.round()} words/min'),
-                        enabled: tileEnabled,
+                        enabled: _tileEnabled,
                       ),
                       const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('Clarity'),
                         title: Text('${(speechResult.speechClarity * 100.0).toStringAsFixed(1)}%'),
-                        enabled: tileEnabled,
+                        enabled: _tileEnabled,
                       ),
                       const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('All Words'),
                         title: Text('${speechResult.speechWords.length} words'),
-                        enabled: tileEnabled,
+                        enabled: _tileEnabled,
                       ),
                       const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: const Text('Filler Words'),
                         title: Text('${speechResult.speechFillerWords.length}'),
-                        enabled: tileEnabled,
+                        enabled: _tileEnabled,
                       ),
                       const Divider(thickness: 1),
                       Visibility(
@@ -103,7 +103,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                           leading: const Icon(Icons.info_outline_rounded),
                           title: const Text('See the Speech Transcript'),
                           trailing: const Icon(Icons.chevron_right),
-                          enabled: tileEnabled,
+                          enabled: _tileEnabled,
                           onTap: () {
                             Navigator.pushNamed(context, AppRoutes.full_speech_transcript);
                           },
@@ -145,7 +145,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
 
                             // disable the field after the save operation was done and wait for the navigator
                             setState(() {
-                              tileEnabled = false;
+                              _tileEnabled = false;
                             });
                             ScaffoldMessenger.of(context).showSnackBar(snackBarSaveSuccess);
 

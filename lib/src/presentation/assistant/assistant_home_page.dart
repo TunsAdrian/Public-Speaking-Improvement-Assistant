@@ -39,13 +39,12 @@ class _AssistantHomePageState extends State<AssistantHomePage> {
           title: const Text('Public Speaking Assistant'),
           centerTitle: true,
         ),
-        body: ConnectivityContainer(
+        body: InternetConnectionContainer(
           builder: (BuildContext context, bool hasInternetConnection) {
             return Center(
-              child: IntrinsicWidth(
+              child: Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     GestureDetector(
                       onTap: !hasInternetConnection
@@ -59,21 +58,21 @@ class _AssistantHomePageState extends State<AssistantHomePage> {
                             }
                           : null,
                       child: ElevatedButton(
+                        child: const Text('Speech Rehearsal'),
                         onPressed: hasInternetConnection
                             ? () {
                                 Navigator.pushNamed(context, AppRoutes.speech_record);
                                 // Navigator.pushNamed(context, AppRoutes.speech_result);
                               }
                             : null,
-                        child: const Text('Speech Rehearsal'),
                       ),
                     ),
                     const SizedBox(height: 36.0),
                     ElevatedButton(
+                      child: const Text('Set Filler Words'),
                       onPressed: () {
                         Navigator.pushNamed(context, AppRoutes.set_filler_words);
                       },
-                      child: const Text('Set Filler Words'),
                     ),
                   ],
                 ),

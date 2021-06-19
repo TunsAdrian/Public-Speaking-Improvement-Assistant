@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 
-part 'get_user.dart';
 part 'get_current_user.dart';
 part 'index.freezed.dart';
 part 'login.dart';

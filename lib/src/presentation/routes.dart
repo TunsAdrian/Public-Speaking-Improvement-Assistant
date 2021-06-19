@@ -60,7 +60,7 @@ class AppRoutes {
 
     // settings routes
     account_home: (BuildContext context) {
-      return const AccountHome();
+      return const AccountHomePage();
     },
     appearance: (BuildContext context) {
       return const AppearancePage();

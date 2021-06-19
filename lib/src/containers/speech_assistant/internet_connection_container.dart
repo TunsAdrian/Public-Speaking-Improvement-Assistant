@@ -1,7 +1,7 @@
 part of speech_assistant_containers;
 
-class ConnectivityContainer extends StatelessWidget {
-  const ConnectivityContainer({Key key, @required this.builder}) : super(key: key);
+class InternetConnectionContainer extends StatelessWidget {
+  const InternetConnectionContainer({Key key, @required this.builder}) : super(key: key);
 
   final ViewModelBuilder<bool> builder;
 

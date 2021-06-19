@@ -6,31 +6,8 @@ part of assistant_models;
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<SpeechAssistant> _$speechAssistantSerializer =
-    new _$SpeechAssistantSerializer();
 Serializer<SpeechAssistantState> _$speechAssistantStateSerializer =
     new _$SpeechAssistantStateSerializer();
-
-class _$SpeechAssistantSerializer
-    implements StructuredSerializer<SpeechAssistant> {
-  @override
-  final Iterable<Type> types = const [SpeechAssistant, _$SpeechAssistant];
-  @override
-  final String wireName = 'SpeechAssistant';
-
-  @override
-  Iterable<Object> serialize(Serializers serializers, SpeechAssistant object,
-      {FullType specifiedType = FullType.unspecified}) {
-    return <Object>[];
-  }
-
-  @override
-  SpeechAssistant deserialize(
-      Serializers serializers, Iterable<Object> serialized,
-      {FullType specifiedType = FullType.unspecified}) {
-    return new SpeechAssistantBuilder().build();
-  }
-}
 
 class _$SpeechAssistantStateSerializer
     implements StructuredSerializer<SpeechAssistantState> {
@@ -47,11 +24,17 @@ class _$SpeechAssistantStateSerializer
       Serializers serializers, SpeechAssistantState object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
-    if (object.speechAssistant != null) {
+    if (object.isListening != null) {
       result
-        ..add('speechAssistant')
-        ..add(serializers.serialize(object.speechAssistant,
-            specifiedType: const FullType(SpeechAssistant)));
+        ..add('isListening')
+        ..add(serializers.serialize(object.isListening,
+            specifiedType: const FullType(bool)));
+    }
+    if (object.recognizedText != null) {
+      result
+        ..add('recognizedText')
+        ..add(serializers.serialize(object.recognizedText,
+            specifiedType: const FullType(String)));
     }
     if (object.hasInternetConnection != null) {
       result
@@ -74,10 +57,13 @@ class _$SpeechAssistantStateSerializer
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'speechAssistant':
-          result.speechAssistant.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(SpeechAssistant))
-              as SpeechAssistant);
+        case 'isListening':
+          result.isListening = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'recognizedText':
+          result.recognizedText = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
           break;
         case 'hasInternetConnection':
           result.hasInternetConnection = serializers.deserialize(value,
@@ -90,67 +76,11 @@ class _$SpeechAssistantStateSerializer
   }
 }
 
-class _$SpeechAssistant extends SpeechAssistant {
-  factory _$SpeechAssistant([void Function(SpeechAssistantBuilder) updates]) =>
-      (new SpeechAssistantBuilder()..update(updates)).build();
-
-  _$SpeechAssistant._() : super._();
-
-  @override
-  SpeechAssistant rebuild(void Function(SpeechAssistantBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  SpeechAssistantBuilder toBuilder() =>
-      new SpeechAssistantBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is SpeechAssistant;
-  }
-
-  @override
-  int get hashCode {
-    return 945805827;
-  }
-
-  @override
-  String toString() {
-    return newBuiltValueToStringHelper('SpeechAssistant').toString();
-  }
-}
-
-class SpeechAssistantBuilder
-    implements Builder<SpeechAssistant, SpeechAssistantBuilder> {
-  _$SpeechAssistant _$v;
-
-  SpeechAssistantBuilder();
-
-  @override
-  void replace(SpeechAssistant other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
-    _$v = other as _$SpeechAssistant;
-  }
-
-  @override
-  void update(void Function(SpeechAssistantBuilder) updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$SpeechAssistant build() {
-    final _$result = _$v ?? new _$SpeechAssistant._();
-    replace(_$result);
-    return _$result;
-  }
-}
-
 class _$SpeechAssistantState extends SpeechAssistantState {
   @override
-  final SpeechAssistant speechAssistant;
+  final bool isListening;
+  @override
+  final String recognizedText;
   @override
   final bool hasInternetConnection;
 
@@ -158,7 +88,8 @@ class _$SpeechAssistantState extends SpeechAssistantState {
           [void Function(SpeechAssistantStateBuilder) updates]) =>
       (new SpeechAssistantStateBuilder()..update(updates)).build();
 
-  _$SpeechAssistantState._({this.speechAssistant, this.hasInternetConnection})
+  _$SpeechAssistantState._(
+      {this.isListening, this.recognizedText, this.hasInternetConnection})
       : super._();
 
   @override
@@ -174,20 +105,22 @@ class _$SpeechAssistantState extends SpeechAssistantState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is SpeechAssistantState &&
-        speechAssistant == other.speechAssistant &&
+        isListening == other.isListening &&
+        recognizedText == other.recognizedText &&
         hasInternetConnection == other.hasInternetConnection;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc(0, speechAssistant.hashCode), hasInternetConnection.hashCode));
+    return $jf($jc($jc($jc(0, isListening.hashCode), recognizedText.hashCode),
+        hasInternetConnection.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('SpeechAssistantState')
-          ..add('speechAssistant', speechAssistant)
+          ..add('isListening', isListening)
+          ..add('recognizedText', recognizedText)
           ..add('hasInternetConnection', hasInternetConnection))
         .toString();
   }
@@ -197,11 +130,14 @@ class SpeechAssistantStateBuilder
     implements Builder<SpeechAssistantState, SpeechAssistantStateBuilder> {
   _$SpeechAssistantState _$v;
 
-  SpeechAssistantBuilder _speechAssistant;
-  SpeechAssistantBuilder get speechAssistant =>
-      _$this._speechAssistant ??= new SpeechAssistantBuilder();
-  set speechAssistant(SpeechAssistantBuilder speechAssistant) =>
-      _$this._speechAssistant = speechAssistant;
+  bool _isListening;
+  bool get isListening => _$this._isListening;
+  set isListening(bool isListening) => _$this._isListening = isListening;
+
+  String _recognizedText;
+  String get recognizedText => _$this._recognizedText;
+  set recognizedText(String recognizedText) =>
+      _$this._recognizedText = recognizedText;
 
   bool _hasInternetConnection;
   bool get hasInternetConnection => _$this._hasInternetConnection;
@@ -212,7 +148,8 @@ class SpeechAssistantStateBuilder
 
   SpeechAssistantStateBuilder get _$this {
     if (_$v != null) {
-      _speechAssistant = _$v.speechAssistant?.toBuilder();
+      _isListening = _$v.isListening;
+      _recognizedText = _$v.recognizedText;
       _hasInternetConnection = _$v.hasInternetConnection;
       _$v = null;
     }
@@ -234,23 +171,11 @@ class SpeechAssistantStateBuilder
 
   @override
   _$SpeechAssistantState build() {
-    _$SpeechAssistantState _$result;
-    try {
-      _$result = _$v ??
-          new _$SpeechAssistantState._(
-              speechAssistant: _speechAssistant?.build(),
-              hasInternetConnection: hasInternetConnection);
-    } catch (_) {
-      String _$failedField;
-      try {
-        _$failedField = 'speechAssistant';
-        _speechAssistant?.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'SpeechAssistantState', _$failedField, e.toString());
-      }
-      rethrow;
-    }
+    final _$result = _$v ??
+        new _$SpeechAssistantState._(
+            isListening: isListening,
+            recognizedText: recognizedText,
+            hasInternetConnection: hasInternetConnection);
     replace(_$result);
     return _$result;
   }

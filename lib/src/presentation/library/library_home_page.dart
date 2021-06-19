@@ -48,14 +48,16 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
                                   background: Container(
                                     color: Colors.red,
                                     margin: const EdgeInsets.only(top: 6.0, bottom: 6.0),
-                                    child: const ListTile(
-                                      leading: Icon(
-                                        Icons.delete_outline_outlined,
-                                        color: Colors.white,
-                                      ),
-                                      title: Text(
-                                        'Delete',
-                                        style: TextStyle(color: Colors.white),
+                                    child: const Center(
+                                      child: ListTile(
+                                        leading: Icon(
+                                          Icons.delete_outline_outlined,
+                                          color: Colors.white,
+                                        ),
+                                        title: Text(
+                                          'Delete',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                       ),
                                     ),
                                   ),

@@ -96,7 +96,7 @@ class _SetFillerWordsState extends State<SetFillerWords> {
                               icon: const Icon(Icons.highlight_remove_rounded),
                               onPressed: () {
                                 final SnackBar snackBar = SnackBar(
-                                  content: Text('$fillerWord removed'),
+                                  content: Text('\"$fillerWord\" removed'),
                                   action: SnackBarAction(
                                     label: 'Undo',
                                     onPressed: () {

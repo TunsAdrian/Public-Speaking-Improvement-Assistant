@@ -4,17 +4,18 @@ import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/containers/auth/index.dart';
 import 'package:public_speaking_assistant/src/models/auth/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
+import 'package:public_speaking_assistant/src/presentation/mixin/current_theme_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/dialog_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/login/login_page.dart';
 
-class AccountHome extends StatefulWidget {
-  const AccountHome({Key key}) : super(key: key);
+class AccountHomePage extends StatefulWidget {
+  const AccountHomePage({Key key}) : super(key: key);
 
   @override
-  _AccountHomeState createState() => _AccountHomeState();
+  _AccountHomePageState createState() => _AccountHomePageState();
 }
 
-class _AccountHomeState extends State<AccountHome> with DialogMixin {
+class _AccountHomePageState extends State<AccountHomePage> with DialogMixin, CurrentThemeMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Future<void> _response(AppAction action) async {
@@ -96,9 +97,7 @@ class _AccountHomeState extends State<AccountHome> with DialogMixin {
                         const SizedBox(height: 68),
                         CircleAvatar(
                           radius: 60,
-                          backgroundColor: Theme.of(context).brightness == Brightness.light
-                              ? ThemeData.dark().scaffoldBackgroundColor
-                              : ThemeData.light().scaffoldBackgroundColor,
+                          backgroundColor: getCurrentTheme(context).scaffoldBackgroundColor,
                           child: Text(
                             user.lastName[0].toUpperCase() + user.firstName[0].toUpperCase(),
                             style: TextStyle(

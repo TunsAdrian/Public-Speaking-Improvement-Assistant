@@ -10,7 +10,10 @@ abstract class SpeechAssistantState implements Built<SpeechAssistantState, Speec
   SpeechAssistantState._();
 
   @nullable
-  SpeechAssistant get speechAssistant;
+  bool get isListening;
+
+  @nullable
+  String get recognizedText;
 
   @nullable
   bool get hasInternetConnection;

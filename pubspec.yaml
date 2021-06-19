@@ -48,6 +48,7 @@ dependencies:
   flutter_emoji: ^2.2.1+1
   select_dialog: ^1.2.3
   flex_color_picker: ^1.1.5
+  fancy_bottom_navigation: ^0.3.2
 
 dev_dependencies:
   flutter_test:

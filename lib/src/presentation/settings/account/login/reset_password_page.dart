@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
+import 'package:public_speaking_assistant/src/presentation/mixin/current_theme_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/dialog_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/separator_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
@@ -13,7 +14,7 @@ class ResetPasswordPage extends StatefulWidget {
   _ResetPasswordPageState createState() => _ResetPasswordPageState();
 }
 
-class _ResetPasswordPageState extends State<ResetPasswordPage> with DialogMixin, SeparatorMixin {
+class _ResetPasswordPageState extends State<ResetPasswordPage> with DialogMixin, SeparatorMixin, CurrentThemeMixin {
   final TextEditingController _email = TextEditingController();
 
   Future<void> _response(BuildContext context, AppAction action) async {
@@ -50,9 +51,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with DialogMixin,
                           child: Icon(
                             Icons.account_circle_outlined,
                             size: 120,
-                            color: Theme.of(context).brightness == Brightness.light
-                                ? ThemeData.dark().scaffoldBackgroundColor
-                                : ThemeData.light().scaffoldBackgroundColor,
+                            color: getCurrentTheme(context).scaffoldBackgroundColor,
                           ),
                         ),
                         const SizedBox(height: 30),

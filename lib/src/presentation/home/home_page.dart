@@ -1,6 +1,8 @@
+import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/assistant_home_page.dart';
 import 'package:public_speaking_assistant/src/presentation/library/library_home_page.dart';
+import 'package:public_speaking_assistant/src/presentation/mixin/current_theme_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/settings_home_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,7 +12,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with CurrentThemeMixin {
   int _page = 0;
 
   @override
@@ -21,23 +23,25 @@ class _HomePageState extends State<HomePage> {
         const LibraryHomePage(),
         const SettingsHomePage(),
       ][_page],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _page,
-        onTap: (int i) async {
+      bottomNavigationBar: FancyBottomNavigation(
+        textColor: Theme.of(context).primaryColor,
+        circleColor: Theme.of(context).primaryColor,
+        activeIconColor: getCurrentTheme(context).iconTheme.color,
+        onTabChangedListener: (int i) async {
           setState(() => _page = i);
         },
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Assistant',
+        tabs: <TabData>[
+          TabData(
+            iconData: Icons.home,
+            title: 'Assistant',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.library_books_rounded),
-            label: 'Library',
+          TabData(
+            iconData: Icons.library_books_rounded,
+            title: 'Library',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings_rounded),
-            label: 'Settings',
+          TabData(
+            iconData: Icons.settings_rounded,
+            title: 'Settings',
           )
         ],
       ),
