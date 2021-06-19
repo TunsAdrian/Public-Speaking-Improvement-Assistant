@@ -1,3 +1,4 @@
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/assistant_home_page.dart';
@@ -18,11 +19,18 @@ class _HomePageState extends State<HomePage> with CurrentThemeMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: <Widget>[
-        const AssistantHomePage(),
-        const LibraryHomePage(),
-        const SettingsHomePage(),
-      ][_page],
+      body: DoubleBackToCloseApp(
+        snackBar: SnackBar(
+          margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 44.0),
+          behavior: SnackBarBehavior.floating,
+          content: const Text('Tap again to exit the application'),
+        ),
+        child: <Widget>[
+          const AssistantHomePage(),
+          const LibraryHomePage(),
+          const SettingsHomePage(),
+        ][_page],
+      ),
       bottomNavigationBar: FancyBottomNavigation(
         textColor: Theme.of(context).primaryColor,
         circleColor: Theme.of(context).primaryColor,

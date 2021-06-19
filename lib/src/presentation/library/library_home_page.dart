@@ -71,6 +71,8 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
                                     }
 
                                     final SnackBar snackBarNameSpeech = SnackBar(
+                                      margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 44.0),
+                                      behavior: SnackBarBehavior.floating,
                                       content: isSpeechResultSynced
                                           ? const Text('Speech entry removed both from local storage and from cloud')
                                           : const Text('Speech entry removed'),
@@ -111,16 +113,21 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
                                               StoreProvider.of<AppState>(context)
                                                   .dispatch(const GetSyncedSpeechResults());
                                             } else {
-                                              const SnackBar snackBarNoUserConnected = SnackBar(
-                                                content: Text(
+                                              final SnackBar snackBarNoUserConnected = SnackBar(
+                                                margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 44.0),
+                                                behavior: SnackBarBehavior.floating,
+                                                content: const Text(
                                                     'You need to confirm your email in order to sync your speeches'),
                                               );
 
                                               ScaffoldMessenger.of(context).showSnackBar(snackBarNoUserConnected);
                                             }
                                           } else {
-                                            const SnackBar snackBarNoUserConnected = SnackBar(
-                                              content: Text('You need to be logged-in in order to sync your speeches'),
+                                            final SnackBar snackBarNoUserConnected = SnackBar(
+                                              margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 44.0),
+                                              behavior: SnackBarBehavior.floating,
+                                              content:
+                                                  const Text('You need to be logged-in in order to sync your speeches'),
                                             );
 
                                             ScaffoldMessenger.of(context).showSnackBar(snackBarNoUserConnected);
