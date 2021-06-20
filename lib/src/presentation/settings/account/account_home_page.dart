@@ -28,13 +28,19 @@ class _AccountHomePageState extends State<AccountHomePage> with DialogMixin, Cur
 
       StoreProvider.of<AppState>(_scaffoldKey.currentContext).dispatch(const SignOut());
     } else if (action is SaveSyncedResultsLocallySuccessful) {
-      const SnackBar snackBarSyncResultSuccess =
-          SnackBar(content: Text('Your speeches were successfully downloaded and synced'));
+      final SnackBar snackBarSyncResultSuccess = SnackBar(
+        margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 8.0),
+        behavior: SnackBarBehavior.floating,
+        content: const Text('Your speeches were successfully downloaded and synced'),
+      );
 
       ScaffoldMessenger.of(_scaffoldKey.currentContext).showSnackBar(snackBarSyncResultSuccess);
     } else if (action is SaveSyncedResultsLocallyError) {
-      const SnackBar snackBarSyncResultError =
-          SnackBar(content: Text('An error has occurred while syncing your speeches'));
+      final SnackBar snackBarSyncResultError = SnackBar(
+        margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 8.0),
+        behavior: SnackBarBehavior.floating,
+        content: const Text('An error has occurred while syncing your speeches'),
+      );
 
       ScaffoldMessenger.of(_scaffoldKey.currentContext).showSnackBar(snackBarSyncResultError);
     }
@@ -112,8 +118,11 @@ class _AccountHomePageState extends State<AccountHomePage> with DialogMixin, Cur
                           icon: const Icon(Icons.cloud_download_outlined),
                           onPressed: () {
                             if (syncedSpeechResultsList.isEmpty) {
-                              const SnackBar snackBarNoSyncedResults =
-                                  SnackBar(content: Text('No synced speeches were found'));
+                              final SnackBar snackBarNoSyncedResults = SnackBar(
+                                margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 8.0),
+                                behavior: SnackBarBehavior.floating,
+                                content: const Text('No synced speeches were found'),
+                              );
 
                               ScaffoldMessenger.of(_scaffoldKey.currentContext).showSnackBar(snackBarNoSyncedResults);
                             } else {

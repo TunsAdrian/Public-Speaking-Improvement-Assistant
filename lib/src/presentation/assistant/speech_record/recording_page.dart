@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -14,6 +15,7 @@ import 'package:public_speaking_assistant/src/models/hive_models/hiveLanguagePai
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/substring_highlight.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
+import 'package:redux/redux.dart';
 import 'package:select_dialog/select_dialog.dart';
 
 class RecordingPage extends StatefulWidget {
@@ -24,6 +26,7 @@ class RecordingPage extends StatefulWidget {
 }
 
 class _RecordingPageState extends State<RecordingPage> {
+  Store<AppState> store;
   List<String> _speechFillerWords = <String>[];
   final Stopwatch _stopwatch = Stopwatch();
   final double _clarity = 1.0;
@@ -49,9 +52,18 @@ class _RecordingPageState extends State<RecordingPage> {
     super.initState();
     getLanguageData();
     getServiceAccount();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      store = StoreProvider.of<AppState>(context);
+      store.dispatch(const GetFillerWords());
+      store.dispatch(const InitializeRecorder());
+    });
+  }
 
-    StoreProvider.of<AppState>(context, listen: false).dispatch(const GetFillerWords());
-    StoreProvider.of<AppState>(context, listen: false).dispatch(const InitializeRecorder());
+  @override
+  void dispose() {
+    store.dispatch(const StopListeningForSpeech());
+    store.dispatch(const StopRecorder());
+    super.dispose();
   }
 
   @override
@@ -86,6 +98,7 @@ class _RecordingPageState extends State<RecordingPage> {
                             ],
                           ),
                           body: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
                               Visibility(
@@ -132,25 +145,26 @@ class _RecordingPageState extends State<RecordingPage> {
                                   ),
                                 ),
                               ),
-                              Visibility(
-                                visible: isListening,
-                                //todo: auto-scroll on content recognized text
-                                child: SingleChildScrollView(
-                                  reverse: true,
-                                  padding: const EdgeInsets.all(30).copyWith(bottom: 150),
-                                  // todo: change this mechanism: send the fillerWords only once
-                                  child: SubstringHighlight(
-                                    text: recognizedText,
-                                    terms: fillerWords,
-                                    textStyle: TextStyle(
-                                      fontSize: 24.0,
-                                      color: Theme.of(context).textTheme.bodyText1.color,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                    textStyleHighlight: const TextStyle(
-                                      fontSize: 24.0,
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.w400,
+                              Expanded(
+                                child: Visibility(
+                                  visible: true,
+                                  child: SingleChildScrollView(
+                                    reverse: true,
+                                    padding: const EdgeInsets.all(30).copyWith(bottom: 150),
+                                    // todo: change this mechanism: send the fillerWords only once
+                                    child: SubstringHighlight(
+                                      text: recognizedText,
+                                      terms: fillerWords,
+                                      textStyle: TextStyle(
+                                        fontSize: 24.0,
+                                        color: Theme.of(context).textTheme.bodyText1.color,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                      textStyleHighlight: const TextStyle(
+                                        fontSize: 24.0,
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -167,15 +181,15 @@ class _RecordingPageState extends State<RecordingPage> {
                               onPressed: () {
                                 if (!isListening) {
                                   _stopwatch.start();
-                                  StoreProvider.of<AppState>(context).dispatch(const StartRecorder());
-                                  StoreProvider.of<AppState>(context).dispatch(ListenForSpeech(
+                                  store.dispatch(const StartRecorder());
+                                  store.dispatch(ListenForSpeech(
                                     languageCode: _selectedSpeechLanguage.languageCode,
                                     serviceAccount: _serviceAccount,
                                   ));
                                 } else {
                                   _stopwatch.stop();
-                                  StoreProvider.of<AppState>(context).dispatch(const StopListeningForSpeech());
-                                  StoreProvider.of<AppState>(context).dispatch(const StopRecorder());
+                                  store.dispatch(const StopListeningForSpeech());
+                                  store.dispatch(const StopRecorder());
 
                                   if (recognizedText.isNotEmpty) {
                                     _speechFillerWords = fillerWords
@@ -184,7 +198,7 @@ class _RecordingPageState extends State<RecordingPage> {
                                             .contains(term))
                                         .toList();
 
-                                    StoreProvider.of<AppState>(context).dispatch(CreateSpeechResult(
+                                    store.dispatch(CreateSpeechResult(
                                       speechDuration: _stopwatch.elapsed,
                                       speechClarity: _clarity,
                                       wordsPerMinute:

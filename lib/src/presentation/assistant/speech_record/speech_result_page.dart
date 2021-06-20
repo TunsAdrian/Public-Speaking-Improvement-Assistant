@@ -128,6 +128,8 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                         onPressed: () async {
                           if (speechResult.speechName == null) {
                             final SnackBar snackBarNameSpeech = SnackBar(
+                              margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 8.0),
+                              behavior: SnackBarBehavior.floating,
                               content: const Text('Please name your speech first'),
                               action: SnackBarAction(
                                 label: 'Name',
@@ -139,8 +141,10 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                             ScaffoldMessenger.of(context).showSnackBar(snackBarNameSpeech);
                           } else {
                             StoreProvider.of<AppState>(context).dispatch(SaveSpeechResult(speechResult: speechResult));
-                            const SnackBar snackBarSaveSuccess = SnackBar(
-                              content: Text('Speech result was successfully saved'),
+                            final SnackBar snackBarSaveSuccess = SnackBar(
+                              margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 8.0),
+                              behavior: SnackBarBehavior.floating,
+                              content: const Text('Speech result was successfully saved'),
                             );
 
                             // disable the field after the save operation was done and wait for the navigator

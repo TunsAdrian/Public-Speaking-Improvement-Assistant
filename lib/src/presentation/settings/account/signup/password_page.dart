@@ -19,9 +19,11 @@ class _PasswordPageState extends State<PasswordPage> with DialogMixin, Separator
 
   Future<void> _response(BuildContext context, AppAction action) async {
     if (action is SignupSuccessful) {
-      const SnackBar snackBarAccountCreationSuccess = SnackBar(
-        content: Text('Your account was successfully created'),
-        duration: Duration(seconds: 2),
+      final SnackBar snackBarAccountCreationSuccess = SnackBar(
+        margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 8.0),
+        behavior: SnackBarBehavior.floating,
+        content: const Text('Your account was successfully created'),
+        duration: const Duration(seconds: 2),
       );
 
       ScaffoldMessenger.of(context).showSnackBar(snackBarAccountCreationSuccess);
@@ -38,75 +40,73 @@ class _PasswordPageState extends State<PasswordPage> with DialogMixin, Separator
         title: const Text('Password'),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            child: Builder(
-              builder: (BuildContext context) {
-                return SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      CircleAvatar(
-                        radius: 60,
-                        backgroundColor: Colors.transparent,
-                        child: Icon(
-                          Icons.account_circle_outlined,
-                          size: 120,
-                          color: getCurrentTheme(context).scaffoldBackgroundColor,
-                        ),
+        child: Form(
+          child: Builder(
+            builder: (BuildContext context) {
+              return SingleChildScrollView(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.transparent,
+                      child: Icon(
+                        Icons.account_circle_outlined,
+                        size: 120,
+                        color: getCurrentTheme(context).scaffoldBackgroundColor,
                       ),
-                      const SizedBox(height: 30),
-                      TextFormField(
-                        keyboardType: TextInputType.visiblePassword,
-                        obscureText: _hidePassword,
-                        decoration: InputDecoration(
-                          icon: const Icon(Icons.vpn_key_outlined),
-                          suffix: GestureDetector(
-                            child: _hidePassword
-                                ? const Icon(Icons.remove_red_eye_rounded)
-                                : const Icon(Icons.remove_red_eye_outlined),
-                            onTap: () {
-                              setState(() {
-                                _hidePassword = !_hidePassword;
-                              });
-                            },
-                          ),
-                          hintText: 'Password',
+                    ),
+                    const SizedBox(height: 30),
+                    TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: _hidePassword,
+                      decoration: InputDecoration(
+                        icon: const Icon(Icons.vpn_key_outlined),
+                        suffix: GestureDetector(
+                          child: _hidePassword
+                              ? const Icon(Icons.remove_red_eye_rounded)
+                              : const Icon(Icons.remove_red_eye_outlined),
+                          onTap: () {
+                            setState(() {
+                              _hidePassword = !_hidePassword;
+                            });
+                          },
                         ),
-                        onChanged: (String value) {
-                          StoreProvider.of<AppState>(context).dispatch(UpdateRegistrationInfo(password: value));
-                        },
-                        validator: (String value) {
-                          if (value.length < 6) {
-                            return 'Please choose a better password';
-                          }
+                        hintText: 'Password',
+                      ),
+                      onChanged: (String value) {
+                        StoreProvider.of<AppState>(context).dispatch(UpdateRegistrationInfo(password: value));
+                      },
+                      validator: (String value) {
+                        if (value.length < 6) {
+                          return 'Please choose a better password';
+                        }
 
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 64),
-                      ElevatedButton(
-                        child: const Text('Sign Up'),
-                        onPressed: () {
-                          if (Form.of(context).validate()) {
-                            StoreProvider.of<AppState>(context).dispatch(Signup((AppAction action) {
-                              _response(context, action);
-                            }));
-                          }
-                        },
-                      ),
-                      orDivider(context),
-                      TextButton(
-                        child: const Text('Go to Log In'),
-                        onPressed: () {
-                          Navigator.popUntil(context, ModalRoute.withName(AppRoutes.account_home));
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 64),
+                    ElevatedButton(
+                      child: const Text('Sign Up'),
+                      onPressed: () {
+                        if (Form.of(context).validate()) {
+                          StoreProvider.of<AppState>(context).dispatch(Signup((AppAction action) {
+                            _response(context, action);
+                          }));
+                        }
+                      },
+                    ),
+                    orDivider(context),
+                    TextButton(
+                      child: const Text('Go to Log In'),
+                      onPressed: () {
+                        Navigator.popUntil(context, ModalRoute.withName(AppRoutes.account_home));
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ),

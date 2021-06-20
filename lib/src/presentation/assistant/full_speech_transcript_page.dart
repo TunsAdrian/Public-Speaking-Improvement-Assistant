@@ -35,43 +35,39 @@ class DetailedSpeechResultPage extends StatelessWidget {
               ),
             ],
           ),
-          body: Padding(
+          body: SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
-            child: Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Visibility(
-                      visible: speechResult.speechName != null,
-                      child: Center(
-                        child: Container(
-                          padding: const EdgeInsets.only(bottom: 30),
-                          child: Text(
-                            speechResult.speechName ?? '',
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Visibility(
+                  visible: speechResult.speechName != null,
+                  child: Center(
+                    child: Container(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: Text(
+                        speechResult.speechName ?? '',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headline4,
                       ),
                     ),
-                    SubstringHighlight(
-                      text: speechResult.speechWords.toList().join(' '),
-                      terms: speechResult.speechFillerWords.toList(),
-                      textStyle: TextStyle(
-                        fontSize: 24.0,
-                        color: Theme.of(context).textTheme.bodyText1.color,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      textStyleHighlight: const TextStyle(
-                        fontSize: 24.0,
-                        color: Colors.red,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                SubstringHighlight(
+                  text: speechResult.speechWords.toList().join(' '),
+                  terms: speechResult.speechFillerWords.toList(),
+                  textStyle: TextStyle(
+                    fontSize: 24.0,
+                    color: Theme.of(context).textTheme.bodyText1.color,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  textStyleHighlight: const TextStyle(
+                    fontSize: 24.0,
+                    color: Colors.red,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
             ),
           ),
         );

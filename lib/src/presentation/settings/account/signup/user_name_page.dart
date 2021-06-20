@@ -17,79 +17,77 @@ class UserNamePage extends StatelessWidget with SeparatorMixin, CurrentThemeMixi
         title: const Text('Your name'),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            child: Builder(
-              builder: (BuildContext context) {
-                return SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      CircleAvatar(
-                        radius: 60,
-                        backgroundColor: Colors.transparent,
-                        child: Icon(
-                          Icons.account_circle_outlined,
-                          size: 120,
-                          color: getCurrentTheme(context).scaffoldBackgroundColor,
-                        ),
+        child: Form(
+          child: Builder(
+            builder: (BuildContext context) {
+              return SingleChildScrollView(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.transparent,
+                      child: Icon(
+                        Icons.account_circle_outlined,
+                        size: 120,
+                        color: getCurrentTheme(context).scaffoldBackgroundColor,
                       ),
-                      const SizedBox(height: 30),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: 'First Name',
-                        ),
-                        keyboardType: TextInputType.name,
-                        textCapitalization: TextCapitalization.words,
-                        onChanged: (String value) {
-                          StoreProvider.of<AppState>(context).dispatch(UpdateRegistrationInfo(firstName: value.trim()));
-                        },
-                        validator: (String value) {
-                          if (value.length < 3) {
-                            return 'Please input a longer first name';
-                          }
+                    ),
+                    const SizedBox(height: 30),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: 'First Name',
+                      ),
+                      keyboardType: TextInputType.name,
+                      textCapitalization: TextCapitalization.words,
+                      onChanged: (String value) {
+                        StoreProvider.of<AppState>(context).dispatch(UpdateRegistrationInfo(firstName: value.trim()));
+                      },
+                      validator: (String value) {
+                        if (value.length < 3) {
+                          return 'Please input a longer first name';
+                        }
 
-                          return null;
-                        },
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: 'Last Name',
                       ),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: 'Last Name',
-                        ),
-                        keyboardType: TextInputType.name,
-                        textCapitalization: TextCapitalization.words,
-                        onChanged: (String value) {
-                          StoreProvider.of<AppState>(context).dispatch(UpdateRegistrationInfo(lastName: value.trim()));
-                        },
-                        validator: (String value) {
-                          if (value.length < 3) {
-                            return 'Please input a longer last name';
-                          }
+                      keyboardType: TextInputType.name,
+                      textCapitalization: TextCapitalization.words,
+                      onChanged: (String value) {
+                        StoreProvider.of<AppState>(context).dispatch(UpdateRegistrationInfo(lastName: value.trim()));
+                      },
+                      validator: (String value) {
+                        if (value.length < 3) {
+                          return 'Please input a longer last name';
+                        }
 
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 64),
-                      ElevatedButton(
-                        child: const Text('Continue'),
-                        onPressed: () {
-                          if (Form.of(context).validate()) {
-                            Navigator.pushNamed(context, AppRoutes.password);
-                          }
-                        },
-                      ),
-                      orDivider(context),
-                      TextButton(
-                        child: const Text('Go to Log In'),
-                        onPressed: () {
-                          Navigator.popUntil(context, ModalRoute.withName(AppRoutes.account_home));
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 64),
+                    ElevatedButton(
+                      child: const Text('Continue'),
+                      onPressed: () {
+                        if (Form.of(context).validate()) {
+                          Navigator.pushNamed(context, AppRoutes.password);
+                        }
+                      },
+                    ),
+                    orDivider(context),
+                    TextButton(
+                      child: const Text('Go to Log In'),
+                      onPressed: () {
+                        Navigator.popUntil(context, ModalRoute.withName(AppRoutes.account_home));
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ),

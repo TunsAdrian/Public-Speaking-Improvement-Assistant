@@ -37,66 +37,64 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> with DialogMixin,
           title: const Text('Reset password'),
         ),
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              child: Builder(
-                builder: (BuildContext context) {
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        CircleAvatar(
-                          radius: 60,
-                          backgroundColor: Colors.transparent,
-                          child: Icon(
-                            Icons.account_circle_outlined,
-                            size: 120,
-                            color: getCurrentTheme(context).scaffoldBackgroundColor,
-                          ),
+          child: Form(
+            child: Builder(
+              builder: (BuildContext context) {
+                return SingleChildScrollView(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: <Widget>[
+                      CircleAvatar(
+                        radius: 60,
+                        backgroundColor: Colors.transparent,
+                        child: Icon(
+                          Icons.account_circle_outlined,
+                          size: 120,
+                          color: getCurrentTheme(context).scaffoldBackgroundColor,
                         ),
-                        const SizedBox(height: 30),
-                        TextFormField(
-                          controller: _email,
-                          decoration: const InputDecoration(
-                            icon: Icon(Icons.email_outlined),
-                            hintText: 'Email',
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                          onChanged: (String value) {},
-                          validator: (String value) {
-                            if (!value.contains('@') || !value.contains('.')) {
-                              return 'Please enter a valid email address';
-                            }
+                      ),
+                      const SizedBox(height: 30),
+                      TextFormField(
+                        controller: _email,
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.email_outlined),
+                          hintText: 'Email',
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: (String value) {},
+                        validator: (String value) {
+                          if (!value.contains('@') || !value.contains('.')) {
+                            return 'Please enter a valid email address';
+                          }
 
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 64),
-                        ElevatedButton(
-                          child: const Text('Reset Password'),
-                          onPressed: () {
-                            if (Form.of(context).validate()) {
-                              StoreProvider.of<AppState>(context).dispatch(ResetPassword(
-                                (AppAction action) {
-                                  _response(context, action);
-                                },
-                                email: _email.text,
-                              ));
-                            }
-                          },
-                        ),
-                        orDivider(context),
-                        TextButton(
-                          child: const Text('Sign Up'),
-                          onPressed: () {
-                            Navigator.pushNamed(context, AppRoutes.signup);
-                          },
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 64),
+                      ElevatedButton(
+                        child: const Text('Reset Password'),
+                        onPressed: () {
+                          if (Form.of(context).validate()) {
+                            StoreProvider.of<AppState>(context).dispatch(ResetPassword(
+                              (AppAction action) {
+                                _response(context, action);
+                              },
+                              email: _email.text,
+                            ));
+                          }
+                        },
+                      ),
+                      orDivider(context),
+                      TextButton(
+                        child: const Text('Sign Up'),
+                        onPressed: () {
+                          Navigator.pushNamed(context, AppRoutes.signup);
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           ),
         ),
