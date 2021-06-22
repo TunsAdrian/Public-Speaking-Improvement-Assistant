@@ -24,138 +24,132 @@ class _AppearancePageState extends State<AppearancePage> {
         final Color textButtonColor = settingsBox.get('textButtonColor', defaultValue: Colors.deepPurpleAccent);
         final Color elevatedButtonColor = settingsBox.get('elevatedButtonColor', defaultValue: Colors.deepPurple);
         final Color floatingButtonColor = settingsBox.get('floatingButtonColor', defaultValue: Colors.deepPurple);
-        final Color toggleableActiveColor = settingsBox.get('toggleableActiveColor', defaultValue: Colors.teal);
+        final Color toggleableActiveColor =
+            settingsBox.get('toggleableActiveColor', defaultValue: Colors.deepPurpleAccent[100]);
 
         return Scaffold(
           appBar: AppBar(
             title: const Text('Appearance'),
           ),
-          body: Column(
-            children: <Widget>[
-              Expanded(
-                child: Center(
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: <Widget>[
-                      ListTile(
-                        title: const Text('Dark Theme'),
-                        trailing: Switch(
-                          value: darkMode,
-                          onChanged: (bool value) {
-                            settingsBox.put('darkMode', !darkMode);
-                          },
-                        ),
-                      ),
-                      const Divider(thickness: 1),
-                      ListTile(
-                        title: const Text('Primary Color'),
-                        trailing: ColorIndicator(
-                          hasBorder: true,
-                          borderRadius: 22,
-                          color: primaryColor,
-                          onSelect: () async {
-                            final Color colorBeforeDialog = primaryColor;
-                            if (!(await _showColorPickerDialog(primaryColor, 'primaryColor', settingsBox))) {
-                              setState(() {
-                                settingsBox.put('primaryColor', colorBeforeDialog);
-                              });
-                            }
-                          },
-                        ),
-                      ),
-                      const Divider(thickness: 1),
-                      ListTile(
-                        title: const Text('Accent Color'),
-                        trailing: ColorIndicator(
-                          hasBorder: true,
-                          borderRadius: 22,
-                          color: accentColor,
-                          onSelect: () async {
-                            final Color colorBeforeDialog = accentColor;
-                            if (!(await _showColorPickerDialog(accentColor, 'accentColor', settingsBox))) {
-                              setState(() {
-                                settingsBox.put('accentColor', colorBeforeDialog);
-                              });
-                            }
-                          },
-                        ),
-                      ),
-                      const Divider(thickness: 1),
-                      ListTile(
-                        title: const Text('Toggle Color'),
-                        trailing: ColorIndicator(
-                          hasBorder: true,
-                          borderRadius: 22,
-                          color: toggleableActiveColor,
-                          onSelect: () async {
-                            final Color colorBeforeDialog = toggleableActiveColor;
-                            if (!(await _showColorPickerDialog(
-                                toggleableActiveColor, 'toggleableActiveColor', settingsBox))) {
-                              setState(() {
-                                settingsBox.put('toggleableActiveColor', colorBeforeDialog);
-                              });
-                            }
-                          },
-                        ),
-                      ),
-                      const Divider(thickness: 1),
-                      ListTile(
-                        title: const Text('Text Button Color'),
-                        trailing: ColorIndicator(
-                          hasBorder: true,
-                          borderRadius: 22,
-                          color: textButtonColor,
-                          onSelect: () async {
-                            final Color colorBeforeDialog = textButtonColor;
-                            if (!(await _showColorPickerDialog(textButtonColor, 'textButtonColor', settingsBox))) {
-                              setState(() {
-                                settingsBox.put('textButtonColor', colorBeforeDialog);
-                              });
-                            }
-                          },
-                        ),
-                      ),
-                      const Divider(thickness: 1),
-                      ListTile(
-                        title: const Text('Elevated Button Color'),
-                        trailing: ColorIndicator(
-                          hasBorder: true,
-                          borderRadius: 22,
-                          color: elevatedButtonColor,
-                          onSelect: () async {
-                            final Color colorBeforeDialog = elevatedButtonColor;
-                            if (!(await _showColorPickerDialog(
-                                elevatedButtonColor, 'elevatedButtonColor', settingsBox))) {
-                              setState(() {
-                                settingsBox.put('elevatedButtonColor', colorBeforeDialog);
-                              });
-                            }
-                          },
-                        ),
-                      ),
-                      const Divider(thickness: 1),
-                      ListTile(
-                        title: const Text('Floating Button Color'),
-                        trailing: ColorIndicator(
-                          hasBorder: true,
-                          borderRadius: 22,
-                          color: floatingButtonColor,
-                          onSelect: () async {
-                            final Color colorBeforeDialog = floatingButtonColor;
-                            if (!(await _showColorPickerDialog(
-                                floatingButtonColor, 'floatingButtonColor', settingsBox))) {
-                              setState(() {
-                                settingsBox.put('floatingButtonColor', colorBeforeDialog);
-                              });
-                            }
-                          },
-                        ),
-                      ),
-                    ],
+          body: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    title: const Text('Dark Theme'),
+                    trailing: Switch(
+                      value: darkMode,
+                      onChanged: (bool value) {
+                        settingsBox.put('darkMode', !darkMode);
+                      },
+                    ),
                   ),
-                ),
+                  const Divider(thickness: 1),
+                  ListTile(
+                    title: const Text('Primary Color'),
+                    trailing: ColorIndicator(
+                      hasBorder: true,
+                      borderRadius: 22,
+                      color: primaryColor,
+                      onSelect: () async {
+                        final Color colorBeforeDialog = primaryColor;
+                        if (!(await _showColorPickerDialog(primaryColor, 'primaryColor', settingsBox))) {
+                          setState(() {
+                            settingsBox.put('primaryColor', colorBeforeDialog);
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                  const Divider(thickness: 1),
+                  ListTile(
+                    title: const Text('Accent Color'),
+                    trailing: ColorIndicator(
+                      hasBorder: true,
+                      borderRadius: 22,
+                      color: accentColor,
+                      onSelect: () async {
+                        final Color colorBeforeDialog = accentColor;
+                        if (!(await _showColorPickerDialog(accentColor, 'accentColor', settingsBox))) {
+                          setState(() {
+                            settingsBox.put('accentColor', colorBeforeDialog);
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                  const Divider(thickness: 1),
+                  ListTile(
+                    title: const Text('Toggle Color'),
+                    trailing: ColorIndicator(
+                      hasBorder: true,
+                      borderRadius: 22,
+                      color: toggleableActiveColor,
+                      onSelect: () async {
+                        final Color colorBeforeDialog = toggleableActiveColor;
+                        if (!(await _showColorPickerDialog(
+                            toggleableActiveColor, 'toggleableActiveColor', settingsBox))) {
+                          setState(() {
+                            settingsBox.put('toggleableActiveColor', colorBeforeDialog);
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                  const Divider(thickness: 1),
+                  ListTile(
+                    title: const Text('Text Button Color'),
+                    trailing: ColorIndicator(
+                      hasBorder: true,
+                      borderRadius: 22,
+                      color: textButtonColor,
+                      onSelect: () async {
+                        final Color colorBeforeDialog = textButtonColor;
+                        if (!(await _showColorPickerDialog(textButtonColor, 'textButtonColor', settingsBox))) {
+                          setState(() {
+                            settingsBox.put('textButtonColor', colorBeforeDialog);
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                  const Divider(thickness: 1),
+                  ListTile(
+                    title: const Text('Elevated Button Color'),
+                    trailing: ColorIndicator(
+                      hasBorder: true,
+                      borderRadius: 22,
+                      color: elevatedButtonColor,
+                      onSelect: () async {
+                        final Color colorBeforeDialog = elevatedButtonColor;
+                        if (!(await _showColorPickerDialog(elevatedButtonColor, 'elevatedButtonColor', settingsBox))) {
+                          setState(() {
+                            settingsBox.put('elevatedButtonColor', colorBeforeDialog);
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                  const Divider(thickness: 1),
+                  ListTile(
+                    title: const Text('Floating Button Color'),
+                    trailing: ColorIndicator(
+                      hasBorder: true,
+                      borderRadius: 22,
+                      color: floatingButtonColor,
+                      onSelect: () async {
+                        final Color colorBeforeDialog = floatingButtonColor;
+                        if (!(await _showColorPickerDialog(floatingButtonColor, 'floatingButtonColor', settingsBox))) {
+                          setState(() {
+                            settingsBox.put('floatingButtonColor', colorBeforeDialog);
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         );
       },

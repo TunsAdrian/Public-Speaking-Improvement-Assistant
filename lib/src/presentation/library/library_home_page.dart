@@ -4,6 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/containers/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
+import 'package:public_speaking_assistant/src/presentation/mixin/align_leading_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
 
 class LibraryHomePage extends StatefulWidget {
@@ -13,7 +14,7 @@ class LibraryHomePage extends StatefulWidget {
   _LibraryHomePageState createState() => _LibraryHomePageState();
 }
 
-class _LibraryHomePageState extends State<LibraryHomePage> {
+class _LibraryHomePageState extends State<LibraryHomePage> with AlignLeadingMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -88,7 +89,7 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
                                   },
                                   child: Card(
                                     child: ListTile(
-                                      leading: const Icon(Icons.record_voice_over_outlined),
+                                      leading: alignedLeading(const Icon(Icons.record_voice_over_outlined)),
                                       title: Text(
                                         speechResult.speechName,
                                         overflow: TextOverflow.ellipsis,

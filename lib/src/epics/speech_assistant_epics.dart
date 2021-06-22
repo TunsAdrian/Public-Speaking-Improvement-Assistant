@@ -52,7 +52,7 @@ class SpeechAssistantEpics {
         .flatMap((ListenForInternetStatus$ action) => _api
             .listenInternetStatus()
             .map((bool hasInternetConnection) => ListenForInternetStatus.successful(hasInternetConnection))
-            .takeUntil(actions.whereType<StopListeningForInternetStatus>()) // close the stream on this action
+            .takeUntil(actions.whereType<StopListeningForInternetStatus$>()) // close the stream on this action
             .onErrorReturnWith((dynamic error) => ListenForInternetStatus.error(error)));
   }
 
@@ -62,7 +62,7 @@ class SpeechAssistantEpics {
         .flatMap((ListenForSpeech$ action) => _api
             .listenForSpeech(action.languageCode, action.serviceAccount)
             .map((String recognizedText) => ListenForSpeech.successful(recognizedText))
-            .takeUntil(actions.whereType<StopListeningForSpeech>()) // close the stream on this action
+            .takeUntil(actions.whereType<StopListeningForSpeech$>()) // close the stream on this action
             .onErrorReturnWith((dynamic error) => ListenForSpeech.error(error)));
   }
 }

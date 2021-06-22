@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/containers/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
+import 'package:public_speaking_assistant/src/presentation/mixin/align_leading_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
 
 class SpeechResultPage extends StatefulWidget {
@@ -12,7 +13,7 @@ class SpeechResultPage extends StatefulWidget {
   _SpeechResultPageState createState() => _SpeechResultPageState();
 }
 
-class _SpeechResultPageState extends State<SpeechResultPage> {
+class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMixin {
   final TextEditingController _speechNameTextController = TextEditingController();
   final GlobalKey<FormState> _speechNameFormKey = GlobalKey<FormState>();
   bool _tileEnabled = true;
@@ -52,7 +53,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                     children: <Widget>[
                       ListTile(
                         minLeadingWidth: 75.0,
-                        leading: const Text('Title'),
+                        leading: alignedLeading(const Text('Title')),
                         title: Text(speechResult?.speechName ?? '-'),
                         trailing: const Icon(Icons.text_fields_outlined),
                         enabled: _tileEnabled,
@@ -63,35 +64,35 @@ class _SpeechResultPageState extends State<SpeechResultPage> {
                       const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
-                        leading: const Text('Time'),
+                        leading: alignedLeading(const Text('Time')),
                         title: Text(speechResult.speechDuration.toString().substring(2, 7)),
                         enabled: _tileEnabled,
                       ),
                       const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
-                        leading: const Text('Pace'),
+                        leading: alignedLeading(const Text('Pace')),
                         title: Text('${speechResult.wordsPerMinute.round()} words/min'),
                         enabled: _tileEnabled,
                       ),
+                      // const Divider(thickness: 1),
+                      // ListTile(
+                      //   minLeadingWidth: 75.0,
+                      //   leading: alignedLeading(const Text('Clarity')),
+                      //   title: Text('${(speechResult.speechClarity * 100.0).toStringAsFixed(1)}%'),
+                      //   enabled: _tileEnabled,
+                      // ),
                       const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
-                        leading: const Text('Clarity'),
-                        title: Text('${(speechResult.speechClarity * 100.0).toStringAsFixed(1)}%'),
-                        enabled: _tileEnabled,
-                      ),
-                      const Divider(thickness: 1),
-                      ListTile(
-                        minLeadingWidth: 75.0,
-                        leading: const Text('All Words'),
+                        leading: alignedLeading(const Text('All Words')),
                         title: Text('${speechResult.speechWords.length} words'),
                         enabled: _tileEnabled,
                       ),
                       const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
-                        leading: const Text('Filler Words'),
+                        leading: alignedLeading(const Text('Filler Words')),
                         title: Text('${speechResult.speechFillerWords.length}'),
                         enabled: _tileEnabled,
                       ),

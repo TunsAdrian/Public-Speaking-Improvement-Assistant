@@ -23,6 +23,7 @@ Future<Store<AppState>> init() async {
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
   final Box<String> fillerWordsBox = await Hive.openBox<String>('fillerWords');
   final Box<HiveSpeechResult> speechResultsBox = await Hive.openBox<HiveSpeechResult>('speechResults');
   final Uuid uuidInstance = Uuid();
@@ -32,7 +33,7 @@ Future<Store<AppState>> init() async {
   final AuthApi authApi = AuthApi(
     auth: auth,
     firestore: firestore,
-    google: GoogleSignIn(),
+    google: googleSignIn,
   );
 
   final FillerWordsApi fillerWordsApi = FillerWordsApi(

@@ -50,7 +50,8 @@ class _PublicSpeakingAssistantState extends State<PublicSpeakingAssistant> with 
                     settingsBox.get('elevatedButtonColor', defaultValue: Colors.deepPurple);
                 final Color floatingButtonColor =
                     settingsBox.get('floatingButtonColor', defaultValue: Colors.deepPurple);
-                final Color toggleableActiveColor = settingsBox.get('toggleableActiveColor', defaultValue: Colors.teal);
+                final Color toggleableActiveColor =
+                    settingsBox.get('toggleableActiveColor', defaultValue: Colors.deepPurpleAccent[100]);
 
                 return MaterialApp(
                   themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,

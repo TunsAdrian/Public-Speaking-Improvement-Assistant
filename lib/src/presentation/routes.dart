@@ -4,7 +4,6 @@ import 'package:public_speaking_assistant/src/presentation/assistant/speech_reco
 import 'package:public_speaking_assistant/src/presentation/home.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/recording_page.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/filler_words/set_filler_words_page.dart';
-import 'package:public_speaking_assistant/src/presentation/settings/about/about_page.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/account_home_page.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/login/reset_password_page.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/signup/password_page.dart';
@@ -31,7 +30,6 @@ class AppRoutes {
   static const String terms_and_conditions = '/terms_and_conditions';
   static const String privacy_policy = '/privacy';
   static const String help = '/help';
-  static const String about = '/about';
 
   // user account routes
   static const String signup = '/signup';
@@ -73,9 +71,6 @@ class AppRoutes {
     },
     help: (BuildContext context) {
       return const HelpPage();
-    },
-    about: (BuildContext context) {
-      return const AboutPage();
     },
 
     // user account routes

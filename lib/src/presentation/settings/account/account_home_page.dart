@@ -4,6 +4,7 @@ import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/containers/auth/index.dart';
 import 'package:public_speaking_assistant/src/models/auth/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
+import 'package:public_speaking_assistant/src/presentation/mixin/align_leading_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/current_theme_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/dialog_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/login/login_page.dart';
@@ -15,7 +16,7 @@ class AccountHomePage extends StatefulWidget {
   _AccountHomePageState createState() => _AccountHomePageState();
 }
 
-class _AccountHomePageState extends State<AccountHomePage> with DialogMixin, CurrentThemeMixin {
+class _AccountHomePageState extends State<AccountHomePage> with DialogMixin, CurrentThemeMixin, AlignLeadingMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Future<void> _response(AppAction action) async {
@@ -138,7 +139,7 @@ class _AccountHomePageState extends State<AccountHomePage> with DialogMixin, Cur
                         const SizedBox(height: 30),
                         ListTile(
                           minLeadingWidth: 110.0,
-                          leading: const Text('First Name'),
+                          leading: alignedLeading(const Text('First Name')),
                           title: Text(
                             user.firstName,
                           ),
@@ -146,7 +147,7 @@ class _AccountHomePageState extends State<AccountHomePage> with DialogMixin, Cur
                         const Divider(thickness: 1),
                         ListTile(
                           minLeadingWidth: 110.0,
-                          leading: const Text('Last Name'),
+                          leading: alignedLeading(const Text('Last Name')),
                           title: Text(
                             user.lastName,
                           ),
@@ -154,7 +155,7 @@ class _AccountHomePageState extends State<AccountHomePage> with DialogMixin, Cur
                         const Divider(thickness: 1),
                         ListTile(
                           minLeadingWidth: 110.0,
-                          leading: const Text('E-mail Address'),
+                          leading: alignedLeading(const Text('E-mail Address')),
                           title: Text(
                             user.email,
                           ),
