@@ -62,7 +62,7 @@ class _PasswordPageState extends State<PasswordPage> with DialogMixin, Separator
                       obscureText: _hidePassword,
                       decoration: InputDecoration(
                         icon: const Icon(Icons.vpn_key_outlined),
-                        suffix: GestureDetector(
+                        suffixIcon: GestureDetector(
                           child: _hidePassword
                               ? const Icon(Icons.remove_red_eye_rounded)
                               : const Icon(Icons.remove_red_eye_outlined),

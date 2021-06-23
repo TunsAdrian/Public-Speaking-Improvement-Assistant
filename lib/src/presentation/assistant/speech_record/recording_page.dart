@@ -100,79 +100,75 @@ class _RecordingPageState extends State<RecordingPage> {
                       ),
                     ],
                   ),
-                  body: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Visibility(
-                        visible: !_isListening,
-                        child: ListTile(
-                          title: Text(
-                            '$_selectedSpeechLanguage is the currently selected language',
-                            textAlign: TextAlign.start,
-                          ),
-                        ),
-                      ),
-                      Visibility(
-                        visible: _recognizedText.isEmpty,
-                        child: Center(
-                          child: Container(
-                            padding: const EdgeInsets.all(16),
-                            child: const Text(
-                              'Press the button and start speaking...',
-                              style: TextStyle(fontSize: 24.0),
-                              textAlign: TextAlign.center,
+                  body: SingleChildScrollView(
+                    padding: const EdgeInsets.only(bottom: 150.0),
+                    reverse: true,
+                    child: Column(
+                      children: <Widget>[
+                        Visibility(
+                          visible: !_isListening,
+                          child: ListTile(
+                            title: Text(
+                              '$_selectedSpeechLanguage is the currently selected language',
+                              textAlign: TextAlign.start,
                             ),
                           ),
                         ),
-                      ),
-                      Visibility(
-                        visible: !_hasInternetConnection,
-                        child: Center(
-                          child: Container(
-                            padding: const EdgeInsets.all(16),
-                            child: RichText(
-                              text: TextSpan(
-                                style: const TextStyle(
-                                  fontSize: 24.0,
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold,
+                        Visibility(
+                          visible: _recognizedText.isEmpty,
+                          child: Center(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 16.0),
+                              child: const Text(
+                                'Press the button and start speaking...',
+                                style: TextStyle(fontSize: 24.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Visibility(
+                          visible: !_hasInternetConnection,
+                          child: Center(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 16.0),
+                              child: RichText(
+                                text: TextSpan(
+                                  style: const TextStyle(
+                                    fontSize: 24.0,
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  text: 'Internet connection lost...',
+                                  children: <TextSpan>[
+                                    if (_isListening) const TextSpan(text: '\nPlease stop your recording')
+                                  ],
                                 ),
-                                text: 'Internet connection lost...',
-                                children: <TextSpan>[
-                                  if (_isListening) const TextSpan(text: '\nPlease stop your recording')
-                                ],
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Visibility(
-                          visible: _recognizedText.isNotEmpty,
-                          child: SingleChildScrollView(
-                            reverse: true,
-                            padding: const EdgeInsets.all(30).copyWith(bottom: 170),
-                            // todo: change this mechanism: send the fillerWords only once
-                            child: SubstringHighlight(
-                              text: _recognizedText,
-                              terms: fillerWords,
-                              textStyle: TextStyle(
-                                fontSize: 24.0,
-                                color: Theme.of(context).textTheme.bodyText1.color,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              textStyleHighlight: const TextStyle(
-                                fontSize: 24.0,
-                                color: Colors.red,
-                                fontWeight: FontWeight.w400,
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                        // todo: change this mechanism: send the fillerWords only once
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: SubstringHighlight(
+                            text: _recognizedText,
+                            terms: fillerWords,
+                            textStyle: TextStyle(
+                              fontSize: 24.0,
+                              color: Theme.of(context).textTheme.bodyText1.color,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            textStyleHighlight: const TextStyle(
+                              fontSize: 24.0,
+                              color: Colors.red,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
                   floatingActionButton: AvatarGlow(
