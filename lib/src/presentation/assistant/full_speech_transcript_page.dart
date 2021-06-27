@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:public_speaking_assistant/src/containers/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
-import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/substring_highlight.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
+import 'package:public_speaking_assistant/src/presentation/mixin/display_speech_word_mixin.dart';
 
-class DetailedSpeechResultPage extends StatelessWidget {
+class DetailedSpeechResultPage extends StatelessWidget with DisplaySpeechWordMixin {
   const DetailedSpeechResultPage({Key key}) : super(key: key);
 
   @override
@@ -53,18 +53,12 @@ class DetailedSpeechResultPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SubstringHighlight(
-                  text: speechResult.speechWords.toList().join(' '),
-                  terms: speechResult.speechFillerWords.toList(),
-                  textStyle: TextStyle(
-                    fontSize: 24.0,
-                    color: Theme.of(context).textTheme.bodyText1.color,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  textStyleHighlight: const TextStyle(
-                    fontSize: 24.0,
-                    color: Colors.red,
-                    fontWeight: FontWeight.w400,
+                RichText(
+                  text: TextSpan(
+                    children: <InlineSpan>[
+                      for (SpeechWord word in speechResult.speechWords)
+                        displaySpeechWord(word, Theme.of(context).textTheme.bodyText1.color),
+                    ],
                   ),
                 ),
               ],

@@ -4,6 +4,7 @@ import 'package:public_speaking_assistant/src/data/speech_assistant_api.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:redux_epics/redux_epics.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tuple/tuple.dart';
 
 class SpeechAssistantEpics {
   const SpeechAssistantEpics({@required SpeechAssistantApi api})
@@ -60,8 +61,15 @@ class SpeechAssistantEpics {
     return actions //
         .whereType<ListenForSpeech$>()
         .flatMap((ListenForSpeech$ action) => _api
-            .listenForSpeech(action.languageCode, action.serviceAccount)
-            .map((String recognizedText) => ListenForSpeech.successful(recognizedText))
+            .listenForSpeech(action.languageCode, action.serviceAccount, store.state.fillerWords.fillerWords.toList())
+            .map((Tuple2<List<SpeechWord>, bool> recognizedTextTuple) {
+              // if the recognized text is marked as final, send it to successful constructor; otherwise, to the partial one
+              if (recognizedTextTuple.item2) {
+                return ListenForSpeech.successful(recognizedTextTuple.item1);
+              } else {
+                return ListenForSpeech.partial(recognizedTextTuple.item1);
+              }
+            })
             .takeUntil(actions.whereType<StopListeningForSpeech$>()) // close the stream on this action
             .onErrorReturnWith((dynamic error) => ListenForSpeech.error(error)));
   }

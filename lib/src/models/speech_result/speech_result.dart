@@ -18,9 +18,7 @@ abstract class SpeechResult implements Built<SpeechResult, SpeechResultBuilder> 
 
   double get wordsPerMinute;
 
-  BuiltList<String> get speechWords;
-
-  BuiltList<String> get speechFillerWords;
+  BuiltList<SpeechWord> get speechWords;
 
   Map<String, dynamic> get json => serializers.serializeWith(serializer, this) as Map<String, dynamic>;
 

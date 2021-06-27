@@ -95,7 +95,7 @@ class _LibraryHomePageState extends State<LibraryHomePage> with AlignLeadingMixi
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       subtitle: Text(
-                                        speechResult.speechWords.take(20).join(' '),
+                                        speechResult.speechWords.map((SpeechWord word) => word.text).take(20).join(''),
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       trailing: IconButton(

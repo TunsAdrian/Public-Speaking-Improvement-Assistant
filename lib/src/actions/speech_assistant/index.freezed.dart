@@ -543,8 +543,15 @@ class _$ListenForSpeechTearOff {
   }
 
 // ignore: unused_element
-  ListenForSpeechSuccessful successful(String recognizedText) {
+  ListenForSpeechSuccessful successful(List<SpeechWord> recognizedText) {
     return ListenForSpeechSuccessful(
+      recognizedText,
+    );
+  }
+
+// ignore: unused_element
+  ListenForSpeechPartial partial(List<SpeechWord> recognizedText) {
+    return ListenForSpeechPartial(
       recognizedText,
     );
   }
@@ -566,13 +573,15 @@ mixin _$ListenForSpeech {
   @optionalTypeArgs
   Result when<Result extends Object>(
     Result $default(String languageCode, String serviceAccount), {
-    @required Result successful(String recognizedText),
+    @required Result successful(List<SpeechWord> recognizedText),
+    @required Result partial(List<SpeechWord> recognizedText),
     @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(String languageCode, String serviceAccount), {
-    Result successful(String recognizedText),
+    Result successful(List<SpeechWord> recognizedText),
+    Result partial(List<SpeechWord> recognizedText),
     Result error(Object error),
     @required Result orElse(),
   });
@@ -580,12 +589,14 @@ mixin _$ListenForSpeech {
   Result map<Result extends Object>(
     Result $default(ListenForSpeech$ value), {
     @required Result successful(ListenForSpeechSuccessful value),
+    @required Result partial(ListenForSpeechPartial value),
     @required Result error(ListenForSpeechError value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>(
     Result $default(ListenForSpeech$ value), {
     Result successful(ListenForSpeechSuccessful value),
+    Result partial(ListenForSpeechPartial value),
     Result error(ListenForSpeechError value),
     @required Result orElse(),
   });
@@ -686,11 +697,13 @@ class _$ListenForSpeech$ implements ListenForSpeech$ {
   @optionalTypeArgs
   Result when<Result extends Object>(
     Result $default(String languageCode, String serviceAccount), {
-    @required Result successful(String recognizedText),
+    @required Result successful(List<SpeechWord> recognizedText),
+    @required Result partial(List<SpeechWord> recognizedText),
     @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
+    assert(partial != null);
     assert(error != null);
     return $default(languageCode, serviceAccount);
   }
@@ -699,7 +712,8 @@ class _$ListenForSpeech$ implements ListenForSpeech$ {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(String languageCode, String serviceAccount), {
-    Result successful(String recognizedText),
+    Result successful(List<SpeechWord> recognizedText),
+    Result partial(List<SpeechWord> recognizedText),
     Result error(Object error),
     @required Result orElse(),
   }) {
@@ -715,10 +729,12 @@ class _$ListenForSpeech$ implements ListenForSpeech$ {
   Result map<Result extends Object>(
     Result $default(ListenForSpeech$ value), {
     @required Result successful(ListenForSpeechSuccessful value),
+    @required Result partial(ListenForSpeechPartial value),
     @required Result error(ListenForSpeechError value),
   }) {
     assert($default != null);
     assert(successful != null);
+    assert(partial != null);
     assert(error != null);
     return $default(this);
   }
@@ -728,6 +744,7 @@ class _$ListenForSpeech$ implements ListenForSpeech$ {
   Result maybeMap<Result extends Object>(
     Result $default(ListenForSpeech$ value), {
     Result successful(ListenForSpeechSuccessful value),
+    Result partial(ListenForSpeechPartial value),
     Result error(ListenForSpeechError value),
     @required Result orElse(),
   }) {
@@ -754,7 +771,7 @@ abstract class $ListenForSpeechSuccessfulCopyWith<$Res> {
   factory $ListenForSpeechSuccessfulCopyWith(ListenForSpeechSuccessful value,
           $Res Function(ListenForSpeechSuccessful) then) =
       _$ListenForSpeechSuccessfulCopyWithImpl<$Res>;
-  $Res call({String recognizedText});
+  $Res call({List<SpeechWord> recognizedText});
 }
 
 /// @nodoc
@@ -776,7 +793,7 @@ class _$ListenForSpeechSuccessfulCopyWithImpl<$Res>
     return _then(ListenForSpeechSuccessful(
       recognizedText == freezed
           ? _value.recognizedText
-          : recognizedText as String,
+          : recognizedText as List<SpeechWord>,
     ));
   }
 }
@@ -787,7 +804,7 @@ class _$ListenForSpeechSuccessful implements ListenForSpeechSuccessful {
       : assert(recognizedText != null);
 
   @override
-  final String recognizedText;
+  final List<SpeechWord> recognizedText;
 
   @override
   String toString() {
@@ -817,11 +834,13 @@ class _$ListenForSpeechSuccessful implements ListenForSpeechSuccessful {
   @optionalTypeArgs
   Result when<Result extends Object>(
     Result $default(String languageCode, String serviceAccount), {
-    @required Result successful(String recognizedText),
+    @required Result successful(List<SpeechWord> recognizedText),
+    @required Result partial(List<SpeechWord> recognizedText),
     @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
+    assert(partial != null);
     assert(error != null);
     return successful(recognizedText);
   }
@@ -830,7 +849,8 @@ class _$ListenForSpeechSuccessful implements ListenForSpeechSuccessful {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(String languageCode, String serviceAccount), {
-    Result successful(String recognizedText),
+    Result successful(List<SpeechWord> recognizedText),
+    Result partial(List<SpeechWord> recognizedText),
     Result error(Object error),
     @required Result orElse(),
   }) {
@@ -846,10 +866,12 @@ class _$ListenForSpeechSuccessful implements ListenForSpeechSuccessful {
   Result map<Result extends Object>(
     Result $default(ListenForSpeech$ value), {
     @required Result successful(ListenForSpeechSuccessful value),
+    @required Result partial(ListenForSpeechPartial value),
     @required Result error(ListenForSpeechError value),
   }) {
     assert($default != null);
     assert(successful != null);
+    assert(partial != null);
     assert(error != null);
     return successful(this);
   }
@@ -859,6 +881,7 @@ class _$ListenForSpeechSuccessful implements ListenForSpeechSuccessful {
   Result maybeMap<Result extends Object>(
     Result $default(ListenForSpeech$ value), {
     Result successful(ListenForSpeechSuccessful value),
+    Result partial(ListenForSpeechPartial value),
     Result error(ListenForSpeechError value),
     @required Result orElse(),
   }) {
@@ -871,11 +894,145 @@ class _$ListenForSpeechSuccessful implements ListenForSpeechSuccessful {
 }
 
 abstract class ListenForSpeechSuccessful implements ListenForSpeech {
-  const factory ListenForSpeechSuccessful(String recognizedText) =
+  const factory ListenForSpeechSuccessful(List<SpeechWord> recognizedText) =
       _$ListenForSpeechSuccessful;
 
-  String get recognizedText;
+  List<SpeechWord> get recognizedText;
   $ListenForSpeechSuccessfulCopyWith<ListenForSpeechSuccessful> get copyWith;
+}
+
+/// @nodoc
+abstract class $ListenForSpeechPartialCopyWith<$Res> {
+  factory $ListenForSpeechPartialCopyWith(ListenForSpeechPartial value,
+          $Res Function(ListenForSpeechPartial) then) =
+      _$ListenForSpeechPartialCopyWithImpl<$Res>;
+  $Res call({List<SpeechWord> recognizedText});
+}
+
+/// @nodoc
+class _$ListenForSpeechPartialCopyWithImpl<$Res>
+    extends _$ListenForSpeechCopyWithImpl<$Res>
+    implements $ListenForSpeechPartialCopyWith<$Res> {
+  _$ListenForSpeechPartialCopyWithImpl(ListenForSpeechPartial _value,
+      $Res Function(ListenForSpeechPartial) _then)
+      : super(_value, (v) => _then(v as ListenForSpeechPartial));
+
+  @override
+  ListenForSpeechPartial get _value => super._value as ListenForSpeechPartial;
+
+  @override
+  $Res call({
+    Object recognizedText = freezed,
+  }) {
+    return _then(ListenForSpeechPartial(
+      recognizedText == freezed
+          ? _value.recognizedText
+          : recognizedText as List<SpeechWord>,
+    ));
+  }
+}
+
+/// @nodoc
+class _$ListenForSpeechPartial implements ListenForSpeechPartial {
+  const _$ListenForSpeechPartial(this.recognizedText)
+      : assert(recognizedText != null);
+
+  @override
+  final List<SpeechWord> recognizedText;
+
+  @override
+  String toString() {
+    return 'ListenForSpeech.partial(recognizedText: $recognizedText)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ListenForSpeechPartial &&
+            (identical(other.recognizedText, recognizedText) ||
+                const DeepCollectionEquality()
+                    .equals(other.recognizedText, recognizedText)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(recognizedText);
+
+  @override
+  $ListenForSpeechPartialCopyWith<ListenForSpeechPartial> get copyWith =>
+      _$ListenForSpeechPartialCopyWithImpl<ListenForSpeechPartial>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>(
+    Result $default(String languageCode, String serviceAccount), {
+    @required Result successful(List<SpeechWord> recognizedText),
+    @required Result partial(List<SpeechWord> recognizedText),
+    @required Result error(Object error),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(partial != null);
+    assert(error != null);
+    return partial(recognizedText);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>(
+    Result $default(String languageCode, String serviceAccount), {
+    Result successful(List<SpeechWord> recognizedText),
+    Result partial(List<SpeechWord> recognizedText),
+    Result error(Object error),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (partial != null) {
+      return partial(recognizedText);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>(
+    Result $default(ListenForSpeech$ value), {
+    @required Result successful(ListenForSpeechSuccessful value),
+    @required Result partial(ListenForSpeechPartial value),
+    @required Result error(ListenForSpeechError value),
+  }) {
+    assert($default != null);
+    assert(successful != null);
+    assert(partial != null);
+    assert(error != null);
+    return partial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>(
+    Result $default(ListenForSpeech$ value), {
+    Result successful(ListenForSpeechSuccessful value),
+    Result partial(ListenForSpeechPartial value),
+    Result error(ListenForSpeechError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (partial != null) {
+      return partial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ListenForSpeechPartial implements ListenForSpeech {
+  const factory ListenForSpeechPartial(List<SpeechWord> recognizedText) =
+      _$ListenForSpeechPartial;
+
+  List<SpeechWord> get recognizedText;
+  $ListenForSpeechPartialCopyWith<ListenForSpeechPartial> get copyWith;
 }
 
 /// @nodoc
@@ -942,11 +1099,13 @@ class _$ListenForSpeechError implements ListenForSpeechError {
   @optionalTypeArgs
   Result when<Result extends Object>(
     Result $default(String languageCode, String serviceAccount), {
-    @required Result successful(String recognizedText),
+    @required Result successful(List<SpeechWord> recognizedText),
+    @required Result partial(List<SpeechWord> recognizedText),
     @required Result error(Object error),
   }) {
     assert($default != null);
     assert(successful != null);
+    assert(partial != null);
     assert(error != null);
     return error(this.error);
   }
@@ -955,7 +1114,8 @@ class _$ListenForSpeechError implements ListenForSpeechError {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(String languageCode, String serviceAccount), {
-    Result successful(String recognizedText),
+    Result successful(List<SpeechWord> recognizedText),
+    Result partial(List<SpeechWord> recognizedText),
     Result error(Object error),
     @required Result orElse(),
   }) {
@@ -971,10 +1131,12 @@ class _$ListenForSpeechError implements ListenForSpeechError {
   Result map<Result extends Object>(
     Result $default(ListenForSpeech$ value), {
     @required Result successful(ListenForSpeechSuccessful value),
+    @required Result partial(ListenForSpeechPartial value),
     @required Result error(ListenForSpeechError value),
   }) {
     assert($default != null);
     assert(successful != null);
+    assert(partial != null);
     assert(error != null);
     return error(this);
   }
@@ -984,6 +1146,7 @@ class _$ListenForSpeechError implements ListenForSpeechError {
   Result maybeMap<Result extends Object>(
     Result $default(ListenForSpeech$ value), {
     Result successful(ListenForSpeechSuccessful value),
+    Result partial(ListenForSpeechPartial value),
     Result error(ListenForSpeechError value),
     @required Result orElse(),
   }) {

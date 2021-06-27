@@ -15,6 +15,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(SpeechAssistantState.serializer)
       ..add(SpeechResult.serializer)
       ..add(SpeechResultState.serializer)
+      ..add(SpeechWord.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(SpeechResult)]),
           () => new ListBuilder<SpeechResult>())
@@ -22,11 +23,14 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(SpeechResult)]),
           () => new ListBuilder<SpeechResult>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(String)]),
-          () => new ListBuilder<String>())
+          const FullType(BuiltList, const [const FullType(SpeechWord)]),
+          () => new ListBuilder<SpeechWord>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(String)]),
-          () => new ListBuilder<String>())
+          const FullType(BuiltList, const [const FullType(SpeechWord)]),
+          () => new ListBuilder<SpeechWord>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(SpeechWord)]),
+          () => new ListBuilder<SpeechWord>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>()))

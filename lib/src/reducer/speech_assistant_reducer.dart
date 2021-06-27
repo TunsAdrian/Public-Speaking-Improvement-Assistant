@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:redux/redux.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
@@ -7,6 +8,7 @@ Reducer<SpeechAssistantState> speechAssistantReducer = combineReducers(<Reducer<
   TypedReducer<SpeechAssistantState, StartRecorderSuccessful>(_startRecorderSuccessful),
   TypedReducer<SpeechAssistantState, StopRecorderSuccessful>(_stopRecorderSuccessful),
   TypedReducer<SpeechAssistantState, ListenForSpeechSuccessful>(_listenForSpeechSuccessful),
+  TypedReducer<SpeechAssistantState, ListenForSpeechPartial>(_listenForSpeechPartial),
 ]);
 
 SpeechAssistantState _listenForInternetStatusSuccessful(
@@ -21,9 +23,17 @@ SpeechAssistantState _startRecorderSuccessful(SpeechAssistantState state, StartR
 SpeechAssistantState _stopRecorderSuccessful(SpeechAssistantState state, StopRecorderSuccessful action) {
   return state.rebuild((SpeechAssistantStateBuilder b) => b
     ..isListening = action.isListening
-    ..recognizedText = '');
+    ..recognizedText = ListBuilder<SpeechWord>()
+    ..possibleText = ListBuilder<SpeechWord>());
 }
 
 SpeechAssistantState _listenForSpeechSuccessful(SpeechAssistantState state, ListenForSpeechSuccessful action) {
-  return state.rebuild((SpeechAssistantStateBuilder b) => b.recognizedText = action.recognizedText);
+  return state.rebuild((SpeechAssistantStateBuilder b) => b
+    ..recognizedText.addAll(action.recognizedText)
+    ..possibleText = ListBuilder<SpeechWord>());
+}
+
+SpeechAssistantState _listenForSpeechPartial(SpeechAssistantState state, ListenForSpeechPartial action) {
+  return state.rebuild((SpeechAssistantStateBuilder b) => //
+      b.possibleText = ListBuilder<SpeechWord>(action.recognizedText));
 }

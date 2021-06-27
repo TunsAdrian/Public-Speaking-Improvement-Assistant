@@ -19,21 +19,6 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
   bool _tileEnabled = true;
 
   @override
-  void initState() {
-    super.initState();
-
-    // todo: remove this
-    // created manual speech result object for testing purposes
-    // StoreProvider.of<AppState>(context, listen: false).dispatch(const CreateSpeechResult(
-    //   speechDuration: Duration(seconds: 61),
-    //   speechClarity: 0.94,
-    //   wordsPerMinute: 24.54,
-    //   speechWords: <String>['This', 'is', 'just', 'a', 'sample', 'text'],
-    //   speechFillerWords: <String>['just', 'text'],
-    // ));
-  }
-
-  @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> arguments = ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
 
@@ -93,7 +78,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: alignedLeading(const Text('Filler Words')),
-                        title: Text('${speechResult.speechFillerWords.length}'),
+                        title: Text('${speechResult.speechWords.where((SpeechWord word) => word.isFiller).length}'),
                         enabled: _tileEnabled,
                       ),
                       const Divider(thickness: 1),
@@ -154,8 +139,8 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
                             });
                             ScaffoldMessenger.of(context).showSnackBar(snackBarSaveSuccess);
 
-                            // wait for 1 second, so the snackbar message can be read
-                            await Future<void>.delayed(const Duration(milliseconds: 1000), () {});
+                            // wait for 1.5 second, so the snackbar message can be read
+                            await Future<void>.delayed(const Duration(milliseconds: 1500), () {});
 
                             Navigator.popUntil(context, ModalRoute.withName(AppRoutes.home));
                           }

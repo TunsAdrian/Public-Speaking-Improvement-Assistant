@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:public_speaking_assistant/src/models/hive_models/hiveSpeechResult.dart';
+import 'package:public_speaking_assistant/src/models/hive_models/hiveSpeechWord.dart';
 
 import 'package:uuid/uuid.dart';
 
@@ -20,8 +21,7 @@ class SpeechResultApi {
     @required Duration speechDuration,
     @required double speechClarity,
     @required double speechWordsPerMinute,
-    @required List<String> speechWords,
-    @required List<String> speechFillerWords,
+    @required List<SpeechWord> speechWords,
   }) async {
     final SpeechResult speechResult = SpeechResult((SpeechResultBuilder b) {
       b
@@ -29,8 +29,7 @@ class SpeechResultApi {
         ..speechDuration = speechDuration
         ..speechClarity = speechClarity
         ..wordsPerMinute = speechWordsPerMinute
-        ..speechFillerWords = ListBuilder<String>(speechFillerWords)
-        ..speechWords = ListBuilder<String>(speechWords);
+        ..speechWords = ListBuilder<SpeechWord>(speechWords);
     });
 
     return speechResult;
@@ -84,8 +83,7 @@ class SpeechResultApi {
     final HiveSpeechResult hiveSpeechResult = HiveSpeechResult(
       speechResult.speechDuration.inSeconds,
       speechResult.speechClarity,
-      speechResult.speechWords.toList(),
-      speechResult.speechFillerWords.toList(),
+      speechResult.speechWords.map((SpeechWord word) => HiveSpeechWord(word.text, word.isFiller)).toList(),
       speechResult.speechName,
       speechResult.uuid,
       speechResult.wordsPerMinute,
@@ -101,9 +99,16 @@ class SpeechResultApi {
         ..speechDuration = Duration(seconds: hiveSpeechResult.speechDuration)
         ..speechClarity = hiveSpeechResult.speechClarity
         ..wordsPerMinute = hiveSpeechResult.wordsPerMinute
-        ..speechWords = ListBuilder<String>(hiveSpeechResult.speechWords)
-        ..speechFillerWords = ListBuilder<String>(hiveSpeechResult.speechFillerWords)
-        ..speechName = hiveSpeechResult.speechName;
+        ..speechName = hiveSpeechResult.speechName
+        ..speechWords = ListBuilder<SpeechWord>(
+          hiveSpeechResult.speechWords.map<SpeechWord>(
+            (HiveSpeechWord word) => SpeechWord((SpeechWordBuilder b) {
+              b
+                ..text = word.text
+                ..isFiller = word.isFiller;
+            }),
+          ),
+        );
     });
 
     return speechResult;

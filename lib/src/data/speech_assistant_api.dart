@@ -8,6 +8,8 @@ import 'package:sound_stream/sound_stream.dart';
 import 'package:google_speech/generated/google/cloud/speech/v1/cloud_speech.pb.dart' as response;
 import 'package:google_speech/google_speech.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tuple/tuple.dart';
+import 'package:public_speaking_assistant/src/models/index.dart';
 
 class SpeechAssistantApi {
   SpeechAssistantApi({
@@ -22,7 +24,7 @@ class SpeechAssistantApi {
   final RecorderStream _recorderStream;
   BehaviorSubject<List<int>> _audioStream;
   StreamSubscription<List<int>> _audioStreamSubscription;
-  String responseText = '';
+  List<String> _fillerWords;
 
   Stream<bool> listenInternetStatus() {
     return _connectivity //
@@ -30,7 +32,12 @@ class SpeechAssistantApi {
         .map((ConnectivityResult result) => result != ConnectivityResult.none);
   }
 
-  Stream<String> listenForSpeech(String languageCode, String serviceAccountJson) {
+  Stream<Tuple2<List<SpeechWord>, bool>> listenForSpeech(
+    String languageCode,
+    String serviceAccountJson,
+    List<String> fillerWords,
+  ) {
+    _fillerWords = fillerWords.map((String word) => word.toLowerCase()).toList();
     _audioStream = BehaviorSubject<List<int>>();
 
     _audioStreamSubscription = _recorderStream.audioStream.listen((Uint8List audioSlice) {
@@ -59,29 +66,52 @@ class SpeechAssistantApi {
     await _recorderStream.stop();
     await _audioStreamSubscription?.cancel();
     await _audioStream?.close();
-    responseText = '';
 
     return false;
   }
 
-  String _getTextFromSpeech(response.StreamingRecognizeResponse data) {
-    final String currentText =
-        data.results.map((response.StreamingRecognitionResult e) => e.alternatives.first.transcript).join('\n');
+  Tuple2<List<SpeechWord>, bool> _getTextFromSpeech(response.StreamingRecognizeResponse data) {
+    final List<String> currentText = data.results.map((response.StreamingRecognitionResult e) => //
+        e.alternatives.first.transcript).join('\n').split(' ');
+    currentText.removeWhere((String word) => word.isEmpty);
 
     if (data.results.first.isFinal) {
-      responseText += currentText;
-      return responseText;
+      return Tuple2<List<SpeechWord>, bool>(_checkFillerWords(currentText), true);
     } else {
-      return responseText + currentText;
+      return Tuple2<List<SpeechWord>, bool>(_checkFillerWords(currentText), false);
     }
   }
 
+  List<SpeechWord> _checkFillerWords(List<String> words) {
+    return words.map((String word) {
+      // replace anything that is not a word, in order to check for words only
+      if (_fillerWords.contains(word.replaceAll(RegExp(r'[^\w]+'), '').toLowerCase())) {
+        return SpeechWord((SpeechWordBuilder b) {
+          b
+            ..text = '$word '
+            ..isFiller = true;
+        });
+      } else {
+        return SpeechWord((SpeechWordBuilder b) {
+          b
+            ..text = '$word '
+            ..isFiller = false;
+        });
+      }
+    }).toList();
+  }
+
   RecognitionConfig _getConfig(String languageCode) {
+    final response.RecognitionMetadata metadata = response.RecognitionMetadata();
+    metadata.originalMediaType = response.RecognitionMetadata_OriginalMediaType.AUDIO;
+    metadata.microphoneDistance = response.RecognitionMetadata_MicrophoneDistance.NEARFIELD;
+
     return RecognitionConfig(
         encoding: AudioEncoding.LINEAR16,
         model: RecognitionModel.basic,
         enableAutomaticPunctuation: true,
         sampleRateHertz: 16000,
-        languageCode: languageCode);
+        languageCode: languageCode,
+        recognitionMetadata: metadata);
   }
 }

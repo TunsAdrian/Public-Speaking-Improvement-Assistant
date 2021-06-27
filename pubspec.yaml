@@ -33,6 +33,7 @@ dependencies:
   google_speech: ^1.2.1
   sound_stream: ^0.2.0
   avatar_glow: ^1.2.0
+  tuple: ^1.0.3
 
   # dart
   redux: ^4.0.0+3

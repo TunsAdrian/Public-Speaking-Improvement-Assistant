@@ -157,6 +157,7 @@ class _AppearancePageState extends State<AppearancePage> {
   }
 
   Future<bool> _showColorPickerDialog(Color currentColor, String colorType, Box<dynamic> settingsBox) async {
+    final bool showBlackWhite = !(colorType == 'primaryColor');
     return ColorPicker(
       hasBorder: true,
       showColorName: true,
@@ -165,10 +166,10 @@ class _AppearancePageState extends State<AppearancePage> {
       heading: const Text('Select color'),
       subheading: const Text('Select color shade'),
       colorNameTextStyle: Theme.of(context).textTheme.caption,
-      pickersEnabled: const <ColorPickerType, bool>{
+      pickersEnabled: <ColorPickerType, bool>{
         ColorPickerType.primary: true,
         ColorPickerType.accent: true,
-        ColorPickerType.bw: true,
+        ColorPickerType.bw: showBlackWhite,
       },
       onColorChanged: (Color color) => setState(() {
         settingsBox.put(colorType, color);

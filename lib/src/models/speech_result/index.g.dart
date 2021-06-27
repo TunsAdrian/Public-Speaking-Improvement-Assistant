@@ -35,11 +35,7 @@ class _$SpeechResultSerializer implements StructuredSerializer<SpeechResult> {
       'speechWords',
       serializers.serialize(object.speechWords,
           specifiedType:
-              const FullType(BuiltList, const [const FullType(String)])),
-      'speechFillerWords',
-      serializers.serialize(object.speechFillerWords,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(String)])),
+              const FullType(BuiltList, const [const FullType(SpeechWord)])),
     ];
     if (object.speechName != null) {
       result
@@ -83,14 +79,8 @@ class _$SpeechResultSerializer implements StructuredSerializer<SpeechResult> {
           break;
         case 'speechWords':
           result.speechWords.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(String)]))
-              as BuiltList<Object>);
-          break;
-        case 'speechFillerWords':
-          result.speechFillerWords.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(String)]))
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(SpeechWord)]))
               as BuiltList<Object>);
           break;
       }
@@ -166,9 +156,7 @@ class _$SpeechResult extends SpeechResult {
   @override
   final double wordsPerMinute;
   @override
-  final BuiltList<String> speechWords;
-  @override
-  final BuiltList<String> speechFillerWords;
+  final BuiltList<SpeechWord> speechWords;
 
   factory _$SpeechResult([void Function(SpeechResultBuilder) updates]) =>
       (new SpeechResultBuilder()..update(updates)).build();
@@ -179,8 +167,7 @@ class _$SpeechResult extends SpeechResult {
       this.speechDuration,
       this.speechClarity,
       this.wordsPerMinute,
-      this.speechWords,
-      this.speechFillerWords})
+      this.speechWords})
       : super._() {
     if (uuid == null) {
       throw new BuiltValueNullFieldError('SpeechResult', 'uuid');
@@ -196,9 +183,6 @@ class _$SpeechResult extends SpeechResult {
     }
     if (speechWords == null) {
       throw new BuiltValueNullFieldError('SpeechResult', 'speechWords');
-    }
-    if (speechFillerWords == null) {
-      throw new BuiltValueNullFieldError('SpeechResult', 'speechFillerWords');
     }
   }
 
@@ -218,8 +202,7 @@ class _$SpeechResult extends SpeechResult {
         speechDuration == other.speechDuration &&
         speechClarity == other.speechClarity &&
         wordsPerMinute == other.wordsPerMinute &&
-        speechWords == other.speechWords &&
-        speechFillerWords == other.speechFillerWords;
+        speechWords == other.speechWords;
   }
 
   @override
@@ -227,13 +210,11 @@ class _$SpeechResult extends SpeechResult {
     return $jf($jc(
         $jc(
             $jc(
-                $jc(
-                    $jc($jc($jc(0, uuid.hashCode), speechName.hashCode),
-                        speechDuration.hashCode),
-                    speechClarity.hashCode),
-                wordsPerMinute.hashCode),
-            speechWords.hashCode),
-        speechFillerWords.hashCode));
+                $jc($jc($jc(0, uuid.hashCode), speechName.hashCode),
+                    speechDuration.hashCode),
+                speechClarity.hashCode),
+            wordsPerMinute.hashCode),
+        speechWords.hashCode));
   }
 
   @override
@@ -244,8 +225,7 @@ class _$SpeechResult extends SpeechResult {
           ..add('speechDuration', speechDuration)
           ..add('speechClarity', speechClarity)
           ..add('wordsPerMinute', wordsPerMinute)
-          ..add('speechWords', speechWords)
-          ..add('speechFillerWords', speechFillerWords))
+          ..add('speechWords', speechWords))
         .toString();
   }
 }
@@ -277,17 +257,11 @@ class SpeechResultBuilder
   set wordsPerMinute(double wordsPerMinute) =>
       _$this._wordsPerMinute = wordsPerMinute;
 
-  ListBuilder<String> _speechWords;
-  ListBuilder<String> get speechWords =>
-      _$this._speechWords ??= new ListBuilder<String>();
-  set speechWords(ListBuilder<String> speechWords) =>
+  ListBuilder<SpeechWord> _speechWords;
+  ListBuilder<SpeechWord> get speechWords =>
+      _$this._speechWords ??= new ListBuilder<SpeechWord>();
+  set speechWords(ListBuilder<SpeechWord> speechWords) =>
       _$this._speechWords = speechWords;
-
-  ListBuilder<String> _speechFillerWords;
-  ListBuilder<String> get speechFillerWords =>
-      _$this._speechFillerWords ??= new ListBuilder<String>();
-  set speechFillerWords(ListBuilder<String> speechFillerWords) =>
-      _$this._speechFillerWords = speechFillerWords;
 
   SpeechResultBuilder();
 
@@ -299,7 +273,6 @@ class SpeechResultBuilder
       _speechClarity = _$v.speechClarity;
       _wordsPerMinute = _$v.wordsPerMinute;
       _speechWords = _$v.speechWords?.toBuilder();
-      _speechFillerWords = _$v.speechFillerWords?.toBuilder();
       _$v = null;
     }
     return this;
@@ -329,15 +302,12 @@ class SpeechResultBuilder
               speechDuration: speechDuration,
               speechClarity: speechClarity,
               wordsPerMinute: wordsPerMinute,
-              speechWords: speechWords.build(),
-              speechFillerWords: speechFillerWords.build());
+              speechWords: speechWords.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'speechWords';
         speechWords.build();
-        _$failedField = 'speechFillerWords';
-        speechFillerWords.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'SpeechResult', _$failedField, e.toString());

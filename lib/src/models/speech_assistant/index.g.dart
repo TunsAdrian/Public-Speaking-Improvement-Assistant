@@ -8,6 +8,7 @@ part of assistant_models;
 
 Serializer<SpeechAssistantState> _$speechAssistantStateSerializer =
     new _$SpeechAssistantStateSerializer();
+Serializer<SpeechWord> _$speechWordSerializer = new _$SpeechWordSerializer();
 
 class _$SpeechAssistantStateSerializer
     implements StructuredSerializer<SpeechAssistantState> {
@@ -34,7 +35,15 @@ class _$SpeechAssistantStateSerializer
       result
         ..add('recognizedText')
         ..add(serializers.serialize(object.recognizedText,
-            specifiedType: const FullType(String)));
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(SpeechWord)])));
+    }
+    if (object.possibleText != null) {
+      result
+        ..add('possibleText')
+        ..add(serializers.serialize(object.possibleText,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(SpeechWord)])));
     }
     if (object.hasInternetConnection != null) {
       result
@@ -62,11 +71,65 @@ class _$SpeechAssistantStateSerializer
               specifiedType: const FullType(bool)) as bool;
           break;
         case 'recognizedText':
-          result.recognizedText = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+          result.recognizedText.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(SpeechWord)]))
+              as BuiltList<Object>);
+          break;
+        case 'possibleText':
+          result.possibleText.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(SpeechWord)]))
+              as BuiltList<Object>);
           break;
         case 'hasInternetConnection':
           result.hasInternetConnection = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$SpeechWordSerializer implements StructuredSerializer<SpeechWord> {
+  @override
+  final Iterable<Type> types = const [SpeechWord, _$SpeechWord];
+  @override
+  final String wireName = 'SpeechWord';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, SpeechWord object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'text',
+      serializers.serialize(object.text, specifiedType: const FullType(String)),
+      'isFiller',
+      serializers.serialize(object.isFiller,
+          specifiedType: const FullType(bool)),
+    ];
+
+    return result;
+  }
+
+  @override
+  SpeechWord deserialize(Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new SpeechWordBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'text':
+          result.text = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'isFiller':
+          result.isFiller = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
       }
@@ -80,7 +143,9 @@ class _$SpeechAssistantState extends SpeechAssistantState {
   @override
   final bool isListening;
   @override
-  final String recognizedText;
+  final BuiltList<SpeechWord> recognizedText;
+  @override
+  final BuiltList<SpeechWord> possibleText;
   @override
   final bool hasInternetConnection;
 
@@ -89,7 +154,10 @@ class _$SpeechAssistantState extends SpeechAssistantState {
       (new SpeechAssistantStateBuilder()..update(updates)).build();
 
   _$SpeechAssistantState._(
-      {this.isListening, this.recognizedText, this.hasInternetConnection})
+      {this.isListening,
+      this.recognizedText,
+      this.possibleText,
+      this.hasInternetConnection})
       : super._();
 
   @override
@@ -107,12 +175,15 @@ class _$SpeechAssistantState extends SpeechAssistantState {
     return other is SpeechAssistantState &&
         isListening == other.isListening &&
         recognizedText == other.recognizedText &&
+        possibleText == other.possibleText &&
         hasInternetConnection == other.hasInternetConnection;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, isListening.hashCode), recognizedText.hashCode),
+    return $jf($jc(
+        $jc($jc($jc(0, isListening.hashCode), recognizedText.hashCode),
+            possibleText.hashCode),
         hasInternetConnection.hashCode));
   }
 
@@ -121,6 +192,7 @@ class _$SpeechAssistantState extends SpeechAssistantState {
     return (newBuiltValueToStringHelper('SpeechAssistantState')
           ..add('isListening', isListening)
           ..add('recognizedText', recognizedText)
+          ..add('possibleText', possibleText)
           ..add('hasInternetConnection', hasInternetConnection))
         .toString();
   }
@@ -134,10 +206,17 @@ class SpeechAssistantStateBuilder
   bool get isListening => _$this._isListening;
   set isListening(bool isListening) => _$this._isListening = isListening;
 
-  String _recognizedText;
-  String get recognizedText => _$this._recognizedText;
-  set recognizedText(String recognizedText) =>
+  ListBuilder<SpeechWord> _recognizedText;
+  ListBuilder<SpeechWord> get recognizedText =>
+      _$this._recognizedText ??= new ListBuilder<SpeechWord>();
+  set recognizedText(ListBuilder<SpeechWord> recognizedText) =>
       _$this._recognizedText = recognizedText;
+
+  ListBuilder<SpeechWord> _possibleText;
+  ListBuilder<SpeechWord> get possibleText =>
+      _$this._possibleText ??= new ListBuilder<SpeechWord>();
+  set possibleText(ListBuilder<SpeechWord> possibleText) =>
+      _$this._possibleText = possibleText;
 
   bool _hasInternetConnection;
   bool get hasInternetConnection => _$this._hasInternetConnection;
@@ -149,7 +228,8 @@ class SpeechAssistantStateBuilder
   SpeechAssistantStateBuilder get _$this {
     if (_$v != null) {
       _isListening = _$v.isListening;
-      _recognizedText = _$v.recognizedText;
+      _recognizedText = _$v.recognizedText?.toBuilder();
+      _possibleText = _$v.possibleText?.toBuilder();
       _hasInternetConnection = _$v.hasInternetConnection;
       _$v = null;
     }
@@ -171,11 +251,117 @@ class SpeechAssistantStateBuilder
 
   @override
   _$SpeechAssistantState build() {
-    final _$result = _$v ??
-        new _$SpeechAssistantState._(
-            isListening: isListening,
-            recognizedText: recognizedText,
-            hasInternetConnection: hasInternetConnection);
+    _$SpeechAssistantState _$result;
+    try {
+      _$result = _$v ??
+          new _$SpeechAssistantState._(
+              isListening: isListening,
+              recognizedText: _recognizedText?.build(),
+              possibleText: _possibleText?.build(),
+              hasInternetConnection: hasInternetConnection);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'recognizedText';
+        _recognizedText?.build();
+        _$failedField = 'possibleText';
+        _possibleText?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'SpeechAssistantState', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SpeechWord extends SpeechWord {
+  @override
+  final String text;
+  @override
+  final bool isFiller;
+
+  factory _$SpeechWord([void Function(SpeechWordBuilder) updates]) =>
+      (new SpeechWordBuilder()..update(updates)).build();
+
+  _$SpeechWord._({this.text, this.isFiller}) : super._() {
+    if (text == null) {
+      throw new BuiltValueNullFieldError('SpeechWord', 'text');
+    }
+    if (isFiller == null) {
+      throw new BuiltValueNullFieldError('SpeechWord', 'isFiller');
+    }
+  }
+
+  @override
+  SpeechWord rebuild(void Function(SpeechWordBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SpeechWordBuilder toBuilder() => new SpeechWordBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SpeechWord &&
+        text == other.text &&
+        isFiller == other.isFiller;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, text.hashCode), isFiller.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SpeechWord')
+          ..add('text', text)
+          ..add('isFiller', isFiller))
+        .toString();
+  }
+}
+
+class SpeechWordBuilder implements Builder<SpeechWord, SpeechWordBuilder> {
+  _$SpeechWord _$v;
+
+  String _text;
+  String get text => _$this._text;
+  set text(String text) => _$this._text = text;
+
+  bool _isFiller;
+  bool get isFiller => _$this._isFiller;
+  set isFiller(bool isFiller) => _$this._isFiller = isFiller;
+
+  SpeechWordBuilder();
+
+  SpeechWordBuilder get _$this {
+    if (_$v != null) {
+      _text = _$v.text;
+      _isFiller = _$v.isFiller;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SpeechWord other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$SpeechWord;
+  }
+
+  @override
+  void update(void Function(SpeechWordBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SpeechWord build() {
+    final _$result = _$v ?? new _$SpeechWord._(text: text, isFiller: isFiller);
     replace(_$result);
     return _$result;
   }
