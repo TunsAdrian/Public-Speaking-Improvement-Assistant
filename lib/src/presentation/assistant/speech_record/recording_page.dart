@@ -30,11 +30,6 @@ class _RecordingPageState extends State<RecordingPage> with DisplaySpeechWordMix
   final double _clarity = 1.0;
   String _serviceAccount;
 
-  bool _isListening = false;
-  bool _hasInternetConnection = false;
-  List<SpeechWord> _recognizedText = <SpeechWord>[];
-  List<SpeechWord> _partialText = <SpeechWord>[];
-
   List<HiveLanguagePair> _languagesList;
   Map<String, dynamic> _languagesMap;
 
@@ -77,13 +72,8 @@ class _RecordingPageState extends State<RecordingPage> with DisplaySpeechWordMix
         final HiveLanguagePair _selectedSpeechLanguage =
             settingsBox.get('speech_language', defaultValue: HiveLanguagePair('English (United States)', 'en-US'));
 
-        return SpeechAssistantContainer(
-          builder: (BuildContext context, SpeechAssistantState speechAssistantState) {
-            _hasInternetConnection = speechAssistantState?.hasInternetConnection ?? false;
-            _isListening = speechAssistantState?.isListening ?? false;
-            _partialText = speechAssistantState?.possibleText?.toList() ?? <SpeechWord>[];
-            _recognizedText = speechAssistantState?.recognizedText?.toList() ?? <SpeechWord>[];
-
+        return ListenSpeechContainer(
+          builder: (BuildContext context, bool isListening) {
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Speech Rehearsal'),
@@ -91,7 +81,7 @@ class _RecordingPageState extends State<RecordingPage> with DisplaySpeechWordMix
                   IconButton(
                     icon: const Icon(Icons.language_outlined),
                     tooltip: 'Select Language',
-                    onPressed: !_isListening
+                    onPressed: !isListening
                         ? () {
                             _showLanguagePickerDialog(settingsBox, _selectedSpeechLanguage);
                           }
@@ -105,7 +95,7 @@ class _RecordingPageState extends State<RecordingPage> with DisplaySpeechWordMix
                 child: Column(
                   children: <Widget>[
                     Visibility(
-                      visible: !_isListening,
+                      visible: !isListening,
                       child: ListTile(
                         title: Text(
                           '$_selectedSpeechLanguage is the currently selected language',
@@ -114,7 +104,7 @@ class _RecordingPageState extends State<RecordingPage> with DisplaySpeechWordMix
                       ),
                     ),
                     Visibility(
-                      visible: _recognizedText.isEmpty && _partialText.isEmpty,
+                      visible: !isListening,
                       child: Center(
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -126,40 +116,51 @@ class _RecordingPageState extends State<RecordingPage> with DisplaySpeechWordMix
                         ),
                       ),
                     ),
-                    // todo: add a live stopwatch widget here
-                    Visibility(
-                      visible: !_hasInternetConnection,
-                      child: Center(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 16.0),
-                          child: RichText(
-                            text: TextSpan(
-                              style: const TextStyle(
-                                fontSize: 24.0,
-                                color: Colors.red,
-                                fontWeight: FontWeight.bold,
+                    InternetConnectionContainer(
+                      builder: (BuildContext context, bool internetConnection) {
+                        return Visibility(
+                          visible: !internetConnection,
+                          child: Center(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 16.0),
+                              child: RichText(
+                                text: TextSpan(
+                                  style: const TextStyle(
+                                    fontSize: 24.0,
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  text: 'Internet connection lost...',
+                                  children: <TextSpan>[
+                                    if (isListening) const TextSpan(text: '\nPlease stop your recording')
+                                  ],
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              text: 'Internet connection lost...',
-                              children: <TextSpan>[
-                                if (_isListening) const TextSpan(text: '\nPlease stop your recording')
-                              ],
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: RichText(
-                        text: TextSpan(
-                          children: <InlineSpan>[
-                            for (SpeechWord word in _recognizedText)
-                              displaySpeechWord(word, Theme.of(context).textTheme.bodyText1.color),
-                            for (SpeechWord word in _partialText)
-                              displaySpeechWord(word, Theme.of(context).textTheme.bodyText1.color),
-                          ],
-                        ),
+                      child: RecognizedTextContainer(
+                        builder: (BuildContext context, List<SpeechWord> recognizedText) {
+                          return PartialTextContainer(
+                            builder: (BuildContext context, List<SpeechWord> partialText) {
+                              return RichText(
+                                text: TextSpan(
+                                  children: <InlineSpan>[
+                                    for (SpeechWord word in recognizedText)
+                                      displaySpeechWord(word, Theme.of(context).textTheme.bodyText1.color),
+                                    for (SpeechWord word in partialText)
+                                      displaySpeechWord(word, Theme.of(context).textTheme.bodyText1.color),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                     ),
                   ],
@@ -167,39 +168,46 @@ class _RecordingPageState extends State<RecordingPage> with DisplaySpeechWordMix
               ),
               floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
               floatingActionButton: AvatarGlow(
-                animate: _isListening,
+                animate: isListening,
                 endRadius: 75,
                 glowColor: Theme.of(context).floatingActionButtonTheme.backgroundColor,
-                child: FloatingActionButton(
-                  child: Icon(_isListening ? Icons.mic : Icons.mic_none, size: 36),
-                  onPressed: () {
-                    if (!_isListening) {
-                      _stopwatch.start();
-                      store.dispatch(const StartRecorder());
-                      store.dispatch(ListenForSpeech(
-                        languageCode: _selectedSpeechLanguage.languageCode,
-                        serviceAccount: _serviceAccount,
-                      ));
-                    } else {
-                      _stopwatch.stop();
-                      final Duration _speechTime = _stopwatch.elapsed;
-                      _stopwatch.reset();
+                child: RecognizedTextContainer(
+                  builder: (BuildContext context, List<SpeechWord> recognizedText) {
+                    return PartialTextContainer(
+                      builder: (BuildContext context, List<SpeechWord> partialText) {
+                        return FloatingActionButton(
+                          child: Icon(isListening ? Icons.mic : Icons.mic_none, size: 36),
+                          onPressed: () {
+                            if (!isListening) {
+                              _stopwatch.start();
+                              store
+                                ..dispatch(const StartRecorder())
+                                ..dispatch(ListenForSpeech(
+                                  languageCode: _selectedSpeechLanguage.languageCode,
+                                  serviceAccount: _serviceAccount,
+                                ));
+                            } else {
+                              _stopwatch.stop();
 
-                      store.dispatch(const StopListeningForSpeech());
-                      store.dispatch(const StopRecorder());
-                      _recognizedText.addAll(_partialText);
+                              store..dispatch(const StopListeningForSpeech())..dispatch(const StopRecorder());
+                              recognizedText.addAll(partialText);
 
-                      if (_recognizedText.isNotEmpty) {
-                        store.dispatch(CreateSpeechResult(
-                          speechDuration: _speechTime,
-                          speechClarity: _clarity,
-                          wordsPerMinute: (_recognizedText.length / _speechTime.inSeconds) * 60,
-                          speechWords: _recognizedText,
-                        ));
+                              if (recognizedText.isNotEmpty) {
+                                store.dispatch(CreateSpeechResult(
+                                  speechDuration: _stopwatch.elapsed,
+                                  speechClarity: _clarity,
+                                  wordsPerMinute: (recognizedText.length / _stopwatch.elapsed.inSeconds) * 60,
+                                  speechWords: recognizedText,
+                                ));
 
-                        Navigator.pushNamed(context, AppRoutes.speech_result);
-                      }
-                    }
+                                _stopwatch.reset();
+                                Navigator.pushNamed(context, AppRoutes.speech_result);
+                              }
+                            }
+                          },
+                        );
+                      },
+                    );
                   },
                 ),
               ),

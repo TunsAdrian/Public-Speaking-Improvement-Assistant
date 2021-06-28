@@ -9,3 +9,4 @@ part 'internet_connection_container.dart';
 part 'listen_speech_container.dart';
 part 'recognized_text_container.dart';
 part 'speech_assitant_container.dart';
+part 'partial_text_container.dart';
