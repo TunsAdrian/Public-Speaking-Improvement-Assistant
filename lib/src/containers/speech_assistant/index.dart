@@ -10,3 +10,4 @@ part 'listen_speech_container.dart';
 part 'recognized_text_container.dart';
 part 'speech_assitant_container.dart';
 part 'partial_text_container.dart';
+part 'confidence_container.dart';

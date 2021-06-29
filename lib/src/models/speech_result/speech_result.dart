@@ -14,7 +14,7 @@ abstract class SpeechResult implements Built<SpeechResult, SpeechResultBuilder> 
 
   Duration get speechDuration;
 
-  double get speechClarity;
+  double get speechConfidence;
 
   double get wordsPerMinute;
 

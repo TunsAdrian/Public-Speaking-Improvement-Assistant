@@ -62,10 +62,12 @@ class SpeechAssistantEpics {
         .whereType<ListenForSpeech$>()
         .flatMap((ListenForSpeech$ action) => _api
             .listenForSpeech(action.languageCode, action.serviceAccount, store.state.fillerWords.fillerWords.toList())
-            .map((Tuple2<List<SpeechWord>, bool> recognizedTextTuple) {
+            .map((Tuple3<List<SpeechWord>, bool, double> recognizedTextTuple) {
               // if the recognized text is marked as final, send it to successful constructor; otherwise, to the partial one
               if (recognizedTextTuple.item2) {
-                return ListenForSpeech.successful(recognizedTextTuple.item1);
+                // for the successful constructor, send the average confidence too
+                return ListenForSpeech.successful(
+                    Tuple2<List<SpeechWord>, double>(recognizedTextTuple.item1, recognizedTextTuple.item3));
               } else {
                 return ListenForSpeech.partial(recognizedTextTuple.item1);
               }

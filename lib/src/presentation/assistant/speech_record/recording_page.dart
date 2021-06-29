@@ -27,7 +27,6 @@ class RecordingPage extends StatefulWidget {
 class _RecordingPageState extends State<RecordingPage> with DisplaySpeechWordMixin {
   Store<AppState> store;
   final Stopwatch _stopwatch = Stopwatch();
-  final double _clarity = 1.0;
   String _serviceAccount;
 
   List<HiveLanguagePair> _languagesList;
@@ -175,35 +174,42 @@ class _RecordingPageState extends State<RecordingPage> with DisplaySpeechWordMix
                   builder: (BuildContext context, List<SpeechWord> recognizedText) {
                     return PartialTextContainer(
                       builder: (BuildContext context, List<SpeechWord> partialText) {
-                        return FloatingActionButton(
-                          child: Icon(isListening ? Icons.mic : Icons.mic_none, size: 36),
-                          onPressed: () {
-                            if (!isListening) {
-                              _stopwatch.start();
-                              store
-                                ..dispatch(const StartRecorder())
-                                ..dispatch(ListenForSpeech(
-                                  languageCode: _selectedSpeechLanguage.languageCode,
-                                  serviceAccount: _serviceAccount,
-                                ));
-                            } else {
-                              _stopwatch.stop();
+                        return ConfidenceContainer(
+                          builder: (BuildContext context, double speechConfidence) {
+                            return FloatingActionButton(
+                              child: Icon(isListening ? Icons.mic : Icons.mic_none, size: 36),
+                              onPressed: () {
+                                if (!isListening) {
+                                  _stopwatch.start();
 
-                              store..dispatch(const StopListeningForSpeech())..dispatch(const StopRecorder());
-                              recognizedText.addAll(partialText);
+                                  store
+                                    ..dispatch(const StartRecorder())
+                                    ..dispatch(ListenForSpeech(
+                                      languageCode: _selectedSpeechLanguage.languageCode,
+                                      serviceAccount: _serviceAccount,
+                                    ));
+                                } else {
+                                  _stopwatch.stop();
 
-                              if (recognizedText.isNotEmpty) {
-                                store.dispatch(CreateSpeechResult(
-                                  speechDuration: _stopwatch.elapsed,
-                                  speechClarity: _clarity,
-                                  wordsPerMinute: (recognizedText.length / _stopwatch.elapsed.inSeconds) * 60,
-                                  speechWords: recognizedText,
-                                ));
+                                  store //
+                                    ..dispatch(const StopListeningForSpeech())
+                                    ..dispatch(const StopRecorder());
+                                  recognizedText.addAll(partialText);
 
-                                _stopwatch.reset();
-                                Navigator.pushNamed(context, AppRoutes.speech_result);
-                              }
-                            }
+                                  if (recognizedText.isNotEmpty) {
+                                    store.dispatch(CreateSpeechResult(
+                                      speechDuration: _stopwatch.elapsed,
+                                      speechConfidence: speechConfidence,
+                                      wordsPerMinute: (recognizedText.length / _stopwatch.elapsed.inSeconds) * 60,
+                                      speechWords: recognizedText,
+                                    ));
+
+                                    _stopwatch.reset();
+                                    Navigator.pushNamed(context, AppRoutes.speech_result);
+                                  }
+                                }
+                              },
+                            );
                           },
                         );
                       },

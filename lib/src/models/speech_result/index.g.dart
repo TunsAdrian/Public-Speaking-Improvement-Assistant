@@ -26,8 +26,8 @@ class _$SpeechResultSerializer implements StructuredSerializer<SpeechResult> {
       'speechDuration',
       serializers.serialize(object.speechDuration,
           specifiedType: const FullType(Duration)),
-      'speechClarity',
-      serializers.serialize(object.speechClarity,
+      'speechConfidence',
+      serializers.serialize(object.speechConfidence,
           specifiedType: const FullType(double)),
       'wordsPerMinute',
       serializers.serialize(object.wordsPerMinute,
@@ -69,8 +69,8 @@ class _$SpeechResultSerializer implements StructuredSerializer<SpeechResult> {
           result.speechDuration = serializers.deserialize(value,
               specifiedType: const FullType(Duration)) as Duration;
           break;
-        case 'speechClarity':
-          result.speechClarity = serializers.deserialize(value,
+        case 'speechConfidence':
+          result.speechConfidence = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double;
           break;
         case 'wordsPerMinute':
@@ -152,7 +152,7 @@ class _$SpeechResult extends SpeechResult {
   @override
   final Duration speechDuration;
   @override
-  final double speechClarity;
+  final double speechConfidence;
   @override
   final double wordsPerMinute;
   @override
@@ -165,7 +165,7 @@ class _$SpeechResult extends SpeechResult {
       {this.uuid,
       this.speechName,
       this.speechDuration,
-      this.speechClarity,
+      this.speechConfidence,
       this.wordsPerMinute,
       this.speechWords})
       : super._() {
@@ -175,8 +175,8 @@ class _$SpeechResult extends SpeechResult {
     if (speechDuration == null) {
       throw new BuiltValueNullFieldError('SpeechResult', 'speechDuration');
     }
-    if (speechClarity == null) {
-      throw new BuiltValueNullFieldError('SpeechResult', 'speechClarity');
+    if (speechConfidence == null) {
+      throw new BuiltValueNullFieldError('SpeechResult', 'speechConfidence');
     }
     if (wordsPerMinute == null) {
       throw new BuiltValueNullFieldError('SpeechResult', 'wordsPerMinute');
@@ -200,7 +200,7 @@ class _$SpeechResult extends SpeechResult {
         uuid == other.uuid &&
         speechName == other.speechName &&
         speechDuration == other.speechDuration &&
-        speechClarity == other.speechClarity &&
+        speechConfidence == other.speechConfidence &&
         wordsPerMinute == other.wordsPerMinute &&
         speechWords == other.speechWords;
   }
@@ -212,7 +212,7 @@ class _$SpeechResult extends SpeechResult {
             $jc(
                 $jc($jc($jc(0, uuid.hashCode), speechName.hashCode),
                     speechDuration.hashCode),
-                speechClarity.hashCode),
+                speechConfidence.hashCode),
             wordsPerMinute.hashCode),
         speechWords.hashCode));
   }
@@ -223,7 +223,7 @@ class _$SpeechResult extends SpeechResult {
           ..add('uuid', uuid)
           ..add('speechName', speechName)
           ..add('speechDuration', speechDuration)
-          ..add('speechClarity', speechClarity)
+          ..add('speechConfidence', speechConfidence)
           ..add('wordsPerMinute', wordsPerMinute)
           ..add('speechWords', speechWords))
         .toString();
@@ -247,10 +247,10 @@ class SpeechResultBuilder
   set speechDuration(Duration speechDuration) =>
       _$this._speechDuration = speechDuration;
 
-  double _speechClarity;
-  double get speechClarity => _$this._speechClarity;
-  set speechClarity(double speechClarity) =>
-      _$this._speechClarity = speechClarity;
+  double _speechConfidence;
+  double get speechConfidence => _$this._speechConfidence;
+  set speechConfidence(double speechConfidence) =>
+      _$this._speechConfidence = speechConfidence;
 
   double _wordsPerMinute;
   double get wordsPerMinute => _$this._wordsPerMinute;
@@ -270,7 +270,7 @@ class SpeechResultBuilder
       _uuid = _$v.uuid;
       _speechName = _$v.speechName;
       _speechDuration = _$v.speechDuration;
-      _speechClarity = _$v.speechClarity;
+      _speechConfidence = _$v.speechConfidence;
       _wordsPerMinute = _$v.wordsPerMinute;
       _speechWords = _$v.speechWords?.toBuilder();
       _$v = null;
@@ -300,7 +300,7 @@ class SpeechResultBuilder
               uuid: uuid,
               speechName: speechName,
               speechDuration: speechDuration,
-              speechClarity: speechClarity,
+              speechConfidence: speechConfidence,
               wordsPerMinute: wordsPerMinute,
               speechWords: speechWords.build());
     } catch (_) {

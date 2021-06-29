@@ -33,7 +33,7 @@ class HiveSpeechResultAdapter extends TypeAdapter<HiveSpeechResult> {
       ..writeByte(0)
       ..write(obj.speechDuration)
       ..writeByte(1)
-      ..write(obj.speechClarity)
+      ..write(obj.speechConfidence)
       ..writeByte(2)
       ..write(obj.speechWords)
       ..writeByte(3)

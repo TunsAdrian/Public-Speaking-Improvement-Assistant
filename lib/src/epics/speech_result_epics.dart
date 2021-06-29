@@ -28,7 +28,7 @@ class SpeechResultEpics {
         .flatMap((CreateSpeechResult$ action) => Stream<CreateSpeechResult$>.value(action)
             .asyncMap((CreateSpeechResult$ action) => _api.createSpeechResult(
                   speechDuration: action.speechDuration,
-                  speechClarity: action.speechClarity,
+                  speechConfidence: action.speechConfidence,
                   speechWordsPerMinute: action.wordsPerMinute,
                   speechWords: action.speechWords,
                 ))

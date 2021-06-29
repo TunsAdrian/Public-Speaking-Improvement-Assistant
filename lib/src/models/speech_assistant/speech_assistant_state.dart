@@ -21,6 +21,9 @@ abstract class SpeechAssistantState implements Built<SpeechAssistantState, Speec
   @nullable
   bool get hasInternetConnection;
 
+  @nullable
+  double get confidence;
+
   Map<String, dynamic> get json => serializers.serializeWith(serializer, this) as Map<String, dynamic>;
 
   static Serializer<SpeechAssistantState> get serializer => _$speechAssistantStateSerializer;

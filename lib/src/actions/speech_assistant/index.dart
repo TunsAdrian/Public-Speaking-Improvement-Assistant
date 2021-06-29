@@ -3,6 +3,7 @@ library speech_assistant_actions;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
+import 'package:tuple/tuple.dart';
 
 part 'index.freezed.dart';
 part 'listen_for_internet_status.dart';

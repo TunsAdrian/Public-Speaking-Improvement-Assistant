@@ -22,6 +22,7 @@ SpeechAssistantState _startRecorderSuccessful(SpeechAssistantState state, StartR
 
 SpeechAssistantState _stopRecorderSuccessful(SpeechAssistantState state, StopRecorderSuccessful action) {
   return state.rebuild((SpeechAssistantStateBuilder b) => b
+    ..confidence = 0.0
     ..isListening = action.isListening
     ..recognizedText = ListBuilder<SpeechWord>()
     ..possibleText = ListBuilder<SpeechWord>());
@@ -29,7 +30,8 @@ SpeechAssistantState _stopRecorderSuccessful(SpeechAssistantState state, StopRec
 
 SpeechAssistantState _listenForSpeechSuccessful(SpeechAssistantState state, ListenForSpeechSuccessful action) {
   return state.rebuild((SpeechAssistantStateBuilder b) => b
-    ..recognizedText.addAll(action.recognizedText)
+    ..recognizedText.addAll(action.recognizedTextWithConfidence.item1)
+    ..confidence = action.recognizedTextWithConfidence.item2
     ..possibleText = ListBuilder<SpeechWord>());
 }
 

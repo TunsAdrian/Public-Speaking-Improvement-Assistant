@@ -4,7 +4,7 @@ part of speech_result_actions;
 abstract class CreateSpeechResult with _$CreateSpeechResult implements AppAction {
   const factory CreateSpeechResult({
     @required Duration speechDuration,
-    @required double speechClarity,
+    @required double speechConfidence,
     @required double wordsPerMinute,
     @required List<SpeechWord> speechWords,
   }) = CreateSpeechResult$;

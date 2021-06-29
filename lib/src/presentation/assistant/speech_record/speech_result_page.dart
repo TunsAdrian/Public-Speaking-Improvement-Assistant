@@ -60,13 +60,15 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
                         title: Text('${speechResult.wordsPerMinute.round()} words/min'),
                         enabled: _tileEnabled,
                       ),
-                      // const Divider(thickness: 1),
-                      // ListTile(
-                      //   minLeadingWidth: 75.0,
-                      //   leading: alignedLeading(const Text('Clarity')),
-                      //   title: Text('${(speechResult.speechClarity * 100.0).toStringAsFixed(1)}%'),
-                      //   enabled: _tileEnabled,
-                      // ),
+                      const Divider(thickness: 1),
+                      ListTile(
+                        minLeadingWidth: 75.0,
+                        leading: alignedLeading(const Text('Confidence')),
+                        title: speechResult.speechConfidence != 0
+                            ? Text('${(speechResult.speechConfidence * 100.0).toStringAsFixed(1)}%')
+                            : const Text('Not computed'),
+                        enabled: _tileEnabled,
+                      ),
                       const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,

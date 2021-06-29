@@ -19,7 +19,7 @@ class SpeechResultApi {
 
   Future<SpeechResult> createSpeechResult({
     @required Duration speechDuration,
-    @required double speechClarity,
+    @required double speechConfidence,
     @required double speechWordsPerMinute,
     @required List<SpeechWord> speechWords,
   }) async {
@@ -27,7 +27,7 @@ class SpeechResultApi {
       b
         ..uuid = _uuidInstance.v1()
         ..speechDuration = speechDuration
-        ..speechClarity = speechClarity
+        ..speechConfidence = speechConfidence
         ..wordsPerMinute = speechWordsPerMinute
         ..speechWords = ListBuilder<SpeechWord>(speechWords);
     });
@@ -82,7 +82,7 @@ class SpeechResultApi {
   HiveSpeechResult _convertSpeechResultToHive({@required SpeechResult speechResult}) {
     final HiveSpeechResult hiveSpeechResult = HiveSpeechResult(
       speechResult.speechDuration.inSeconds,
-      speechResult.speechClarity,
+      speechResult.speechConfidence,
       speechResult.speechWords.map((SpeechWord word) => HiveSpeechWord(word.text, word.isFiller)).toList(),
       speechResult.speechName,
       speechResult.uuid,
@@ -97,7 +97,7 @@ class SpeechResultApi {
       b
         ..uuid = hiveSpeechResult.uuid
         ..speechDuration = Duration(seconds: hiveSpeechResult.speechDuration)
-        ..speechClarity = hiveSpeechResult.speechClarity
+        ..speechConfidence = hiveSpeechResult.speechConfidence
         ..wordsPerMinute = hiveSpeechResult.wordsPerMinute
         ..speechName = hiveSpeechResult.speechName
         ..speechWords = ListBuilder<SpeechWord>(

@@ -25,6 +25,8 @@ class SpeechAssistantApi {
   BehaviorSubject<List<int>> _audioStream;
   StreamSubscription<List<int>> _audioStreamSubscription;
   List<String> _fillerWords;
+  double _confidenceSum = 0.0;
+  int _confidenceCount = 0;
 
   Stream<bool> listenInternetStatus() {
     return _connectivity //
@@ -32,7 +34,7 @@ class SpeechAssistantApi {
         .map((ConnectivityResult result) => result != ConnectivityResult.none);
   }
 
-  Stream<Tuple2<List<SpeechWord>, bool>> listenForSpeech(
+  Stream<Tuple3<List<SpeechWord>, bool, double>> listenForSpeech(
     String languageCode,
     String serviceAccountJson,
     List<String> fillerWords,
@@ -50,7 +52,7 @@ class SpeechAssistantApi {
 
     return speechToText
         .streamingRecognize(StreamingRecognitionConfig(config: config, interimResults: true), _audioStream)
-        .map((response.StreamingRecognizeResponse data) => _getTextFromSpeech(data));
+        .map((response.StreamingRecognizeResponse data) => _getTextFromSpeechWithConfidence(data));
   }
 
   void initializeRecorder() {
@@ -66,19 +68,21 @@ class SpeechAssistantApi {
     await _recorderStream.stop();
     await _audioStreamSubscription?.cancel();
     await _audioStream?.close();
+    _confidenceSum = 0.0;
+    _confidenceCount = 0;
 
     return false;
   }
 
-  Tuple2<List<SpeechWord>, bool> _getTextFromSpeech(response.StreamingRecognizeResponse data) {
+  Tuple3<List<SpeechWord>, bool, double> _getTextFromSpeechWithConfidence(response.StreamingRecognizeResponse data) {
     final List<String> currentText = data.results.map((response.StreamingRecognitionResult e) => //
         e.alternatives.first.transcript).join('\n').split(' ');
     currentText.removeWhere((String word) => word.isEmpty);
 
     if (data.results.first.isFinal) {
-      return Tuple2<List<SpeechWord>, bool>(_checkFillerWords(currentText), true);
+      return Tuple3<List<SpeechWord>, bool, double>(_checkFillerWords(currentText), true, _getConfidence(data.results));
     } else {
-      return Tuple2<List<SpeechWord>, bool>(_checkFillerWords(currentText), false);
+      return Tuple3<List<SpeechWord>, bool, double>(_checkFillerWords(currentText), false, null);
     }
   }
 
@@ -99,6 +103,20 @@ class SpeechAssistantApi {
         });
       }
     }).toList();
+  }
+
+  double _getConfidence(List<response.StreamingRecognitionResult> results) {
+    final double currentSum = results.fold<double>(
+        0, (double prev, response.StreamingRecognitionResult result) => prev + result.alternatives.first.confidence);
+
+    if (currentSum == 0.0) {
+      return currentSum;
+    }
+
+    _confidenceSum += currentSum;
+    _confidenceCount++;
+
+    return _confidenceSum / _confidenceCount;
   }
 
   RecognitionConfig _getConfig(String languageCode) {

@@ -16,12 +16,12 @@ class _$CreateSpeechResultTearOff {
 // ignore: unused_element
   CreateSpeechResult$ call(
       {@required Duration speechDuration,
-      @required double speechClarity,
+      @required double speechConfidence,
       @required double wordsPerMinute,
       @required List<SpeechWord> speechWords}) {
     return CreateSpeechResult$(
       speechDuration: speechDuration,
-      speechClarity: speechClarity,
+      speechConfidence: speechConfidence,
       wordsPerMinute: wordsPerMinute,
       speechWords: speechWords,
     );
@@ -50,14 +50,14 @@ const $CreateSpeechResult = _$CreateSpeechResultTearOff();
 mixin _$CreateSpeechResult {
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
+    Result $default(Duration speechDuration, double speechConfidence,
         double wordsPerMinute, List<SpeechWord> speechWords), {
     @required Result successful(SpeechResult speechResult),
     @required Result error(Object error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
+    Result $default(Duration speechDuration, double speechConfidence,
         double wordsPerMinute, List<SpeechWord> speechWords), {
     Result successful(SpeechResult speechResult),
     Result error(Object error),
@@ -102,7 +102,7 @@ abstract class $CreateSpeechResult$CopyWith<$Res> {
       _$CreateSpeechResult$CopyWithImpl<$Res>;
   $Res call(
       {Duration speechDuration,
-      double speechClarity,
+      double speechConfidence,
       double wordsPerMinute,
       List<SpeechWord> speechWords});
 }
@@ -121,7 +121,7 @@ class _$CreateSpeechResult$CopyWithImpl<$Res>
   @override
   $Res call({
     Object speechDuration = freezed,
-    Object speechClarity = freezed,
+    Object speechConfidence = freezed,
     Object wordsPerMinute = freezed,
     Object speechWords = freezed,
   }) {
@@ -129,9 +129,9 @@ class _$CreateSpeechResult$CopyWithImpl<$Res>
       speechDuration: speechDuration == freezed
           ? _value.speechDuration
           : speechDuration as Duration,
-      speechClarity: speechClarity == freezed
-          ? _value.speechClarity
-          : speechClarity as double,
+      speechConfidence: speechConfidence == freezed
+          ? _value.speechConfidence
+          : speechConfidence as double,
       wordsPerMinute: wordsPerMinute == freezed
           ? _value.wordsPerMinute
           : wordsPerMinute as double,
@@ -146,18 +146,18 @@ class _$CreateSpeechResult$CopyWithImpl<$Res>
 class _$CreateSpeechResult$ implements CreateSpeechResult$ {
   const _$CreateSpeechResult$(
       {@required this.speechDuration,
-      @required this.speechClarity,
+      @required this.speechConfidence,
       @required this.wordsPerMinute,
       @required this.speechWords})
       : assert(speechDuration != null),
-        assert(speechClarity != null),
+        assert(speechConfidence != null),
         assert(wordsPerMinute != null),
         assert(speechWords != null);
 
   @override
   final Duration speechDuration;
   @override
-  final double speechClarity;
+  final double speechConfidence;
   @override
   final double wordsPerMinute;
   @override
@@ -165,7 +165,7 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
 
   @override
   String toString() {
-    return 'CreateSpeechResult(speechDuration: $speechDuration, speechClarity: $speechClarity, wordsPerMinute: $wordsPerMinute, speechWords: $speechWords)';
+    return 'CreateSpeechResult(speechDuration: $speechDuration, speechConfidence: $speechConfidence, wordsPerMinute: $wordsPerMinute, speechWords: $speechWords)';
   }
 
   @override
@@ -175,9 +175,9 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
             (identical(other.speechDuration, speechDuration) ||
                 const DeepCollectionEquality()
                     .equals(other.speechDuration, speechDuration)) &&
-            (identical(other.speechClarity, speechClarity) ||
+            (identical(other.speechConfidence, speechConfidence) ||
                 const DeepCollectionEquality()
-                    .equals(other.speechClarity, speechClarity)) &&
+                    .equals(other.speechConfidence, speechConfidence)) &&
             (identical(other.wordsPerMinute, wordsPerMinute) ||
                 const DeepCollectionEquality()
                     .equals(other.wordsPerMinute, wordsPerMinute)) &&
@@ -190,7 +190,7 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(speechDuration) ^
-      const DeepCollectionEquality().hash(speechClarity) ^
+      const DeepCollectionEquality().hash(speechConfidence) ^
       const DeepCollectionEquality().hash(wordsPerMinute) ^
       const DeepCollectionEquality().hash(speechWords);
 
@@ -201,7 +201,7 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
+    Result $default(Duration speechDuration, double speechConfidence,
         double wordsPerMinute, List<SpeechWord> speechWords), {
     @required Result successful(SpeechResult speechResult),
     @required Result error(Object error),
@@ -209,13 +209,14 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
     assert($default != null);
     assert(successful != null);
     assert(error != null);
-    return $default(speechDuration, speechClarity, wordsPerMinute, speechWords);
+    return $default(
+        speechDuration, speechConfidence, wordsPerMinute, speechWords);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
+    Result $default(Duration speechDuration, double speechConfidence,
         double wordsPerMinute, List<SpeechWord> speechWords), {
     Result successful(SpeechResult speechResult),
     Result error(Object error),
@@ -224,7 +225,7 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
     assert(orElse != null);
     if ($default != null) {
       return $default(
-          speechDuration, speechClarity, wordsPerMinute, speechWords);
+          speechDuration, speechConfidence, wordsPerMinute, speechWords);
     }
     return orElse();
   }
@@ -261,12 +262,12 @@ class _$CreateSpeechResult$ implements CreateSpeechResult$ {
 abstract class CreateSpeechResult$ implements CreateSpeechResult {
   const factory CreateSpeechResult$(
       {@required Duration speechDuration,
-      @required double speechClarity,
+      @required double speechConfidence,
       @required double wordsPerMinute,
       @required List<SpeechWord> speechWords}) = _$CreateSpeechResult$;
 
   Duration get speechDuration;
-  double get speechClarity;
+  double get speechConfidence;
   double get wordsPerMinute;
   List<SpeechWord> get speechWords;
   $CreateSpeechResult$CopyWith<CreateSpeechResult$> get copyWith;
@@ -340,7 +341,7 @@ class _$CreateSpeechResultSuccessful implements CreateSpeechResultSuccessful {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
+    Result $default(Duration speechDuration, double speechConfidence,
         double wordsPerMinute, List<SpeechWord> speechWords), {
     @required Result successful(SpeechResult speechResult),
     @required Result error(Object error),
@@ -354,7 +355,7 @@ class _$CreateSpeechResultSuccessful implements CreateSpeechResultSuccessful {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
+    Result $default(Duration speechDuration, double speechConfidence,
         double wordsPerMinute, List<SpeechWord> speechWords), {
     Result successful(SpeechResult speechResult),
     Result error(Object error),
@@ -468,7 +469,7 @@ class _$CreateSpeechResultError implements CreateSpeechResultError {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
+    Result $default(Duration speechDuration, double speechConfidence,
         double wordsPerMinute, List<SpeechWord> speechWords), {
     @required Result successful(SpeechResult speechResult),
     @required Result error(Object error),
@@ -482,7 +483,7 @@ class _$CreateSpeechResultError implements CreateSpeechResultError {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
-    Result $default(Duration speechDuration, double speechClarity,
+    Result $default(Duration speechDuration, double speechConfidence,
         double wordsPerMinute, List<SpeechWord> speechWords), {
     Result successful(SpeechResult speechResult),
     Result error(Object error),

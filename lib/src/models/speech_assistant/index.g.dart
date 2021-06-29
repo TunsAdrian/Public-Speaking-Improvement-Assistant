@@ -51,6 +51,12 @@ class _$SpeechAssistantStateSerializer
         ..add(serializers.serialize(object.hasInternetConnection,
             specifiedType: const FullType(bool)));
     }
+    if (object.confidence != null) {
+      result
+        ..add('confidence')
+        ..add(serializers.serialize(object.confidence,
+            specifiedType: const FullType(double)));
+    }
     return result;
   }
 
@@ -85,6 +91,10 @@ class _$SpeechAssistantStateSerializer
         case 'hasInternetConnection':
           result.hasInternetConnection = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'confidence':
+          result.confidence = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
           break;
       }
     }
@@ -148,6 +158,8 @@ class _$SpeechAssistantState extends SpeechAssistantState {
   final BuiltList<SpeechWord> possibleText;
   @override
   final bool hasInternetConnection;
+  @override
+  final double confidence;
 
   factory _$SpeechAssistantState(
           [void Function(SpeechAssistantStateBuilder) updates]) =>
@@ -157,7 +169,8 @@ class _$SpeechAssistantState extends SpeechAssistantState {
       {this.isListening,
       this.recognizedText,
       this.possibleText,
-      this.hasInternetConnection})
+      this.hasInternetConnection,
+      this.confidence})
       : super._();
 
   @override
@@ -176,15 +189,18 @@ class _$SpeechAssistantState extends SpeechAssistantState {
         isListening == other.isListening &&
         recognizedText == other.recognizedText &&
         possibleText == other.possibleText &&
-        hasInternetConnection == other.hasInternetConnection;
+        hasInternetConnection == other.hasInternetConnection &&
+        confidence == other.confidence;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, isListening.hashCode), recognizedText.hashCode),
-            possibleText.hashCode),
-        hasInternetConnection.hashCode));
+        $jc(
+            $jc($jc($jc(0, isListening.hashCode), recognizedText.hashCode),
+                possibleText.hashCode),
+            hasInternetConnection.hashCode),
+        confidence.hashCode));
   }
 
   @override
@@ -193,7 +209,8 @@ class _$SpeechAssistantState extends SpeechAssistantState {
           ..add('isListening', isListening)
           ..add('recognizedText', recognizedText)
           ..add('possibleText', possibleText)
-          ..add('hasInternetConnection', hasInternetConnection))
+          ..add('hasInternetConnection', hasInternetConnection)
+          ..add('confidence', confidence))
         .toString();
   }
 }
@@ -223,6 +240,10 @@ class SpeechAssistantStateBuilder
   set hasInternetConnection(bool hasInternetConnection) =>
       _$this._hasInternetConnection = hasInternetConnection;
 
+  double _confidence;
+  double get confidence => _$this._confidence;
+  set confidence(double confidence) => _$this._confidence = confidence;
+
   SpeechAssistantStateBuilder();
 
   SpeechAssistantStateBuilder get _$this {
@@ -231,6 +252,7 @@ class SpeechAssistantStateBuilder
       _recognizedText = _$v.recognizedText?.toBuilder();
       _possibleText = _$v.possibleText?.toBuilder();
       _hasInternetConnection = _$v.hasInternetConnection;
+      _confidence = _$v.confidence;
       _$v = null;
     }
     return this;
@@ -258,7 +280,8 @@ class SpeechAssistantStateBuilder
               isListening: isListening,
               recognizedText: _recognizedText?.build(),
               possibleText: _possibleText?.build(),
-              hasInternetConnection: hasInternetConnection);
+              hasInternetConnection: hasInternetConnection,
+              confidence: confidence);
     } catch (_) {
       String _$failedField;
       try {
