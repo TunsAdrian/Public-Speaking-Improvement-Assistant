@@ -9,7 +9,7 @@ abstract class FillerWordsState implements Built<FillerWordsState, FillerWordsSt
 
   FillerWordsState._();
 
-  BuiltList<String> get fillerWords;
+  BuiltList<FillerWord> get fillerWords;
 
   Map<String, dynamic> get json => serializers.serializeWith(serializer, this) as Map<String, dynamic>;
 

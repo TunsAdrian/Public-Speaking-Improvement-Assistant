@@ -9,7 +9,7 @@ class SavedSpeechResultsNamesContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, List<String>>(
       converter: (Store<AppState> store) =>
-          store.state.speechResult.savedSpeechResults.map((SpeechResult e) => e.speechName).toList(),
+          store.state.speechResult?.savedSpeechResults?.map((SpeechResult e) => e.speechName)?.toList() ?? <String>[],
       builder: builder,
     );
   }

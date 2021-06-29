@@ -10,6 +10,7 @@ import 'package:public_speaking_assistant/src/data/filler_words_api.dart';
 import 'package:public_speaking_assistant/src/data/speech_assistant_api.dart';
 import 'package:public_speaking_assistant/src/data/speech_result_api.dart';
 import 'package:public_speaking_assistant/src/epics/app_epics.dart';
+import 'package:public_speaking_assistant/src/models/hive_models/hiveFillerWord.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
 import 'package:public_speaking_assistant/src/models/hive_models/hiveSpeechResult.dart';
 import 'package:public_speaking_assistant/src/reducer/reducer.dart';
@@ -23,12 +24,12 @@ Future<Store<AppState>> init() async {
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
-  final Box<String> fillerWordsBox = await Hive.openBox<String>('fillerWords');
-  final Box<HiveSpeechResult> speechResultsBox = await Hive.openBox<HiveSpeechResult>('speechResults');
   final Uuid uuidInstance = Uuid();
+  final GoogleSignIn googleSignIn = GoogleSignIn();
   final Connectivity connectivity = Connectivity();
   final RecorderStream recorderStream = RecorderStream();
+  final Box<HiveFillerWord> fillerWordsBox = await Hive.openBox<HiveFillerWord>('fillerWords');
+  final Box<HiveSpeechResult> speechResultsBox = await Hive.openBox<HiveSpeechResult>('speechResults');
 
   final AuthApi authApi = AuthApi(
     auth: auth,
@@ -38,16 +39,17 @@ Future<Store<AppState>> init() async {
 
   final FillerWordsApi fillerWordsApi = FillerWordsApi(
     fillerWordsBox: fillerWordsBox,
-  );
-
-  final SpeechResultApi speechResultApi = SpeechResultApi(
-    speechResultsBox: speechResultsBox,
     uuidInstance: uuidInstance,
   );
 
   final SpeechAssistantApi speechAssistantApi = SpeechAssistantApi(
     connectivity: connectivity,
     recorderStream: recorderStream,
+  );
+
+  final SpeechResultApi speechResultApi = SpeechResultApi(
+    speechResultsBox: speechResultsBox,
+    uuidInstance: uuidInstance,
   );
 
   final AppEpics epic = AppEpics(

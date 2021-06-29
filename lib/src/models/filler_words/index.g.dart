@@ -8,6 +8,7 @@ part of filler_words_models;
 
 Serializer<FillerWordsState> _$fillerWordsStateSerializer =
     new _$FillerWordsStateSerializer();
+Serializer<FillerWord> _$fillerWordSerializer = new _$FillerWordSerializer();
 
 class _$FillerWordsStateSerializer
     implements StructuredSerializer<FillerWordsState> {
@@ -23,7 +24,7 @@ class _$FillerWordsStateSerializer
       'fillerWords',
       serializers.serialize(object.fillerWords,
           specifiedType:
-              const FullType(BuiltList, const [const FullType(String)])),
+              const FullType(BuiltList, const [const FullType(FillerWord)])),
     ];
 
     return result;
@@ -43,9 +44,54 @@ class _$FillerWordsStateSerializer
       switch (key) {
         case 'fillerWords':
           result.fillerWords.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(String)]))
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(FillerWord)]))
               as BuiltList<Object>);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$FillerWordSerializer implements StructuredSerializer<FillerWord> {
+  @override
+  final Iterable<Type> types = const [FillerWord, _$FillerWord];
+  @override
+  final String wireName = 'FillerWord';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, FillerWord object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'uuid',
+      serializers.serialize(object.uuid, specifiedType: const FullType(String)),
+      'text',
+      serializers.serialize(object.text, specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  FillerWord deserialize(Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new FillerWordBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'uuid':
+          result.uuid = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'text':
+          result.text = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
           break;
       }
     }
@@ -56,7 +102,7 @@ class _$FillerWordsStateSerializer
 
 class _$FillerWordsState extends FillerWordsState {
   @override
-  final BuiltList<String> fillerWords;
+  final BuiltList<FillerWord> fillerWords;
 
   factory _$FillerWordsState(
           [void Function(FillerWordsStateBuilder) updates]) =>
@@ -99,10 +145,10 @@ class FillerWordsStateBuilder
     implements Builder<FillerWordsState, FillerWordsStateBuilder> {
   _$FillerWordsState _$v;
 
-  ListBuilder<String> _fillerWords;
-  ListBuilder<String> get fillerWords =>
-      _$this._fillerWords ??= new ListBuilder<String>();
-  set fillerWords(ListBuilder<String> fillerWords) =>
+  ListBuilder<FillerWord> _fillerWords;
+  ListBuilder<FillerWord> get fillerWords =>
+      _$this._fillerWords ??= new ListBuilder<FillerWord>();
+  set fillerWords(ListBuilder<FillerWord> fillerWords) =>
       _$this._fillerWords = fillerWords;
 
   FillerWordsStateBuilder();
@@ -145,6 +191,94 @@ class FillerWordsStateBuilder
       }
       rethrow;
     }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$FillerWord extends FillerWord {
+  @override
+  final String uuid;
+  @override
+  final String text;
+
+  factory _$FillerWord([void Function(FillerWordBuilder) updates]) =>
+      (new FillerWordBuilder()..update(updates)).build();
+
+  _$FillerWord._({this.uuid, this.text}) : super._() {
+    if (uuid == null) {
+      throw new BuiltValueNullFieldError('FillerWord', 'uuid');
+    }
+    if (text == null) {
+      throw new BuiltValueNullFieldError('FillerWord', 'text');
+    }
+  }
+
+  @override
+  FillerWord rebuild(void Function(FillerWordBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  FillerWordBuilder toBuilder() => new FillerWordBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is FillerWord && uuid == other.uuid && text == other.text;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, uuid.hashCode), text.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('FillerWord')
+          ..add('uuid', uuid)
+          ..add('text', text))
+        .toString();
+  }
+}
+
+class FillerWordBuilder implements Builder<FillerWord, FillerWordBuilder> {
+  _$FillerWord _$v;
+
+  String _uuid;
+  String get uuid => _$this._uuid;
+  set uuid(String uuid) => _$this._uuid = uuid;
+
+  String _text;
+  String get text => _$this._text;
+  set text(String text) => _$this._text = text;
+
+  FillerWordBuilder();
+
+  FillerWordBuilder get _$this {
+    if (_$v != null) {
+      _uuid = _$v.uuid;
+      _text = _$v.text;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(FillerWord other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$FillerWord;
+  }
+
+  @override
+  void update(void Function(FillerWordBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$FillerWord build() {
+    final _$result = _$v ?? new _$FillerWord._(uuid: uuid, text: text);
     replace(_$result);
     return _$result;
   }

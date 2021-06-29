@@ -35,7 +35,7 @@ class _SetFillerWordsState extends State<SetFillerWords> {
         body: SafeArea(
           child: Form(
             child: FillerWordsContainer(
-              builder: (BuildContext context, List<String> fillerWords) {
+              builder: (BuildContext context, List<FillerWord> fillerWords) {
                 return SingleChildScrollView(
                   physics: const ScrollPhysics(),
                   child: Column(
@@ -51,7 +51,7 @@ class _SetFillerWordsState extends State<SetFillerWords> {
                                   if (Form.of(context).validate()) {
                                     if (_showTextForm) {
                                       StoreProvider.of<AppState>(context)
-                                          .dispatch(AddFillerWord(fillerWord: _newFillerWord.text.trim()));
+                                          .dispatch(AddFillerWord(fillerWordText: _newFillerWord.text.trim()));
                                     }
                                     _showTextForm = !_showTextForm;
                                     _newFillerWord.clear();
@@ -61,35 +61,41 @@ class _SetFillerWordsState extends State<SetFillerWords> {
                             ),
                             Visibility(
                               visible: _showTextForm,
-                              child: TextFormField(
-                                controller: _newFillerWord,
-                                autofocus: true,
-                                decoration: InputDecoration(
-                                  hintText: 'Add a new filler word',
-                                  suffixIcon: IconButton(
-                                    padding: const EdgeInsets.only(right: 8),
-                                    icon: const Icon(Icons.cancel_outlined),
-                                    onPressed: () {
-                                      setState(() {
-                                        _showTextForm = !_showTextForm;
-                                        _newFillerWord.clear();
-                                      });
-                                    },
-                                  ),
-                                ),
-                                validator: (String value) {
-                                  if (value.isEmpty || value.trim().isEmpty) {
-                                    return 'Please enter a valid word';
-                                  } else {
-                                    for (final int rune in value.runes) {
-                                      final String character = String.fromCharCode(rune);
-                                      if (_emojiParser.hasEmoji(character)) {
-                                        return 'No emoji allowed';
+                              child: FillerWordsNamesContainer(
+                                builder: (BuildContext context, List<String> fillerWordsNames) {
+                                  return TextFormField(
+                                    controller: _newFillerWord,
+                                    autofocus: true,
+                                    decoration: InputDecoration(
+                                      hintText: 'Add a new filler word',
+                                      suffixIcon: IconButton(
+                                        padding: const EdgeInsets.only(right: 8),
+                                        icon: const Icon(Icons.cancel_outlined),
+                                        onPressed: () {
+                                          setState(() {
+                                            _showTextForm = !_showTextForm;
+                                            _newFillerWord.clear();
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    validator: (String value) {
+                                      if (value.isEmpty || value.trim().isEmpty) {
+                                        return 'Please enter a valid word';
+                                      } else if (fillerWordsNames.contains(value.trim().toLowerCase())) {
+                                        return 'This word already exists';
+                                      } else {
+                                        for (final int rune in value.runes) {
+                                          final String character = String.fromCharCode(rune);
+                                          if (_emojiParser.hasEmoji(character)) {
+                                            return 'No emoji allowed';
+                                          }
+                                        }
                                       }
-                                    }
-                                  }
 
-                                  return null;
+                                      return null;
+                                    },
+                                  );
                                 },
                               ),
                             ),
@@ -101,30 +107,31 @@ class _SetFillerWordsState extends State<SetFillerWords> {
                         shrinkWrap: true,
                         itemCount: fillerWords.length,
                         itemBuilder: (BuildContext context, int index) {
-                          final String fillerWord = fillerWords[index];
+                          final String fillerWordUuid = fillerWords[index].uuid;
+                          final String fillerWordText = fillerWords[index].text;
 
                           return Card(
                             child: ListTile(
-                              title: Text(fillerWord),
+                              title: Text(fillerWordText),
                               trailing: IconButton(
                                 icon: const Icon(Icons.highlight_remove_rounded),
                                 onPressed: () {
                                   final SnackBar snackBar = SnackBar(
                                     margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 8.0),
                                     behavior: SnackBarBehavior.floating,
-                                    content: Text('\"$fillerWord\" removed'),
+                                    content: Text('\"$fillerWordText\" removed'),
                                     action: SnackBarAction(
                                       label: 'Undo',
                                       onPressed: () {
                                         // undo the change
                                         StoreProvider.of<AppState>(context)
-                                            .dispatch(AddFillerWord(fillerWord: fillerWord));
+                                            .dispatch(AddFillerWord(fillerWordText: fillerWordText));
                                       },
                                     ),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                   StoreProvider.of<AppState>(context)
-                                      .dispatch(RemoveFillerWord(fillerWord: fillerWord));
+                                      .dispatch(RemoveFillerWord(fillerWordUuid: fillerWordUuid));
                                 },
                               ),
                             ),

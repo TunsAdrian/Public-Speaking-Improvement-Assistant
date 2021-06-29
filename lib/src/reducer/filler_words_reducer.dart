@@ -11,18 +11,18 @@ Reducer<FillerWordsState> fillerWordsReducer = combineReducers(<Reducer<FillerWo
 
 FillerWordsState _getFillerWordsSuccessful(FillerWordsState state, GetFillerWordsSuccessful action) {
   return state.rebuild((FillerWordsStateBuilder b) {
-    b.fillerWords = ListBuilder<String>(action.fillerWords);
+    b.fillerWords = ListBuilder<FillerWord>(action.fillerWords);
   });
 }
 
 FillerWordsState _addFillerWordSuccessful(FillerWordsState state, AddFillerWordSuccessful action) {
   return state.rebuild((FillerWordsStateBuilder b) {
-    b.fillerWords = ListBuilder<String>(action.fillerWords);
+    b.fillerWords = ListBuilder<FillerWord>(action.fillerWords);
   });
 }
 
 FillerWordsState _removeFillerWordSuccessful(FillerWordsState state, RemoveFillerWordSuccessful action) {
   return state.rebuild((FillerWordsStateBuilder b) {
-    b.fillerWords = ListBuilder<String>(action.fillerWords);
+    b.fillerWords = ListBuilder<FillerWord>(action.fillerWords);
   });
 }

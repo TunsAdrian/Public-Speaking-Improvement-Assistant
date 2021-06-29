@@ -25,23 +25,23 @@ class FillerWordsEpics {
     return actions //
         .flatMap((GetFillerWords$ action) => Stream<GetFillerWords$>.value(action)
             .asyncMap((GetFillerWords$ action) => _api.getFillerWords())
-            .map((List<String> fillerWords) => GetFillerWords.successful(fillerWords))
+            .map((List<FillerWord> fillerWords) => GetFillerWords.successful(fillerWords))
             .onErrorReturnWith((dynamic error) => GetFillerWords.error(error)));
   }
 
   Stream<AppAction> _addFillerWord(Stream<AddFillerWord$> actions, EpicStore<AppState> store) {
     return actions //
         .flatMap((AddFillerWord$ action) => Stream<AddFillerWord$>.value(action)
-            .asyncMap((AddFillerWord$ action) => _api.addFillerWord(fillerWord: action.fillerWord))
-            .map((List<String> fillerWords) => AddFillerWord.successful(fillerWords))
+            .asyncMap((AddFillerWord$ action) => _api.addFillerWord(fillerWordText: action.fillerWordText))
+            .map((List<FillerWord> fillerWords) => AddFillerWord.successful(fillerWords))
             .onErrorReturnWith((dynamic error) => AddFillerWord.error(error)));
   }
 
   Stream<AppAction> _removeFillerWord(Stream<RemoveFillerWord$> actions, EpicStore<AppState> store) {
     return actions //
         .flatMap((RemoveFillerWord$ action) => Stream<RemoveFillerWord$>.value(action)
-            .asyncMap((RemoveFillerWord$ action) => _api.removeFillerWord(fillerWord: action.fillerWord))
-            .map((List<String> fillerWords) => RemoveFillerWord.successful(fillerWords))
+            .asyncMap((RemoveFillerWord$ action) => _api.removeFillerWord(fillerWordUuid: action.fillerWordUuid))
+            .map((List<FillerWord> fillerWords) => RemoveFillerWord.successful(fillerWords))
             .onErrorReturnWith((dynamic error) => RemoveFillerWord.error(error)));
   }
 }

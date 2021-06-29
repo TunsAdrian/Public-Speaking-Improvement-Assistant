@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:public_speaking_assistant/src/models/hive_models/hiveColorAdapter.dart';
+import 'package:public_speaking_assistant/src/models/hive_models/hiveFillerWord.dart';
 import 'package:public_speaking_assistant/src/models/hive_models/hiveLanguagePair.dart';
 import 'package:public_speaking_assistant/src/models/hive_models/hiveSpeechResult.dart';
 import 'package:public_speaking_assistant/src/models/hive_models/hiveSpeechWord.dart';
@@ -17,6 +18,7 @@ Future<void> main() async {
   Hive.registerAdapter<HiveSpeechResult>(HiveSpeechResultAdapter());
   Hive.registerAdapter<HiveLanguagePair>(HiveLanguagePairAdapter());
   Hive.registerAdapter<HiveSpeechWord>(HiveSpeechWordAdapter());
+  Hive.registerAdapter<HiveFillerWord>(HiveFillerWordAdapter());
   Hive.registerAdapter<Color>(HiveColorAdapter());
   await Hive.openBox<dynamic>('settings'); // open the settings box when starting the application
 

@@ -7,3 +7,4 @@ import 'package:public_speaking_assistant/src/models/serializers.dart';
 
 part 'index.g.dart';
 part 'filler_words_state.dart';
+part 'filler_word.dart';
