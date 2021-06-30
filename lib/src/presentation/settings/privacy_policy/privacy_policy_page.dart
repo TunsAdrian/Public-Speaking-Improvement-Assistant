@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
@@ -17,6 +18,9 @@ class PrivacyPolicyPage extends StatelessWidget {
                 if (snapshot.hasData) {
                   return Markdown(
                     data: snapshot.data,
+                    onTapLink: (String text, String url, String title) {
+                      launch('https://app-privacy-policy-generator.nisrulz.com');
+                    },
                   );
                 }
                 return const Center(
