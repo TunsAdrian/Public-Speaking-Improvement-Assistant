@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:public_speaking_assistant/src/actions/index.dart';
 import 'package:public_speaking_assistant/src/containers/index.dart';
 import 'package:public_speaking_assistant/src/models/index.dart';
+import 'package:public_speaking_assistant/src/presentation/assistant/speech_rehearsal/speech_improvement_tips.dart';
 import 'package:public_speaking_assistant/src/presentation/mixin/align_leading_mixin.dart';
 import 'package:public_speaking_assistant/src/presentation/routes.dart';
 
@@ -16,6 +17,12 @@ class SpeechResultPage extends StatefulWidget {
 class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMixin {
   final TextEditingController _speechNameTextController = TextEditingController();
   final GlobalKey<FormState> _speechNameFormKey = GlobalKey<FormState>();
+  Duration _speechDuration;
+  double _speechConfidence;
+  double _wordsPerMinute;
+  int _fillerWordsCount;
+  int _speechWordsCount;
+  String _speechName;
   bool _tileEnabled = true;
 
   @override
@@ -29,6 +36,13 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
         ),
         body: SpeechResultContainer(
           builder: (BuildContext context, SpeechResult speechResult) {
+            _speechDuration = speechResult.speechDuration;
+            _speechConfidence = speechResult.speechConfidence;
+            _wordsPerMinute = speechResult.wordsPerMinute;
+            _fillerWordsCount = speechResult.speechWords?.where((SpeechWord word) => word.isFiller)?.length;
+            _speechWordsCount = speechResult.speechWords?.length;
+            _speechName = speechResult?.speechName;
+
             return Column(
               children: <Widget>[
                 Expanded(
@@ -39,7 +53,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: alignedLeading(const Text('Title')),
-                        title: Text(speechResult?.speechName ?? '-'),
+                        title: Text(_speechName ?? '-'),
                         trailing: const Icon(Icons.text_fields_outlined),
                         enabled: _tileEnabled,
                         onTap: () {
@@ -50,37 +64,54 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: alignedLeading(const Text('Time')),
-                        title: Text(speechResult.speechDuration.toString().substring(2, 7)),
+                        title: Text(_speechDuration?.toString()?.substring(2, 7)) ?? const Text('-'),
                         enabled: _tileEnabled,
                       ),
                       const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: alignedLeading(const Text('Pace')),
-                        title: Text('${speechResult.wordsPerMinute.round()} words/min'),
+                        title: Text('${_wordsPerMinute?.round()} words/min') ?? const Text('-'),
+                        trailing: const Icon(Icons.info_outline_rounded),
                         enabled: _tileEnabled,
+                        onTap: () {
+                          _showTipsDialog(context, 'pace', _wordsPerMinute.round());
+                        },
                       ),
                       const Divider(thickness: 1),
                       ListTile(
+                          minLeadingWidth: 75.0,
+                          leading: alignedLeading(const Text('Confidence')),
+                          title: _speechConfidence != 0
+                              ? Text('${(_speechConfidence * 100.0).toStringAsFixed(1)}%')
+                              : const Text('Not computed'),
+                          trailing: const Icon(Icons.info_outline_rounded),
+                          enabled: _tileEnabled,
+                          onTap: () {
+                            _showTipsDialog(context, 'confidence', _speechConfidence != 0);
+                          }),
+                      const Divider(thickness: 1),
+                      ListTile(
                         minLeadingWidth: 75.0,
-                        leading: alignedLeading(const Text('Confidence')),
-                        title: speechResult.speechConfidence != 0
-                            ? Text('${(speechResult.speechConfidence * 100.0).toStringAsFixed(1)}%')
-                            : const Text('Not computed'),
+                        leading: alignedLeading(const Text('Filler Words')),
+                        title: Text('$_fillerWordsCount') ?? const Text('-'),
+                        trailing: const Icon(Icons.info_outline_rounded),
                         enabled: _tileEnabled,
+                        onTap: () {
+                          final int minutes = _speechDuration.inSeconds % 60 == 0
+                              ? _speechDuration.inMinutes
+                              : _speechDuration.inMinutes + 1;
+
+                          final double fillerWordsRatio = _fillerWordsCount == 0 ? 1.0 : minutes / _fillerWordsCount;
+
+                          _showTipsDialog(context, 'fillerWords', fillerWordsRatio);
+                        },
                       ),
                       const Divider(thickness: 1),
                       ListTile(
                         minLeadingWidth: 75.0,
                         leading: alignedLeading(const Text('All Words')),
-                        title: Text('${speechResult.speechWords.length} words'),
-                        enabled: _tileEnabled,
-                      ),
-                      const Divider(thickness: 1),
-                      ListTile(
-                        minLeadingWidth: 75.0,
-                        leading: alignedLeading(const Text('Filler Words')),
-                        title: Text('${speechResult.speechWords.where((SpeechWord word) => word.isFiller).length}'),
+                        title: Text('$_speechWordsCount words') ?? const Text('-'),
                         enabled: _tileEnabled,
                       ),
                       const Divider(thickness: 1),
@@ -114,7 +145,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
                       ElevatedButton(
                         child: const Text('Save This Speech'),
                         onPressed: () async {
-                          if (speechResult.speechName == null) {
+                          if (_speechName == null) {
                             final SnackBar snackBarNameSpeech = SnackBar(
                               margin: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 8.0),
                               behavior: SnackBarBehavior.floating,
@@ -203,6 +234,36 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
               ),
             );
           },
+        );
+      },
+    );
+  }
+
+  Future<void> _showTipsDialog(BuildContext context, String speechTipType, dynamic tipValue) {
+    Widget widgetTip;
+
+    if (speechTipType == 'confidence') {
+      widgetTip = ConfidenceTip(isComputed: tipValue as bool);
+    } else if (speechTipType == 'fillerWords') {
+      widgetTip = FillerWordsTip(fillerWordPerMinutes: tipValue as double);
+    } else if (speechTipType == 'pace') {
+      widgetTip = PacingTip(wordPerMinute: tipValue as int);
+    }
+
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(16.0),
+          content: widgetTip,
+          actions: <Widget>[
+            OutlinedButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          ],
         );
       },
     );

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/full_speech_transcript_page.dart';
-import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/speech_result_page.dart';
+import 'package:public_speaking_assistant/src/presentation/assistant/speech_rehearsal/speech_result_page.dart';
 import 'package:public_speaking_assistant/src/presentation/home.dart';
-import 'package:public_speaking_assistant/src/presentation/assistant/speech_record/recording_page.dart';
+import 'package:public_speaking_assistant/src/presentation/assistant/speech_rehearsal/rehearsal_page.dart';
 import 'package:public_speaking_assistant/src/presentation/assistant/filler_words/set_filler_words_page.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/account_home_page.dart';
 import 'package:public_speaking_assistant/src/presentation/settings/account/login/reset_password_page.dart';
@@ -44,7 +44,7 @@ class AppRoutes {
 
     // voice assistant routes
     speech_record: (BuildContext context) {
-      return const RecordingPage();
+      return const RehearsalPage();
     },
     set_filler_words: (BuildContext context) {
       return const SetFillerWords();

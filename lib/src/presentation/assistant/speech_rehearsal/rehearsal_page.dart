@@ -17,14 +17,14 @@ import 'package:public_speaking_assistant/src/presentation/routes.dart';
 import 'package:redux/redux.dart';
 import 'package:select_dialog/select_dialog.dart';
 
-class RecordingPage extends StatefulWidget {
-  const RecordingPage({Key key}) : super(key: key);
+class RehearsalPage extends StatefulWidget {
+  const RehearsalPage({Key key}) : super(key: key);
 
   @override
-  _RecordingPageState createState() => _RecordingPageState();
+  _RehearsalPageState createState() => _RehearsalPageState();
 }
 
-class _RecordingPageState extends State<RecordingPage> with DisplaySpeechWordMixin {
+class _RehearsalPageState extends State<RehearsalPage> with DisplaySpeechWordMixin {
   Store<AppState> store;
   final Stopwatch _stopwatch = Stopwatch();
   String _serviceAccount;
