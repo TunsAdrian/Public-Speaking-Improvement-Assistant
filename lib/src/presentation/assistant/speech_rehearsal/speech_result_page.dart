@@ -27,7 +27,10 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> arguments = ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
+    final Map<String, dynamic> arguments = ModalRoute
+        .of(context)
+        .settings
+        .arguments as Map<String, dynamic>;
 
     return ScaffoldMessenger(
       child: Scaffold(
@@ -39,7 +42,9 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
             _speechDuration = speechResult.speechDuration;
             _speechConfidence = speechResult.speechConfidence;
             _wordsPerMinute = speechResult.wordsPerMinute;
-            _fillerWordsCount = speechResult.speechWords?.where((SpeechWord word) => word.isFiller)?.length;
+            _fillerWordsCount = speechResult.speechWords
+                ?.where((SpeechWord word) => word.isFiller)
+                ?.length;
             _speechWordsCount = speechResult.speechWords?.length;
             _speechName = speechResult?.speechName;
 
@@ -120,7 +125,7 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
                         child: ListTile(
                           minLeadingWidth: 75.0,
                           leading: const Icon(Icons.info_outline_rounded),
-                          title: const Text('See the Speech Transcript'),
+                          title: const Text('Full Speech Transcript'),
                           trailing: const Icon(Icons.chevron_right),
                           enabled: _tileEnabled,
                           onTap: () {
@@ -206,7 +211,11 @@ class _SpeechResultPageState extends State<SpeechResultPage> with AlignLeadingMi
                   decoration: const InputDecoration(labelText: 'Speech Name', hintText: 'e.g. School speech'),
                   autofocus: true,
                   validator: (String value) {
-                    if (value.isEmpty || value.trim().isEmpty || value.trim().length < 4) {
+                    if (value.isEmpty || value
+                        .trim()
+                        .isEmpty || value
+                        .trim()
+                        .length < 4) {
                       return 'Please enter a valid name';
                     } else if (speechResultNames.contains(value)) {
                       return 'This name was already used';

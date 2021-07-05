@@ -62,7 +62,8 @@ class FillerWordsTip extends StatelessWidget {
             const TextSpan(text: 'keep up the good work, having an average of 1 filler word per minute or less.')
           else if (fillerWordPerMinutes >= 0.25 && fillerWordPerMinutes < 1)
             const TextSpan(
-                text: 'slightly reduce the filler words usage, having an average of 4 filler words per minute.')
+                text: 'slightly reduce the filler words usage, having an average between 2 and 4 filler words'
+                    ' per minute.')
           else
             const TextSpan(text: 'reduce the usage of filler words in your speech.')
         ],

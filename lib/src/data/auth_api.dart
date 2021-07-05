@@ -162,36 +162,31 @@ class AuthApi {
       return null;
     }
 
-    try {
-      final DocumentSnapshot snapshot = await _firestore.doc('users/${currentUser.uid}').get();
+    final DocumentSnapshot snapshot = await _firestore.doc('users/${currentUser.uid}').get();
 
-      final AppUser user = AppUser.fromJson(snapshot.data());
-      final List<SpeechResult> syncedSpeechResults = user.userSpeechResults.toList();
+    final AppUser user = AppUser.fromJson(snapshot.data());
+    final List<SpeechResult> syncedSpeechResults = user.userSpeechResults.toList();
 
-      // if the result is already on cloud, it means it must be removed
-      if (isSynced) {
-        syncedSpeechResults.remove(speechResult);
-      } else {
-        syncedSpeechResults.add(speechResult);
-      }
-
-      final AppUser userUpdated = AppUser((AppUserBuilder b) {
-        b
-          ..uid = user.uid
-          ..email = user.email
-          ..firstName = user.firstName
-          ..lastName = user.lastName
-          ..userSpeechResults = ListBuilder<SpeechResult>(syncedSpeechResults)
-          ..isEmailVerified = user.isEmailVerified;
-      });
-
-      await _firestore.doc('users/${user.uid}').set(userUpdated.json);
-
-      return syncedSpeechResults;
-    } catch (e) {
-      print(e);
-      return <SpeechResult>[];
+    // if the result is already on cloud, it means it must be removed
+    if (isSynced) {
+      syncedSpeechResults.remove(speechResult);
+    } else {
+      syncedSpeechResults.add(speechResult);
     }
+
+    final AppUser userUpdated = AppUser((AppUserBuilder b) {
+      b
+        ..uid = user.uid
+        ..email = user.email
+        ..firstName = user.firstName
+        ..lastName = user.lastName
+        ..userSpeechResults = ListBuilder<SpeechResult>(syncedSpeechResults)
+        ..isEmailVerified = user.isEmailVerified;
+    });
+
+    await _firestore.doc('users/${user.uid}').set(userUpdated.json);
+
+    return syncedSpeechResults;
   }
 
   Future<List<SpeechResult>> getSyncedSpeechResults() async {
@@ -200,16 +195,11 @@ class AuthApi {
       return null;
     }
 
-    try {
-      final DocumentSnapshot snapshot = await _firestore.doc('users/${currentUser.uid}').get();
+    final DocumentSnapshot snapshot = await _firestore.doc('users/${currentUser.uid}').get();
 
-      final AppUser user = AppUser.fromJson(snapshot.data());
-      final List<SpeechResult> syncedSpeechResults = user.userSpeechResults.toList();
+    final AppUser user = AppUser.fromJson(snapshot.data());
+    final List<SpeechResult> syncedSpeechResults = user.userSpeechResults.toList();
 
-      return syncedSpeechResults;
-    } catch (e) {
-      print(e);
-      return <SpeechResult>[];
-    }
+    return syncedSpeechResults;
   }
 }
