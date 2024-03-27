@@ -1,6 +1,6 @@
 # Public Speaking Improvement Assistant
 
-This application represents the work for my [bachelor's thesis](https://github.com/TunsAdrian/Public-Speaking-Improvement-Assistant/blob/master/documentation/thesis.pdf), application called Public Speaking Improvement Assistant.
+This application represents the work for my [bachelor's thesis](https://github.com/TunsAdrian/Public-Speaking-Improvement-Assistant/blob/master/documentation/thesis.pdf), application called Public Speaking Improvement Assistant. The thesis was made for Computer Science bachelor program of West University of Timișoara.
 
 This is a mobile application created with the purpose of improving one's ability to hold a speech, by rehearsing it and
 getting useful insights after finishing the rehearsal.
